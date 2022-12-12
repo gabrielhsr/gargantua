@@ -6,9 +6,9 @@ namespace Financial.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpensesController : BaseController<Expense>
+    public class PaymentMethodController : BaseController<PaymentMethod>
     {
-        public ExpensesController(IExpensesRepository repository) : base(repository)
+        public PaymentMethodController(IBaseRepository<PaymentMethod> repository) : base(repository)
         {
         }
     }

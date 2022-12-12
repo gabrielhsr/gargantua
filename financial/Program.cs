@@ -1,26 +1,31 @@
 using Financial.Data;
+using Financial.Interfaces;
+using Financial.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+// Cors
 builder.Services.AddCors(opts =>
 {
     opts.AddDefaultPolicy(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
-
+// Database
 builder.Services.AddDbContext<FinancialDbContext>(opts =>
 {
     opts.UseSqlServer(connectionString);
 });
+
+// Repositories
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
+
+// Services
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
