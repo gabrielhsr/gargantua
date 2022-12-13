@@ -19,8 +19,8 @@ namespace Financial.Data.Models.Expense
         [Column(TypeName = "Money")]
         public decimal Amount { get; set; } = 0;
 
-        public Category? Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public PaymentMethod? PaymentMethod { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

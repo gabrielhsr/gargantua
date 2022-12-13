@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Financial.Interfaces;
 using Financial.Data.Models;
+using AutoMapper;
 
 namespace Financial.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T> : ControllerBase where T : BaseEntity
+    public class BaseController<TEntity, TDto> : ControllerBase where TEntity : BaseEntity
     {
-        private readonly IBaseRepository<T> repository;
+        private readonly IBaseRepository<TEntity> repository;
+        private readonly IMapper mapper;
 
-        public BaseController(IBaseRepository<T> repository)
+        public BaseController(IBaseRepository<TEntity> repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         // GET: api/Entity
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> GetEntities()
+        public async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
         {
             var entity = await repository.GetAllAsync();
 
@@ -26,22 +29,24 @@ namespace Financial.Controllers
 
         // GET: api/Entity/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> GetEntity(Guid id)
+        public async Task<ActionResult<TEntity>> GetEntity(Guid id)
         {
-            var entitiy = await repository.GetAsync(id);
+            var entity = await repository.GetAsync(id);
 
-            if (entitiy == null)
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return Ok(entitiy);
+            var dto = mapper.Map<TEntity, TDto>(entity);
+
+            return Ok(dto);
         }
 
         // PUT: api/Entity/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEntity(Guid id, T entity)
+        public async Task<IActionResult> PutEntity(Guid id, TEntity entity)
         {
             var result = await repository.SaveAsync(id, entity);
             
@@ -56,7 +61,7 @@ namespace Financial.Controllers
         // POST: api/Entity
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<T>> PostEntity(Guid id, T entitiy)
+        public async Task<ActionResult<TEntity>> PostEntity(Guid id, TEntity entitiy)
         {
             var newEntitiy = await repository.SaveAsync(id, entitiy);
 

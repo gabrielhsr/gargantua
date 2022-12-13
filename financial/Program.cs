@@ -1,3 +1,4 @@
+using Financial.Configurations;
 using Financial.Data;
 using Financial.Interfaces;
 using Financial.Repositories;
@@ -15,7 +16,8 @@ builder.Services.AddCors(opts =>
 // Database
 builder.Services.AddDbContext<FinancialDbContext>(opts =>
 {
-    opts.UseSqlServer(connectionString);
+    opts.UseLazyLoadingProxies()
+        .UseSqlServer(connectionString);
 });
 
 // Repositories
@@ -26,6 +28,8 @@ builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 var app = builder.Build();
 

@@ -44,7 +44,7 @@ namespace Financial.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await context.Set<T>().AsNoTracking().ToListAsync();
+            return await context.Set<T>().ToListAsync();
         }
 
         public async Task<T?> GetAsync(Guid? id)
@@ -54,7 +54,7 @@ namespace Financial.Repositories
                 return null;
             }
 
-            return await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<T> SaveAsync(Guid id, T entity)
