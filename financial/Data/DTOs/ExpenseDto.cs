@@ -1,5 +1,4 @@
-﻿using Financial.Data.Models.Expense;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Financial.Data.DTOs

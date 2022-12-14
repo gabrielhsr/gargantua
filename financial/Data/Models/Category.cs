@@ -1,4 +1,4 @@
-﻿namespace Financial.Data.Models.Expense
+﻿namespace Financial.Data.Models
 {
     public class Category : BaseEntity
     {

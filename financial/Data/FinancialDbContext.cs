@@ -1,4 +1,4 @@
-﻿using Financial.Data.Models.Expense;
+﻿using Financial.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Financial.Data

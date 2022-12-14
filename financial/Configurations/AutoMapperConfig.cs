@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Financial.Data.DTOs;
-using Financial.Data.Models.Expense;
+using Financial.Data.Models;
 using System.Diagnostics.Metrics;
 
 namespace Financial.Configurations

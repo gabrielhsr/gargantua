@@ -1,5 +1,5 @@
 ﻿using Financial.Data;
-using Financial.Data.Models.Expense;
+using Financial.Data.Models;
 using Financial.Interfaces;
 
 namespace Financial.Repositories

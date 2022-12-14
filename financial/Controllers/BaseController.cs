@@ -22,9 +22,10 @@ namespace Financial.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
         {
-            var entity = await repository.GetAllAsync();
+            var entities = await repository.GetAllAsync();
+            var records = mapper.Map<IEnumerable<TDto>>(entities);
 
-            return Ok(entity);
+            return Ok(records);
         }
 
         // GET: api/Entity/5
@@ -38,7 +39,7 @@ namespace Financial.Controllers
                 return NotFound();
             }
 
-            var dto = mapper.Map<TEntity, TDto>(entity);
+            var dto = mapper.Map<TDto>(entity);
 
             return Ok(dto);
         }

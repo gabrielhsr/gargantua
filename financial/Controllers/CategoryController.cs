@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Financial.Data.Models.Expense;
+using Financial.Data.Models;
 using Financial.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
