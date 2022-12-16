@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Expense : BaseEntity
 {
-    public DateTimeOffset DueData { get; set; }
+    public DateTimeOffset DueDate { get; set; }
 
     public DateTimeOffset PurchaseDate { get; set; }
 

@@ -5,7 +5,7 @@ namespace Financial.Data.DTOs
 {
     public class ExpenseDto
     {
-        public DateTimeOffset DueData { get; set; }
+        public DateTimeOffset DueDate { get; set; }
 
         public DateTimeOffset PurchaseDate { get; set; }
 
