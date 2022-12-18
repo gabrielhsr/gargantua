@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CurrencyMaskConfig } from 'ng2-currency-mask';
 
 import enDict from 'src/assets/language/en.json';
 import ptDict from 'src/assets/language/pt.json';
@@ -8,25 +9,56 @@ const resolvePath = require('object-resolve-path');
 export type Language = 'pt-BR' | 'en-US';
 export type Currency = 'BRL' | 'USD';
 
+const prefix = { 'pt-BR': { USD: 'USD$ ', BRL: 'R$ ' }, 'en-US': { USD: '$', BRL: 'R$' } };
+const decimal = { BRL: ',', USD: '.' };
+const thousands = { BRL: '.', USD: ',' };
+
 const LOCALSTORAGE_LANGUAGE_KEY = 'language';
 const LOCALSTORAGE_CURRENCY_KEY = 'currency';
 
 const DEFAULT_LANGUAGE = 'en-US';
 const DEFAULT_CURRENCY = 'USD';
 
+const DEFAULT_CURRENCY_MASK = {
+	align: 'right',
+	allowNegative: false,
+	precision: 2,
+	suffix: ''
+};
+
 @Injectable()
 export class TranslateService {
-	constructor() {
-		if (!this.language) this.setDefaultLanguage();
-		if (!this.currency) this.setDefaultCurrency();
-	}
-
 	public get language(): Language {
-		return localStorage.getItem(LOCALSTORAGE_LANGUAGE_KEY) as Language;
+		const stored = localStorage.getItem(LOCALSTORAGE_LANGUAGE_KEY);
+
+		if (stored) {
+			return stored as Language;
+		}
+
+		this.setDefaultLanguage();
+		return DEFAULT_LANGUAGE;
 	}
 
 	public get currency(): Currency {
-		return localStorage.getItem(LOCALSTORAGE_CURRENCY_KEY) as Currency;
+		const stored = localStorage.getItem(LOCALSTORAGE_CURRENCY_KEY);
+
+		if (stored) {
+			return stored as Currency;
+		}
+
+		this.setDefaultCurrency();
+		return DEFAULT_CURRENCY;
+	}
+
+	public get currencyMask(): CurrencyMaskConfig {
+		const mask: CurrencyMaskConfig = {
+			...DEFAULT_CURRENCY_MASK,
+			prefix: prefix[this.language][this.currency],
+			decimal: decimal[this.currency],
+			thousands: thousands[this.currency]
+		};
+
+		return mask;
 	}
 
 	public set language(value: Language) {
@@ -40,8 +72,9 @@ export class TranslateService {
 	public translate(id: string): string {
 		const file = this.getFile(this.language);
 		const key = id as keyof typeof file;
+		const text = resolvePath(file, key);
 
-		if (resolvePath(file, key)) return resolvePath(file, key);
+		if (text) return text;
 
 		console.error(`No translation found for key ${key} in language ${this.language}`);
 		return key;
@@ -55,7 +88,7 @@ export class TranslateService {
 				return enDict;
 			default:
 				this.setDefaultLanguage();
-				throw new Error("Language file not found! Reseted to 'pt-BR'.");
+				throw new Error(`Language file not found! Reseted to '${DEFAULT_LANGUAGE}'.`);
 		}
 	}
 

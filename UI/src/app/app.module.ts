@@ -1,7 +1,12 @@
-import { DEFAULT_CURRENCY_CODE, InjectionToken, LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
+import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
 
@@ -11,9 +16,6 @@ import localePT from '@angular/common/locales/pt';
 import localeEN from '@angular/common/locales/en';
 
 import { AppBase } from './app.base';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(localePT);
 registerLocaleData(localeEN);
@@ -38,6 +40,11 @@ registerLocaleData(localeEN);
 			deps: [TranslateService],
 			useFactory: (translateService: TranslateService) => translateService.language
 		},
+		{
+			provide: CURRENCY_MASK_CONFIG,
+			deps: [TranslateService],
+			useFactory: (translateService: TranslateService) => translateService.currencyMask
+		}
 	],
 	bootstrap: [AppBase],
 })
