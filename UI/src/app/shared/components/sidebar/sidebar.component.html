@@ -1,0 +1,26 @@
+<mat-sidenav-container class="sidebar-container">
+	<mat-sidenav #sidenav mode="over">
+		<mat-nav-list>
+			<h2 matSubheader>{{ 'MY_WORK' | translate }}</h2>
+
+			<mat-list-item routerLink="/" style="height: 0;"></mat-list-item>
+
+			<mat-list-item routerLink="/home" routerLinkActive="active-item">
+				<div class="list-item">
+					<mat-icon>home</mat-icon>
+					<span>{{ 'Sidebar.Home' | translate }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item routerLink="/configuration" routerLinkActive="active-item">
+				<div class="list-item">
+					<mat-icon>settings</mat-icon>
+					<span>{{ 'Sidebar.Configuration' | translate }}</span>
+				</div>
+			</mat-list-item>
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<mat-sidenav-content class="container">
+		<ng-content></ng-content>
+	</mat-sidenav-content>
+</mat-sidenav-container>

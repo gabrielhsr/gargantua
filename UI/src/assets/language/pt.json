@@ -1,0 +1,20 @@
+{
+	"Language": "Português",
+	"Example": "Exemplo",
+	"Title": "Finanças",
+	"Sidebar": {
+		"Home": "Página Inicial",
+		"Configuration": "Configurações"
+	},
+	"Pages": {
+		"Home": {
+			"Expenses": "Despesas",
+			"DueDate": "Data de Vencimento",
+			"PurchaseDate": "Data da Compra",
+			"Category": "Categoria",
+			"PaymentMethod": "Forma de Pagamento",
+			"Description": "Descrição",
+			"Amount": "Valor Pago"
+		}
+	}
+}

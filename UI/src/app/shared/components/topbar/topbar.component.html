@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="toolbar">
+	<button mat-icon-button (click)="sidebarButton.emit()">
+		<mat-icon>menu</mat-icon>
+	</button>
+
+	<span>{{ 'Title' | translate }}</span>
+
+	<span class="spacer"></span>
+
+	<button mat-icon-button (click)="changeCurrency()">
+		<mat-icon>attach_money</mat-icon>
+	</button>
+
+	<button mat-icon-button (click)="changeLanguage()">
+		<mat-icon>language</mat-icon>
+	</button>
+</mat-toolbar>

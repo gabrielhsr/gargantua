@@ -1,0 +1,36 @@
+<table *ngIf="expenses" mat-table [dataSource]="expenses" class="mat-elevation-z1">
+
+	<!-- Position Column -->
+	<ng-container matColumnDef="dueDate">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.DueDate" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.dueDate | date}}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="purchaseDate">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.PurchaseDate" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.purchaseDate | date }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="category">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Category" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.categoryName }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="paymentMethod">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.PaymentMethod" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.paymentMethodName }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="description">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Description" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.description }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="amount">
+		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Amount" | translate }}</th>
+		<td mat-cell *matCellDef="let expense; dataSouce: expenses">{{ expense.amount | currency }}</td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

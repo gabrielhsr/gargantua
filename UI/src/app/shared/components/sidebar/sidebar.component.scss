@@ -1,0 +1,18 @@
+.sidebar-container {
+	height: calc(100vh - var(--topbar-height));
+}
+
+.list-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 0 30px 0 10px;
+
+	span {
+		margin-top: 2.5px;
+	}
+}
+
+.active-item {
+    background-color: #c7c7c6;
+}
