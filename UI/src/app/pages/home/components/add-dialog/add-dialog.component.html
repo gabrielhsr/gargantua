@@ -1,39 +1,55 @@
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.DueDate" | translate }}</mat-label>
-	<input matInput [matDatepicker]="dueDatePicker" />
-	<mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-	<mat-datepicker #dueDatePicker></mat-datepicker>
-</mat-form-field>
+<h2 mat-dialog-title>{{ "Pages.Home.AddDialog.Title" | translate }}</h2>
 
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.PurchaseDate" | translate }}</mat-label>
-	<input matInput [matDatepicker]="purchaseDatePicker" />
-	<mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
-	<mat-datepicker #purchaseDatePicker></mat-datepicker>
-</mat-form-field>
+<mat-dialog-content>
+	<mat-form-field>
+		<mat-label>{{ "Pages.Home.Description" | translate }}</mat-label>
+		<input matInput type="text" />
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.Category" | translate }}</mat-label>
-	<mat-select>
-		<mat-option value="one">First option</mat-option>
-		<mat-option value="two">Second option</mat-option>
-	</mat-select>
-</mat-form-field>
+	<mat-form-field>
+		<mat-label>{{ "Pages.Home.Amount" | translate }}</mat-label>
+		<input matInput currencyMask />
+	</mat-form-field>
 
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.PaymentMethod" | translate }}</mat-label>
-	<mat-select>
-		<mat-option value="one">First option</mat-option>
-		<mat-option value="two">Second option</mat-option>
-	</mat-select>
-</mat-form-field>
+	<div class="two-input-container">
+		<mat-form-field>
+			<mat-label>{{ "Pages.Home.Category" | translate }}</mat-label>
+			<mat-select>
+				<mat-option
+					*ngFor="let category of categories | async"
+					[value]="category.id"
+				>
+					{{ category.name }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
 
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.Description" | translate }}</mat-label>
-	<input type="text" matInput />
-</mat-form-field>
+		<mat-form-field>
+			<mat-label>{{ "Pages.Home.PaymentMethod" | translate }}</mat-label>
+			<mat-select>
+				<mat-option
+					*ngFor="let paymentMethod of paymentMethods | async"
+					[value]="paymentMethod.id"
+				>
+					{{ paymentMethod.name }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
 
-<mat-form-field>
-	<mat-label>{{ "Pages.Home.Amount" | translate }}</mat-label>
-	<input matInput currencyMask />
-</mat-form-field>
+	<div class="two-input-container">
+		<mat-form-field>
+			<mat-label>{{ "Pages.Home.DueDate" | translate }}</mat-label>
+			<input matInput [matDatepicker]="dueDatePicker" />
+			<mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+			<mat-datepicker #dueDatePicker></mat-datepicker>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>{{ "Pages.Home.PurchaseDate" | translate }}</mat-label>
+			<input matInput [matDatepicker]="purchaseDatePicker" />
+			<mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
+			<mat-datepicker #purchaseDatePicker></mat-datepicker>
+		</mat-form-field>
+	</div>
+</mat-dialog-content>

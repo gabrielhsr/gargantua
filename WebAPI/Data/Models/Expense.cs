@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Expense : BaseEntity
 {
+    public Expense()
+    {
+        Category = new Category();
+        PaymentMethod = new PaymentMethod();
+    }
+
     public DateTimeOffset DueDate { get; set; }
 
     public DateTimeOffset PurchaseDate { get; set; }

@@ -14,7 +14,10 @@
 			"Category": "Categoria",
 			"PaymentMethod": "Forma de Pagamento",
 			"Description": "Descrição",
-			"Amount": "Valor Pago"
+			"Amount": "Valor Pago",
+			"AddDialog": {
+				"Title": "Nova Despesa"
+			}
 		}
 	}
 }

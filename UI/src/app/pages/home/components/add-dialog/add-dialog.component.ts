@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../../home.service';
 
 @Component({
 	selector: 'app-add-dialog',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./add-dialog.component.scss'],
 })
 export class AddDialogComponent implements OnInit {
-	constructor() {}
+	public categories =  this.homeService.getCategories();
+	public paymentMethods = this.homeService.getPaymentMethods();
 
-	ngOnInit(): void {}
+	constructor(private readonly homeService: HomeService) {}
+
+	ngOnInit(): void {	}
 }

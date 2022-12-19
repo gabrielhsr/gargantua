@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 // Directives
+import { AutocompleteDisableDirective } from './directives/autocomplete-disable.directive';
 import { TypeSafeMatCellDef } from './directives/type-safe-mat-cell-def.directive';
 
 // Pipes
@@ -25,6 +26,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 	declarations: [
 		// Directives
 		TypeSafeMatCellDef,
+		AutocompleteDisableDirective,
 
 		// Pipes
 		TranslatePipe,
@@ -47,6 +49,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 
 		// Directives
 		TypeSafeMatCellDef,
+		AutocompleteDisableDirective,
 
 		// Pipes
 		TranslatePipe,

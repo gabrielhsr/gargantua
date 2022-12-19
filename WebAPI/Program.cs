@@ -21,7 +21,6 @@ builder.Services.AddDbContext<FinancialDbContext>(opts =>
 
 // Repositories
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
 
 // Services
 builder.Services.AddControllers();

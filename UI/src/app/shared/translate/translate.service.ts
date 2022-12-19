@@ -9,9 +9,9 @@ const resolvePath = require('object-resolve-path');
 export type Language = 'pt-BR' | 'en-US';
 export type Currency = 'BRL' | 'USD';
 
-const prefix = { 'pt-BR': { USD: 'USD$ ', BRL: 'R$ ' }, 'en-US': { USD: '$', BRL: 'R$' } };
-const decimal = { BRL: ',', USD: '.' };
-const thousands = { BRL: '.', USD: ',' };
+const prefix = { 'pt-BR': { USD: 'US$ ', BRL: 'R$ ' }, 'en-US': { USD: '$', BRL: 'R$' } };
+const decimal = { 'pt-BR': ',', 'en-US': '.' };
+const thousands = { 'pt-BR': '.', 'en-US': ',' };
 
 const LOCALSTORAGE_LANGUAGE_KEY = 'language';
 const LOCALSTORAGE_CURRENCY_KEY = 'currency';
@@ -54,8 +54,8 @@ export class TranslateService {
 		const mask: CurrencyMaskConfig = {
 			...DEFAULT_CURRENCY_MASK,
 			prefix: prefix[this.language][this.currency],
-			decimal: decimal[this.currency],
-			thousands: thousands[this.currency]
+			decimal: decimal[this.language],
+			thousands: thousands[this.language]
 		};
 
 		return mask;

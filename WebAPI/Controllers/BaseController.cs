@@ -20,7 +20,7 @@ namespace Financial.Controllers
 
         // GET: api/Entity
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
+        public virtual async Task<ActionResult<IEnumerable<TDto>>> GetEntities()
         {
             var entities = await repository.GetAllAsync();
             var records = mapper.Map<IEnumerable<TDto>>(entities);
@@ -30,7 +30,7 @@ namespace Financial.Controllers
 
         // GET: api/Entity/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TEntity>> GetEntity(Guid id)
+        public virtual async Task<ActionResult<TDto>> GetEntity(Guid id)
         {
             var entity = await repository.GetAsync(id);
 
@@ -47,7 +47,7 @@ namespace Financial.Controllers
         // PUT: api/Entity/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEntity(Guid id, TEntity entity)
+        public virtual async Task<IActionResult> PutEntity(Guid id, TEntity entity)
         {
             var result = await repository.SaveAsync(id, entity);
             
@@ -62,7 +62,7 @@ namespace Financial.Controllers
         // POST: api/Entity
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TEntity>> PostEntity(Guid id, TEntity entitiy)
+        public virtual async Task<ActionResult<TEntity>> PostEntity(Guid id, TEntity entitiy)
         {
             var newEntitiy = await repository.SaveAsync(id, entitiy);
 
@@ -71,7 +71,7 @@ namespace Financial.Controllers
 
         // DELETE: api/Entities/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEntity(Guid id)
+        public virtual async Task<IActionResult> DeleteEntity(Guid id)
         {
             var entitiy = await repository.GetAsync(id);
 
