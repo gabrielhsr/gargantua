@@ -1,4 +1,6 @@
-﻿namespace Financial.Data.Models
+﻿using Newtonsoft.Json;
+
+namespace Financial.Data.Models
 {
     public class Category : BaseEntity
     {

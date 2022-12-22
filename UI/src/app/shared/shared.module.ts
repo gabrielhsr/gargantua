@@ -20,6 +20,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 // Modules
 import { MaterialModule } from './material/material.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 		MaterialModule,
 		HttpClientModule,
 		CurrencyMaskModule,
+		ReactiveFormsModule,
 
 		// Directives
 		TypeSafeMatCellDef,

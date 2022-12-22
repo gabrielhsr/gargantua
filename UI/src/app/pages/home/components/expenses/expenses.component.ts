@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
-import { Expense, ExpenseDto } from 'src/app/entities/expense/expense.model';
+import { Expense } from 'src/app/entities/expense/expense.model';
 
 @Component({
 	selector: 'app-expenses-table',
@@ -8,8 +8,8 @@ import { Expense, ExpenseDto } from 'src/app/entities/expense/expense.model';
 	styleUrls: ['./expenses.component.scss'],
 })
 export class ExpensesComponent implements OnInit {
-	expenses?: ExpenseDto[];
-	displayedColumns: string[] = Object.keys(new Expense()).filter(x => x !== 'Id');
+	expenses?: Expense[];
+	displayedColumns: string[] = Object.keys(new Expense()).filter(x => x !== 'id');
 
 	constructor(private endpoint: ExpenseEndpoint) {
 	}

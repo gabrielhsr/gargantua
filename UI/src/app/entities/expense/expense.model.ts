@@ -10,12 +10,3 @@ export class Expense extends BaseEntity {
 	description: string = '';
 	amount: number = 0;
 }
-
-export interface ExpenseDto {
-	dueDate: Date;
-	purchaseDate: Date;
-	description: string;
-	amount: number;
-	categoryName: string;
-	paymentMethodName: string;
-}

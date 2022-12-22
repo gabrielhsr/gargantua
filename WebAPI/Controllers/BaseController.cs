@@ -1,36 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Financial.Interfaces;
 using Financial.Data.Models;
-using AutoMapper;
 
 namespace Financial.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<TEntity, TDto> : ControllerBase where TEntity : BaseEntity
+    public class BaseController<TEntity> : ControllerBase where TEntity : BaseEntity
     {
         private readonly IBaseRepository<TEntity> repository;
-        private readonly IMapper mapper;
 
-        public BaseController(IBaseRepository<TEntity> repository, IMapper mapper)
+        public BaseController(IBaseRepository<TEntity> repository)
         {
             this.repository = repository;
-            this.mapper = mapper;
         }
 
         // GET: api/Entity
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<TDto>>> GetEntities()
+        public virtual async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
         {
-            var entities = await repository.GetAllAsync();
-            var records = mapper.Map<IEnumerable<TDto>>(entities);
+            var records = await repository.GetAllAsync();
 
             return Ok(records);
         }
 
         // GET: api/Entity/5
         [HttpGet("{id}")]
-        public virtual async Task<ActionResult<TDto>> GetEntity(Guid id)
+        public virtual async Task<ActionResult<TEntity>> GetEntity(Guid id)
         {
             var entity = await repository.GetAsync(id);
 
@@ -39,9 +35,7 @@ namespace Financial.Controllers
                 return NotFound();
             }
 
-            var dto = mapper.Map<TDto>(entity);
-
-            return Ok(dto);
+            return Ok(entity);
         }
 
         // PUT: api/Entity/5
