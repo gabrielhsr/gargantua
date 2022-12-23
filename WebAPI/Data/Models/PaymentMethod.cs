@@ -1,4 +1,6 @@
-﻿namespace Financial.Data.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Financial.Data.Models
 {
     public class PaymentMethod : BaseEntity
     {
@@ -8,6 +10,8 @@
         }
 
         public string? Name { get; set; }
+
+        [JsonIgnore]
         public virtual IList<Expense> Expenses { get; set; }
     }
 }

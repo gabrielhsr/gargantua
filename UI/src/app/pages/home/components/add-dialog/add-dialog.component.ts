@@ -4,6 +4,15 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { HomeService } from '../../home.service';
 
+interface Test {
+	dueDate: FormControl;
+	purchaseDate: FormControl;
+	category: FormControl;
+	paymentMethod: FormControl;
+	description: FormControl;
+	amount: FormControl;
+}
+
 @Component({
 	selector: 'app-add-dialog',
 	templateUrl: './add-dialog.component.html',
@@ -22,12 +31,16 @@ export class AddDialogComponent implements OnInit {
 	}
 
 	public submitForm() {
-		console.log(this.newExpenseForm.value);
+		const formValue = this.newExpenseForm.value as Expense;
+
+		this.homeService.saveExpense(formValue).subscribe(res => console.log(res));
 	}
 
 	private createForm(expense: Expense) {
-		const formsControl = FormHelper.Build({ object: expense, exclude: ['id'] });
+		const formsControl = FormHelper.build({ object: expense, exclude: ['id'] });
 
 		this.newExpenseForm = new FormGroup(formsControl);
 	}
 }
+
+

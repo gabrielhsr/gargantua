@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Financial.Data.Models
 {
@@ -10,6 +10,8 @@ namespace Financial.Data.Models
         }
 
         public string? Name { get; set; }
+
+        [JsonIgnore]
         public virtual IList<Expense> Expenses { get; set; }
     }
 }

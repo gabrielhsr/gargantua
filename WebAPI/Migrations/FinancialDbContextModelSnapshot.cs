@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Financial.Migrations
+namespace WebAPI.Migrations
 {
     [DbContext(typeof(FinancialDbContext))]
     partial class FinancialDbContextModelSnapshot : ModelSnapshot
@@ -92,13 +92,13 @@ namespace Financial.Migrations
                     b.HasOne("Financial.Data.Models.Category", "Category")
                         .WithMany("Expenses")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Financial.Data.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Expenses")
                         .HasForeignKey("PaymentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");

@@ -6,7 +6,7 @@ interface buildOptions {
 }
 
 export class FormHelper {
-	public static Build(options: buildOptions) {
+	public static build(options: buildOptions) {
 		const formObj: {[key: string]: FormControl} = {};
 
 		Object.keys(options.object)

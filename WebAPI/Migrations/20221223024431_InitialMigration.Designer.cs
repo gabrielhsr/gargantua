@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Financial.Migrations
+namespace WebAPI.Migrations
 {
     [DbContext(typeof(FinancialDbContext))]
-    [Migration("20221212003705_CreatedForeignKeys")]
-    partial class CreatedForeignKeys
+    [Migration("20221223024431_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,40 +21,30 @@ namespace Financial.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Financial.Data.Models.Expense.Category", b =>
+            modelBuilder.Entity("Expense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("Financial.Data.Models.Expense.Expense", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("Amount")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("Money");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset>("DueData")
+                    b.Property<DateTimeOffset>("DueDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("PaymentMethodId")
@@ -72,7 +62,7 @@ namespace Financial.Migrations
                     b.ToTable("Expenses");
                 });
 
-            modelBuilder.Entity("Financial.Data.Models.Expense.PaymentMethod", b =>
+            modelBuilder.Entity("Financial.Data.Models.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,26 +73,50 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethod");
+                    b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Financial.Data.Models.Expense.Expense", b =>
+            modelBuilder.Entity("Financial.Data.Models.PaymentMethod", b =>
                 {
-                    b.HasOne("Financial.Data.Models.Expense.Category", "Category")
-                        .WithMany()
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentMethods");
+                });
+
+            modelBuilder.Entity("Expense", b =>
+                {
+                    b.HasOne("Financial.Data.Models.Category", "Category")
+                        .WithMany("Expenses")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Financial.Data.Models.Expense.PaymentMethod", "PaymentMethod")
-                        .WithMany()
+                    b.HasOne("Financial.Data.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany("Expenses")
                         .HasForeignKey("PaymentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
 
                     b.Navigation("PaymentMethod");
+                });
+
+            modelBuilder.Entity("Financial.Data.Models.Category", b =>
+                {
+                    b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("Financial.Data.Models.PaymentMethod", b =>
+                {
+                    b.Navigation("Expenses");
                 });
 #pragma warning restore 612, 618
         }
