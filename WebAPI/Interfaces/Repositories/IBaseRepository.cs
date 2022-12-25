@@ -1,4 +1,4 @@
-﻿namespace Financial.Interfaces
+﻿namespace Financial.Interfaces.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {

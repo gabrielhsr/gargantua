@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ "Pages.Home.AddDialog.Title" | translate }}</h2>
 
-<mat-dialog-content>
+<mat-dialog-content [loading]="isLoading">
 	<form [formGroup]="newExpenseForm">
 		<mat-form-field>
 			<mat-label>{{ "Pages.Home.Description" | translate }}</mat-label>

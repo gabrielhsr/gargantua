@@ -1,4 +1,5 @@
-﻿using Financial.Interfaces;
+﻿using Financial.Interfaces.Repositories;
+using Financial.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financial.Controllers
@@ -7,7 +8,7 @@ namespace Financial.Controllers
     [ApiController]
     public class ExpensesController : BaseController<Expense>
     {
-        public ExpensesController(IBaseRepository<Expense> repository) : base(repository)
+        public ExpensesController(IExpenseRepository repository) : base(repository)
         {
         }
     }

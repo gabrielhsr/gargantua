@@ -21,6 +21,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MaterialModule } from './material/material.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingDirective } from './directives/loading.directive';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 		// Directives
 		TypeSafeMatCellDef,
 		AutocompleteDisableDirective,
+		LoadingDirective,
 
 		// Pipes
 		TranslatePipe,
@@ -52,6 +54,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 		// Directives
 		TypeSafeMatCellDef,
 		AutocompleteDisableDirective,
+		LoadingDirective,
 
 		// Pipes
 		TranslatePipe,

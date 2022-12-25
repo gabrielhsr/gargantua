@@ -23,6 +23,7 @@ export class AddDialogComponent implements OnInit {
 	public paymentMethods = this.homeService.getPaymentMethods();
 
 	public newExpenseForm!: FormGroup;
+	isLoading: boolean = false;
 
 	constructor(private readonly homeService: HomeService) {}
 
@@ -30,13 +31,22 @@ export class AddDialogComponent implements OnInit {
 		this.createForm(new Expense());
 	}
 
-	public submitForm() {
-		const formValue = this.newExpenseForm.value as Expense;
-
-		this.homeService.saveExpense(formValue).subscribe(res => console.log(res));
+	public test() {
+		this.isLoading = !this.isLoading;
 	}
 
-	private createForm(expense: Expense) {
+	public submitForm(): void {
+		const formValue = this.newExpenseForm.value as Expense;
+
+		this.homeService
+			.saveExpense(formValue)
+			.subscribe({
+				error: (error) => console.log(error),
+				complete: () => console.log('success'),
+			});
+	}
+
+	private createForm(expense: Expense): void {
 		const formsControl = FormHelper.build({ object: expense, exclude: ['id'] });
 
 		this.newExpenseForm = new FormGroup(formsControl);

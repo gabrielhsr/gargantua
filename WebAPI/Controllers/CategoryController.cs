@@ -1,6 +1,6 @@
 ﻿using Financial.Data.Models;
-using Financial.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Financial.Interfaces.Repositories;
 
 namespace Financial.Controllers
 {

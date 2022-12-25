@@ -1,9 +1,8 @@
 ﻿using Financial.Data;
 using Financial.Data.Models;
 using Financial.Helpers;
-using Financial.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Financial.Interfaces.Repositories;
 
 namespace Financial.Repositories
 {
@@ -15,7 +14,7 @@ namespace Financial.Repositories
         {
             this.context = context;
         }
-        public async Task<T> AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
             await context.AddAsync(entity);
             await context.SaveChangesAsync();
@@ -23,7 +22,7 @@ namespace Financial.Repositories
             return entity;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             var entity = await GetAsync(id);
 
@@ -36,18 +35,18 @@ namespace Financial.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task<bool> Exists(Guid id)
+        public virtual async Task<bool> Exists(Guid id)
         {
             var entity = await GetAsync(id);
             return entity != null;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public virtual async Task<List<T>> GetAllAsync()
         {
             return await context.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetAsync(Guid? id)
+        public virtual async Task<T?> GetAsync(Guid? id)
         {
             if (id is null)
             {
@@ -57,7 +56,7 @@ namespace Financial.Repositories
             return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<T> SaveAsync(Guid id, T entity)
+        public virtual async Task<T> SaveAsync(Guid id, T entity)
         {
             if (IdHelper.IsNullOrDefault(id))
             {
@@ -66,7 +65,7 @@ namespace Financial.Repositories
             {
                 if (await Exists(id))
                 {
-                    entity.Id= id;
+                    entity.Id = id;
 
                     await UpdateAsync(entity);
                 } else
@@ -78,7 +77,7 @@ namespace Financial.Repositories
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public virtual async Task<T> UpdateAsync(T entity)
         {
             context.Update(entity);
             await context.SaveChangesAsync();
