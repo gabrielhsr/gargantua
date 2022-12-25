@@ -26,12 +26,6 @@ namespace Financial.Data
                 .WithMany(x => x.Expenses)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Category>()
-                .Ignore(x => x.Expenses);
-
-            modelBuilder.Entity<PaymentMethod>()
-                .Ignore(x => x.Expenses);
-
             base.OnModelCreating(modelBuilder);
         }
     }

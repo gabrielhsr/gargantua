@@ -11,6 +11,7 @@ namespace Financial.Data.Models
 
         public string? Name { get; set; }
 
+        [JsonIgnore]
         public virtual IList<Expense> Expenses { get; set; }
     }
 }

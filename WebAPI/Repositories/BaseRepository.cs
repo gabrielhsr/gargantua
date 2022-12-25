@@ -46,35 +46,9 @@ namespace Financial.Repositories
             return await context.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T?> GetAsync(Guid? id)
+        public virtual async Task<T?> GetAsync(Guid id)
         {
-            if (id is null)
-            {
-                return null;
-            }
-
             return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public virtual async Task<T> SaveAsync(Guid id, T entity)
-        {
-            if (IdHelper.IsNullOrDefault(id))
-            {
-                await AddAsync(entity);
-            } else
-            {
-                if (await Exists(id))
-                {
-                    entity.Id = id;
-
-                    await UpdateAsync(entity);
-                } else
-                {
-                    throw new Exception("Id not found!");
-                }
-            }
-
-            return entity;
         }
 
         public virtual async Task<T> UpdateAsync(T entity)

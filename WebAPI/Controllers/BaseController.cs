@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Financial.Data.Models;
-using Financial.Interfaces.Repositories;
+using Financial.Interfaces.Services;
 
 namespace Financial.Controllers
 {
@@ -8,18 +8,18 @@ namespace Financial.Controllers
     [ApiController]
     public class BaseController<TEntity> : ControllerBase where TEntity : BaseEntity
     {
-        private readonly IBaseRepository<TEntity> repository;
+        private readonly IBaseService<TEntity> service;
 
-        public BaseController(IBaseRepository<TEntity> repository)
+        public BaseController(IBaseService<TEntity> service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         // GET: api/Entity
         [HttpGet]
         public virtual async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
         {
-            var records = await repository.GetAllAsync();
+            var records = await service.GetAllAsync();
 
             return Ok(records);
         }
@@ -28,7 +28,7 @@ namespace Financial.Controllers
         [HttpGet("{id}")]
         public virtual async Task<ActionResult<TEntity>> GetEntity(Guid id)
         {
-            var entity = await repository.GetAsync(id);
+            var entity = await service.GetAsync(id);
 
             if (entity == null)
             {
@@ -43,7 +43,7 @@ namespace Financial.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> PutEntity(Guid id, TEntity entity)
         {
-            var result = await repository.SaveAsync(id, entity);
+            var result = await service.SaveAsync(id, entity);
             
             if (result is not null)
             {
@@ -58,7 +58,7 @@ namespace Financial.Controllers
         [HttpPost]
         public virtual async Task<ActionResult<TEntity>> PostEntity(Guid id, TEntity entitiy)
         {
-            var newEntitiy = await repository.SaveAsync(id, entitiy);
+            var newEntitiy = await service.SaveAsync(id, entitiy);
 
             return Ok(newEntitiy);
         }
@@ -67,14 +67,14 @@ namespace Financial.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> DeleteEntity(Guid id)
         {
-            var entitiy = await repository.GetAsync(id);
+            var entitiy = await service.GetAsync(id);
 
             if (entitiy == null)
             {
                 return NotFound();
             }
 
-            await repository.DeleteAsync(id);
+            await service.RemoveAsync(id);
 
             return NoContent();
         }

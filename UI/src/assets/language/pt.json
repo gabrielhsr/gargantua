@@ -2,6 +2,10 @@
 	"Language": "Português",
 	"Example": "Exemplo",
 	"Title": "Finanças",
+	"Feedback": {
+		"GenericSuccess": "Salvo com sucesso!",
+		"GenericError": "Erro ao salvar."
+	},
 	"Common": {
 		"Send": "Enviar"
 	},

@@ -16,6 +16,7 @@ import localePT from '@angular/common/locales/pt';
 import localeEN from '@angular/common/locales/en';
 
 import { AppBase } from './app.base';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 registerLocaleData(localePT);
 registerLocaleData(localeEN);
@@ -44,6 +45,9 @@ registerLocaleData(localeEN);
 			provide: CURRENCY_MASK_CONFIG,
 			deps: [TranslateService],
 			useFactory: (translateService: TranslateService) => translateService.currencyMask
+		},
+		{	provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+			useValue: { duration: 2500 }
 		}
 	],
 	bootstrap: [AppBase],

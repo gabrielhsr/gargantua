@@ -1,17 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { finalize } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
+import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { HomeService } from '../../home.service';
-
-interface Test {
-	dueDate: FormControl;
-	purchaseDate: FormControl;
-	category: FormControl;
-	paymentMethod: FormControl;
-	description: FormControl;
-	amount: FormControl;
-}
 
 @Component({
 	selector: 'app-add-dialog',
@@ -23,26 +18,29 @@ export class AddDialogComponent implements OnInit {
 	public paymentMethods = this.homeService.getPaymentMethods();
 
 	public newExpenseForm!: FormGroup;
-	isLoading: boolean = false;
 
-	constructor(private readonly homeService: HomeService) {}
+	public submitLoading: boolean = false;
+
+	constructor(
+		private readonly dialogRef: MatDialogRef<AddDialogComponent>,
+		private readonly homeService: HomeService,
+		private readonly feedBack: FeedbackService
+	) {}
 
 	public ngOnInit(): void {
 		this.createForm(new Expense());
 	}
 
-	public test() {
-		this.isLoading = !this.isLoading;
-	}
-
 	public submitForm(): void {
+		this.submitLoading = true;
 		const formValue = this.newExpenseForm.value as Expense;
 
 		this.homeService
 			.saveExpense(formValue)
+			.pipe(finalize(() => this.dialogRef.close()))
 			.subscribe({
-				error: (error) => console.log(error),
-				complete: () => console.log('success'),
+				complete: () => this.feedBack.successToast(),
+				error: (error: HttpErrorResponse) => this.feedBack.httpErrorToast(error),
 			});
 	}
 
@@ -52,5 +50,3 @@ export class AddDialogComponent implements OnInit {
 		this.newExpenseForm = new FormGroup(formsControl);
 	}
 }
-
-

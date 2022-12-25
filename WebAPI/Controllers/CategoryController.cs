@@ -1,6 +1,7 @@
 ﻿using Financial.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Financial.Interfaces.Repositories;
+using Financial.Interfaces.Services;
 
 namespace Financial.Controllers
 {
@@ -8,7 +9,7 @@ namespace Financial.Controllers
     [ApiController]
     public class CategoryController : BaseController<Category>
     {
-        public CategoryController(IBaseRepository<Category> repository) : base(repository)
+        public CategoryController(IBaseService<Category> service) : base(service)
         {
         }
     }

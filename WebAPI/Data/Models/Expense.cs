@@ -1,25 +1,32 @@
-﻿using Financial.Data.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Expense : BaseEntity
+namespace Financial.Data.Models
 {
-    public Expense()
+    public class Expense : BaseEntity
     {
-        Category = new Category();
-        PaymentMethod = new PaymentMethod();
+        public Expense()
+        {
+            Category = new Category();
+            PaymentMethod = new PaymentMethod();
+        }
+        
+        public DateTimeOffset? DueDate { get; set; }
+
+        [Required]
+        public DateTimeOffset PurchaseDate { get; set; }
+
+        [Required]
+        public string Description { get; set; } = string.Empty;
+
+        [Required]
+        [Column(TypeName = "Money")]
+        public decimal Amount { get; set; } = 0;
+
+        [Required]
+        public virtual Category Category { get; set; }
+
+        [Required]
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
-
-    public DateTimeOffset DueDate { get; set; }
-
-    public DateTimeOffset PurchaseDate { get; set; }
-
-    public string Description { get; set; } = "No Description";
-
-    [Column(TypeName = "Money")]
-    public decimal Amount { get; set; } = 0;
-
-    public virtual Category Category { get; set; }
-    public virtual PaymentMethod PaymentMethod { get; set; }
 }
-

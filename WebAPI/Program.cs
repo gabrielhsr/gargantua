@@ -3,6 +3,8 @@ using Financial.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Financial.Interfaces.Repositories;
+using Financial.Services;
+using Financial.Interfaces.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
@@ -21,9 +23,11 @@ builder.Services.AddDbContext<FinancialDbContext>(opts =>
 
 // Repositories
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 
 // Services
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
