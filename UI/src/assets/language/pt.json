@@ -26,5 +26,8 @@
 				"Title": "Nova Despesa"
 			}
 		}
+	},
+	"ErrorMessage": {
+		"required": "Campo obrigatório."
 	}
 }

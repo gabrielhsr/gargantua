@@ -69,7 +69,7 @@ export class TranslateService {
 		localStorage.setItem(LOCALSTORAGE_CURRENCY_KEY, value);
 	}
 
-	public translate(id: string): string {
+	public instant(id: string): string {
 		const file = this.getFile(this.language);
 		const key = id as keyof typeof file;
 		const text = resolvePath(file, key);

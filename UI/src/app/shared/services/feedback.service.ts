@@ -13,7 +13,7 @@ export class FeedbackService {
 	) {}
 
 	public successToast(message?: string) {
-		this.snackBar.open(message ?? this.translateService.translate('Feedback.GenericSuccess'));
+		this.snackBar.open(message ?? this.translateService.instant('Feedback.GenericSuccess'));
 	}
 
 	public errorToast(error: string) {
