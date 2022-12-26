@@ -20,10 +20,7 @@ namespace Financial.Services
             context.Entry(entity.Category).State = EntityState.Unchanged;
             context.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
 
-            if (entity.DueDate is null)
-            {
-                entity.DueDate = entity.PurchaseDate;
-            }
+            entity.DueDate ??= entity.PurchaseDate;
 
             return await base.SaveAsync(id, entity);
         }

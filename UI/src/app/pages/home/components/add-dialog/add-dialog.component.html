@@ -17,7 +17,7 @@
 				<mat-label>{{ "Pages.Home.Category" | translate }}</mat-label>
 				<mat-select formControlName="category">
 					<mat-option
-						*ngFor="let category of categories | async"
+						*ngFor="let category of (categories | async)?.value"
 						[value]="category"
 					>
 						{{ category.name }}
@@ -29,7 +29,7 @@
 				<mat-label>{{ "Pages.Home.PaymentMethod" | translate }}</mat-label>
 				<mat-select formControlName="paymentMethod">
 					<mat-option
-						*ngFor="let paymentMethod of paymentMethods | async"
+						*ngFor="let paymentMethod of (paymentMethods | async)?.value"
 						[value]="paymentMethod"
 					>
 						{{ paymentMethod.name }}

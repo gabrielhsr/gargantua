@@ -16,7 +16,7 @@ export class FeedbackService {
 		this.snackBar.open(message ?? this.translateService.translate('Feedback.GenericSuccess'));
 	}
 
-	public httpErrorToast(error: HttpErrorResponse) {
-		this.snackBar.open(error.message);
+	public errorToast(error: string) {
+		this.snackBar.open(error);
 	}
 }

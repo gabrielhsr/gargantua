@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HttpService } from '../shared/services/http.service';
 
 export abstract class BaseEndpoint<T> {
 	public abstract endpoint?: string;
 
-	constructor(protected httpClient: HttpClient) {	}
+	constructor(protected httpClient: HttpClient, protected httpService: HttpService) {	}
 
-	public get(): Observable<T[]> {
-		return this.httpClient.get<T[]>(environment.baseApi + this.endpoint);
+	public get() {
+		return this.httpService.handle(this.httpClient.get<T[]>(environment.baseApi + this.endpoint));
 	}
 
-	public post(object: T): Observable<T> {
-		return this.httpClient.post<T>(environment.baseApi + this.endpoint, object);
+	public post(object: T) {
+		return this.httpService.handle(this.httpClient.post<T>(environment.baseApi + this.endpoint, object));
 	}
 }

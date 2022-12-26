@@ -7,7 +7,7 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 @Injectable({
 	providedIn: 'root',
 })
-export class HomeService {
+export class ExpenseService {
 	constructor(
 		private categoryEndpoint: CategoryEndpoint,
 		private paymentMethodEndpoint: PaymentMethodEndpoint,
@@ -20,6 +20,10 @@ export class HomeService {
 
 	public getPaymentMethods() {
 		return this.paymentMethodEndpoint.get();
+	}
+
+	public getAllExpenses() {
+		return this.expenseEndpoint.get();
 	}
 
 	public saveExpense(expense: Expense) {

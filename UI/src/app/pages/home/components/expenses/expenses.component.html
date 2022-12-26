@@ -1,4 +1,4 @@
-<table *ngIf="expenses" mat-table [dataSource]="expenses" class="mat-elevation-z1">
+<table mat-table [dataSource]="expenses!" class="mat-elevation-z1" [loading]="expensesLoading">
 
 	<!-- Position Column -->
 	<ng-container matColumnDef="dueDate">

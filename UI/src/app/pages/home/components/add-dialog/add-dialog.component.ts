@@ -6,7 +6,7 @@ import { finalize } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { HomeService } from '../../home.service';
+import { ExpenseService } from '../../../../shared/services/expense.service';
 
 @Component({
 	selector: 'app-add-dialog',
@@ -23,7 +23,7 @@ export class AddDialogComponent implements OnInit {
 
 	constructor(
 		private readonly dialogRef: MatDialogRef<AddDialogComponent>,
-		private readonly homeService: HomeService,
+		private readonly homeService: ExpenseService,
 		private readonly feedBack: FeedbackService
 	) {}
 
@@ -37,10 +37,9 @@ export class AddDialogComponent implements OnInit {
 
 		this.homeService
 			.saveExpense(formValue)
-			.pipe(finalize(() => this.dialogRef.close()))
-			.subscribe({
-				complete: () => this.feedBack.successToast(),
-				error: (error: HttpErrorResponse) => this.feedBack.httpErrorToast(error),
+			.subscribe((response) => {
+				if (response.isSuccess) this.feedBack.successToast();
+				this.dialogRef.close()
 			});
 	}
 
