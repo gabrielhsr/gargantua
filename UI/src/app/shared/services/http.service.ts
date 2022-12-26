@@ -21,7 +21,7 @@ interface SuccessHandleResponse<T> {
 export class HttpService {
 	constructor(private readonly feedback: FeedbackService) {}
 
-	public handle<T>(observable: Observable<T>) {
+	public handle<T>(observable: Observable<T>): Observable<HttpHandleResponse<T>> {
 		return observable.pipe(
 			map((value) => {
 				const response: HttpHandleResponse<T> = {
