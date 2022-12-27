@@ -36,5 +36,13 @@ export class ExpenseService {
 			})
 		);
 	}
+
+	public removeExpense(id: string) {
+		return this.expenseEndpoint.delete(id).pipe(
+			tap(({ isSuccess }) => {
+				if (isSuccess) this.expensesUpdate.next();
+			})
+		);
+	}
 }
 

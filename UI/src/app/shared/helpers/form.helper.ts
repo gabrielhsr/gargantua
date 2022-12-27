@@ -32,7 +32,7 @@ export class FormHelper {
 			const key = (field.errors ? Object.keys(field.errors)[0] : '') as keyof typeof messageErrors;
 
 			if (!messageErrors[key] && key) {
-				console.error(`No translation for error: ${String(key)}`);
+				return key;
 			}
 
 			return messageErrors[key];

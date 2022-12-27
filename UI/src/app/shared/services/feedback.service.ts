@@ -9,11 +9,11 @@ import { TranslateService } from '../translate/translate.service';
 export class FeedbackService {
 	constructor(
 		private readonly snackBar: MatSnackBar,
-		private readonly translateService: TranslateService
+		private readonly translate: TranslateService
 	) {}
 
-	public successToast(message?: string) {
-		this.snackBar.open(message ?? this.translateService.instant('Feedback.GenericSuccess'));
+	public successToast(dictionaryKey?: string) {
+		this.snackBar.open(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericSuccess'));
 	}
 
 	public errorToast(error: string) {

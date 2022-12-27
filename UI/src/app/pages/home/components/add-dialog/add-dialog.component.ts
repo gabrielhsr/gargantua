@@ -21,7 +21,7 @@ export class AddDialogComponent implements OnInit {
 	constructor(
 		private readonly dialogRef: MatDialogRef<AddDialogComponent>,
 		private readonly homeService: ExpenseService,
-		private readonly feedBack: FeedbackService
+		private readonly feedback: FeedbackService
 	) {}
 
 	public ngOnInit(): void {
@@ -34,7 +34,7 @@ export class AddDialogComponent implements OnInit {
 
 		this.homeService.saveExpense(formValue).subscribe((response) => {
 			if (response.isSuccess) {
-				this.feedBack.successToast();
+				this.feedback.successToast("Feedback.SaveSuccess");
 				this.dialogRef.close();
 			}
 

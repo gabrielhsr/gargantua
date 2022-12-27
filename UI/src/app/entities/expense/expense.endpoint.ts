@@ -8,7 +8,7 @@ import { Expense } from './expense.model';
 	providedIn: 'root',
 })
 export class ExpenseEndpoint extends BaseEndpoint<Expense> {
-	public override endpoint = '/api/Expenses';
+	public override endpoint = '/api/Expenses/';
 
 	constructor(private readonly client: HttpClient, private readonly service: HttpService) {
 		super(client, service);

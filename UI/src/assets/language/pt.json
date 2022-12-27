@@ -3,8 +3,10 @@
 	"Example": "Exemplo",
 	"Title": "Finanças",
 	"Feedback": {
-		"GenericSuccess": "Salvo com sucesso!",
-		"GenericError": "Erro ao salvar."
+		"GenericSuccess": "Sucesso!",
+		"GenericError": "Erro!",
+		"SaveSuccess": "Salvo com sucesso!",
+		"DeleteSuccess": "Deletado com sucesso!"
 	},
 	"Common": {
 		"Send": "Enviar"
