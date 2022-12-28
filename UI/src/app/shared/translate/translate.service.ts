@@ -76,7 +76,7 @@ export class TranslateService {
 
 		if (text) return text;
 
-		console.error(`No translation found for key ${key} in language ${this.language}`);
+		console.error(`No translation found for key '${key}' in language ${this.language}`);
 		return key;
 	}
 

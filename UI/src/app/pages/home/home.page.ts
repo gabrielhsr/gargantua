@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
+import { Period } from 'src/app/entities/period/period.dto';
+import { ExpenseService } from 'src/app/shared/services/expense.service';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 
 @Component({
@@ -8,11 +11,34 @@ import { AddDialogComponent } from './components/add-dialog/add-dialog.component
 	styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-	constructor(private readonly dialog: MatDialog) {}
+	public periods?: Period[];
+	public selectedPeriod?: Period;
 
-	ngOnInit(): void {}
+	constructor(
+		private readonly dialog: MatDialog,
+		private readonly expenseService: ExpenseService
+	) {}
 
-	openAddDialog() {
+	public ngOnInit(): void {
+		this.expenseService.getPeriods().subscribe((res) => {
+			if (res.isSuccess) {
+				this.periods = res.value;
+
+				if (this.periods.length) {
+					const currentMonth = new Date().getMonth() + 1;
+					const currentYear = new Date().getFullYear();
+
+					const currentPeriod = this.periods.find(({ month, year }) => month === currentMonth && year === currentYear);
+
+					if (!currentPeriod) console.error('Current period not finded!');
+
+					this.selectedPeriod = currentPeriod;
+				}
+			}
+		});
+	}
+
+	public openAddDialog() {
 		this.dialog.open(AddDialogComponent);
 	}
 }

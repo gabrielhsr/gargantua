@@ -19,7 +19,7 @@ namespace Financial.Services
             await baseRepository.DeleteAsync(id);
         }
 
-        public virtual async Task<List<T>> GetAllAsync()
+        public virtual async Task<IList<T>> GetAllAsync()
         {
             return await baseRepository.GetAllAsync();
         }

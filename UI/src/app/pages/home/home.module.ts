@@ -5,6 +5,7 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
 	{
@@ -15,7 +16,7 @@ const routes: Routes = [
 
 @NgModule({
 	declarations: [HomePage, ExpensesComponent, AddDialogComponent],
-	imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+	imports: [CommonModule, SharedModule, FormsModule, RouterModule.forChild(routes)],
 	exports: [HomePage],
 })
 export class HomeModule {}

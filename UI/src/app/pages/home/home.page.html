@@ -1,5 +1,20 @@
 <div class="home-container">
-	<app-expenses-table></app-expenses-table>
+	<ng-container *ngIf="periods?.length; else expenses">
+		<mat-form-field>
+			<mat-label>{{ 'Common.Month' | translate }}</mat-label>
+			<mat-select [(value)]="selectedPeriod">
+				<mat-option *ngFor="let period of periods" [value]="period">
+					{{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<app-expenses-table [selectedPeriod]="selectedPeriod"></app-expenses-table>
+	</ng-container>
+
+	<ng-template #expenses>
+		<div class="alert alert-info" role="alert">{{ 'Pages.Home.Alerts.NoExpense' | translate }}</div>
+	</ng-template>
 
 	<button mat-fab class="add-button" (click)="openAddDialog()">
 		<mat-icon>add</mat-icon>

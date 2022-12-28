@@ -9,7 +9,8 @@
 		"DeleteSuccess": "Deletado com sucesso!"
 	},
 	"Common": {
-		"Send": "Enviar"
+		"Send": "Enviar",
+		"Month": "Mês"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
@@ -17,6 +18,9 @@
 	},
 	"Pages": {
 		"Home": {
+			"Alerts": {
+				"NoExpense": "Nenhuma despesa cadastrada!"
+			},
 			"Expenses": "Despesas",
 			"DueDate": "Data de Vencimento",
 			"PurchaseDate": "Data da Compra",
