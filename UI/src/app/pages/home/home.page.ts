@@ -30,9 +30,11 @@ export class HomePage implements OnInit {
 
 					const currentPeriod = this.periods.find(({ month, year }) => month === currentMonth && year === currentYear);
 
-					if (!currentPeriod) console.error('Current period not finded!');
-
-					this.selectedPeriod = currentPeriod;
+					if (currentPeriod) {
+						this.selectedPeriod = currentPeriod;
+					} else {
+						this.selectedPeriod = this.periods.at(-1);
+					}
 				}
 			}
 		});
