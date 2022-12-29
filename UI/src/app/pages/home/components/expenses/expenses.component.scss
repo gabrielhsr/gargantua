@@ -69,10 +69,29 @@ table {
 
 @include media-breakpoint-up(lg) {
 	table {
-		display: block;
+		display: table;
+
+		td {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			max-width: 250px;
+		}
+
+		.mat-column-dueDate {
+			display: none;
+		}
 	}
 
 	.mobile-view {
 		display: none;
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	table {
+		.mat-column-dueDate {
+			display: table-cell;
+		}
 	}
 }
