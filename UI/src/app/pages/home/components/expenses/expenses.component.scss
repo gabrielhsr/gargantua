@@ -8,62 +8,70 @@ table {
 .mobile-view {
 	display: block;
 
-	.mobile-row {
-		display: flex;
-		padding-bottom: 12px;
-		gap: 12px;
-		flex-direction: column;
+	mat-expansion-panel-header {
+		align-items: start;
+		padding: 12px 24px;
+		height: auto;
+
+	 	::ng-deep .mat-expansion-indicator {
+			align-self: center;
+		}
 	}
 
-	.main-container {
-		display: flex;
-		justify-content: space-between;
-		margin-left: 16px;
-		margin-right: 16px;
+	mat-action-row {
+		padding: 1px 16px 1px 16px;
 	}
 
-	.item-container {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.left-container {
-		width: 50%;
+	.panel-title {
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-		flex: 1;
+		align-items: start;
+		width: 45%;
 	}
 
-	.right-container {
+	.panel-description {
+		font-size: 1.1rem;
+		justify-content: flex-end;
+		flex-grow: 1;
+		width: 45%;
+	}
+
+	.panel-content {
+		display: flex;
+		gap: 8px;
+		align-items: start;
+
+		.sub-content {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			flex-grow: 1;
+		}
+
+		.sub-content:last-of-type {
+			.item {
+				align-items: flex-end;
+			}
+		}
+	}
+
+	.item {
 		display: flex;
 		flex-direction: column;
-		width: 50%;
-		font-size: 1.2rem;
-		flex: 1;
-		align-items: flex-end;
-		text-align: end;
-		justify-content: space-between;
+		width: 100%;
 	}
 
-	.title {
+	.sub-title {
 		font-size: 0.7rem;
 		line-height: 0.7rem;
 		color: rgba(0, 0, 0, 0.5);
 	}
 
-	.value {
+	.sub-value {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
-		width: 95%;
-	}
-
-	.toggle-icon {
-		font-size: 40px;
-		width: 30px;
-		height: 25px;
-		color: rgba(0, 0, 0, 0.5);
 	}
 }
 

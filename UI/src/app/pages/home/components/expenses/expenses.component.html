@@ -46,36 +46,71 @@
 
 
 <div class="mobile-view" [loading]="expensesLoading">
-	<div class="mobile-row" *ngFor="let item of periodExpenses">
-		<div class="main-container">
-			<div class="left-container">
-				<div class="item-container">
-					<div class="title">
-						{{ "Pages.Home.Description" | translate }}
+	<mat-accordion class="mat-elevation-z1" multi="true">
+		<mat-expansion-panel *ngFor="let expense of periodExpenses" #panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title class="panel-title">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.Description" | translate }}
+						</div>
+						<div [ngClass]="panel.expanded ? '' : 'sub-value'">
+							{{ expense.description }}
+						</div>
 					</div>
-					<div class="value">
-						{{ item.description }}
+
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.PurchaseDate" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.purchaseDate | date }}
+						</div>
+					</div>
+				</mat-panel-title>
+
+				<mat-panel-description class="panel-description">
+					<div class="sub-value">{{ expense.amount | currency }}</div>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+			<div class="panel-content">
+				<div class="sub-content">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.DueDate" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.dueDate | date }}
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.Category" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.category.name }}
+						</div>
 					</div>
 				</div>
 
-				<div class="item-container">
-					<div class="title">
-						{{ "Pages.Home.PurchaseDate" | translate }}
-					</div>
-					<div class="value">
-						{{ item.purchaseDate | date }}
+				<div class="sub-content">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.PaymentMethod" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.paymentMethod.name }}
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="right-container">
-				<div class="value">
-					{{ item.amount | currency }}
-				</div>
-
-				<mat-icon class="toggle-icon" inline="true">keyboard_arrow_down</mat-icon>
-			</div>
-		</div>
-
-		<mat-divider></mat-divider>
-	</div>
+			<mat-action-row>
+				<button mat-icon-button color="warn" (click)="deleteExpense(expense.id)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-action-row>
+		</mat-expansion-panel>
+	</mat-accordion>
 </div>
