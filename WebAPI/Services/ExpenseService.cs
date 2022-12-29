@@ -47,6 +47,7 @@ namespace Financial.Services
             var expensesByPeriod = expenses
                 .Where(x => x.DueDate is not null)
                 .Where(x => x.DueDate!.Value.Month == period.Month && x.DueDate!.Value.Year == period.Year)
+                .OrderBy(x => x.DueDate)
                 .ToList();
 
             return expensesByPeriod;

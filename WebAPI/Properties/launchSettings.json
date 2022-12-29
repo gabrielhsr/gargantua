@@ -9,22 +9,22 @@
     }
   },
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5228",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "https": {
+    "WebAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7242;http://localhost:5228",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "WebAPI - Mobile Test": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://0.0.0.0:7242;http://0.0.0.0:5228",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

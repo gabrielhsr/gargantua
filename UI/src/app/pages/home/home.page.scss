@@ -1,5 +1,7 @@
+@import '/src/assets/bootstrap/scss/bootstrap.scss';
+
 .home-container {
-	padding: 20px;
+	padding-top: 20px;
 }
 
 .add-button {
@@ -7,3 +9,14 @@
 	bottom: 30px;
 	right: 30px;
 }
+
+.period-form-field {
+	width: 100%;
+}
+
+@include media-breakpoint-up(md) {
+	.period-form-field {
+		width: auto;
+	}
+}
+

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { forkJoin } from 'rxjs';
+import { Category } from 'src/app/entities/category/category.model';
 import { Expense } from 'src/app/entities/expense/expense.model';
+import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../../../shared/services/expense.service';
@@ -12,24 +15,36 @@ import { ExpenseService } from '../../../../shared/services/expense.service';
 	styleUrls: ['./add-dialog.component.scss'],
 })
 export class AddDialogComponent implements OnInit {
-	public categories$ = this.homeService.getCategories();
-	public paymentMethods$ = this.homeService.getPaymentMethods();
+	public categories?: Category[];
+	public paymentMethods?: PaymentMethod[];
 
 	public newExpenseForm?: FormGroup;
-	public submitLoading: boolean = false;
+	public loading: boolean = true;
 
 	constructor(
 		private readonly dialogRef: MatDialogRef<AddDialogComponent>,
 		private readonly homeService: ExpenseService,
 		private readonly feedback: FeedbackService
-	) {}
+	) {
+		forkJoin({
+			categories: this.homeService.getCategories(),
+			paymentMethods: this.homeService.getPaymentMethods(),
+		}).subscribe(({ categories, paymentMethods }) => {
+			if (categories.isSuccess && paymentMethods.isSuccess) {
+				this.categories = categories.value;
+				this.paymentMethods = paymentMethods.value;
+
+				this.loading = false;
+			}
+		});
+	}
 
 	public ngOnInit(): void {
 		this.createForm(new Expense());
 	}
 
 	public submitForm(): void {
-		this.submitLoading = true;
+		this.loading = true;
 		const formValue = this.newExpenseForm?.value as Expense;
 
 		this.homeService.saveExpense(formValue).subscribe((response) => {
@@ -38,7 +53,7 @@ export class AddDialogComponent implements OnInit {
 				this.dialogRef.close();
 			}
 
-			this.submitLoading = false;
+			this.loading = false;
 		});
 	}
 

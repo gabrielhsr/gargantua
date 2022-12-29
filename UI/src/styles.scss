@@ -1,3 +1,5 @@
+@import "/src/assets/bootstrap/scss/bootstrap.scss";
+
 :root {
 	--topbar-height: 64px;
 }
@@ -12,10 +14,15 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+mat-dialog-content {
+	min-width: 200px;
+	min-height: 200px;
+}
+
 .two-input-container {
 	display: flex;
 	flex-direction: row;
-	gap: 22px;
+	flex-wrap: wrap;
 
 	input {
 		width: 100%;
@@ -33,3 +40,9 @@ body {
 	width: 100%;
 	height: 100%;
 }
+
+// @include media-breakpoint-up(sm) { .mat-drawer-container { background-color: red !important; } } // Tablet
+// @include media-breakpoint-up(md) { .mat-drawer-container { background-color: navy !important; } } // Tablet
+// @include media-breakpoint-up(lg) { .mat-drawer-container { background-color: green !important; } } // Laptop
+// @include media-breakpoint-up(xl) { .mat-drawer-container { background-color: gold !important; } } // Laptop
+// @include media-breakpoint-up(xxl) { .mat-drawer-container { background-color: gray !important; } } // Desktop

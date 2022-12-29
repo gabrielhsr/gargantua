@@ -1,6 +1,6 @@
 <div class="home-container">
 	<ng-container *ngIf="periods?.length; else expenses">
-		<mat-form-field>
+		<mat-form-field class="period-form-field">
 			<mat-label>{{ 'Common.Month' | translate }}</mat-label>
 			<mat-select [(value)]="selectedPeriod">
 				<mat-option *ngFor="let period of periods" [value]="period">

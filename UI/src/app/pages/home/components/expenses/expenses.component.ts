@@ -26,7 +26,6 @@ export class ExpensesComponent implements OnChanges {
 		this.periodSubject
 			.pipe(switchMap((period) => this.expenseService.getExpensesByPeriod(period)))
 			.subscribe((res) => {
-
 				if (res.isSuccess) {
 					this.periodExpenses = res.value;
 					this.expensesLoading = false;
