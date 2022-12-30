@@ -6,11 +6,17 @@
 		"GenericSuccess": "Sucesso!",
 		"GenericError": "Erro!",
 		"SaveSuccess": "Salvo com sucesso!",
-		"DeleteSuccess": "Deletado com sucesso!"
+		"DeleteSuccess": "Deletado com sucesso!",
+		"DeleteItem": {
+			"Title": "Deletar item",
+			"Message": "Você gostaria de deletar o item '{{itemName}}'?"
+		}
 	},
 	"Common": {
 		"Send": "Enviar",
-		"Month": "Mês"
+		"Month": "Mês",
+		"Cancel": "Cancelar",
+		"Delete": "Deletar"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",

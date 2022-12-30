@@ -5,7 +5,7 @@ namespace Financial.Interfaces.Services
 {
     public interface IExpenseService: IBaseService<Expense>
     {
-        Task<IList<PeriodDto>> GetPeriods();
-        Task<IList<Expense>> GetExpensesByPeriod(PeriodDto period);
+        Task<IList<Period>> GetPeriods();
+        Task<IList<Expense>> GetExpensesByPeriod(Period period);
     }
 }

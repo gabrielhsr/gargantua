@@ -2,8 +2,21 @@
 	"Language": "English",
 	"Example": "Example",
 	"Title": "Finances",
+		"Feedback": {
+		"GenericSuccess": "Success!",
+		"GenericError": "Error!",
+		"SaveSuccess": "Saved successfully!",
+		"DeleteSuccess": "Successfully deleted!",
+		"DeleteItem": {
+			"Title": "Delete item",
+			"Message": "Would you like to delete the item '{{itemName}}'?"
+		}
+	},
 	"Common": {
-		"Send": "Send"
+		"Send": "Send",
+		"Month": "Month",
+		"Cancel": "Cancel",
+		"Delete": "Delete"
 	},
 	"Sidebar": {
 		"Home": "Home Page",
@@ -11,13 +24,22 @@
 	},
 	"Pages": {
 		"Home": {
+			"Alerts": {
+				"NoExpense": "No expense registered!"
+			},
 			"Expenses": "Expenses",
 			"DueDate": "Due Date",
 			"PurchaseDate": "Purchase Date",
 			"Category": "Category",
 			"PaymentMethod": "Payment Method",
 			"Description": "Description",
-			"Amount": "Amount Paid"
+			"Amount": "Amount Paid",
+			"AddDialog": {
+				"Title": "New Expense"
+			}
 		}
+	},
+	"ErrorMessage": {
+		"required": "Required field."
 	}
 }

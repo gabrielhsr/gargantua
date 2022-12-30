@@ -34,7 +34,11 @@
 	<ng-container matColumnDef="options">
 		<th mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell class="table-mobile-options" *matCellDef="let expense; dataSouce: periodExpenses">
-			<button mat-icon-button color="warn" (click)="deleteExpense(expense.id)">
+			<button mat-icon-button color="primary" (click)="editExpense(expense)">
+				<mat-icon>edit</mat-icon>
+			</button>
+
+			<button mat-icon-button color="warn" (click)="deleteExpense(expense)">
 				<mat-icon>delete</mat-icon>
 			</button>
 		</td>
@@ -107,7 +111,11 @@
 				</div>
 			</div>
 			<mat-action-row>
-				<button mat-icon-button color="warn" (click)="deleteExpense(expense.id)">
+				<button mat-icon-button color="primary" (click)="editExpense(expense)">
+					<mat-icon>edit</mat-icon>
+				</button>
+				
+				<button mat-icon-button color="warn" (click)="deleteExpense(expense)">
 					<mat-icon>delete</mat-icon>
 				</button>
 			</mat-action-row>

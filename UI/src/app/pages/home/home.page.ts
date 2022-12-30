@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Period } from 'src/app/entities/period/period.dto';
 import { ExpenseService } from 'src/app/shared/services/expense.service';
-import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { ExpenseDialogComponent } from './components/expense-dialog/expense-dialog.component';
 
 @Component({
 	selector: 'app-home',
@@ -41,6 +41,6 @@ export class HomePage implements OnInit {
 	}
 
 	public openAddDialog() {
-		this.dialog.open(AddDialogComponent);
+		this.dialog.open(ExpenseDialogComponent);
 	}
 }

@@ -10,11 +10,11 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../../../shared/services/expense.service';
 
 @Component({
-	selector: 'app-add-dialog',
-	templateUrl: './add-dialog.component.html',
-	styleUrls: ['./add-dialog.component.scss'],
+	selector: 'app-expense-dialog',
+	templateUrl: './expense-dialog.component.html',
+	styleUrls: ['./expense-dialog.component.scss'],
 })
-export class AddDialogComponent implements OnInit {
+export class ExpenseDialogComponent implements OnInit {
 	public categories?: Category[];
 	public paymentMethods?: PaymentMethod[];
 
@@ -22,7 +22,7 @@ export class AddDialogComponent implements OnInit {
 	public loading: boolean = true;
 
 	constructor(
-		private readonly dialogRef: MatDialogRef<AddDialogComponent>,
+		private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
 		private readonly homeService: ExpenseService,
 		private readonly feedback: FeedbackService
 	) {

@@ -26,21 +26,21 @@ namespace Financial.Services
             return await base.SaveAsync(id, entity);
         }
 
-        public async Task<IList<PeriodDto>> GetPeriods()
+        public async Task<IList<Period>> GetPeriods()
         {
             var expenses = await base.GetAllAsync();
 
             var years = expenses
                 .Where(x => x.DueDate is not null)
                 .OrderBy(x => x.DueDate)
-                .Select(x => new PeriodDto { Month = x.DueDate!.Value.Month, Year = x.DueDate!.Value.Year })
+                .Select(x => new Period { Month = x.DueDate!.Value.Month, Year = x.DueDate!.Value.Year })
                 .Distinct()
                 .ToList();
 
             return years;
         }
 
-        public async Task<IList<Expense>> GetExpensesByPeriod(PeriodDto period)
+        public async Task<IList<Expense>> GetExpensesByPeriod(Period period)
         {
             var expenses = await base.GetAllAsync();
 

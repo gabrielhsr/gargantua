@@ -16,6 +16,7 @@ import { TranslateService } from './translate/translate.service';
 // Components
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 // Modules
 import { MaterialModule } from './material/material.module';
@@ -36,7 +37,8 @@ import { LoadingDirective } from './directives/loading.directive';
 
 		// Components
 		TopbarComponent,
-		SidebarComponent
+		SidebarComponent,
+  		DialogComponent
 	],
 	imports: [
 		// Modules

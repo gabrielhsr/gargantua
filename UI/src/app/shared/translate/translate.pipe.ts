@@ -5,7 +5,7 @@ import { TranslateService } from './translate.service';
 export class TranslatePipe implements PipeTransform {
 	constructor(private translationService: TranslateService) {}
 
-	public transform(value: string): string {
-		return this.translationService.instant(value);
+	public transform(value: string, args?: { [key: string]: string }): string {
+		return this.translationService.instant(value, args);
 	}
 }

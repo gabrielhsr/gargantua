@@ -17,7 +17,7 @@ namespace Financial.Controllers
         }
 
         [HttpGet("periods")]
-        public async Task<IList<PeriodDto>> GetPeriods()
+        public async Task<IList<Period>> GetPeriods()
         {
             return await service.GetPeriods();
         }
@@ -25,7 +25,7 @@ namespace Financial.Controllers
         [HttpGet("expensesByPeriod")]
         public async Task<IList<Expense>> GetExpensesByPeriod(int month, int year)
         {
-            return await service.GetExpensesByPeriod(new PeriodDto { Month= month, Year = year });
+            return await service.GetExpensesByPeriod(new Period { Month= month, Year = year });
         }
     }
 }

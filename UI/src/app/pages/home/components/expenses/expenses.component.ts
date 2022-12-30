@@ -42,9 +42,21 @@ export class ExpensesComponent implements OnChanges {
 		}
 	}
 
-	public deleteExpense(id: string) {
-		this.expenseService.removeExpense(id).subscribe((res) => {
-			if (res.isSuccess) this.feedback.successToast('Feedback.DeleteSuccess');
-		});
+	public deleteExpense(expense: Expense) {
+		this.feedback
+			.confirmCancelDialog(expense.description)
+			.subscribe((res) => {
+				if (!res?.deleted) return;
+
+				this.expenseService
+					.removeExpense(expense.id)
+					.subscribe((res) => {
+						if (res.isSuccess) this.feedback.successToast('Feedback.DeleteSuccess');
+					});
+			});
+	}
+
+	public editExpense(expense: Expense) {
+		console.log(expense);
 	}
 }

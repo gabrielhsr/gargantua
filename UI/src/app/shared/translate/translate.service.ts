@@ -69,12 +69,25 @@ export class TranslateService {
 		localStorage.setItem(LOCALSTORAGE_CURRENCY_KEY, value);
 	}
 
-	public instant(id: string): string {
+	public instant(id: string, args?: { [key: string]: string }): string {
 		const file = this.getFile(this.language);
 		const key = id as keyof typeof file;
-		const text = resolvePath(file, key);
 
-		if (text) return text;
+		let text = resolvePath(file, key) as string;
+
+		if (text) {
+			if (args) {
+				text.match(/\{{(.+?)\}}/g)?.forEach(toReplace => {
+					const key = toReplace.replace('{{', '').replace('}}', '');
+
+					if (args[key]) {
+						text = text.replace(toReplace, args[key]);
+					}
+				});
+			}
+
+			return text;
+		};
 
 		console.error(`No translation found for key '${key}' in language ${this.language}`);
 		return key;

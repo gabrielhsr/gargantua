@@ -1,11 +1,11 @@
 ﻿namespace Financial.Data.DTO
 {
-    public class PeriodDto: IEquatable<PeriodDto>
+    public class Period: IEquatable<Period>
     {
         public int Month { get; set; }
         public int Year { get; set; }
 
-        public bool Equals(PeriodDto? other) => Month == other?.Month && Year == other?.Year;
+        public bool Equals(Period? other) => Month == other?.Month && Year == other?.Year;
         public override int GetHashCode() => Month.GetHashCode() ^ Year.GetHashCode();
     }
 }
