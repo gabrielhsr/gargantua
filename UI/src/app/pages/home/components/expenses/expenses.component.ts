@@ -1,11 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Subject, switchMap } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { ExpenseService } from 'src/app/shared/services/expense.service';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { ExpenseDialogComponent } from '../expense-dialog/expense-dialog.component';
 
 @Component({
 	selector: 'app-expenses-table',
@@ -21,10 +19,11 @@ export class ExpensesComponent implements OnChanges {
 
 	public periodSubject = new Subject<Period>();
 
+	public openedPanels: string[] = [];
+
 	constructor(
 		private readonly expenseService: ExpenseService,
-		private readonly feedback: FeedbackService,
-		private readonly dialog: MatDialog
+		private readonly feedback: FeedbackService
 	) {
 		this.periodSubject
 			.pipe(switchMap((period) => this.expenseService.getExpensesByPeriod(period)))
@@ -60,6 +59,10 @@ export class ExpensesComponent implements OnChanges {
 	}
 
 	public editExpense(expense: Expense) {
-		this.dialog.open(ExpenseDialogComponent, { data: expense });
+		this.expenseService.openExpenseDialog(expense);
+	}
+
+	public forgetPanel(id: string) {
+		return this.openedPanels = this.openedPanels.filter(x => x !== id);
 	}
 }

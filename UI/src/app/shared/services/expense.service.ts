@@ -6,6 +6,8 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { GuidHelper } from '../helpers/guid.helper';
+import { MatDialog } from '@angular/material/dialog';
+import { ExpenseDialogComponent } from 'src/app/pages/home/components/expense-dialog/expense-dialog.component';
 
 @Injectable({
 	providedIn: 'root',
@@ -16,7 +18,8 @@ export class ExpenseService {
 	constructor(
 		private categoryEndpoint: CategoryEndpoint,
 		private paymentMethodEndpoint: PaymentMethodEndpoint,
-		private expenseEndpoint: ExpenseEndpoint
+		private expenseEndpoint: ExpenseEndpoint,
+		private readonly dialog: MatDialog,
 	) {	}
 
 	public getCategories() {
@@ -55,6 +58,10 @@ export class ExpenseService {
 				if (isSuccess) this.expensesUpdate.next();
 			})
 		);
+	}
+
+	public openExpenseDialog(expense?: Expense) {
+		this.dialog.open(ExpenseDialogComponent, { data: expense });
 	}
 }
 

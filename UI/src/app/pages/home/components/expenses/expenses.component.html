@@ -23,12 +23,12 @@
 
 	<ng-container matColumnDef="category">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Category" | translate }}</th>
-		<td mat-cell class="table-mobile-category" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.category.name }}</td>
+		<td mat-cell class="table-mobile-category" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.category?.name }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="paymentMethod">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.PaymentMethod" | translate }}</th>
-		<td mat-cell class="table-mobile-payment-method" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.paymentMethod.name }}</td>
+		<td mat-cell class="table-mobile-payment-method" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.paymentMethod?.name }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="options">
@@ -48,10 +48,15 @@
 	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-
 <div class="mobile-view" [loading]="expensesLoading">
 	<mat-accordion class="mat-elevation-z1" multi="true">
-		<mat-expansion-panel *ngFor="let expense of periodExpenses" #panel>
+		<mat-expansion-panel
+			*ngFor="let expense of periodExpenses"
+			[expanded]="openedPanels.includes(expense.id)"
+			(opened)="openedPanels.push(expense.id)"
+			(closed)="forgetPanel(expense.id)"
+			#panel
+		>
 			<mat-expansion-panel-header>
 				<mat-panel-title class="panel-title">
 					<div class="item">
@@ -94,7 +99,7 @@
 							{{ "Pages.Home.Category" | translate }}
 						</div>
 						<div class="sub-value">
-							{{ expense.category.name }}
+							{{ expense.category?.name }}
 						</div>
 					</div>
 				</div>
@@ -105,7 +110,7 @@
 							{{ "Pages.Home.PaymentMethod" | translate }}
 						</div>
 						<div class="sub-value">
-							{{ expense.paymentMethod.name }}
+							{{ expense.paymentMethod?.name }}
 						</div>
 					</div>
 				</div>
@@ -114,7 +119,7 @@
 				<button mat-icon-button color="primary" (click)="editExpense(expense)">
 					<mat-icon>edit</mat-icon>
 				</button>
-				
+
 				<button mat-icon-button color="warn" (click)="deleteExpense(expense)">
 					<mat-icon>delete</mat-icon>
 				</button>

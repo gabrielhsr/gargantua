@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
 import { Period } from 'src/app/entities/period/period.dto';
 import { ExpenseService } from 'src/app/shared/services/expense.service';
-import { ExpenseDialogComponent } from './components/expense-dialog/expense-dialog.component';
 
 @Component({
 	selector: 'app-home',
@@ -15,7 +12,6 @@ export class HomePage implements OnInit {
 	public selectedPeriod?: Period;
 
 	constructor(
-		private readonly dialog: MatDialog,
 		private readonly expenseService: ExpenseService
 	) {}
 
@@ -41,6 +37,6 @@ export class HomePage implements OnInit {
 	}
 
 	public openAddDialog() {
-		this.dialog.open(ExpenseDialogComponent);
+		this.expenseService.openExpenseDialog();
 	}
 }

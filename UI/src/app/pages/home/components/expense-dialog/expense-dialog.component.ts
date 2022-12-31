@@ -47,7 +47,7 @@ export class ExpenseDialogComponent implements OnInit {
 	public submitForm(): void {
 		this.loading = true;
 		const formValue = this.newExpenseForm?.value as Expense;
-		
+
 		this.homeService.saveExpense(formValue).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
@@ -67,7 +67,7 @@ export class ExpenseDialogComponent implements OnInit {
 	}
 
 	public compareSelect(category1: Category | PaymentMethod, category2: Category | PaymentMethod) {
-		return category1.id === category2.id;
+		return category1?.id === category2?.id;
 	}
 
 	private createForm(expense: Expense): void {

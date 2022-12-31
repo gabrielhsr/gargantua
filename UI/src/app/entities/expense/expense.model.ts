@@ -6,7 +6,7 @@ export class Expense extends BaseEntity {
 	description: string = '';
 	purchaseDate: Date = new Date();
 	dueDate: Date = new Date();
-	amount: number = 0;
-	category: Category = new Category();
-	paymentMethod: PaymentMethod = new PaymentMethod();
+	amount: number | null = null;
+	category: Category | null = null;
+	paymentMethod: PaymentMethod | null = null;
 }
