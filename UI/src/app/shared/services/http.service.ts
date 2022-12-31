@@ -37,7 +37,7 @@ export class HttpService {
 					error: error.message
 				};
 
-				this.feedback.errorToast(error.message);
+				this.feedback.toast(error.message);
 
 				return of(response);
 			})

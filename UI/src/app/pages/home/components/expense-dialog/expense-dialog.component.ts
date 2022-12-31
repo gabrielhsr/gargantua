@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { forkJoin } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
 import { Expense } from 'src/app/entities/expense/expense.model';
@@ -22,6 +22,7 @@ export class ExpenseDialogComponent implements OnInit {
 	public loading: boolean = true;
 
 	constructor(
+		@Inject(MAT_DIALOG_DATA) public expense: Expense,
 		private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
 		private readonly homeService: ExpenseService,
 		private readonly feedback: FeedbackService
@@ -40,13 +41,13 @@ export class ExpenseDialogComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.createForm(new Expense());
+		this.createForm(this.expense ?? new Expense());
 	}
 
 	public submitForm(): void {
 		this.loading = true;
 		const formValue = this.newExpenseForm?.value as Expense;
-
+		
 		this.homeService.saveExpense(formValue).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
@@ -65,10 +66,13 @@ export class ExpenseDialogComponent implements OnInit {
 		throw 'Form not initialized!';
 	}
 
+	public compareSelect(category1: Category | PaymentMethod, category2: Category | PaymentMethod) {
+		return category1.id === category2.id;
+	}
+
 	private createForm(expense: Expense): void {
 		const formsControl = FormHelper.build({
 			object: expense,
-			exclude: ['id'],
 			allValidators: {
 				validators: [Validators.required],
 				exclude: ['dueDate'],

@@ -15,6 +15,10 @@ export abstract class BaseEndpoint<T> {
 		return this.httpService.handle(this.httpClient.post<T>(environment.baseApi + this.endpoint, object));
 	}
 
+	public put(object: T, id: string) {
+		return this.httpService.handle(this.httpClient.put<T>(environment.baseApi + this.endpoint + id, object));
+	}
+
 	public delete(id: string) {
 		return this.httpService.handle(this.httpClient.delete<T>(environment.baseApi + this.endpoint + id))
 	}

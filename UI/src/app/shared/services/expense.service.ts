@@ -5,6 +5,7 @@ import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
+import { GuidHelper } from '../helpers/guid.helper';
 
 @Injectable({
 	providedIn: 'root',
@@ -39,7 +40,9 @@ export class ExpenseService {
 	}
 
 	public saveExpense(expense: Expense) {
-		return this.expenseEndpoint.post(expense).pipe(
+		const operation = GuidHelper.isNullOrDefault(expense.id) ? this.expenseEndpoint.post(expense) : this.expenseEndpoint.put(expense, expense.id);
+
+		return operation.pipe(
 			tap(({ isSuccess }) => {
 				if (isSuccess) this.expensesUpdate.next();
 			})

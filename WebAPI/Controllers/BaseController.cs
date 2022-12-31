@@ -56,9 +56,9 @@ namespace Financial.Controllers
         // POST: api/Entity
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public virtual async Task<ActionResult<TEntity>> PostEntity(Guid id, TEntity entitiy)
+        public virtual async Task<ActionResult<TEntity>> PostEntity(TEntity entitiy)
         {
-            var newEntitiy = await service.SaveAsync(id, entitiy);
+            var newEntitiy = await service.SaveAsync(Guid.Empty, entitiy);
 
             return Ok(newEntitiy);
         }

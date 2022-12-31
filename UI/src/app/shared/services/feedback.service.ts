@@ -15,11 +15,15 @@ export class FeedbackService {
 	) {}
 
 	public successToast(dictionaryKey?: string) {
-		this.snackBar.open(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericSuccess'));
+		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericSuccess'));
 	}
 
 	public errorToast(dictionaryKey?: string) {
-		this.snackBar.open(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericError'));
+		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericError'));
+	}
+
+	public toast(message: string) {
+		this.snackBar.open(message);
 	}
 
 	public confirmCancelDialog(itemName: string) {

@@ -47,10 +47,11 @@ export class FormHelper {
 
 		Object.keys(options.object)
 			.filter(key => options.exclude ? !options.exclude.includes(key) : key)
-			.forEach(key => {
+			.forEach(item => {
+				const key = item as keyof typeof options.object;
 				const validators = this.buildValidators(options, key);
 
-				formObj[key] = new FormControl(null, validators);
+				formObj[key] = new FormControl(options.object[key], validators);
 			})
 
 		return formObj;

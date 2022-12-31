@@ -37,7 +37,7 @@ namespace Financial.Repositories
 
         public virtual async Task<bool> Exists(Guid id)
         {
-            var entity = await GetAsync(id);
+            var entity = await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             return entity != null;
         }
 
