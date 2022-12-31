@@ -3,12 +3,12 @@
 	<!-- Position Column -->
 	<ng-container matColumnDef="description">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Description" | translate }}</th>
-		<td mat-cell class="table-mobile-title" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.description }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.description }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="amount">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Amount" | translate }}</th>
-		<td mat-cell class="table-mobile-amount" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.amount | currency }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.amount | currency }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="dueDate">
@@ -18,22 +18,22 @@
 
 	<ng-container matColumnDef="purchaseDate">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.PurchaseDate" | translate }}</th>
-		<td mat-cell class="table-mobile-purchase" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.purchaseDate | date }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.purchaseDate | date }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="category">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.Category" | translate }}</th>
-		<td mat-cell class="table-mobile-category" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.category?.name }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.category?.name }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="paymentMethod">
 		<th mat-header-cell *matHeaderCellDef>{{ "Pages.Home.PaymentMethod" | translate }}</th>
-		<td mat-cell class="table-mobile-payment-method" *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.paymentMethod?.name }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.paymentMethod?.name }}</td>
 	</ng-container>
 
 	<ng-container matColumnDef="options">
 		<th mat-header-cell *matHeaderCellDef></th>
-		<td mat-cell class="table-mobile-options" *matCellDef="let expense; dataSouce: periodExpenses">
+		<td mat-cell class="d-flex justify-content-end" *matCellDef="let expense; dataSouce: periodExpenses">
 			<button mat-icon-button color="primary" (click)="editExpense(expense)">
 				<mat-icon>edit</mat-icon>
 			</button>
