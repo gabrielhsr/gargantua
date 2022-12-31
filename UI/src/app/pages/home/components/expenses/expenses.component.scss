@@ -1,105 +1,19 @@
-@import "/src/assets/bootstrap/scss/bootstrap.scss";
+@import "/src/assets/bootstrap/scss/bootstrap-utilities.scss";
 
-table {
+app-desktop-view {
 	display: none;
-	width: 100%;
 }
 
-.mobile-view {
+app-mobile-view {
 	display: block;
-
-	mat-expansion-panel-header {
-		align-items: flex-start;
-		padding: 12px 24px;
-		height: auto;
-
-	 	::ng-deep .mat-expansion-indicator {
-			align-self: center;
-		}
-	}
-
-	mat-action-row {
-		padding: 1px 16px 1px 16px;
-	}
-
-	.panel-title {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		align-items: flex-start;
-		width: 45%;
-	}
-
-	.panel-description {
-		font-size: 1.1rem;
-		justify-content: flex-end;
-		flex-grow: 1;
-		width: 45%;
-	}
-
-	.panel-content {
-		display: flex;
-		gap: 8px;
-		align-items: flex-start;
-
-		.sub-content {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-			flex-grow: 1;
-		}
-
-		.sub-content:last-of-type {
-			.item {
-				align-items: flex-end;
-			}
-		}
-	}
-
-	.item {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-
-	.sub-title {
-		font-size: 0.7rem;
-		line-height: 0.7rem;
-		color: rgba(0, 0, 0, 0.5);
-	}
-
-	.sub-value {
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-	}
 }
 
 @include media-breakpoint-up(lg) {
-	table {
-		display: table;
-
-		td {
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
-			max-width: 250px;
-		}
-
-		.mat-column-dueDate {
-			display: none;
-		}
+	app-desktop-view {
+		display: block;
 	}
 
-	.mobile-view {
+	app-mobile-view {
 		display: none;
-	}
-}
-
-@include media-breakpoint-up(xl) {
-	table {
-		.mat-column-dueDate {
-			display: table-cell;
-		}
 	}
 }

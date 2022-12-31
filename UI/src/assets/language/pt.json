@@ -16,7 +16,8 @@
 		"Send": "Enviar",
 		"Month": "Mês",
 		"Cancel": "Cancelar",
-		"Delete": "Deletar"
+		"Delete": "Deletar",
+		"Total": "Total"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
@@ -34,9 +35,10 @@
 			"PaymentMethod": "Forma de Pagamento",
 			"Description": "Descrição",
 			"Amount": "Valor Pago",
-			"AddDialog": {
-				"Title": "Nova Despesa"
-			}
+			"NewExpense": "Nova Despesa",
+			"EditExpense": "Editar Despesa",
+			"FilterBy": "Filtrar por",
+			"SortBy": "Ordernar por"
 		}
 	},
 	"ErrorMessage": {

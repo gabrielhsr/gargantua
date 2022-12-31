@@ -27,6 +27,6 @@ export class FeedbackService {
 	}
 
 	public confirmCancelDialog(itemName: string) {
-		return this.dialog.open<DialogComponent, string, { deleted: boolean }>(DialogComponent, { data: itemName }).afterClosed();
+		return this.dialog.open<DialogComponent, string, { delete: boolean }>(DialogComponent, { data: itemName }).afterClosed();
 	}
 }

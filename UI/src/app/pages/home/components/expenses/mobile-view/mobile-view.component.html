@@ -1,0 +1,87 @@
+<div class="mobile-view" [loading]="loading">
+	<mat-accordion multi="true">
+		<mat-expansion-panel
+			class="mat-elevation-z1"
+			*ngFor="let expense of periodExpenses?.data"
+			[expanded]="openedPanels.includes(expense.id)"
+			(opened)="openedPanels.push(expense.id)"
+			(closed)="forgetPanel(expense.id)"
+			#panel
+		>
+			<mat-expansion-panel-header>
+				<mat-panel-title class="panel-title">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.Description" | translate }}
+						</div>
+						<div [ngClass]="panel.expanded ? '' : 'sub-value'">
+							{{ expense.description }}
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.PurchaseDate" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.purchaseDate | date }}
+						</div>
+					</div>
+				</mat-panel-title>
+
+				<mat-panel-description class="panel-description">
+					<div class="sub-value">{{ expense.amount | currency }}</div>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+			<div class="panel-content">
+				<div class="sub-content">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.DueDate" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.dueDate | date }}
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.Category" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.category?.name }}
+						</div>
+					</div>
+				</div>
+
+				<div class="sub-content">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Home.PaymentMethod" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ expense.paymentMethod?.name }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<mat-action-row>
+				<button mat-icon-button color="primary" (click)="editExpense.emit(expense)">
+					<mat-icon>edit</mat-icon>
+				</button>
+
+				<button mat-icon-button color="warn" (click)="deleteExpense.emit(expense)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-action-row>
+		</mat-expansion-panel>
+	</mat-accordion>
+
+	<mat-card>
+		<mat-card-content class="total-container">
+			{{ "Common.Total" | translate }}
+			<div class="total-value">{{ totalAmount | currency }}</div>
+		</mat-card-content>
+	</mat-card>
+</div>

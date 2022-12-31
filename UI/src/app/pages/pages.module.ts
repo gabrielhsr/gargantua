@@ -4,7 +4,6 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-	declarations: [],
 	imports: [CommonModule, SharedModule, HomeModule],
 	exports: [HomeModule]
 })

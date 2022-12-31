@@ -7,7 +7,7 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { ExpenseService } from '../../../../shared/services/expense.service';
+import { ExpenseService } from '../../services/expense.service';
 
 @Component({
 	selector: 'app-expense-dialog',

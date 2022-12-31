@@ -5,7 +5,7 @@ import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
-import { GuidHelper } from '../helpers/guid.helper';
+import { GuidHelper } from '../../../shared/helpers/guid.helper';
 import { MatDialog } from '@angular/material/dialog';
 import { ExpenseDialogComponent } from 'src/app/pages/home/components/expense-dialog/expense-dialog.component';
 

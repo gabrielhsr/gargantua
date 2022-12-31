@@ -9,14 +9,3 @@
 	bottom: 30px;
 	right: 30px;
 }
-
-.period-form-field {
-	width: 100%;
-}
-
-@include media-breakpoint-up(md) {
-	.period-form-field {
-		width: auto;
-	}
-}
-
