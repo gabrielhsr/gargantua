@@ -14,10 +14,10 @@
 </div>
 
 <mat-menu #filterMenu="matMenu">
-	<div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+	<div preventDefault>
 		<div mat-menu-item disabled>{{ 'Pages.Home.SortBy' | translate }}:</div>
 
-		<button mat-menu-item *ngFor="let option of sortOptions" (click)="emitSort(option)">
+		<button mat-menu-item *ngFor="let option of expenseService.sortOptions" (click)="sort(option)">
 			<mat-icon *ngIf="option.order">{{ option.order === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
 			{{ option.text | translate }}
 		</button>

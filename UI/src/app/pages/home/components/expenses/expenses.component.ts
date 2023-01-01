@@ -37,8 +37,12 @@ export class ExpensesComponent implements OnInit {
 				if (res.isSuccess) {
 					this.periodExpenses.data = res.value;
 					this.expensesLoading = false;
+
+					this.expenseService.sortOption.next(this.expenseService.sortOption.value);
 				}
 			});
+
+		this.expenseService.sortOption.subscribe(option => option ? this.sort(option) : EMPTY);
 	}
 
 	public deleteExpense(expense: Expense) {
@@ -58,7 +62,7 @@ export class ExpensesComponent implements OnInit {
 			const itemB = sortingDataAccessor(expenseB, category.value);
 
 			if (itemA && itemB) {
-				return category.order === 'asc' ? itemA < itemB ? -1 : itemA > itemB ? 1 : 0 : itemA > itemB ? -1 : itemA < itemB ? 1 : 0;
+				return category.order === 'asc' ? (itemA < itemB ? -1 : itemA > itemB ? 1 : 0) : (itemA > itemB ? -1 : itemA < itemB ? 1 : 0);
 			}
 
 			throw new Error(`Key named '${category.value}' not finded in object of type 'Expense'!`);

@@ -2,7 +2,7 @@
 	<mat-icon>close</mat-icon>
 </button>
 
-<h2 mat-dialog-title>{{  expense ? ("Pages.Home.EditExpense" | translate)  : ("Pages.Home.NewExpense" | translate) }}</h2>
+<h2 mat-dialog-title>{{  expense ? ("Pages.Home.EditExpense" | translate) : ("Pages.Home.NewExpense" | translate) }}</h2>
 
 <mat-dialog-content [loading]="loading">
 	<form *ngIf="newExpenseForm && paymentMethods && categories" [formGroup]="newExpenseForm">

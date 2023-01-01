@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Period } from 'src/app/entities/period/period.dto';
 import { ExpenseService } from 'src/app/pages/home/services/expense.service';
 
 @Component({

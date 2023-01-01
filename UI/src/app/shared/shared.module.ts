@@ -23,6 +23,7 @@ import { MaterialModule } from './material/material.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingDirective } from './directives/loading.directive';
+import { PreventDefaultDirective } from './directives/prevent-default.directive';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { LoadingDirective } from './directives/loading.directive';
 		TypeSafeMatCellDef,
 		AutocompleteDisableDirective,
 		LoadingDirective,
+		PreventDefaultDirective,
 
 		// Pipes
 		TranslatePipe,
@@ -57,6 +59,7 @@ import { LoadingDirective } from './directives/loading.directive';
 		TypeSafeMatCellDef,
 		AutocompleteDisableDirective,
 		LoadingDirective,
+		PreventDefaultDirective,
 
 		// Pipes
 		TranslatePipe,
