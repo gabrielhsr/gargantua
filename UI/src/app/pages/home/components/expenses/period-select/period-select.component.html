@@ -1,7 +1,7 @@
 <div class="period-container">
 	<mat-form-field class="period-form-field">
 		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
-		<mat-select [(value)]="selectedPeriod" (selectionChange)="selectionChange($event)">
+		<mat-select [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)">
 			<mat-option *ngFor="let period of periods" [value]="period">
 				{{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
 			</mat-option>
@@ -17,7 +17,7 @@
 	<div preventDefault>
 		<div mat-menu-item disabled>{{ 'Pages.Home.SortBy' | translate }}:</div>
 
-		<button mat-menu-item *ngFor="let option of expenseService.sortOptions" (click)="sort(option)">
+		<button mat-menu-item *ngFor="let option of expenseService.sortOptions" (click)="expenseService.changeSortOption(option)">
 			<mat-icon *ngIf="option.order">{{ option.order === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
 			{{ option.text | translate }}
 		</button>

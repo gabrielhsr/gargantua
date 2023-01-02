@@ -43,8 +43,34 @@ mat-dialog-content {
 	}
 }
 
+@include media-breakpoint-down(md) {
+	.responsive-dialog {
+		max-width: unset !important;
+		width: 100%;
+		height: calc(100vh - var(--topbar-height));
+		align-self: flex-end;
+
+		.mat-dialog-container {
+			max-width: 100vw;
+			max-height: 100vh;
+			height: 100%;
+			width: 100%;
+
+			.mat-dialog-content {
+				max-height: unset !important;
+			}
+		}
+	}
+}
+
 // @include media-breakpoint-up(sm) { .mat-drawer-container { background-color: red !important; } } // Tablet
 // @include media-breakpoint-up(md) { .mat-drawer-container { background-color: navy !important; } } // Tablet
 // @include media-breakpoint-up(lg) { .mat-drawer-container { background-color: green !important; } } // Laptop
 // @include media-breakpoint-up(xl) { .mat-drawer-container { background-color: gold !important; } } // Laptop
 // @include media-breakpoint-up(xxl) { .mat-drawer-container { background-color: gray !important; } } // Desktop
+
+// @include media-breakpoint-down(sm) { ... }
+// @include media-breakpoint-down(md) { ... }
+// @include media-breakpoint-down(lg) { ... }
+// @include media-breakpoint-down(xl) { ... }
+// @include media-breakpoint-down(xxl) { ... }

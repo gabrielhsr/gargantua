@@ -24,13 +24,14 @@ export class PeriodSelectComponent implements OnInit {
 	public periods?: Period[];
 	public selectedPeriod?: Period;
 
-	public sortOptions?: SortOption[];
-
 	constructor(public readonly expenseService: ExpenseService) {}
 
 	public ngOnInit() {
 		this.expenseService.sortOptions = this.getSortOptions();
+		this.loadPeriods();
+	}
 
+	private loadPeriods() {
 		this.expenseService.getPeriods().subscribe((res) => {
 			if (!res.isSuccess) return;
 
@@ -53,12 +54,6 @@ export class PeriodSelectComponent implements OnInit {
 		});
 	}
 
-	public selectionChange(event: MatSelectChange) {
-		const period = event.value as Period;
-
-		this.periodChange.emit(period);
-	}
-
 	private getSortOptions(): SortOption[] {
 		return this.displayedColumns
 			.filter((x) => x !== 'options')
@@ -70,9 +65,5 @@ export class PeriodSelectComponent implements OnInit {
 
 				return x === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
-	}
-
-	public sort(option: SortOption) {
-		this.expenseService.changeSortOption(option);
 	}
 }

@@ -13,6 +13,7 @@ import { ExpenseService } from '../../services/expense.service';
 	selector: 'app-expense-dialog',
 	templateUrl: './expense-dialog.component.html',
 	styleUrls: ['./expense-dialog.component.scss'],
+	
 })
 export class ExpenseDialogComponent implements OnInit {
 	public categories?: Category[];

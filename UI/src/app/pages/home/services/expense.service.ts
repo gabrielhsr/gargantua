@@ -13,6 +13,7 @@ import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
 import { ExpenseDialogComponent } from 'src/app/pages/home/components/expense-dialog/expense-dialog.component';
 import { SortOption } from '../components/expenses/period-select/period-select.component';
+import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -28,6 +29,7 @@ export class ExpenseService {
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly expenseEndpoint: ExpenseEndpoint,
 		private readonly dialog: MatDialog,
+		private readonly breakpoint: BreakpointService
 	) {	}
 
 	public getCategories() {
@@ -69,7 +71,7 @@ export class ExpenseService {
 	}
 
 	public openExpenseDialog(expense?: Expense) {
-		this.dialog.open(ExpenseDialogComponent, { data: expense });
+		this.dialog.open(ExpenseDialogComponent, { data: expense, panelClass: ['responsive-dialog'], hasBackdrop: !this.breakpoint.isMobile });
 	}
 
 	public changeSortOption(sortOption: SortOption) {
