@@ -1,4 +1,6 @@
 export class GuidHelper {
+	public static default = "00000000-0000-0000-0000-000000000000";
+
 	public static generate() {
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
 			/[xy]/g,

@@ -18,8 +18,8 @@ namespace Financial.Services
 
         public override async Task<Expense> SaveAsync(Guid id, Expense entity)
         {
-            context.Entry(entity.Category).State = EntityState.Unchanged;
-            context.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
+            if (entity.Category.Id != Guid.Empty) context.Entry(entity.Category).State = EntityState.Unchanged;
+            if (entity.PaymentMethod.Id != Guid.Empty) context.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
 
             entity.DueDate ??= entity.PurchaseDate;
 

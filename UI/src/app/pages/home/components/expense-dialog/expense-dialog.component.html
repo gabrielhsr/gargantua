@@ -21,21 +21,27 @@
 		<div class="two-input-container">
 			<mat-form-field>
 				<mat-label>{{ "Pages.Home.Category" | translate }}</mat-label>
-				<mat-select formControlName="category" [compareWith]="compareSelect">
-					<mat-option *ngFor="let category of categories" [value]="category">
+				<input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete">
+
+				<mat-autocomplete #categoryAutoComplete="matAutocomplete" [displayWith]="displayFn">
+					<mat-option *ngFor="let category of filteredCategories | async" [value]="category">
 						{{ category.name }}
 					</mat-option>
-				</mat-select>
+				</mat-autocomplete>
+
 				<mat-error>{{ showErrorMessage('category') }}</mat-error>
 			</mat-form-field>
 
 			<mat-form-field>
 				<mat-label>{{ "Pages.Home.PaymentMethod" | translate }}</mat-label>
-				<mat-select formControlName="paymentMethod" [compareWith]="compareSelect">
-					<mat-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">
+				<input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete">
+
+				<mat-autocomplete #paymentMethodAutoComplete="matAutocomplete" [displayWith]="displayFn">
+					<mat-option *ngFor="let paymentMethod of filteredPaymentMethods | async" [value]="paymentMethod">
 						{{ paymentMethod.name }}
 					</mat-option>
-				</mat-select>
+				</mat-autocomplete>
+
 				<mat-error>{{ showErrorMessage('paymentMethod') }}</mat-error>
 			</mat-form-field>
 		</div>

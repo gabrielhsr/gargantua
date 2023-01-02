@@ -21,7 +21,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 // Modules
 import { MaterialModule } from './material/material.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingDirective } from './directives/loading.directive';
 import { PreventDefaultDirective } from './directives/prevent-default.directive';
 
@@ -46,7 +46,9 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 		// Modules
 		CommonModule,
 		MaterialModule,
-		RouterModule
+		RouterModule,
+		ReactiveFormsModule,
+		FormsModule
 	],
 	exports: [
 		// Modules
@@ -54,6 +56,7 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 		HttpClientModule,
 		CurrencyMaskModule,
 		ReactiveFormsModule,
+		FormsModule,
 
 		// Directives
 		TypeSafeMatCellDef,
