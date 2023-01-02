@@ -2,10 +2,17 @@
 
 .home-container {
 	padding-top: 20px;
+	padding-bottom: 110px;
 }
 
 .add-button {
 	position: fixed;
 	bottom: 30px;
 	right: 30px;
+}
+
+@include media-breakpoint-up(lg) {
+	.home-container {
+		padding-bottom: auto;
+	}
 }

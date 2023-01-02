@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.Build.Framework;
 
 namespace Financial.Data.Models
 {
@@ -9,7 +10,8 @@ namespace Financial.Data.Models
             Expenses = new List<Expense>();
         }
 
-        public string? Name { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         [JsonIgnore]
         public virtual IList<Expense> Expenses { get; set; }

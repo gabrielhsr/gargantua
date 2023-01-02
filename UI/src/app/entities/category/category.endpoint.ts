@@ -8,7 +8,7 @@ import { Category } from './category.model';
 	providedIn: 'root',
 })
 export class CategoryEndpoint extends BaseEndpoint<Category> {
-	public override endpoint = '/api/Category';
+	public override endpoint = '/api/Category/';
 
 	constructor(private readonly client: HttpClient, private readonly service: HttpService) {
 		super(client, service);

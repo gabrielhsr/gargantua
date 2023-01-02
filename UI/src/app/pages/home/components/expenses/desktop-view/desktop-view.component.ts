@@ -5,7 +5,7 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 import { sortingDataAccessor } from 'src/app/shared/helpers/expense.helper';
 
 @Component({
-  selector: 'app-desktop-view',
+  selector: 'expenses-desktop-view',
   templateUrl: './desktop-view.component.html',
   styleUrls: ['./desktop-view.component.scss']
 })

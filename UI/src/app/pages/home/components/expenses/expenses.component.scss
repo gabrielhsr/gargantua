@@ -1,19 +1,19 @@
 @import "/src/assets/bootstrap/scss/bootstrap-utilities.scss";
 
-app-desktop-view {
+expenses-desktop-view {
 	display: none;
 }
 
-app-mobile-view {
+expenses-mobile-view {
 	display: block;
 }
 
 @include media-breakpoint-up(lg) {
-	app-desktop-view {
+	expenses-desktop-view {
 		display: block;
 	}
 
-	app-mobile-view {
+	expenses-mobile-view {
 		display: none;
 	}
 }

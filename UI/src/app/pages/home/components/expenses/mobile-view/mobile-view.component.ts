@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/entities/expense/expense.model';
 
 @Component({
-  selector: 'app-mobile-view',
+  selector: 'expenses-mobile-view',
   templateUrl: './mobile-view.component.html',
   styleUrls: ['./mobile-view.component.scss']
 })

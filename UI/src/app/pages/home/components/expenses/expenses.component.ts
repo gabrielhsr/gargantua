@@ -9,7 +9,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { SortOption } from './period-select/period-select.component';
 
 @Component({
-	selector: 'app-expenses-table',
+	selector: 'expenses-table',
 	templateUrl: './expenses.component.html',
 	styleUrls: ['./expenses.component.scss'],
 })

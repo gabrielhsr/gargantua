@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '../../translate/translate.service';
 
 @Component({
-	selector: 'app-topbar',
+	selector: 'topbar',
 	templateUrl: './topbar.component.html',
 	styleUrls: ['./topbar.component.scss'],
 })

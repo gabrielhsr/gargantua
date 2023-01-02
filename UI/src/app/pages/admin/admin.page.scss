@@ -1,0 +1,43 @@
+@import "/src/assets/bootstrap/scss/bootstrap-utilities.scss";
+
+.admin-container {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+mat-list-item {
+	height: 75px !important;
+}
+
+mat-card-content {
+	padding: 0 !important;
+	padding-bottom: 10px !important;
+}
+
+.lists-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.new-item-input {
+	width: 100%;
+}
+
+.new-item-input:hover {
+	cursor: pointer;
+
+	input:hover, mat-label:hover {
+		cursor: pointer;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	.lists-container {
+		flex-direction: row;
+
+		mat-list {
+			flex-grow: 1;
+			width: 50%;
+		}
+	}
+}

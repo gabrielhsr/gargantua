@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
@@ -12,7 +11,7 @@ export interface SortOption {
 }
 
 @Component({
-	selector: 'app-period-select',
+	selector: 'period-select',
 	templateUrl: './period-select.component.html',
 	styleUrls: ['./period-select.component.scss'],
 })

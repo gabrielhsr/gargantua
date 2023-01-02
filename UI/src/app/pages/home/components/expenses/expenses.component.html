@@ -1,21 +1,21 @@
-<app-period-select
+<period-select
 	[displayedColumns]="displayedColumns"
 	(periodChange)="periodSubject.next($event)"
-></app-period-select>
+></period-select>
 
-<app-desktop-view
+<expenses-desktop-view
 	[periodExpenses]="periodExpenses"
 	[displayedColumns]="displayedColumns"
 	[totalAmount]="totalAmount"
 	[loading]="expensesLoading"
 	(editExpense)="editExpense($event)"
 	(deleteExpense)="deleteExpense($event)"
-></app-desktop-view>
+></expenses-desktop-view>
 
-<app-mobile-view
+<expenses-mobile-view
 	[periodExpenses]="periodExpenses"
 	[totalAmount]="totalAmount"
 	[loading]="expensesLoading"
 	(editExpense)="editExpense($event)"
 	(deleteExpense)="deleteExpense($event)"
-></app-mobile-view>
+></expenses-mobile-view>

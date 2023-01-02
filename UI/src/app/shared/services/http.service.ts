@@ -8,6 +8,7 @@ type HttpHandleResponse<T> = ErrorHandleResponse | SuccessHandleResponse<T>
 interface ErrorHandleResponse {
 	isSuccess: false;
 	error: string;
+	type: 'entityInUse' | 'generic'
 }
 
 interface SuccessHandleResponse<T> {
@@ -34,10 +35,15 @@ export class HttpService {
 			catchError((error: HttpErrorResponse) => {
 				const response: HttpHandleResponse<T> = {
 					isSuccess: false,
-					error: error.message
+					error: error.message,
+					type: 'generic'
 				};
 
-				this.feedback.toast(error.message);
+				if (error.error.includes('DELETE statement conflicted with the REFERENCE constraint')) {
+					response.type = 'entityInUse';
+				} else {
+					this.feedback.toast(error.message);
+				}
 
 				return of(response);
 			})

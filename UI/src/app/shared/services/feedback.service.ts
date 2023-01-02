@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DialogComponent } from '../components/dialog/dialog.component';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '../translate/translate.service';
 
 @Injectable({
@@ -14,12 +14,12 @@ export class FeedbackService {
 		private readonly translate: TranslateService
 	) {}
 
-	public successToast(dictionaryKey?: string) {
-		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericSuccess'));
+	public successToast(dictionaryKey?: string, args?: { [key: string]: string }) {
+		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey, args) : this.translate.instant('Feedback.GenericSuccess'));
 	}
 
-	public errorToast(dictionaryKey?: string) {
-		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey) : this.translate.instant('Feedback.GenericError'));
+	public errorToast(dictionaryKey?: string, args?: { [key: string]: string }) {
+		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey, args) : this.translate.instant('Feedback.GenericError'));
 	}
 
 	public toast(message: string) {
@@ -27,6 +27,6 @@ export class FeedbackService {
 	}
 
 	public confirmCancelDialog(itemName: string) {
-		return this.dialog.open<DialogComponent, string, { delete: boolean }>(DialogComponent, { data: itemName }).afterClosed();
+		return this.dialog.open<ConfirmDialogComponent, string, { delete: boolean }>(ConfirmDialogComponent, { data: itemName }).afterClosed();
 	}
 }

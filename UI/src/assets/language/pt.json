@@ -17,11 +17,13 @@
 		"Month": "Mês",
 		"Cancel": "Cancelar",
 		"Delete": "Deletar",
-		"Total": "Total"
+		"Total": "Total",
+		"Edit": "Editar",
+		"Name": "Nome"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
-		"Configuration": "Configurações"
+		"Admin": "Administração"
 	},
 	"Pages": {
 		"Home": {
@@ -39,6 +41,15 @@
 			"EditExpense": "Editar Despesa",
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por"
+		},
+		"Admin": {
+			"Categories": "Categorias",
+			"PaymentMethods": "Formas de Pagamento",
+			"SavedWithSuccess": "Item salvo com sucesso!",
+			"AddNewItem": "Adicionar novo item...",
+			"Errors": {
+				"EntityInUse": "O item '{{itemName}}' não pode ser deletado pois está em uso por algum registro de despesa!"
+			}
 		}
 	},
 	"ErrorMessage": {

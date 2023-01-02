@@ -11,7 +11,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
 
 @Component({
-	selector: 'app-expense-dialog',
+	selector: 'expense-dialog',
 	templateUrl: './expense-dialog.component.html',
 	styleUrls: ['./expense-dialog.component.scss'],
 
@@ -83,19 +83,19 @@ export class ExpenseDialogComponent implements OnInit {
 	}
 
 	public displayFn(category: Category | PaymentMethod) {
-		return category?.name;
+		return category?.name ?? '';
 	}
 
 	private filterCategories(val: string) {
 		if (typeof val !== "string") return this.categories;
 
-		return this.categories?.filter(option => option.name.toLowerCase().includes(val.toLowerCase()));
+		return this.categories?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
 	}
 
 	private filterPaymentMethods(val: string) {
 		if (typeof val !== "string") return this.paymentMethods;
 
-		return this.paymentMethods?.filter(option => option.name.toLowerCase().includes(val.toLowerCase()));
+		return this.paymentMethods?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
 	}
 
 	private createForm(expense: Expense): void {

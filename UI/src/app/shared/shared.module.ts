@@ -16,7 +16,7 @@ import { TranslateService } from './translate/translate.service';
 // Components
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 // Modules
 import { MaterialModule } from './material/material.module';
@@ -40,7 +40,7 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 		// Components
 		TopbarComponent,
 		SidebarComponent,
-  		DialogComponent
+  		ConfirmDialogComponent
 	],
 	imports: [
 		// Modules
