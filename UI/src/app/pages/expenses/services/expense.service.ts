@@ -11,8 +11,9 @@ import { Period } from 'src/app/entities/period/period.dto';
 
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
-import { ExpenseDialogComponent } from 'src/app/pages/home/components/expense-dialog/expense-dialog.component';
-import { SortOption } from '../components/expenses/period-select/period-select.component';
+import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
+import { SortOption } from '../components/expenses-table/period-select/period-select.component';
+
 
 @Injectable({
 	providedIn: 'root',

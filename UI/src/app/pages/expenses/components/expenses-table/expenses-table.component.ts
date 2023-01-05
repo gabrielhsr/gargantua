@@ -3,17 +3,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, Subject, switchMap } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
-import { ExpenseService } from 'src/app/pages/home/services/expense.service';
 import { sortingDataAccessor } from 'src/app/shared/helpers/expense.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
+import { ExpenseService } from '../../services/expense.service';
 import { SortOption } from './period-select/period-select.component';
 
 @Component({
 	selector: 'expenses-table',
-	templateUrl: './expenses.component.html',
-	styleUrls: ['./expenses.component.scss'],
+	templateUrl: './expenses-table.component.html',
+	styleUrls: ['./expenses-table.component.scss'],
 })
-export class ExpensesComponent implements OnInit {
+export class ExpensesTableComponent implements OnInit {
 	public expensesLoading: boolean = true;
 
 	public periodExpenses = new MatTableDataSource<Expense>();
@@ -36,10 +36,10 @@ export class ExpensesComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.isSuccess) {
 					this.periodExpenses.data = res.value;
-					this.expensesLoading = false;
-
 					this.expenseService.sortOption.next(this.expenseService.sortOption.value);
 				}
+
+				this.expensesLoading = false;
 			});
 
 		this.expenseService.sortOption.subscribe(option => option ? this.sort(option) : EMPTY);

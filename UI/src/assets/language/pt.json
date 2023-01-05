@@ -23,7 +23,8 @@
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
-		"Admin": "Administração"
+		"Admin": "Administração",
+		"Expenses": "Despesas"
 	},
 	"Pages": {
 		"Home": {

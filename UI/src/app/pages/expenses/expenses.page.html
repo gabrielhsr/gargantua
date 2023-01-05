@@ -1,0 +1,11 @@
+<div class="home-container">
+	<expenses-table></expenses-table>
+
+	<ng-template #expenses>
+		<div class="alert alert-info" role="alert">{{ 'Pages.Home.Alerts.NoExpense' | translate }}</div>
+	</ng-template>
+
+	<button mat-fab class="add-button" (click)="openAddDialog()">
+		<mat-icon>add</mat-icon>
+	</button>
+</div>

@@ -32,17 +32,19 @@ export class HttpService {
 
 				return response;
 			}),
-			catchError((error: HttpErrorResponse) => {
+			catchError((res: HttpErrorResponse) => {
 				const response: HttpHandleResponse<T> = {
 					isSuccess: false,
-					error: error.message,
+					error: res.message,
 					type: 'generic'
 				};
 
-				if (error.error.includes('DELETE statement conflicted with the REFERENCE constraint')) {
+				const isMessage = typeof res.error === 'string';
+
+				if (isMessage && res.error.includes('DELETE statement conflicted with the REFERENCE constraint')) {
 					response.type = 'entityInUse';
 				} else {
-					this.feedback.toast(error.message);
+					this.feedback.toast(res.message);
 				}
 
 				return of(response);
