@@ -29,12 +29,12 @@ export class ExpenseDialogComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public expense: Expense,
 		private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
-		private readonly homeService: ExpenseService,
+		private readonly expenseService: ExpenseService,
 		private readonly feedback: FeedbackService
 	) {
 		forkJoin({
-			categories: this.homeService.getCategories(),
-			paymentMethods: this.homeService.getPaymentMethods(),
+			categories: this.expenseService.getCategories(),
+			paymentMethods: this.expenseService.getPaymentMethods(),
 		}).subscribe(({ categories, paymentMethods }) => {
 			if (categories.isSuccess && paymentMethods.isSuccess) {
 				this.categories = categories.value;
@@ -64,7 +64,7 @@ export class ExpenseDialogComponent implements OnInit {
 			formValue.paymentMethod = { name: formValue.paymentMethod, id: GuidHelper.default }
 		}
 
-		this.homeService.saveExpense(formValue).subscribe((response) => {
+		this.expenseService.saveExpense(formValue).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
 				this.dialogRef.close();

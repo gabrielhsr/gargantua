@@ -6,6 +6,8 @@ import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMet
 import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
 import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
 
+import { PeriodService } from 'src/app/shared/components/period-select/period-select.service';
+
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 
@@ -23,6 +25,7 @@ export class ExpenseService {
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly expenseEndpoint: ExpenseEndpoint,
+		private readonly periodService: PeriodService,
 		private readonly dialog: MatDialog
 	) {	}
 
@@ -47,7 +50,10 @@ export class ExpenseService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.expensesUpdate.next();
+				if (isSuccess) {
+					this.expensesUpdate.next()
+					this.periodService.update.next();
+				};
 			})
 		);
 	}
@@ -55,7 +61,10 @@ export class ExpenseService {
 	public removeExpense(id: string) {
 		return this.expenseEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.expensesUpdate.next();
+				if (isSuccess) {
+					this.expensesUpdate.next()
+					this.periodService.update.next();
+				};
 			})
 		);
 	}

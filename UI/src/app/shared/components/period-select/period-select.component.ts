@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Period } from 'src/app/entities/period/period.dto';
-import { PeriodService } from '../../services/period.service';
+import { PeriodService } from './period-select.service';
 
 interface SortOption {
 	text: string;

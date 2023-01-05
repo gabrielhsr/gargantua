@@ -42,11 +42,7 @@ export class RevenueTableComponent implements OnInit {
 		return this.displayedColumns
 			.filter((x) => x !== 'options')
 			.map((x) => {
-				const defaultOption: SortOption = {
-					text: `Pages.Revenue.${toTitleCase(x)}`,
-					value: x as keyof Revenue,
-				};
-
+				const defaultOption: SortOption = { text: `Pages.Revenue.${toTitleCase(x)}`, value: x as keyof Revenue };
 				return x === 'paymentDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}

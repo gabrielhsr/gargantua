@@ -8,6 +8,8 @@ import { Period } from 'src/app/entities/period/period.dto';
 
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
+import { PeriodService } from 'src/app/shared/components/period-select/period-select.service';
+
 import { RevenueDialogComponent } from '../components/revenue-dialog/revenue-dialog.component';
 import { Revenue } from 'src/app/entities/revenue/revenue.model';
 
@@ -19,6 +21,7 @@ export class RevenueService {
 
 	constructor(
 		private readonly revenueEndpoint: RevenueEndpoint,
+		private readonly periodService: PeriodService,
 		private readonly dialog: MatDialog
 	) {	}
 
@@ -35,7 +38,10 @@ export class RevenueService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.revenueUpdate.next();
+				if (isSuccess) {
+					this.revenueUpdate.next()
+					this.periodService.update.next();
+				};
 			})
 		);
 	}
@@ -43,7 +49,10 @@ export class RevenueService {
 	public removeRevenue(id: string) {
 		return this.revenueEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.revenueUpdate.next();
+				if (isSuccess) {
+					this.revenueUpdate.next()
+					this.periodService.update.next();
+				};
 			})
 		);
 	}

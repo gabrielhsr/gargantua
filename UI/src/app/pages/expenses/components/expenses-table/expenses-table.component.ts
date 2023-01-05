@@ -42,11 +42,7 @@ export class ExpensesTableComponent implements OnInit {
 		return this.displayedColumns
 			.filter((x) => x !== 'options')
 			.map((x) => {
-				const defaultOption: SortOption = {
-					text: `Pages.Expenses.${toTitleCase(x)}`,
-					value: x as keyof Expense,
-				};
-
+				const defaultOption: SortOption = { text: `Pages.Expenses.${toTitleCase(x)}`, value: x as keyof Expense };
 				return x === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}

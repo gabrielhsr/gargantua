@@ -45,6 +45,9 @@
 			"SortBy": "Ordernar por"
 		},
 		"Revenue": {
+			"Alerts": {
+				"NoExpense": "Nenhuma receita cadastrada!"
+			},
 			"Revenue": "Receita",
 			"Amount": "Valor Pago",
 			"PaymentDate": "Data do Pagamento",

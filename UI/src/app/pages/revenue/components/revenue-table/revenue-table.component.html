@@ -4,19 +4,25 @@
 	(filterChange)="sort($event)"
 ></period-select>
 
-<revenue-desktop-view
-	[periodRevenue]="periodRevenue"
-	[displayedColumns]="displayedColumns"
-	[totalAmount]="totalAmount"
-	[loading]="revenueLoading"
-	(editRevenue)="editRevenue($event)"
-	(deleteRevenue)="deleteRevenue($event)"
-></revenue-desktop-view>
+<ng-container *ngIf="periodRevenue.data.length else noRegister">
+	<revenue-desktop-view
+		[periodRevenue]="periodRevenue"
+		[displayedColumns]="displayedColumns"
+		[totalAmount]="totalAmount"
+		[loading]="revenueLoading"
+		(editRevenue)="editRevenue($event)"
+		(deleteRevenue)="deleteRevenue($event)"
+	></revenue-desktop-view>
 
-<revenue-mobile-view
-	[periodRevenue]="periodRevenue"
-	[totalAmount]="totalAmount"
-	[loading]="revenueLoading"
-	(editRevenue)="editRevenue($event)"
-	(deleteRevenue)="deleteRevenue($event)"
-></revenue-mobile-view>
+	<revenue-mobile-view
+		[periodRevenue]="periodRevenue"
+		[totalAmount]="totalAmount"
+		[loading]="revenueLoading"
+		(editRevenue)="editRevenue($event)"
+		(deleteRevenue)="deleteRevenue($event)"
+	></revenue-mobile-view>
+</ng-container>
+
+<ng-template #noRegister>
+	<div class="alert alert-info" role="alert">{{ 'Pages.Revenue.Alerts.NoExpense' | translate }}</div>
+</ng-template>
