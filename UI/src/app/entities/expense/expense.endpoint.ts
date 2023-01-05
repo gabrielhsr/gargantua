@@ -17,7 +17,7 @@ export class ExpenseEndpoint extends BaseEndpoint<Expense> {
 		super(client, service);
 	}
 
-	public getPeriods() {
+	public getExpensesPeriods() {
 		return this.service.handle(this.httpClient.get<Period[]>(environment.baseApi + this.endpoint + 'periods'));
 	}
 

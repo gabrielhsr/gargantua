@@ -17,7 +17,7 @@
 	<div preventDefault>
 		<div mat-menu-item disabled>{{ 'Pages.Expenses.SortBy' | translate }}:</div>
 
-		<button mat-menu-item *ngFor="let option of expenseService.sortOptions" (click)="expenseService.changeSortOption(option)">
+		<button mat-menu-item *ngFor="let option of periodService.sortOptions" (click)="changeFilter(option)">
 			<mat-icon *ngIf="option.order">{{ option.order === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
 			{{ option.text | translate }}
 		</button>

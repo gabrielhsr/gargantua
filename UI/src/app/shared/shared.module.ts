@@ -17,6 +17,7 @@ import { TranslateService } from './translate/translate.service';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PeriodSelectComponent } from './components/period-select/period-select.component';
 
 // Modules
 import { MaterialModule } from './material/material.module';
@@ -40,7 +41,8 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 		// Components
 		TopbarComponent,
 		SidebarComponent,
-  		ConfirmDialogComponent
+  		ConfirmDialogComponent,
+    	PeriodSelectComponent
 	],
 	imports: [
 		// Modules
@@ -69,7 +71,8 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 
 		// Components
 		TopbarComponent,
-		SidebarComponent
+		SidebarComponent,
+		PeriodSelectComponent
 	],
 	providers: [TranslateService]
 })

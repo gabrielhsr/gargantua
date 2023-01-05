@@ -28,6 +28,7 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IRevenueService, RevenueService>();
+builder.Services.AddScoped<IPeriodService, PeriodService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

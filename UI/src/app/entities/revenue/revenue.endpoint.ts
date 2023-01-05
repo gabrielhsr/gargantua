@@ -17,7 +17,7 @@ export class RevenueEndpoint extends BaseEndpoint<Revenue> {
 		super(client, service);
 	}
 
-	public getPeriods() {
+	public getRevenuePeriods() {
 		return this.service.handle(this.httpClient.get<Period[]>(environment.baseApi + this.endpoint + 'periods'));
 	}
 

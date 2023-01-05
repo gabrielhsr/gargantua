@@ -1,4 +1,6 @@
-﻿namespace Financial.Data.DTO
+﻿using Financial.Data.Models;
+
+namespace Financial.Data.DTO
 {
     public class Period: IEquatable<Period>
     {

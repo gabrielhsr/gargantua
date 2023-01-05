@@ -1,7 +1,8 @@
-<revenue-period-select
-	[displayedColumns]="displayedColumns"
+<period-select
+	[sortOptions]="sortOptions"
 	(periodChange)="periodSubject.next($event)"
-></revenue-period-select>
+	(filterChange)="sort($event)"
+></period-select>
 
 <revenue-desktop-view
 	[periodRevenue]="periodRevenue"

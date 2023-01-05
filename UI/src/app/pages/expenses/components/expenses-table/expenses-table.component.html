@@ -1,7 +1,8 @@
-<expenses-period-select
-	[displayedColumns]="displayedColumns"
+<period-select
+	[sortOptions]="sortOptions"
 	(periodChange)="periodSubject.next($event)"
-></expenses-period-select>
+	(filterChange)="sort($event)"
+></period-select>
 
 <expenses-desktop-view
 	[periodExpenses]="periodExpenses"
