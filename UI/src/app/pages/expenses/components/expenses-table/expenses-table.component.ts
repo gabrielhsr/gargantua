@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, Subject, switchMap } from 'rxjs';
+import { EMPTY, of, Subject, switchMap } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
-import { sortingDataAccessor } from 'src/app/shared/helpers/expense.helper';
+import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
 import { SortOption } from './period-select/period-select.component';
@@ -19,7 +19,7 @@ export class ExpensesTableComponent implements OnInit {
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public displayedColumns: string[] = [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id');
 
-	public periodSubject = new Subject<Period>();
+	public periodSubject = new Subject<Period | undefined>();
 
 	constructor(
 		private readonly expenseService: ExpenseService,
@@ -32,9 +32,9 @@ export class ExpensesTableComponent implements OnInit {
 
 	public ngOnInit() {
 		this.periodSubject
-			.pipe(switchMap((period) => this.expenseService.getExpensesByPeriod(period)))
+			.pipe(switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period)))
 			.subscribe((res) => {
-				if (res.isSuccess) {
+				if (res?.isSuccess) {
 					this.periodExpenses.data = res.value;
 					this.expenseService.sortOption.next(this.expenseService.sortOption.value);
 				}
@@ -58,8 +58,8 @@ export class ExpensesTableComponent implements OnInit {
 
 	public sort(category: SortOption) {
 		this.periodExpenses.data = this.periodExpenses.data.sort((expenseA, expenseB) => {
-			const itemA = sortingDataAccessor(expenseA, category.value);
-			const itemB = sortingDataAccessor(expenseB, category.value);
+			const itemA = sortingExpenseDataAccessor(expenseA, category.value);
+			const itemB = sortingExpenseDataAccessor(expenseB, category.value);
 
 			if (itemA && itemB) {
 				return category.order === 'asc' ? (itemA < itemB ? -1 : itemA > itemB ? 1 : 0) : (itemA > itemB ? -1 : itemA < itemB ? 1 : 0);

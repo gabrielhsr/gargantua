@@ -1,21 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
+import { Revenue } from 'src/app/entities/revenue/revenue.model';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
-import { ExpenseService } from '../../../services/expense.service';
+import { RevenueService } from '../../../services/revenue.service';
 
 export interface SortOption {
 	text: string;
-	value: keyof Expense;
+	value: keyof Revenue;
 	order?: 'asc' | 'desc';
 }
 
 @Component({
-	selector: 'expenses-period-select',
+	selector: 'revenue-period-select',
 	templateUrl: './period-select.component.html',
 	styleUrls: ['./period-select.component.scss'],
 })
-export class PeriodSelectComponent implements OnInit {
+export class RevenuePeriodSelectComponent implements OnInit {
 	@Output() public periodChange = new EventEmitter<Period>();
 
 	@Input() public displayedColumns: string[] = [];
@@ -23,15 +23,15 @@ export class PeriodSelectComponent implements OnInit {
 	public periods?: Period[];
 	public selectedPeriod?: Period;
 
-	constructor(public readonly expenseService: ExpenseService) {}
+	constructor(public readonly revenueService: RevenueService) {}
 
 	public ngOnInit() {
-		this.expenseService.sortOptions = this.getSortOptions();
+		this.revenueService.sortOptions = this.getSortOptions();
 		this.loadPeriods();
 	}
 
 	private loadPeriods() {
-		this.expenseService.getPeriods().subscribe((res) => {
+		this.revenueService.getPeriods().subscribe((res) => {
 			if (!res.isSuccess) return;
 
 			this.periods = res.value;
@@ -58,11 +58,11 @@ export class PeriodSelectComponent implements OnInit {
 			.filter((x) => x !== 'options')
 			.map((x) => {
 				const defaultOption: SortOption = {
-					text: `Pages.Expenses.${toTitleCase(x)}`,
-					value: x as keyof Expense,
+					text: `Pages.Revenue.${toTitleCase(x)}`,
+					value: x as keyof Revenue,
 				};
 
-				return x === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
+				return x === 'paymentDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}
 }

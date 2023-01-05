@@ -30,14 +30,14 @@ namespace Financial.Services
         {
             var expenses = await base.GetAllAsync();
 
-            var years = expenses
+            var periods = expenses
                 .Where(x => x.DueDate is not null)
                 .OrderBy(x => x.DueDate)
                 .Select(x => new Period { Month = x.DueDate!.Value.Month, Year = x.DueDate!.Value.Year })
                 .Distinct()
                 .ToList();
 
-            return years;
+            return periods;
         }
 
         public async Task<IList<Expense>> GetExpensesByPeriod(Period period)

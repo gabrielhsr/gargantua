@@ -7,11 +7,11 @@ namespace Financial.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpensesController : BaseController<Expense>
+    public class RevenueController : BaseController<Revenue>
     {
-        private readonly IExpenseService service;
+        private readonly IRevenueService service;
 
-        public ExpensesController(IExpenseService service) : base(service)
+        public RevenueController(IRevenueService service) : base(service)
         {
             this.service = service;
         }
@@ -22,10 +22,10 @@ namespace Financial.Controllers
             return await service.GetPeriods();
         }
 
-        [HttpGet("expensesByPeriod")]
-        public async Task<IList<Expense>> GetExpensesByPeriod(int month, int year)
+        [HttpGet("revenueByPeriod")]
+        public async Task<IList<Revenue>> GetRevenueByPeriod(int month, int year)
         {
-            return await service.GetExpensesByPeriod(new Period { Month = month, Year = year });
+            return await service.GetRevenueByPeriod(new Period { Month = month, Year = year });
         }
     }
 }

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, Simpl
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/entities/expense/expense.model';
-import { sortingDataAccessor } from 'src/app/shared/helpers/expense.helper';
+import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
 
 @Component({
   selector: 'expenses-desktop-view',
@@ -25,7 +25,7 @@ export class DesktopViewComponent implements AfterViewInit {
 	public ngAfterViewInit() {
 		if (this.sort && this.periodExpenses) {
 			this.periodExpenses.sort = this.sort;
-			this.periodExpenses.sortingDataAccessor = sortingDataAccessor;
+			this.periodExpenses.sortingDataAccessor = sortingExpenseDataAccessor;
 			return;
 		}
 

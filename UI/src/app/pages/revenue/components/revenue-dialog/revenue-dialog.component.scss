@@ -1,0 +1,20 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+mat-form-field {
+	width: 100%;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.close-button {
+	position: absolute;
+	right: 10px;
+    top: 10px;
+}

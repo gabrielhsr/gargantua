@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
-	selector: 'app-expenses',
+	selector: 'page-expenses',
 	templateUrl: './expenses.page.html',
 	styleUrls: ['./expenses.page.scss'],
 })

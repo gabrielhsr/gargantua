@@ -31,6 +31,12 @@ mat-dialog-content {
 	height: 100%;
 }
 
+.add-button {
+	position: fixed !important;
+	bottom: 30px;
+	right: 30px;
+}
+
 @include media-breakpoint-up(lg) {
 	.two-input-container {
 		display: flex;

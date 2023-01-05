@@ -1,12 +1,12 @@
 @import '/src/assets/bootstrap/scss/bootstrap.scss';
 
-.expenses-container {
+.revenue-container {
 	padding-top: 20px;
 	padding-bottom: 110px;
 }
 
 @include media-breakpoint-up(lg) {
-	.expenses-container {
+	.revenue-container {
 		padding-bottom: auto;
 	}
 }

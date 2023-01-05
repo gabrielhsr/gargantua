@@ -1,0 +1,58 @@
+<div class="mobile-view" [loading]="loading" matSort>
+	<mat-accordion multi="true">
+		<mat-expansion-panel
+			class="mat-elevation-z1"
+			*ngFor="let revenue of periodRevenue?.data"
+			[expanded]="openedPanels.includes(revenue.id)"
+			(opened)="openedPanels.push(revenue.id)"
+			(closed)="forgetPanel(revenue.id)"
+			#panel
+		>
+			<mat-expansion-panel-header>
+				<mat-panel-title class="panel-title">
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Revenue.Description" | translate }}
+						</div>
+						<div [ngClass]="panel.expanded ? '' : 'sub-value'">
+							{{ revenue.description }}
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="sub-title">
+							{{ "Pages.Revenue.PaymentDate" | translate }}
+						</div>
+						<div class="sub-value">
+							{{ revenue.paymentDate | date }}
+						</div>
+					</div>
+				</mat-panel-title>
+
+				<mat-panel-description class="panel-description">
+					<div class="sub-value">{{ revenue.amount | currency }}</div>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+			<div class="panel-content">
+				<!-- content to show -->
+			</div>
+			<mat-action-row>
+				<button mat-icon-button color="primary" (click)="editRevenue.emit(revenue)">
+					<mat-icon>edit</mat-icon>
+				</button>
+
+				<button mat-icon-button color="warn" (click)="deleteRevenue.emit(revenue)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-action-row>
+		</mat-expansion-panel>
+	</mat-accordion>
+
+	<mat-card>
+		<mat-card-content class="total-container">
+			{{ "Common.Total" | translate }}
+			<div class="total-value">{{ totalAmount | currency }}</div>
+		</mat-card-content>
+	</mat-card>
+</div>

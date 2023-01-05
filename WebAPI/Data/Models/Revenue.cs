@@ -1,0 +1,18 @@
+﻿using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Financial.Data.Models
+{
+    public class Revenue : BaseEntity
+    {
+        [Required]
+        public DateTimeOffset PaymentDate { get; set; }
+
+        [Required]
+        public string Description { get; set; } = string.Empty;
+
+        [Required]
+        [Column(TypeName = "Money")]
+        public decimal Amount { get; set; } = 0;
+    }
+}

@@ -1,0 +1,21 @@
+<revenue-period-select
+	[displayedColumns]="displayedColumns"
+	(periodChange)="periodSubject.next($event)"
+></revenue-period-select>
+
+<revenue-desktop-view
+	[periodRevenue]="periodRevenue"
+	[displayedColumns]="displayedColumns"
+	[totalAmount]="totalAmount"
+	[loading]="revenueLoading"
+	(editRevenue)="editRevenue($event)"
+	(deleteRevenue)="deleteRevenue($event)"
+></revenue-desktop-view>
+
+<revenue-mobile-view
+	[periodRevenue]="periodRevenue"
+	[totalAmount]="totalAmount"
+	[loading]="revenueLoading"
+	(editRevenue)="editRevenue($event)"
+	(deleteRevenue)="deleteRevenue($event)"
+></revenue-mobile-view>

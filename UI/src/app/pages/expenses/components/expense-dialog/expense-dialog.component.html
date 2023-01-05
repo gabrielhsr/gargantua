@@ -2,25 +2,25 @@
 	<mat-icon>close</mat-icon>
 </button>
 
-<h2 mat-dialog-title>{{  expense ? ("Pages.Home.EditExpense" | translate) : ("Pages.Home.NewExpense" | translate) }}</h2>
+<h2 mat-dialog-title>{{  expense ? ("Pages.Expenses.EditExpense" | translate) : ("Pages.Expenses.NewExpense" | translate) }}</h2>
 
 <mat-dialog-content [loading]="loading">
 	<form *ngIf="newExpenseForm && paymentMethods && categories" [formGroup]="newExpenseForm">
 		<mat-form-field>
-			<mat-label>{{ "Pages.Home.Description" | translate }}</mat-label>
+			<mat-label>{{ "Pages.Expenses.Description" | translate }}</mat-label>
 			<input matInput type="text" formControlName="description"/>
 			<mat-error>{{ showErrorMessage('description') }}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>
-			<mat-label>{{ "Pages.Home.Amount" | translate }}</mat-label>
+			<mat-label>{{ "Pages.Expenses.Amount" | translate }}</mat-label>
 			<input matInput currencyMask formControlName="amount"/>
 			<mat-error>{{ showErrorMessage('amount') }}</mat-error>
 		</mat-form-field>
 
 		<div class="two-input-container">
 			<mat-form-field>
-				<mat-label>{{ "Pages.Home.Category" | translate }}</mat-label>
+				<mat-label>{{ "Pages.Expenses.Category" | translate }}</mat-label>
 				<input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete">
 
 				<mat-autocomplete #categoryAutoComplete="matAutocomplete" [displayWith]="displayFn">
@@ -33,7 +33,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<mat-label>{{ "Pages.Home.PaymentMethod" | translate }}</mat-label>
+				<mat-label>{{ "Pages.Expenses.PaymentMethod" | translate }}</mat-label>
 				<input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete">
 
 				<mat-autocomplete #paymentMethodAutoComplete="matAutocomplete" [displayWith]="displayFn">
@@ -48,7 +48,7 @@
 
 		<div class="two-input-container">
 			<mat-form-field>
-				<mat-label>{{ "Pages.Home.DueDate" | translate }}</mat-label>
+				<mat-label>{{ "Pages.Expenses.DueDate" | translate }}</mat-label>
 				<input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" />
 				<mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
 				<mat-datepicker #dueDatePicker></mat-datepicker>
@@ -56,7 +56,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<mat-label>{{ "Pages.Home.PurchaseDate" | translate }}</mat-label>
+				<mat-label>{{ "Pages.Expenses.PurchaseDate" | translate }}</mat-label>
 				<input matInput [matDatepicker]="purchaseDatePicker" formControlName="purchaseDate" />
 				<mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
 				<mat-datepicker #purchaseDatePicker></mat-datepicker>

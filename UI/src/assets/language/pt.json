@@ -24,10 +24,11 @@
 	"Sidebar": {
 		"Home": "Página Inicial",
 		"Admin": "Administração",
-		"Expenses": "Despesas"
+		"Expenses": "Despesas",
+		"Revenue": "Receita"
 	},
 	"Pages": {
-		"Home": {
+		"Expenses": {
 			"Alerts": {
 				"NoExpense": "Nenhuma despesa cadastrada!"
 			},
@@ -40,6 +41,17 @@
 			"Amount": "Valor Pago",
 			"NewExpense": "Nova Despesa",
 			"EditExpense": "Editar Despesa",
+			"FilterBy": "Filtrar por",
+			"SortBy": "Ordernar por"
+		},
+		"Revenue": {
+			"Revenue": "Receita",
+			"Amount": "Valor Pago",
+			"PaymentDate": "Data do Pagamento",
+			"Description": "Descrição",
+			"PaymentMethod": "Forma de Pagamento",
+			"NewRevenue": "Nova Receita",
+			"EditRevenue": "Editar Receita",
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por"
 		},

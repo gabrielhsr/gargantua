@@ -12,7 +12,7 @@
 				<mat-panel-title class="panel-title">
 					<div class="item">
 						<div class="sub-title">
-							{{ "Pages.Home.Description" | translate }}
+							{{ "Pages.Expenses.Description" | translate }}
 						</div>
 						<div [ngClass]="panel.expanded ? '' : 'sub-value'">
 							{{ expense.description }}
@@ -21,7 +21,7 @@
 
 					<div class="item">
 						<div class="sub-title">
-							{{ "Pages.Home.PurchaseDate" | translate }}
+							{{ "Pages.Expenses.PurchaseDate" | translate }}
 						</div>
 						<div class="sub-value">
 							{{ expense.purchaseDate | date }}
@@ -38,7 +38,7 @@
 				<div class="sub-content">
 					<div class="item">
 						<div class="sub-title">
-							{{ "Pages.Home.DueDate" | translate }}
+							{{ "Pages.Expenses.DueDate" | translate }}
 						</div>
 						<div class="sub-value">
 							{{ expense.dueDate | date }}
@@ -47,7 +47,7 @@
 
 					<div class="item">
 						<div class="sub-title">
-							{{ "Pages.Home.Category" | translate }}
+							{{ "Pages.Expenses.Category" | translate }}
 						</div>
 						<div class="sub-value">
 							{{ expense.category?.name }}
@@ -58,7 +58,7 @@
 				<div class="sub-content">
 					<div class="item">
 						<div class="sub-title">
-							{{ "Pages.Home.PaymentMethod" | translate }}
+							{{ "Pages.Expenses.PaymentMethod" | translate }}
 						</div>
 						<div class="sub-value">
 							{{ expense.paymentMethod?.name }}
