@@ -37,6 +37,10 @@ mat-dialog-content {
 	right: 30px;
 }
 
+.page-title {
+	font-size: 1.5rem;
+}
+
 @include media-breakpoint-up(lg) {
 	.two-input-container {
 		display: flex;

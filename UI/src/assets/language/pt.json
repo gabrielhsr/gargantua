@@ -32,7 +32,7 @@
 			"Alerts": {
 				"NoExpense": "Nenhuma despesa cadastrada!"
 			},
-			"Expenses": "Despesas",
+			"Title": "Despesas",
 			"DueDate": "Data de Vencimento",
 			"PurchaseDate": "Data da Compra",
 			"Category": "Categoria",
@@ -48,7 +48,7 @@
 			"Alerts": {
 				"NoExpense": "Nenhuma receita cadastrada!"
 			},
-			"Revenue": "Receita",
+			"Title": "Receita",
 			"Amount": "Valor Pago",
 			"PaymentDate": "Data do Pagamento",
 			"Description": "Descrição",
