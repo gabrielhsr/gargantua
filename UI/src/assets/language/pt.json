@@ -28,6 +28,11 @@
 		"Revenue": "Receita"
 	},
 	"Pages": {
+		"Home": {
+			"Revenue": "Receita Mensal",
+			"Expenses": "Despesa Mensal",
+			"Balance": "Saldo Mensal"
+		},
 		"Expenses": {
 			"Alerts": {
 				"NoExpense": "Nenhuma despesa cadastrada!"

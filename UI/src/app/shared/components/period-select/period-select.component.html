@@ -8,7 +8,7 @@
 		</mat-select>
 	</mat-form-field>
 
-	<button mat-icon-button class="filter-button" [matMenuTriggerFor]="filterMenu">
+	<button mat-icon-button class="filter-button" [matMenuTriggerFor]="filterMenu" *ngIf="sortOptions.length">
 		<mat-icon>sort</mat-icon>
 	</button>
 </div>

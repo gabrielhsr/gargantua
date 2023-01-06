@@ -1,0 +1,17 @@
+@import '/src/assets/bootstrap/scss/bootstrap.scss';
+
+.cards-container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	mat-card {
+		min-width: 200px;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	.cards-container {
+		flex-direction: row;
+	}
+}
