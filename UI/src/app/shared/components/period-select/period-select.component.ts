@@ -12,6 +12,7 @@ interface SortOption {
 	selector: 'period-select',
 	templateUrl: './period-select.component.html',
 	styleUrls: ['./period-select.component.scss'],
+	providers: [PeriodService]
 })
 export class PeriodSelectComponent implements OnInit {
 	@Output() public periodChange = new EventEmitter<Period>();

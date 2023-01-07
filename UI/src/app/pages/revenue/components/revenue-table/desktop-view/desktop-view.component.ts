@@ -12,7 +12,6 @@ export class RevenueDesktopViewComponent implements AfterViewInit {
 	@Input() public periodRevenue?: MatTableDataSource<Revenue>;
 	@Input() public displayedColumns?: string[];
 	@Input() public totalAmount?: number;
-	@Input() public loading: boolean = true;
 
 	@Output() public editRevenue = new EventEmitter<Revenue>();
 	@Output() public deleteRevenue = new EventEmitter<Revenue>();

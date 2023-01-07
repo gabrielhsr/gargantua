@@ -11,7 +11,6 @@ import { Revenue } from 'src/app/entities/revenue/revenue.model';
 export class RevenueMobileViewComponent {
 	@Input() public periodRevenue?: MatTableDataSource<Revenue>;
 	@Input() public totalAmount?: number;
-	@Input() public loading: boolean = true;
 
 	@ViewChild(MatSort) public sort?: MatSort;
 

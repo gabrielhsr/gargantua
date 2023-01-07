@@ -2,5 +2,5 @@
 	<mat-label>{{ 'Common.Name' | translate }}</mat-label>
 	<input matInput [value]="item.name" (blur)="onBlur($event, item)"/>
 	<mat-spinner matSuffix class="suffix-loading" *ngIf="loading"></mat-spinner>
-	<mat-icon matSuffix *ngIf="!loading" color="warn" class="delete-icon" (click)="deleteItem($event, item)">delete</mat-icon>
+	<mat-icon matSuffix preventDefault *ngIf="!loading" color="warn" class="delete-icon" (click)="deleteItem($event, item)">delete</mat-icon>
 </mat-form-field>

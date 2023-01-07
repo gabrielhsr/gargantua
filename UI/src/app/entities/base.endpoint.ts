@@ -1,25 +1,23 @@
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { HttpService } from '../shared/services/http.service';
 
 export abstract class BaseEndpoint<T> {
-	public abstract endpoint?: string;
+	public abstract url: string;
 
-	constructor(protected httpClient: HttpClient, protected httpService: HttpService) {	}
+	constructor(protected httpService: HttpService) {}
 
 	public get() {
-		return this.httpService.handle(this.httpClient.get<T[]>(environment.baseApi + this.endpoint));
+		return this.httpService.get<T[]>(this.url);
 	}
 
 	public post(object: T) {
-		return this.httpService.handle(this.httpClient.post<T>(environment.baseApi + this.endpoint, object));
+		return this.httpService.post<T>(this.url, object);
 	}
 
 	public put(object: T, id: string) {
-		return this.httpService.handle(this.httpClient.put<T>(environment.baseApi + this.endpoint + id, object));
+		return this.httpService.put<T>(this.url, object, id);
 	}
 
 	public delete(id: string) {
-		return this.httpService.handle(this.httpClient.delete<T>(environment.baseApi + this.endpoint + id))
+		return this.httpService.delete<T>(this.url, id);
 	}
 }

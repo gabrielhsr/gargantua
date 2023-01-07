@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { PeriodEndpoint } from 'src/app/entities/period/period.endpoint';
+import { UpdateService } from '../../services/update.service';
 
 export interface SortOption {
 	text: string;
@@ -8,18 +9,15 @@ export interface SortOption {
 	order?: 'asc' | 'desc';
 }
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class PeriodService {
 	public sortOptions?: SortOption[];
 	public sortOption = new BehaviorSubject<SortOption | undefined>(undefined);
-	public update = new BehaviorSubject<void>(undefined);
 
-	constructor(private readonly periodEndpoint: PeriodEndpoint) {}
+	constructor(private readonly update: UpdateService, private readonly periodEndpoint: PeriodEndpoint) {}
 
 	public getPeriods() {
-		return this.update.pipe(switchMap(() => this.periodEndpoint.getPeriods()));
+		return this.update.handle(this.periodEndpoint.getPeriods());
 	}
 
 	public changeSortOption(sortOption: SortOption) {

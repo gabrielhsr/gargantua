@@ -71,8 +71,6 @@ export class InputComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteItem(event: Event, item: ItemUnion) {
-		event.stopPropagation();
-
 		const itemName = item.name;
 
 		const operation = this.type  === 'category' ? this.categoryEndpoint.delete(item.id) : this.paymentMethodEndpoint.delete(item.id);

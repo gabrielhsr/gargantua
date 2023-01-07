@@ -1,9 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { FeedbackService } from './feedback.service';
 
-type HttpHandleResponse<T> = ErrorHandleResponse | SuccessHandleResponse<T>
+export type HttpHandleResponse<T> = ErrorHandleResponse | SuccessHandleResponse<T>
+
+export type Params = HttpParams | {	[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean> };
 
 interface ErrorHandleResponse {
 	isSuccess: false;
@@ -20,9 +23,25 @@ interface SuccessHandleResponse<T> {
 	providedIn: 'root',
 })
 export class HttpService {
-	constructor(private readonly feedback: FeedbackService) {}
+	constructor(private readonly feedback: FeedbackService, private readonly httpClient: HttpClient) {}
 
-	public handle<T>(observable: Observable<T>): Observable<HttpHandleResponse<T>> {
+	public get<T>(url: string, params?: Params) {
+		return this.intercept(this.httpClient.get<T>(environment.baseApi + url, { params }));
+	}
+
+	public post<T>(endpoint: string, object: T) {
+		return this.intercept(this.httpClient.post<T>(environment.baseApi + endpoint, object));
+	}
+
+	public put<T>(endpoint: string, object: T, id: string) {
+		return this.intercept(this.httpClient.put<T>(environment.baseApi + endpoint + id, object));
+	}
+
+	public delete<T>(endpoint: string, id: string) {
+		return this.intercept(this.httpClient.delete<T>(environment.baseApi + endpoint + id))
+	}
+
+	private intercept<T>(observable: Observable<T>): Observable<HttpHandleResponse<T>> {
 		return observable.pipe(
 			map((value) => {
 				const response: HttpHandleResponse<T> = {

@@ -16,13 +16,13 @@ export class TopbarComponent {
 		private readonly translate: TranslateService,
 		private readonly router: Router
 	) {
-		this.title = this.translate.instant('Title');
+		this.title = this.translate.instant('Sidebar.Home');
 
 		this.router.events.subscribe(nav => {
 			if (nav instanceof NavigationEnd) {
 				const routeName = capitalize(nav.url.replace('/', ''));
 
-				this.title = this.translate.instant(`Sidebar.${routeName}`);
+				if (routeName) this.title = this.translate.instant(`Sidebar.${routeName}`);
 			}
 		});
 	}

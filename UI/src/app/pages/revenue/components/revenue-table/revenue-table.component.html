@@ -4,24 +4,24 @@
 	(filterChange)="sort($event)"
 ></period-select>
 
-<ng-container *ngIf="periodRevenue.data.length else noRegister">
-	<revenue-desktop-view
-		[periodRevenue]="periodRevenue"
-		[displayedColumns]="displayedColumns"
-		[totalAmount]="totalAmount"
-		[loading]="revenueLoading"
-		(editRevenue)="editRevenue($event)"
-		(deleteRevenue)="deleteRevenue($event)"
-	></revenue-desktop-view>
+<div [loading]="revenueLoading">
+	<ng-container *ngIf="periodRevenue.data.length else noRegister">
+		<revenue-desktop-view
+			[periodRevenue]="periodRevenue"
+			[displayedColumns]="displayedColumns"
+			[totalAmount]="totalAmount"
+			(editRevenue)="editRevenue($event)"
+			(deleteRevenue)="deleteRevenue($event)"
+		></revenue-desktop-view>
 
-	<revenue-mobile-view
-		[periodRevenue]="periodRevenue"
-		[totalAmount]="totalAmount"
-		[loading]="revenueLoading"
-		(editRevenue)="editRevenue($event)"
-		(deleteRevenue)="deleteRevenue($event)"
-	></revenue-mobile-view>
-</ng-container>
+		<revenue-mobile-view
+			[periodRevenue]="periodRevenue"
+			[totalAmount]="totalAmount"
+			(editRevenue)="editRevenue($event)"
+			(deleteRevenue)="deleteRevenue($event)"
+		></revenue-mobile-view>
+	</ng-container>
+</div>
 
 <ng-template #noRegister>
 	<div class="alert alert-info" role="alert">{{ 'Pages.Revenue.Alerts.NoExpense' | translate }}</div>

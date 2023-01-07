@@ -14,18 +14,17 @@ import { Period } from 'src/app/entities/period/period.dto';
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
 import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
+import { UpdateService } from 'src/app/shared/services/update.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ExpenseService {
-	private expensesUpdate = new BehaviorSubject<void>(undefined);
-
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly expenseEndpoint: ExpenseEndpoint,
-		private readonly periodService: PeriodService,
+		private readonly update: UpdateService,
 		private readonly dialog: MatDialog
 	) {	}
 
@@ -38,11 +37,11 @@ export class ExpenseService {
 	}
 
 	public getAllExpenses() {
-		return this.expensesUpdate.pipe(switchMap(() => this.expenseEndpoint.get()));
+		return this.update.handle(this.expenseEndpoint.get());
 	}
 
 	public getExpensesByPeriod(period: Period) {
-		return this.expensesUpdate.pipe(switchMap(() => this.expenseEndpoint.getExpensesByPeriod(period.month, period.year)));
+		return this.update.handle(this.expenseEndpoint.getExpensesByPeriod(period.month, period.year));
 	}
 
 	public saveExpense(expense: Expense) {
@@ -50,10 +49,7 @@ export class ExpenseService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) {
-					this.expensesUpdate.next()
-					this.periodService.update.next();
-				};
+				if (isSuccess) this.update.run() ;
 			})
 		);
 	}
@@ -61,10 +57,7 @@ export class ExpenseService {
 	public removeExpense(id: string) {
 		return this.expenseEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) {
-					this.expensesUpdate.next()
-					this.periodService.update.next();
-				};
+				if (isSuccess) this.update.run();
 			})
 		);
 	}

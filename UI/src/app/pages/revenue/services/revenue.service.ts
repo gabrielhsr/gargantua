@@ -12,25 +12,24 @@ import { PeriodService } from 'src/app/shared/components/period-select/period-se
 
 import { RevenueDialogComponent } from '../components/revenue-dialog/revenue-dialog.component';
 import { Revenue } from 'src/app/entities/revenue/revenue.model';
+import { UpdateService } from 'src/app/shared/services/update.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class RevenueService {
-	private revenueUpdate = new BehaviorSubject<void>(undefined);
-
 	constructor(
 		private readonly revenueEndpoint: RevenueEndpoint,
-		private readonly periodService: PeriodService,
-		private readonly dialog: MatDialog
+		private readonly dialog: MatDialog,
+		private readonly update: UpdateService
 	) {	}
 
 	public getAllRevenues() {
-		return this.revenueUpdate.pipe(switchMap(() => this.revenueEndpoint.get()));
+		return this.update.handle(this.revenueEndpoint.get());
 	}
 
 	public getRevenueByPeriod(period: Period) {
-		return this.revenueUpdate.pipe(switchMap(() => this.revenueEndpoint.getRevenueByPeriod(period.month, period.year)));
+		return this.update.handle(this.revenueEndpoint.getRevenueByPeriod(period.month, period.year))
 	}
 
 	public saveRevenue(revenue: Revenue) {
@@ -38,10 +37,7 @@ export class RevenueService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) {
-					this.revenueUpdate.next()
-					this.periodService.update.next();
-				};
+				if (isSuccess) this.update.run();
 			})
 		);
 	}
@@ -49,10 +45,7 @@ export class RevenueService {
 	public removeRevenue(id: string) {
 		return this.revenueEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) {
-					this.revenueUpdate.next()
-					this.periodService.update.next();
-				};
+				if (isSuccess) this.update.run();
 			})
 		);
 	}

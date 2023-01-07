@@ -13,7 +13,6 @@ export class DesktopViewComponent implements AfterViewInit {
 	@Input() public periodExpenses?: MatTableDataSource<Expense>;
 	@Input() public displayedColumns?: string[];
 	@Input() public totalAmount?: number;
-	@Input() public loading: boolean = true;
 
 	@Output() public editExpense = new EventEmitter<Expense>();
 	@Output() public deleteExpense = new EventEmitter<Expense>();

@@ -8,9 +8,9 @@ import { PaymentMethod } from './paymentMethod.model';
 	providedIn: 'root',
 })
 export class PaymentMethodEndpoint extends BaseEndpoint<PaymentMethod> {
-	public override endpoint = '/api/PaymentMethod/';
+	public override url = '/api/PaymentMethod/';
 
-	constructor(private readonly client: HttpClient, private readonly service: HttpService) {
-		super(client, service);
+	constructor(private readonly service: HttpService) {
+		super(service);
 	}
 }
