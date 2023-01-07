@@ -10,6 +10,6 @@ export class ExpensesPage {
 	constructor(private readonly expenseService: ExpenseService) {}
 
 	public openAddDialog() {
-		this.expenseService.openExpenseDialog();
+		this.expenseService.openInsertDialog();
 	}
 }

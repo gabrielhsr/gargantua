@@ -46,6 +46,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 
+import { MatFabMenuModule } from '@angular-material-extensions/fab-menu';
+
 @NgModule({
 	exports: [
 		A11yModule,
@@ -66,6 +68,7 @@ import { MatTreeModule } from '@angular/material/tree';
 		MatDialogModule,
 		MatDividerModule,
 		MatExpansionModule,
+		MatFabMenuModule,
 		MatFormFieldModule,
 		MatGridListModule,
 		MatIconModule,

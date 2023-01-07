@@ -50,7 +50,7 @@ export class RevenueService {
 		);
 	}
 
-	public openRevenueDialog(revenue?: Revenue) {
+	public openInsertDialog(revenue?: Revenue) {
 		this.dialog.open(RevenueDialogComponent, { data: revenue, panelClass: ['responsive-dialog'] });
 	}
 }

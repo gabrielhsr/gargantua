@@ -1,7 +1,7 @@
 <period-select (periodChange)="periodSubject.next($event)"></period-select>
 
 <div class="cards-container">
-	<mat-card>
+	<mat-card [loading]="loading">
 		<mat-card-header>
 			<mat-card-title>{{ 'Pages.Home.Revenue' | translate }}</mat-card-title>
 			<mat-card-subtitle>{{ totalRevenue | currency }}</mat-card-subtitle>
@@ -10,7 +10,7 @@
 		<mat-card-content></mat-card-content>
 	</mat-card>
 
-	<mat-card>
+	<mat-card [loading]="loading">
 		<mat-card-header>
 			<mat-card-title>{{ 'Pages.Home.Expenses' | translate }}</mat-card-title>
 			<mat-card-subtitle>{{ totalExpenses | currency }}</mat-card-subtitle>
@@ -19,7 +19,7 @@
 		<mat-card-content></mat-card-content>
 	</mat-card>
 
-	<mat-card>
+	<mat-card [loading]="loading">
 		<mat-card-header>
 			<mat-card-title>{{ 'Pages.Home.Balance' | translate }}</mat-card-title>
 			<mat-card-subtitle>{{ totalRevenue - totalExpenses | currency }}</mat-card-subtitle>
@@ -28,3 +28,10 @@
 		<mat-card-content></mat-card-content>
 	</mat-card>
 </div>
+
+<mat-fab-menu
+	class="menu-add-button"
+	color="primary"
+	[fabButtons]="fabButtons"
+	(onFabMenuItemSelected)="menuItemSelected($event)"
+></mat-fab-menu>

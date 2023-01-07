@@ -68,7 +68,7 @@ export class ExpensesTableComponent implements OnInit {
 	}
 
 	public editExpense(expense: Expense) {
-		this.expenseService.openExpenseDialog(expense);
+		this.expenseService.openInsertDialog(expense);
 	}
 
 	public sort(category?: SortOption) {

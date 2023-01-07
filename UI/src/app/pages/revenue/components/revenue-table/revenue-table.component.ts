@@ -68,7 +68,7 @@ export class RevenueTableComponent implements OnInit {
 	}
 
 	public editRevenue(revenue: Revenue) {
-		this.revenueService.openRevenueDialog(revenue);
+		this.revenueService.openInsertDialog(revenue);
 	}
 
 	public sort(category?: SortOption) {

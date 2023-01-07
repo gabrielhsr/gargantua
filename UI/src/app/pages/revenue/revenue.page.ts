@@ -10,6 +10,6 @@ export class RevenuePage {
 	constructor(private readonly revenueService: RevenueService) {}
 
 	public openAddDialog() {
-		this.revenueService.openRevenueDialog();
+		this.revenueService.openInsertDialog();
 	}
 }
