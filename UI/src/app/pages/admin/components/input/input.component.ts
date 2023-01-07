@@ -70,7 +70,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		return GuidHelper.isNullOrDefault(paymentMethod.id) ? this.paymentMethodEndpoint.post(paymentMethod) : this.paymentMethodEndpoint.put(paymentMethod, paymentMethod.id);
 	}
 
-	public deleteItem(event: Event, item: ItemUnion) {
+	public deleteItem(item: ItemUnion) {
 		const itemName = item.name;
 
 		const operation = this.type  === 'category' ? this.categoryEndpoint.delete(item.id) : this.paymentMethodEndpoint.delete(item.id);
