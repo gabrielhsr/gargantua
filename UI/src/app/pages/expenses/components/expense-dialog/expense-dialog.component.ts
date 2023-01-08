@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
@@ -21,7 +22,7 @@ export class ExpenseDialogComponent implements OnInit {
 	public paymentMethods?: PaymentMethod[];
 
 	public newExpenseForm?: FormGroup;
-	public loading: boolean = true;
+	public loading: boolean = true; // TODO: Check loading spinner placement on mobile.
 
 	public filteredCategories?: Observable<Category[] | undefined>;
 	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
@@ -89,18 +90,25 @@ export class ExpenseDialogComponent implements OnInit {
 	private filterCategories(val: string) {
 		if (typeof val !== "string") return this.categories;
 
+		if (this.categories?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
+			this.newExpenseForm?.get('category')?.setErrors({ 'alreadyExist': true });
+		}
+
 		return this.categories?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
 	}
 
 	private filterPaymentMethods(val: string) {
 		if (typeof val !== "string") return this.paymentMethods;
 
+		if (this.paymentMethods?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
+			this.newExpenseForm?.get('paymentMethod')?.setErrors({ 'alreadyExist': true });
+		}
+
 		return this.paymentMethods?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
 	}
 
 	private createForm(expense: Expense): void {
-		const formsControl = FormHelper.build({
-			object: expense,
+		const formsControl = FormHelper.build(expense, {
 			allValidators: {
 				validators: [Validators.required],
 				exclude: ['dueDate'],

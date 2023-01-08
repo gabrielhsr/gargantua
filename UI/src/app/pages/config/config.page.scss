@@ -1,7 +1,7 @@
 @import "/src/assets/bootstrap/scss/bootstrap-utilities.scss";
 
-.admin-container {
-	padding-bottom: 20px;
+mat-card {
+	flex-grow: 1;
 }
 
 mat-list-item {
@@ -13,9 +13,10 @@ mat-card-content {
 	padding-bottom: 10px !important;
 }
 
-.lists-container {
+.config-container {
 	display: flex;
-	flex-direction: column;
+	gap: 16px;
+	flex-wrap: wrap;
 }
 
 .new-item-input {
@@ -30,13 +31,10 @@ mat-card-content {
 	}
 }
 
-@include media-breakpoint-up(lg) {
-	.lists-container {
-		flex-direction: row;
+.fake-hint {
+	height: 22px;
+}
 
-		mat-list {
-			flex-grow: 1;
-			width: 50%;
-		}
-	}
+::ng-deep .new-item-input .mat-mdc-form-field-subscript-wrapper {
+	display: none !important;
 }

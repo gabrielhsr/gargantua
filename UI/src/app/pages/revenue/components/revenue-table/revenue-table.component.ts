@@ -23,7 +23,9 @@ export class RevenueTableComponent implements OnInit {
 	public revenueLoading: boolean = true;
 
 	public periodRevenue = new MatTableDataSource<Revenue>();
-	public displayedColumns: string[] = [...Object.keys(new Revenue()), 'options'].filter((x) => x !== 'id');
+	public displayedColumns: string[] = [...Object.keys(new Revenue()), 'options']
+											.filter((x) => x !== 'id')
+											.filter((x) => x !== 'periodic');
 
 	public periodSubject = new Subject<Period | undefined>();
 

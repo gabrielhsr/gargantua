@@ -14,5 +14,7 @@ namespace Financial.Data.Models
         [Required]
         [Column(TypeName = "Money")]
         public decimal Amount { get; set; } = 0;
+
+        public bool Periodic { get; set; } = false;
     }
 }

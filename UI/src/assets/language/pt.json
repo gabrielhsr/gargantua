@@ -23,7 +23,7 @@
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
-		"Admin": "Administração",
+		"Config": "Configurações",
 		"Expenses": "Despesas",
 		"Revenue": "Receita"
 	},
@@ -37,7 +37,6 @@
 			"Alerts": {
 				"NoExpense": "Nenhuma despesa cadastrada!"
 			},
-			"Title": "Despesas",
 			"DueDate": "Data de Vencimento",
 			"PurchaseDate": "Data da Compra",
 			"Category": "Categoria",
@@ -53,7 +52,6 @@
 			"Alerts": {
 				"NoExpense": "Nenhuma receita cadastrada!"
 			},
-			"Title": "Receita",
 			"Amount": "Valor Pago",
 			"PaymentDate": "Data do Pagamento",
 			"Description": "Descrição",
@@ -61,9 +59,11 @@
 			"NewRevenue": "Nova Receita",
 			"EditRevenue": "Editar Receita",
 			"FilterBy": "Filtrar por",
-			"SortBy": "Ordernar por"
+			"SortBy": "Ordernar por",
+			"Periodic": "Recorrente",
+			"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário."
 		},
-		"Admin": {
+		"Config": {
 			"Categories": "Categorias",
 			"PaymentMethods": "Formas de Pagamento",
 			"SavedWithSuccess": "Item salvo com sucesso!",
@@ -74,6 +74,7 @@
 		}
 	},
 	"ErrorMessage": {
-		"required": "Campo obrigatório."
+		"required": "Campo obrigatório.",
+		"alreadyExist": "Não pode ter itens de mesmo nome!"
 	}
 }

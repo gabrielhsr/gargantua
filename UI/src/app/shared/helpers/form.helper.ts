@@ -2,10 +2,9 @@ import { FormControl, FormGroup, ValidationErrors } from "@angular/forms";
 import { TranslateService } from "../translate/translate.service";
 
 interface buildOptions {
-	object: object;
-	exclude?: string[];
-	allValidators?: AllValidators;
-	specificValidators?: SpecificValidators;
+	exclude: string[];
+	allValidators: AllValidators;
+	specificValidators: SpecificValidators;
 }
 
 interface SpecificValidators {
@@ -42,22 +41,22 @@ export class FormHelper {
 		return '';
 	}
 
-	public static build(options: buildOptions) {
+	public static build(object: object, options: Partial<buildOptions>) {
 		const formObj: {[key: string]: FormControl} = {};
 
-		Object.keys(options.object)
+		Object.keys(object)
 			.filter(key => options.exclude ? !options.exclude.includes(key) : key)
 			.forEach(item => {
-				const key = item as keyof typeof options.object;
+				const key = item as keyof typeof object;
 				const validators = this.buildValidators(options, key);
 
-				formObj[key] = new FormControl(options.object[key], validators);
+				formObj[key] = new FormControl(object[key], validators);
 			})
 
 		return formObj;
 	}
 
-	private static buildValidators(options: buildOptions, key: string): ValidationErrors {
+	private static buildValidators(options: Partial<buildOptions>, key: string): ValidationErrors {
 		const allValidators = options.allValidators?.validators ?? [];
 		const specificValidator = options.specificValidators?.[key] ? options.specificValidators[key] : [];
 

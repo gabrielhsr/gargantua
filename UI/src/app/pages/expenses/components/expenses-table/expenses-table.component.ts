@@ -23,7 +23,7 @@ export class ExpensesTableComponent implements OnInit {
 	public expensesLoading: boolean = true;
 
 	public periodExpenses = new MatTableDataSource<Expense>();
-	public displayedColumns: string[] = [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id');
+	public displayedColumns: string[] = [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id'); // TODO: Create a helper to generate the columns.
 
 	public periodSubject = new Subject<Period | undefined>();
 

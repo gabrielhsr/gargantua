@@ -56,8 +56,7 @@ export class RevenueDialogComponent implements OnInit {
 	}
 
 	private createForm(revenue: Revenue): void {
-		const formsControl = FormHelper.build({
-			object: revenue,
+		const formsControl = FormHelper.build(revenue, {
 			allValidators: {
 				validators: [Validators.required],
 				exclude: ['dueDate'],

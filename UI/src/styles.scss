@@ -47,6 +47,12 @@ mat-dialog-content {
 	font-size: 1.5rem;
 }
 
+.checkbox-tooltip {
+	display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 @include media-breakpoint-up(lg) {
 	.two-input-container {
 		display: flex;

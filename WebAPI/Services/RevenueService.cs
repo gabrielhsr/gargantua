@@ -28,7 +28,19 @@ namespace Financial.Services
             var revenue = await base.GetAllAsync();
 
             var revenueByPeriod = revenue
-                .Where(x => x.PaymentDate.Month == period.Month && x.PaymentDate.Year == period.Year)
+                .Where(x => x.Periodic || x.PaymentDate.Month == period.Month && x.PaymentDate.Year == period.Year)
+                .Select(x =>
+                {
+                    if (x.Periodic)
+                    {
+                        var yearDiff = period.Year - x.PaymentDate.Year;
+                        var monthDiff = period.Month - x.PaymentDate.Month;
+
+                        x.PaymentDate = x.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
+                    };
+
+                    return x;
+                })
                 .OrderBy(x => x.PaymentDate)
                 .ToList();
 

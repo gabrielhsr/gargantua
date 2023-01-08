@@ -1,0 +1,24 @@
+<mat-form-field class="w-100" floatLabel="always">
+	<mat-label>{{ "Common.Name" | translate }}</mat-label>
+
+	<input
+		#inputElement
+		#inputModel="ngModel"
+		matInput
+		[ngModel]="item.name"
+		(blur)="onBlur($event, item)"
+	/>
+	<mat-error *ngIf="inputModel.invalid">{{ 'ErrorMessage.alreadyExist' | translate }}</mat-error>
+
+	<mat-spinner matSuffix class="suffix-loading" *ngIf="loading"></mat-spinner>
+	<mat-icon
+		*ngIf="!loading"
+		matSuffix
+		preventDefault
+		color="warn"
+		class="delete-icon"
+		(click)="deleteItem(item)"
+	>
+		delete
+	</mat-icon>
+</mat-form-field>

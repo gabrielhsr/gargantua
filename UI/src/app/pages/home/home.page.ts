@@ -2,6 +2,7 @@ import { MatFabMenu } from '@angular-material-extensions/fab-menu';
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, of, Subject, switchMap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
+import { TranslateService } from 'src/app/shared/translate/translate.service';
 import { ExpenseService } from '../expenses/services/expense.service';
 import { RevenueService } from '../revenue/services/revenue.service';
 @Component({
@@ -20,16 +21,21 @@ export class HomePage implements OnInit {
 		{
 			id: 'revenue',
 			icon: 'attach_money',
+			tooltip: this.translate.instant('Pages.Revenue.NewRevenue'),
+			tooltipPosition: 'left'
 		},
 		{
 			id: 'expense',
 			icon: 'money_off',
+			tooltip: this.translate.instant('Pages.Expenses.NewExpense'),
+			tooltipPosition: 'left'
 		},
 	];
 
 	constructor(
 		private readonly revenueService: RevenueService,
-		private readonly expensesService: ExpenseService
+		private readonly expensesService: ExpenseService,
+		private readonly translate: TranslateService
 	) {}
 
 	public ngOnInit(): void {

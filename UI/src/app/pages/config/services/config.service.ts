@@ -5,7 +5,7 @@ import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMet
 @Injectable({
 	providedIn: 'root',
 })
-export class AdminService {
+export class ConfigService {
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint

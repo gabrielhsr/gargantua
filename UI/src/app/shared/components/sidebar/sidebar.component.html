@@ -23,16 +23,16 @@
 					<span>{{ 'Sidebar.Expenses' | translate }}</span>
 				</div>
 			</mat-list-item>
-			<mat-list-item routerLink="/admin" routerLinkActive="active-item" (click)="sidenav.close()">
+			<mat-list-item routerLink="/config" routerLinkActive="active-item" (click)="sidenav.close()">
 				<div class="list-item">
 					<mat-icon>settings</mat-icon>
-					<span>{{ 'Sidebar.Admin' | translate }}</span>
+					<span>{{ 'Sidebar.Config' | translate }}</span>
 				</div>
 			</mat-list-item>
 		</mat-nav-list>
 	</mat-sidenav>
 
-	<mat-sidenav-content class="container mt-3">
+	<mat-sidenav-content class="container">
 		<ng-content></ng-content>
 	</mat-sidenav-content>
 </mat-sidenav-container>

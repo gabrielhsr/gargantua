@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, NgModel } from '@angular/forms';
 import { EMPTY, Subject, Subscription, switchMap } from 'rxjs';
 import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
 import { Category } from 'src/app/entities/category/category.model';
@@ -11,20 +12,26 @@ export type ItemType = 'category' | 'paymentMethod';
 type ItemUnion = PaymentMethod | Category;
 
 @Component({
-	selector: 'admin-input',
+	selector: 'config-input',
 	templateUrl: './input.component.html',
 	styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit, OnDestroy {
+	@ViewChild('inputModel') public input?: NgModel;
+	@ViewChild('inputElement') public element?: ElementRef;
+
 	@Input() public item!: ItemUnion;
 	@Input() public type!: ItemType;
+	@Input() public list?: Category[] | PaymentMethod[];
 
 	@Output() public itemUpdated = new EventEmitter<void>();
 
+	public loading: boolean = false;
 	public subject = new Subject<ItemUnion>();
-	public loading = false;
 
 	private subject$?: Subscription;
+
+	public form = new FormControl('');
 
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
@@ -37,7 +44,7 @@ export class InputComponent implements OnInit, OnDestroy {
 			.pipe(switchMap((item) => this.type === 'category' ? this.saveCategory(item) : this.savePaymentMethod(item)))
 			.subscribe((res) => {
 				if (res.isSuccess) {
-					this.feedback.successToast("Pages.Admin.SavedWithSuccess");
+					this.feedback.successToast("Pages.Config.SavedWithSuccess");
 				}
 
 				this.itemUpdated.emit();
@@ -50,10 +57,18 @@ export class InputComponent implements OnInit, OnDestroy {
 	}
 
 	public onBlur(event: FocusEvent, item: ItemUnion) {
-		const element = event.target as HTMLInputElement;
-		const inputValue = element.value;
+		this.input?.control.setErrors(null);
 
-		if (inputValue !== item.name) {
+		const element = event.target as HTMLInputElement;
+		const inputValue = element.value.trim();
+		const listToSearch = this.list?.filter(x => x.id !== item.id).filter(x => x.name != '');
+
+		if (listToSearch?.find(x => x.name?.toLowerCase() === inputValue.toLowerCase())) {
+			this.input?.control.setErrors({ 'alreadyExist': true });
+			return;
+		}
+
+		if (inputValue != item.name) {
 			this.loading = true;
 
 			const newItem: ItemUnion = { ...item, name: inputValue.length > 0 ? inputValue : null };
@@ -87,7 +102,7 @@ export class InputComponent implements OnInit, OnDestroy {
 				if (res.isSuccess) {
 					this.feedback.successToast('Feedback.DeleteSuccess');
 				} else {
-					if (res.type === 'entityInUse') this.feedback.errorToast('Pages.Admin.Errors.EntityInUse', { itemName });
+					if (res.type === 'entityInUse') this.feedback.errorToast('Pages.Config.Errors.EntityInUse', { itemName });
 				}
 
 				this.itemUpdated.emit();

@@ -12,8 +12,8 @@ const routes: Routes = [
 		loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
 	},
 	{
-		path: 'admin',
-		loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+		path: 'config',
+		loadChildren: () => import('./pages/config/config.module').then((m) => m.ConfigModule),
 	},
 	{
 		path: 'expenses',
