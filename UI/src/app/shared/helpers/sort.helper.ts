@@ -1,5 +1,5 @@
 import { Expense } from "src/app/entities/expense/expense.model";
-import { Revenue } from "src/app/entities/revenue/revenue.model";
+import { Income } from "src/app/entities/income/income.model";
 
 export const sortingExpenseDataAccessor: any = (item: Expense, property: keyof Expense) => {
 	switch (property) {
@@ -12,7 +12,7 @@ export const sortingExpenseDataAccessor: any = (item: Expense, property: keyof E
 	}
 };
 
-export const sortingRevenueDataAccessor: any = (item: Revenue, property: keyof Revenue) => {
+export const sortingIncomeDataAccessor: any = (item: Income, property: keyof Income) => {
 	switch (property) {
 		default:
 			return item[property];

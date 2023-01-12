@@ -3,8 +3,8 @@
 <div class="cards-container">
 	<mat-card [loading]="loading">
 		<mat-card-header>
-			<mat-card-title>{{ 'Pages.Home.Revenue' | translate }}</mat-card-title>
-			<mat-card-subtitle>{{ totalRevenue | currency }}</mat-card-subtitle>
+			<mat-card-title>{{ 'Pages.Home.Income' | translate }}</mat-card-title>
+			<mat-card-subtitle>{{ totalIncome | currency }}</mat-card-subtitle>
 		</mat-card-header>
 
 		<mat-card-content></mat-card-content>
@@ -22,7 +22,7 @@
 	<mat-card [loading]="loading">
 		<mat-card-header>
 			<mat-card-title>{{ 'Pages.Home.Balance' | translate }}</mat-card-title>
-			<mat-card-subtitle>{{ totalRevenue - totalExpenses | currency }}</mat-card-subtitle>
+			<mat-card-subtitle>{{ totalIncome - totalExpenses | currency }}</mat-card-subtitle>
 		</mat-card-header>
 
 		<mat-card-content></mat-card-content>

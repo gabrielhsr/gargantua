@@ -13,7 +13,7 @@ namespace Financial.Data
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Revenue> Revenue { get; set; }
+        public DbSet<Income> Income { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

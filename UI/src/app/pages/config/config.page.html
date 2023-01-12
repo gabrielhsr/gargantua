@@ -7,7 +7,14 @@
 			<mat-list role="list">
 				<ng-container *ngFor="let category of categories">
 					<mat-list-item role="listitem">
-						<config-input [item]="category" [list]="categories" type="category" (itemUpdated)="itemUpdate.next()"></config-input>
+						<config-input
+							#categoryInputs
+							type="category"
+							[item]="category"
+							[list]="categories"
+							(itemUpdated)="itemUpdate.next()"
+						>
+						</config-input>
 					</mat-list-item>
 				</ng-container>
 
@@ -31,7 +38,14 @@
 			<mat-list role="list">
 				<ng-container *ngFor="let paymentMethod of paymentMethods">
 					<mat-list-item role="listitem">
-						<config-input [item]="paymentMethod" [list]="paymentMethods" type="paymentMethod" (itemUpdated)="itemUpdate.next()"></config-input>
+						<config-input
+							#paymentMethodInputs
+							type="paymentMethod"
+							[item]="paymentMethod"
+							[list]="paymentMethods"
+							(itemUpdated)="itemUpdate.next()"
+						>
+						</config-input>
 					</mat-list-item>
 				</ng-container>
 

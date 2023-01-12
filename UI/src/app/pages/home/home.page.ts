@@ -4,7 +4,7 @@ import { combineLatest, of, Subject, switchMap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { TranslateService } from 'src/app/shared/translate/translate.service';
 import { ExpenseService } from '../expenses/services/expense.service';
-import { RevenueService } from '../revenue/services/revenue.service';
+import { IncomeService } from '../income/services/income.service';
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.page.html',
@@ -13,15 +13,15 @@ import { RevenueService } from '../revenue/services/revenue.service';
 export class HomePage implements OnInit {
 	public periodSubject = new Subject<Period | undefined>();
 
-	public totalRevenue: number = 0;
+	public totalIncome: number = 0;
 	public totalExpenses: number = 0;
 	public loading: boolean = true;
 
 	public fabButtons: MatFabMenu[] = [
 		{
-			id: 'revenue',
+			id: 'income',
 			icon: 'attach_money',
-			tooltip: this.translate.instant('Pages.Revenue.NewRevenue'),
+			tooltip: this.translate.instant('Pages.Income.NewIncome'),
 			tooltipPosition: 'left'
 		},
 		{
@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
 	];
 
 	constructor(
-		private readonly revenueService: RevenueService,
+		private readonly incomeService: IncomeService,
 		private readonly expensesService: ExpenseService,
 		private readonly translate: TranslateService
 	) {}
@@ -42,10 +42,10 @@ export class HomePage implements OnInit {
 		this.periodSubject
 			.pipe(switchMap((period) => {
 				if (period) {
-					const revenue = this.revenueService.getRevenueByPeriod(period);
+					const income = this.incomeService.getIncomeByPeriod(period);
 					const expenses = this.expensesService.getExpensesByPeriod(period);
 
-					return combineLatest({ revenue, expenses });
+					return combineLatest({ income, expenses });
 				}
 
 				return of(period);
@@ -54,21 +54,21 @@ export class HomePage implements OnInit {
 				this.loading = true;
 
 				const expenses = res?.expenses;
-				const revenue = res?.revenue;
+				const income = res?.income;
 
-				if (expenses?.isSuccess && revenue?.isSuccess) {
+				if (expenses?.isSuccess && income?.isSuccess) {
 					this.totalExpenses = expenses.value.map((x) => x.amount ?? 0).reduce((acc, val) => acc + val, 0);
-					this.totalRevenue = revenue.value.map((x) => x.amount ?? 0).reduce((acc, val) => acc + val, 0);
-
-					this.loading = false;
+					this.totalIncome = income.value.map((x) => x.amount ?? 0).reduce((acc, val) => acc + val, 0);
 				}
+
+				this.loading = false;
 			});
 	}
 
 	public menuItemSelected(item: string | number) {
 		switch (item) {
-			case 'revenue':
-				this.revenueService.openInsertDialog();
+			case 'income':
+				this.incomeService.openInsertDialog();
 				break;
 			case 'expense':
 				this.expensesService.openInsertDialog();

@@ -1,0 +1,40 @@
+<button class="close-button" mat-icon-button mat-dialog-close>
+	<mat-icon>close</mat-icon>
+</button>
+
+<h2 mat-dialog-title>{{  income ? ("Pages.Income.EditIncome" | translate) : ("Pages.Income.NewIncome" | translate) }}</h2>
+
+<mat-dialog-content>
+	<form *ngIf="newIncomeForm" [formGroup]="newIncomeForm">
+		<mat-form-field>
+			<mat-label>{{ "Pages.Income.Description" | translate }}</mat-label>
+			<input matInput type="text" formControlName="description"/>
+			<mat-error>{{ showErrorMessage('description') }}</mat-error>
+		</mat-form-field>
+
+		<div class="two-input-container">
+			<mat-form-field>
+				<mat-label>{{ "Pages.Income.Amount" | translate }}</mat-label>
+				<input matInput currencyMask formControlName="amount"/>
+				<mat-error>{{ showErrorMessage('amount') }}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>{{ "Pages.Income.PaymentDate" | translate }}</mat-label>
+				<input matInput [matDatepicker]="paymentDatePicker" formControlName="paymentDate" />
+				<mat-datepicker-toggle matIconSuffix [for]="paymentDatePicker"></mat-datepicker-toggle>
+				<mat-datepicker #paymentDatePicker></mat-datepicker>
+				<mat-error>{{ showErrorMessage('paymentDate') }}</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div class="checkbox-tooltip">
+			<mat-checkbox formControlName="periodic">{{ "Pages.Income.Periodic" | translate }}</mat-checkbox>
+			<mat-icon fontIcon="help" [matTooltip]="'Pages.Income.PeriodicTooltip' | translate" matTooltipPosition="right"></mat-icon>
+		</div>
+
+		<div class="button-container">
+			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="newIncomeForm.invalid">{{ "Common.Send" | translate  }}</button>
+		</div>
+	</form>
+</mat-dialog-content>

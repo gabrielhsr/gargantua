@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppBase {}
 
-// TODO: Change 'Revenue' to 'Income'.
-// TODO: Add options to edit only the revenue/income of the selected month.
+// TODO: Add options to edit only the income of the selected month.
 // TODO: Add option to set a date range in a Expense.

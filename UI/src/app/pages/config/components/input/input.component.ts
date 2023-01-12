@@ -108,4 +108,8 @@ export class InputComponent implements OnInit, OnDestroy {
 				this.itemUpdated.emit();
 			});
 	}
+
+	public focus() {
+		this.element?.nativeElement.focus();
+	}
 }

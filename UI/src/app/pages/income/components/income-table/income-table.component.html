@@ -1,0 +1,28 @@
+<period-select
+	[sortOptions]="sortOptions"
+	(periodChange)="periodSubject.next($event)"
+	(filterChange)="sort($event)"
+></period-select>
+
+<div [loading]="incomeLoading">
+	<ng-container *ngIf="periodIncome.data.length else noRegister">
+		<income-desktop-view
+			[periodIncome]="periodIncome"
+			[displayedColumns]="displayedColumns"
+			[totalAmount]="totalAmount"
+			(editIncome)="editIncome($event)"
+			(deleteIncome)="deleteIncome($event)"
+		></income-desktop-view>
+
+		<income-mobile-view
+			[periodIncome]="periodIncome"
+			[totalAmount]="totalAmount"
+			(editIncome)="editIncome($event)"
+			(deleteIncome)="deleteIncome($event)"
+		></income-mobile-view>
+	</ng-container>
+</div>
+
+<ng-template #noRegister>
+	<div class="alert alert-info" role="alert">{{ 'Pages.Income.Alerts.NoExpense' | translate }}</div>
+</ng-template>

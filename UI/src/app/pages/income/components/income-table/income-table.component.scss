@@ -1,0 +1,19 @@
+@import "/src/assets/bootstrap/scss/bootstrap-utilities.scss";
+
+income-desktop-view {
+	display: none;
+}
+
+income-mobile-view {
+	display: block;
+}
+
+@include media-breakpoint-up(lg) {
+	income-desktop-view {
+		display: block;
+	}
+
+	income-mobile-view {
+		display: none;
+	}
+}

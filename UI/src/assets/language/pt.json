@@ -25,11 +25,11 @@
 		"Home": "Página Inicial",
 		"Config": "Configurações",
 		"Expenses": "Despesas",
-		"Revenue": "Receita"
+		"Income": "Receita"
 	},
 	"Pages": {
 		"Home": {
-			"Revenue": "Receita Mensal",
+			"Income": "Receita Mensal",
 			"Expenses": "Despesa Mensal",
 			"Balance": "Saldo Mensal"
 		},
@@ -48,7 +48,7 @@
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por"
 		},
-		"Revenue": {
+		"Income": {
 			"Alerts": {
 				"NoExpense": "Nenhuma receita cadastrada!"
 			},
@@ -56,8 +56,8 @@
 			"PaymentDate": "Data do Pagamento",
 			"Description": "Descrição",
 			"PaymentMethod": "Forma de Pagamento",
-			"NewRevenue": "Nova Receita",
-			"EditRevenue": "Editar Receita",
+			"NewIncome": "Nova Receita",
+			"EditIncome": "Editar Receita",
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por",
 			"Periodic": "Recorrente",
