@@ -64,12 +64,12 @@ export class ExpensesTableComponent implements OnInit {
 	public deleteExpense(expense: Expense) {
 		this.feedback
 			.confirmCancelDialog(expense.description)
-			.pipe(switchMap((res) => res?.delete ? this.expenseService.removeExpense(expense.id) : EMPTY))
+			.pipe(switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 
 	public editExpense(expense: Expense) {
-		this.expenseService.openInsertDialog(expense);
+		this.expenseService.openFormDialog(expense);
 	}
 
 	public sort(category?: SortOption) {

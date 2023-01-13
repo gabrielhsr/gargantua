@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { YesOrNoData, YesOrNoDialogComponent } from '../components/yes-no-dialog/yes-no-dialog.component';
 import { TranslateService } from '../translate/translate.service';
 
 @Injectable({
@@ -27,6 +28,12 @@ export class FeedbackService {
 	}
 
 	public confirmCancelDialog(itemName: string) {
-		return this.dialog.open<ConfirmDialogComponent, string, { delete: boolean }>(ConfirmDialogComponent, { data: itemName }).afterClosed();
+		return this.dialog.open<ConfirmDialogComponent, string, { confirm: boolean }>(ConfirmDialogComponent, { data: itemName }).afterClosed();
+	}
+
+	public yesOrNoDialog(message: string, yesText: string, noText: string) {
+		const data = { message, yesText, noText };
+
+		return this.dialog.open<YesOrNoDialogComponent, YesOrNoData, { confirm: boolean }>(YesOrNoDialogComponent, { data }).afterClosed();
 	}
 }

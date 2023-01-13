@@ -68,10 +68,10 @@ export class HomePage implements OnInit {
 	public menuItemSelected(item: string | number) {
 		switch (item) {
 			case 'income':
-				this.incomeService.openInsertDialog();
+				this.incomeService.openFormDialog();
 				break;
 			case 'expense':
-				this.expensesService.openInsertDialog();
+				this.expensesService.openFormDialog();
 				break;
 			default:
 				console.error(`Unknown 'id' for mat-fab-menu. ID: ${item}`);

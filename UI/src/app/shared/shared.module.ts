@@ -18,6 +18,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { PeriodSelectComponent } from './components/period-select/period-select.component';
+import { YesOrNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 
 // Modules
 import { MaterialModule } from './material/material.module';
@@ -42,7 +43,8 @@ import { PreventDefaultDirective } from './directives/prevent-default.directive'
 		TopbarComponent,
 		SidebarComponent,
   		ConfirmDialogComponent,
-    	PeriodSelectComponent
+    	PeriodSelectComponent,
+		YesOrNoDialogComponent
 	],
 	imports: [
 		// Modules

@@ -62,7 +62,7 @@ export class ExpenseService {
 		);
 	}
 
-	public openInsertDialog(expense?: Expense) {
+	public openFormDialog(expense?: Expense) {
 		this.dialog.open(ExpenseDialogComponent, { data: expense, panelClass: ['responsive-dialog'] });
 	}
 }

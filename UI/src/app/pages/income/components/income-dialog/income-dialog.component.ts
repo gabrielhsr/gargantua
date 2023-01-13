@@ -19,14 +19,16 @@ export class IncomeDialogComponent implements OnInit {
 	public loading: boolean = false;
 
 	constructor(
-		@Inject(MAT_DIALOG_DATA) public income: Income,
+		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editRecurrent?: boolean },
 		private readonly dialogRef: MatDialogRef<IncomeDialogComponent>,
 		private readonly homeService: IncomeService,
 		private readonly feedback: FeedbackService
 	) {}
 
 	public ngOnInit(): void {
-		this.createForm(this.income ?? new Income());
+		this.createForm(this.data.income ?? new Income());
+
+		console.log(this.data);
 	}
 
 	public submitForm(): void {

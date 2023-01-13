@@ -8,8 +8,11 @@
 		"SaveSuccess": "Salvo com sucesso!",
 		"DeleteSuccess": "Deletado com sucesso!",
 		"DeleteItem": {
-			"Title": "Deletar item",
+			"Title": "Deletar Item",
 			"Message": "Você gostaria de deletar o item '{{itemName}}'?"
+		},
+		"YesOrNo": {
+			"Title": "Confirmação"
 		}
 	},
 	"Common": {
@@ -19,7 +22,9 @@
 		"Delete": "Deletar",
 		"Total": "Total",
 		"Edit": "Editar",
-		"Name": "Nome"
+		"Name": "Nome",
+		"Yes": "Sim",
+		"No": "Não"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
@@ -61,7 +66,9 @@
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por",
 			"Periodic": "Recorrente",
-			"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário."
+			"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário.",
+			"EditOption": "Desejar editar a recorrência ou somente este mês?",
+			"JustMonth": "Somente Mês"
 		},
 		"Config": {
 			"Categories": "Categorias",

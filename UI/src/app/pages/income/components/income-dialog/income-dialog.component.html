@@ -2,7 +2,7 @@
 	<mat-icon>close</mat-icon>
 </button>
 
-<h2 mat-dialog-title>{{  income ? ("Pages.Income.EditIncome" | translate) : ("Pages.Income.NewIncome" | translate) }}</h2>
+<h2 mat-dialog-title>{{ data.income ? ("Pages.Income.EditIncome" | translate) : ("Pages.Income.NewIncome" | translate) }}</h2>
 
 <mat-dialog-content>
 	<form *ngIf="newIncomeForm" [formGroup]="newIncomeForm">

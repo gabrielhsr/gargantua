@@ -10,6 +10,6 @@ export class IncomePage {
 	constructor(private readonly incomeService: IncomeService) {}
 
 	public openAddDialog() {
-		this.incomeService.openInsertDialog();
+		this.incomeService.openFormDialog();
 	}
 }

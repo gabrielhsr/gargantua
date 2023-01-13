@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, of, Subject, switchMap } from 'rxjs';
+import { EMPTY, lastValueFrom, of, Subject, switchMap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { Income } from 'src/app/entities/income/income.model';
 import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -64,12 +64,19 @@ export class IncomeTableComponent implements OnInit {
 	public deleteIncome(income: Income) {
 		this.feedback
 			.confirmCancelDialog(income.description)
-			.pipe(switchMap((res) => res?.delete ? this.incomeService.removeIncome(income.id) : EMPTY))
+			.pipe(switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 
-	public editIncome(income: Income) {
-		this.incomeService.openInsertDialog(income);
+	public async editIncome(income: Income) {
+		if (income.periodic) {
+			const dialog$ = this.feedback.yesOrNoDialog('Pages.Income.EditOption', 'Pages.Income.Periodic', 'Pages.Income.JustMonth');
+			const response = await lastValueFrom(dialog$);
+
+			this.incomeService.openFormDialog(income, response?.confirm);
+		} else {
+			this.incomeService.openFormDialog(income);
+		}
 	}
 
 	public sort(category?: SortOption) {
