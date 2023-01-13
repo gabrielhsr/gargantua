@@ -7,6 +7,7 @@ import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
+import { TableHelper } from 'src/app/shared/helpers/table.helper';
 
 export interface SortOption {
 	text: string;
@@ -23,9 +24,7 @@ export class IncomeTableComponent implements OnInit {
 	public incomeLoading: boolean = true;
 
 	public periodIncome = new MatTableDataSource<Income>();
-	public displayedColumns: string[] = [...Object.keys(new Income()), 'options']
-											.filter((x) => x !== 'id')
-											.filter((x) => x !== 'periodic');
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: ['id', 'periodic'], include: ['options'] });
 
 	public periodSubject = new Subject<Period | undefined>();
 

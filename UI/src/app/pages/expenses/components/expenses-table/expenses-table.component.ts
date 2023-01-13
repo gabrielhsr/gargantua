@@ -5,6 +5,7 @@ import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
+import { TableHelper } from 'src/app/shared/helpers/table.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
 
@@ -23,7 +24,7 @@ export class ExpensesTableComponent implements OnInit {
 	public expensesLoading: boolean = true;
 
 	public periodExpenses = new MatTableDataSource<Expense>();
-	public displayedColumns: string[] = [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id'); // TODO: Create a helper to generate the columns.
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id'], include: ['options'] });
 
 	public periodSubject = new Subject<Period | undefined>();
 
