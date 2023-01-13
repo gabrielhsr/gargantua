@@ -22,7 +22,7 @@ export class ExpenseDialogComponent implements OnInit {
 	public paymentMethods?: PaymentMethod[];
 
 	public newExpenseForm?: FormGroup;
-	public loading: boolean = true; // TODO: Check loading spinner placement on mobile.
+	public loading: boolean = true;
 
 	public filteredCategories?: Observable<Category[] | undefined>;
 	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
