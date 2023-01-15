@@ -1,6 +1,7 @@
 ﻿using Financial.Data;
 using Financial.Data.DTO;
 using Financial.Data.Models;
+using Financial.Helpers;
 using Financial.Interfaces.Repositories;
 using Financial.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
@@ -45,9 +46,8 @@ namespace Financial.Services
             var expenses = await base.GetAllAsync();
 
             var expensesByPeriod = expenses
-                .Where(x => x.DueDate is not null)
-                .Where(x => x.DueDate!.Value.Month == period.Month && x.DueDate!.Value.Year == period.Year)
-                .OrderBy(x => x.DueDate)
+                .Where(expense => expense.DueDate.HasValue && period.Equals(expense.DueDate.Value))
+                .OrderBy(expense => expense.DueDate)
                 .ToList();
 
             return expensesByPeriod;

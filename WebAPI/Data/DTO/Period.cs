@@ -8,6 +8,7 @@ namespace Financial.Data.DTO
         public int Year { get; set; }
 
         public bool Equals(Period? other) => Month == other?.Month && Year == other?.Year;
+        public bool Equals(DateTimeOffset? other) => Month == other?.Month && Year == other?.Year;
         public override int GetHashCode() => Month.GetHashCode() ^ Year.GetHashCode();
     }
 }

@@ -21,12 +21,10 @@ export interface SortOption {
 	styleUrls: ['./expenses-table.component.scss'],
 })
 export class ExpensesTableComponent implements OnInit {
-	public expensesLoading: boolean = true;
-
-	public periodExpenses = new MatTableDataSource<Expense>();
 	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id'], include: ['options'] });
-
+	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
+	public expensesLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
 

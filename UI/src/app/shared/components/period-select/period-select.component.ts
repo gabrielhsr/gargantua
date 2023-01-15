@@ -23,31 +23,35 @@ export class PeriodSelectComponent implements OnInit {
 	public periods?: Period[];
 	public selectedPeriod?: Period;
 
-	constructor(public readonly periodService: PeriodService) {}
+	constructor(public readonly service: PeriodService) {}
 
 	public ngOnInit() {
-		this.periodService.sortOptions = this.sortOptions;
+		this.service.sortOptions = this.sortOptions;
 		this.loadPeriods();
 	}
 
 	public changeFilter(sortOption: SortOption) {
-		this.periodService.changeSortOption(sortOption);
-		this.filterChange.emit(this.periodService.sortOption.value);
+		this.service.changeSortOption(sortOption);
+		this.filterChange.emit(this.service.sortOption.value);
+	}
+
+	public compareWith(oldPeriod: Period, newPeriod: Period) {
+		return oldPeriod.month === newPeriod.month && oldPeriod.year === newPeriod.year;
 	}
 
 	private loadPeriods() {
-		this.periodService.getPeriods().subscribe((res) => {
+		this.service.getPeriods().subscribe((res) => {
 			if (!res.isSuccess) return;
 
 			this.periods = res.value;
 
-			if (this.periods.length) {
-				const currentMonth = new Date().getMonth() + 1;
-				const currentYear = new Date().getFullYear();
+			if (this.periods.length && !this.selectedPeriod) {
+				const month = new Date().getMonth() + 1;
+				const year = new Date().getFullYear();
 
-				const currentPeriod = this.periods.find(({ month, year }) => month === currentMonth && year === currentYear);
+				const currentPeriod: Period = { month, year };
 
-				if (currentPeriod) {
+				if (this.periods.find(period => this.compareWith(period, currentPeriod))) {
 					this.selectedPeriod = currentPeriod;
 				} else {
 					this.selectedPeriod = this.periods.at(-1);

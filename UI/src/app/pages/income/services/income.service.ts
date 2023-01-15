@@ -8,8 +8,6 @@ import { Period } from 'src/app/entities/period/period.dto';
 
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
-import { PeriodService } from 'src/app/shared/components/period-select/period-select.service';
-
 import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
 import { Income } from 'src/app/entities/income/income.model';
 import { UpdateService } from 'src/app/shared/services/update.service';
@@ -18,6 +16,8 @@ import { UpdateService } from 'src/app/shared/services/update.service';
 	providedIn: 'root',
 })
 export class IncomeService {
+	public selectedPeriod?: Period;
+
 	constructor(
 		private readonly incomeEndpoint: IncomeEndpoint,
 		private readonly dialog: MatDialog,
@@ -29,6 +29,8 @@ export class IncomeService {
 	}
 
 	public getIncomeByPeriod(period: Period) {
+		this.selectedPeriod = period;
+
 		return this.update.handle(this.incomeEndpoint.getIncomeByPeriod(period.month, period.year))
 	}
 

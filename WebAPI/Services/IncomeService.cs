@@ -29,8 +29,8 @@ namespace Financial.Services
             var allIncome = await base.GetAllAsync();
 
             var incomeByPeriod = allIncome
-                .Where(income => income.Periodic || PeriodHelper.Compare(income.PaymentDate, period))
-                .Where(income => !income.Periodic || !allIncome.Any(any => any.RecurrentId == income.Id && PeriodHelper.Compare(any.PaymentDate, period)))
+                .Where(income => income.Periodic || period.Equals(income.PaymentDate))
+                .Where(income => !income.Periodic || !allIncome.Any(any => any.RecurrentId == income.Id && period.Equals(any.PaymentDate)))
                 .Select(income =>
                 {
                     if (income.Periodic)

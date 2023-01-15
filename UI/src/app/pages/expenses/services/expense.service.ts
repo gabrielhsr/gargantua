@@ -6,8 +6,6 @@ import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMet
 import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
 import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
 
-import { PeriodService } from 'src/app/shared/components/period-select/period-select.service';
-
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 
@@ -20,6 +18,8 @@ import { UpdateService } from 'src/app/shared/services/update.service';
 	providedIn: 'root',
 })
 export class ExpenseService {
+	public selectedPeriod?: Period;
+
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
@@ -41,6 +41,8 @@ export class ExpenseService {
 	}
 
 	public getExpensesByPeriod(period: Period) {
+		this.selectedPeriod = period;
+
 		return this.update.handle(this.expenseEndpoint.getExpensesByPeriod(period.month, period.year));
 	}
 
