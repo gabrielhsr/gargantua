@@ -5,4 +5,5 @@ export class Income extends BaseEntity {
 	paymentDate: Date = new Date();
 	amount: number | null = null;
 	periodic: boolean = false;
+	recurrentId: string | null = null;
 }

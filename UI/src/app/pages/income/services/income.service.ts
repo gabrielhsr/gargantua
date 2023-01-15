@@ -50,8 +50,8 @@ export class IncomeService {
 		);
 	}
 
-	public openFormDialog(income?: Income, editRecurrent?: boolean) {
-		this.dialog.open(IncomeDialogComponent, { data: { income, editRecurrent }, panelClass: ['responsive-dialog'] });
+	public openFormDialog(income?: Income, editMonth?: boolean) {
+		this.dialog.open(IncomeDialogComponent, { data: { income, editMonth }, panelClass: ['responsive-dialog'] });
 	}
 }
 

@@ -1,5 +1,6 @@
 ﻿using Financial.Data.DTO;
 using Financial.Data.Models;
+using Financial.Helpers;
 using Financial.Interfaces.Repositories;
 using Financial.Interfaces.Services;
 
@@ -25,23 +26,24 @@ namespace Financial.Services
 
         public async Task<IList<Income>> GetIncomeByPeriod(Period period)
         {
-            var income = await base.GetAllAsync();
+            var allIncome = await base.GetAllAsync();
 
-            var incomeByPeriod = income
-                .Where(x => x.Periodic || x.PaymentDate.Month == period.Month && x.PaymentDate.Year == period.Year)
-                .Select(x =>
+            var incomeByPeriod = allIncome
+                .Where(income => income.Periodic || PeriodHelper.Compare(income.PaymentDate, period))
+                .Where(income => !income.Periodic || !allIncome.Any(any => any.RecurrentId == income.Id && PeriodHelper.Compare(any.PaymentDate, period)))
+                .Select(income =>
                 {
-                    if (x.Periodic)
+                    if (income.Periodic)
                     {
-                        var yearDiff = period.Year - x.PaymentDate.Year;
-                        var monthDiff = period.Month - x.PaymentDate.Month;
+                        var yearDiff = period.Year - income.PaymentDate.Year;
+                        var monthDiff = period.Month - income.PaymentDate.Month;
 
-                        x.PaymentDate = x.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
+                        income.PaymentDate = income.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
                     };
 
-                    return x;
+                    return income;
                 })
-                .OrderBy(x => x.PaymentDate)
+                .OrderBy(income => income.PaymentDate)
                 .ToList();
 
             return incomeByPeriod;

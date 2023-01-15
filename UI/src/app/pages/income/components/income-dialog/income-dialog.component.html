@@ -5,7 +5,7 @@
 <h2 mat-dialog-title>{{ data.income ? ("Pages.Income.EditIncome" | translate) : ("Pages.Income.NewIncome" | translate) }}</h2>
 
 <mat-dialog-content>
-	<form *ngIf="newIncomeForm" [formGroup]="newIncomeForm">
+	<form *ngIf="incomeForm" [formGroup]="incomeForm">
 		<mat-form-field>
 			<mat-label>{{ "Pages.Income.Description" | translate }}</mat-label>
 			<input matInput type="text" formControlName="description"/>
@@ -28,13 +28,13 @@
 			</mat-form-field>
 		</div>
 
-		<div class="checkbox-tooltip">
+		<div class="checkbox-tooltip" *ngIf="showRecurrentCheck">
 			<mat-checkbox formControlName="periodic">{{ "Pages.Income.Periodic" | translate }}</mat-checkbox>
 			<mat-icon fontIcon="help" [matTooltip]="'Pages.Income.PeriodicTooltip' | translate" matTooltipPosition="right"></mat-icon>
 		</div>
 
 		<div class="button-container">
-			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="newIncomeForm.invalid">{{ "Common.Send" | translate  }}</button>
+			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="incomeForm.invalid || incomeForm.pristine">{{ "Common.Send" | translate  }}</button>
 		</div>
 	</form>
 </mat-dialog-content>

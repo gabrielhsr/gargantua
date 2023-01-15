@@ -7,6 +7,7 @@ import { Income } from 'src/app/entities/income/income.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
+import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 
 @Component({
 	selector: 'income-dialog',
@@ -15,11 +16,13 @@ import { IncomeService } from '../../services/income.service';
 
 })
 export class IncomeDialogComponent implements OnInit {
-	public newIncomeForm?: FormGroup;
+	public incomeForm?: FormGroup;
 	public loading: boolean = false;
+	public editMonth: boolean = false;
+	public showRecurrentCheck: boolean = true;
 
 	constructor(
-		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editRecurrent?: boolean },
+		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editMonth?: boolean },
 		private readonly dialogRef: MatDialogRef<IncomeDialogComponent>,
 		private readonly homeService: IncomeService,
 		private readonly feedback: FeedbackService
@@ -27,13 +30,29 @@ export class IncomeDialogComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.createForm(this.data.income ?? new Income());
+		this.editMonth = this.data.editMonth ?? false;
 
-		console.log(this.data);
+		if ((this.editMonth || this.incomeForm?.get('recurrentId')?.value)) {
+			this.showRecurrentCheck = false;
+		}
 	}
 
 	public submitForm(): void {
 		this.loading = true;
-		const formValue = this.newIncomeForm?.value as Income;
+
+		console.log(this.incomeForm);
+
+		if (this.editMonth) {
+			const recurrentId = this.incomeForm?.get('recurrentId')!;
+			const periodicInput = this.incomeForm?.get('periodic')!;
+			const id = this.incomeForm?.get('id')!;
+
+			periodicInput.patchValue(false);
+			recurrentId.patchValue(id.value);
+			id.patchValue(GuidHelper.default);
+		};
+
+		const formValue = this.incomeForm?.value as Income;
 
 		this.homeService.saveIncome(formValue).subscribe((response) => {
 			if (response.isSuccess) {
@@ -46,8 +65,8 @@ export class IncomeDialogComponent implements OnInit {
 	}
 
 	public showErrorMessage(input: string) {
-		if (this.newIncomeForm) {
-			return FormHelper.showErrorMessage(input, this.newIncomeForm);
+		if (this.incomeForm) {
+			return FormHelper.showErrorMessage(input, this.incomeForm);
 		}
 
 		throw 'Form not initialized!';
@@ -61,10 +80,10 @@ export class IncomeDialogComponent implements OnInit {
 		const formsControl = FormHelper.build(income, {
 			allValidators: {
 				validators: [Validators.required],
-				exclude: ['dueDate'],
-			}
+				exclude: ['recurrentId'],
+			},
 		});
 
-		this.newIncomeForm = new FormGroup(formsControl);
+		this.incomeForm = new FormGroup(formsControl);
 	}
 }
