@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Period } from 'src/app/entities/period/period.dto';
+import { DateHelper } from '../../helpers/date.helper';
 import { PeriodService } from './period-select.service';
 
 interface SortOption {
@@ -35,8 +36,8 @@ export class PeriodSelectComponent implements OnInit {
 		this.filterChange.emit(this.service.sortOption.value);
 	}
 
-	public compareWith(oldPeriod: Period, newPeriod: Period) {
-		return oldPeriod.month === newPeriod.month && oldPeriod.year === newPeriod.year;
+	public compareWith(oldPeriod?: Period, newPeriod?: Period) {
+		return oldPeriod?.month === newPeriod?.month && oldPeriod?.year === newPeriod?.year;
 	}
 
 	private loadPeriods() {
@@ -45,16 +46,18 @@ export class PeriodSelectComponent implements OnInit {
 
 			this.periods = res.value;
 
-			if (this.periods.length && !this.selectedPeriod) {
-				const month = new Date().getMonth() + 1;
-				const year = new Date().getFullYear();
+			if (this.periods.length) {
+				const currentPeriod = DateHelper.PeriodNow();
 
-				const currentPeriod: Period = { month, year };
+				const selectedPeriodExist = this.periods.some(period => this.compareWith(period, this.selectedPeriod));
+				const currentPeriodExist = this.periods.some(period => this.compareWith(period, currentPeriod));
 
-				if (this.periods.find(period => this.compareWith(period, currentPeriod))) {
-					this.selectedPeriod = currentPeriod;
-				} else {
-					this.selectedPeriod = this.periods.at(-1);
+				if (!selectedPeriodExist) {
+					if (currentPeriodExist) {
+						this.selectedPeriod = currentPeriod;
+					} else {
+						this.selectedPeriod = this.periods.at(-1);
+					}
 				}
 			}
 

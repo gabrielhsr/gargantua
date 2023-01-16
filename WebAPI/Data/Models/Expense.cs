@@ -1,4 +1,4 @@
-﻿using Microsoft.Build.Framework;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Financial.Data.Models
@@ -22,6 +22,10 @@ namespace Financial.Data.Models
         [Required]
         [Column(TypeName = "Money")]
         public decimal Amount { get; set; } = 0;
+
+        [Range(1, int.MaxValue)]
+        public int Installments { get; set; } = 1;
+        public bool Periodic { get; set; } = false;
 
         [Required]
         public virtual Category Category { get; set; }

@@ -21,7 +21,7 @@ export interface SortOption {
 	styleUrls: ['./expenses-table.component.scss'],
 })
 export class ExpensesTableComponent implements OnInit {
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id'], include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic'], include: ['options'] });
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
 	public expensesLoading: boolean = true;

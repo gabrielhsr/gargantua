@@ -4,9 +4,11 @@ import { PaymentMethod } from "../paymentMethod/paymentMethod.model";
 
 export class Expense extends BaseEntity {
 	description: string = '';
-	purchaseDate: Date | null = null;
+	purchaseDate: Date = new Date();
 	dueDate: Date | null = null;
 	amount: number | null = null;
 	category: Category | null = null;
 	paymentMethod: PaymentMethod | null = null;
+	installments: number = 1;
+	periodic: boolean = false;
 }

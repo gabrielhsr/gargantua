@@ -24,7 +24,8 @@
 		"Edit": "Editar",
 		"Name": "Nome",
 		"Yes": "Sim",
-		"No": "Não"
+		"No": "Não",
+		"MoreOptions": "Mais Opções"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
@@ -51,7 +52,9 @@
 			"NewExpense": "Nova Despesa",
 			"EditExpense": "Editar Despesa",
 			"FilterBy": "Filtrar por",
-			"SortBy": "Ordernar por"
+			"SortBy": "Ordernar por",
+			"Installments": "Parcelas",
+			"Periodic": "Recorrente"
 		},
 		"Income": {
 			"Alerts": {

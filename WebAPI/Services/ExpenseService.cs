@@ -22,6 +22,8 @@ namespace Financial.Services
             if (entity.Category.Id != Guid.Empty) context.Entry(entity.Category).State = EntityState.Unchanged;
             if (entity.PaymentMethod.Id != Guid.Empty) context.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
 
+            if (entity.Periodic) entity.Installments = 1;
+
             entity.DueDate ??= entity.PurchaseDate;
 
             return await base.SaveAsync(id, entity);
@@ -46,7 +48,34 @@ namespace Financial.Services
             var expenses = await base.GetAllAsync();
 
             var expensesByPeriod = expenses
-                .Where(expense => expense.DueDate.HasValue && period.Equals(expense.DueDate.Value))
+                .Select(expense =>
+                {
+                    //var periodDate = period.ToDateTimeOffset();
+                    //var lastExpense = expense.PurchaseDate.AddMonths(expense.Installments - 1);
+
+                    //if (periodDate >= expense.PurchaseDate && periodDate <= lastExpense)
+                    //{
+                    //    var currentExpense = lastExpense - periodDate;
+
+                    //    expense.Periodic = true;
+                    //    expense.Description += $" ({currentExpense}/{expense.Installments})";
+                    //}
+
+                    return expense;
+                })
+                .Where(expense => expense.Periodic || period.Equals(expense.DueDate))
+                .Select(expense =>
+                {
+                    if (expense.Periodic)
+                    {
+                        var yearDiff = period.Year - expense.PurchaseDate.Year;
+                        var monthDiff = period.Month - expense.PurchaseDate.Month;
+
+                        expense.PurchaseDate = expense.PurchaseDate.AddMonths(monthDiff).AddYears(yearDiff);
+                    };
+
+                    return expense;
+                })
                 .OrderBy(expense => expense.DueDate)
                 .ToList();
 

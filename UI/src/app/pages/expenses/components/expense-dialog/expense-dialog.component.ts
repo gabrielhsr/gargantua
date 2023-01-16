@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
@@ -21,7 +20,7 @@ export class ExpenseDialogComponent implements OnInit {
 	public categories?: Category[];
 	public paymentMethods?: PaymentMethod[];
 
-	public newExpenseForm?: FormGroup;
+	public expenseForm?: FormGroup;
 	public loading: boolean = true;
 
 	public filteredCategories?: Observable<Category[] | undefined>;
@@ -49,13 +48,13 @@ export class ExpenseDialogComponent implements OnInit {
 	public ngOnInit(): void {
 		this.createForm(this.expense ?? new Expense());
 
-		this.filteredCategories = this.newExpenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
-		this.filteredPaymentMethods = this.newExpenseForm?.get('paymentMethod')?.valueChanges.pipe(startWith(''), map(val => this.filterPaymentMethods(val)));
+		this.filteredCategories = this.expenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
+		this.filteredPaymentMethods = this.expenseForm?.get('paymentMethod')?.valueChanges.pipe(startWith(''), map(val => this.filterPaymentMethods(val)));
 	}
 
 	public submitForm(): void {
 		this.loading = true;
-		const formValue = this.newExpenseForm?.value as Expense;
+		const formValue = this.expenseForm?.value as Expense;
 
 		if (typeof formValue.category === "string") {
 			formValue.category = { name: formValue.category, id: GuidHelper.default }
@@ -76,8 +75,8 @@ export class ExpenseDialogComponent implements OnInit {
 	}
 
 	public showErrorMessage(input: string) {
-		if (this.newExpenseForm) {
-			return FormHelper.showErrorMessage(input, this.newExpenseForm);
+		if (this.expenseForm) {
+			return FormHelper.showErrorMessage(input, this.expenseForm);
 		}
 
 		throw 'Form not initialized!';
@@ -91,7 +90,7 @@ export class ExpenseDialogComponent implements OnInit {
 		if (typeof val !== "string") return this.categories;
 
 		if (this.categories?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
-			this.newExpenseForm?.get('category')?.setErrors({ 'alreadyExist': true });
+			this.expenseForm?.get('category')?.setErrors({ 'alreadyExist': true });
 		}
 
 		return this.categories?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
@@ -101,7 +100,7 @@ export class ExpenseDialogComponent implements OnInit {
 		if (typeof val !== "string") return this.paymentMethods;
 
 		if (this.paymentMethods?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
-			this.newExpenseForm?.get('paymentMethod')?.setErrors({ 'alreadyExist': true });
+			this.expenseForm?.get('paymentMethod')?.setErrors({ 'alreadyExist': true });
 		}
 
 		return this.paymentMethods?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
@@ -115,6 +114,6 @@ export class ExpenseDialogComponent implements OnInit {
 			}
 		});
 
-		this.newExpenseForm = new FormGroup(formsControl);
+		this.expenseForm = new FormGroup(formsControl);
 	}
 }
