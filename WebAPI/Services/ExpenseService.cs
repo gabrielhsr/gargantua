@@ -50,16 +50,15 @@ namespace Financial.Services
             var expensesByPeriod = expenses
                 .Select(expense =>
                 {
-                    //var periodDate = period.ToDateTimeOffset();
-                    //var lastExpense = expense.PurchaseDate.AddMonths(expense.Installments - 1);
+                    var lastCharge = expense.PurchaseDate.AddMonths(expense.Installments - 1);
 
-                    //if (periodDate >= expense.PurchaseDate && periodDate <= lastExpense)
-                    //{
-                    //    var currentExpense = lastExpense - periodDate;
+                    if (DateHelper.InTimeRange(period, expense.PurchaseDate, lastCharge) && expense.Installments > 1)
+                    {
+                        var currentCharge = (lastCharge.Month - period.Month) + 12 * (lastCharge.Year - period.Year);
 
-                    //    expense.Periodic = true;
-                    //    expense.Description += $" ({currentExpense}/{expense.Installments})";
-                    //}
+                        expense.Periodic = true;
+                        expense.Description += $" ({expense.Installments - currentCharge}/{expense.Installments})";
+                    }
 
                     return expense;
                 })
