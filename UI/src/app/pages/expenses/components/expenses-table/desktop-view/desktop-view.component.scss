@@ -4,17 +4,23 @@ tr.mat-mdc-footer-row td {
 	font-weight: var(--mdc-typography-subtitle2-font-weight, 500);
 }
 
-@include media-breakpoint-up(lg) {
-	table {
-		td {
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
-			max-width: 250px;
-		}
+table {
+	td {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		max-width: 250px;
+	}
 
+	.mat-column-dueDate {
+		display: none;
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	table {
 		.mat-column-dueDate {
-			display: none;
+			display: table-cell;
 		}
 	}
 }

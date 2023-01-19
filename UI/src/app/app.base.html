@@ -1,4 +1,6 @@
-<topbar (sidebarButton)="sidebar.toggle()"></topbar>
-<sidebar #sidebar>
-	<router-outlet></router-outlet>
-</sidebar>
+<div [ngClass]="{ 'dark-theme' : theme === 'light' }">
+	<topbar (sidebarButton)="sidebar.toggle()"></topbar>
+	<sidebar #sidebar>
+		<router-outlet></router-outlet>
+	</sidebar>
+</div>
