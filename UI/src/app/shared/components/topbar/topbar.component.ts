@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { capitalize } from '../../helpers/string.helper';
+import { ThemeService } from '../../services/theme.service';
 import { TranslateService } from '../../translate/translate.service';
 
 @Component({
@@ -9,11 +10,14 @@ import { TranslateService } from '../../translate/translate.service';
 	styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent {
-	@Output() public sidebarButton = new EventEmitter();
+	@Output()
+	public sidebarButton = new EventEmitter();
+
 	public title: string;
 
 	constructor(
 		private readonly translate: TranslateService,
+		private readonly theme: ThemeService,
 		private readonly router: Router
 	) {
 		this.title = this.translate.instant('Sidebar.Home');
@@ -28,34 +32,17 @@ export class TopbarComponent {
 	}
 
 	public changeLanguage(): void {
-		if (this.translate.language === 'en-US') {
-			this.translate.language = 'pt-BR';
-		} else {
-			this.translate.language = 'en-US';
-		}
-
+		this.translate.toggleLanguage();
 		location.reload();
 	}
 
 	public changeCurrency(): void {
-		if (this.translate.currency === 'USD') {
-			this.translate.currency = 'BRL';
-		} else {
-			this.translate.currency = 'USD';
-		}
-
+		this.translate.toggleCurrency();
 		location.reload();
 	}
 
 	public changeTheme(): void {
-		const theme = localStorage.getItem('theme');
-
-		if (theme === 'light') {
-			localStorage.setItem('theme', 'dark');
-		} else {
-			localStorage.setItem('theme', 'light');
-		}
-
-		location.reload()
+		this.theme.toggle();
+		location.reload();
 	}
 }

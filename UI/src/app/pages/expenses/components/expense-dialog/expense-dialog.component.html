@@ -74,7 +74,7 @@
 
 				<mat-form-field *ngIf="!periodic.checked">
 					<mat-label>{{ "Pages.Expenses.Installments" | translate }}</mat-label>
-					<input matInput type="number" min="0" formControlName="installments"/>
+					<input matInput type="number" min="1" formControlName="installments"/>
 					<mat-error>{{ showErrorMessage('installments') }}</mat-error>
 				</mat-form-field>
 			</mat-expansion-panel>

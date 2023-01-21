@@ -38,5 +38,5 @@ $my-theme: palette-helper.modify-background($my-theme, #F8F7F9);
 @include mat.all-component-themes($my-theme);
 
 .dark-theme {
-	@include mat.all-component-themes($my-dark-theme);
+	@include mat.all-component-colors($my-dark-theme);
 }

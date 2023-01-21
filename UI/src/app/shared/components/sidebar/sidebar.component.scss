@@ -1,3 +1,9 @@
+@import "/src/assets/theme/colors.scss";
+
+mat-sidenav-content {
+	padding: 22px !important;
+}
+
 .sidebar-container {
 	height: calc(100vh - var(--topbar-height));
 }
@@ -14,9 +20,13 @@
 }
 
 .active-item {
-    background-color: #c7c7c6;
+    background-color: $color-selected;
 }
 
-mat-sidenav-content {
-	padding: 12px !important;
+.active-item-dark {
+    background-color: $color-dark-selected;
+}
+
+::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {
+	background-color: rgba(0, 0, 0, 0.32) !important;
 }

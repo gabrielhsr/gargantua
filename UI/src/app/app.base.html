@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'dark-theme' : theme === 'light' }">
+<div [class.dark-theme]="isDark">
 	<topbar (sidebarButton)="sidebar.toggle()"></topbar>
 	<sidebar #sidebar>
 		<router-outlet></router-outlet>

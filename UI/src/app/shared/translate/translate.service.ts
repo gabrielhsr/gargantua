@@ -9,7 +9,11 @@ const resolvePath = require('object-resolve-path');
 export type Language = 'pt-BR' | 'en-US';
 export type Currency = 'BRL' | 'USD';
 
-const prefix = { 'pt-BR': { USD: 'US$ ', BRL: 'R$ ' }, 'en-US': { USD: '$', BRL: 'R$' } };
+const prefix = {
+	'pt-BR': { USD: 'US$ ', BRL: 'R$ ' },
+	'en-US': { USD: '$', BRL: 'R$' },
+};
+
 const decimal = { 'pt-BR': ',', 'en-US': '.' };
 const thousands = { 'pt-BR': '.', 'en-US': ',' };
 
@@ -35,7 +39,6 @@ export class TranslateService {
 			return stored as Language;
 		}
 
-		this.setDefaultLanguage();
 		return DEFAULT_LANGUAGE;
 	}
 
@@ -46,7 +49,6 @@ export class TranslateService {
 			return stored as Currency;
 		}
 
-		this.setDefaultCurrency();
 		return DEFAULT_CURRENCY;
 	}
 
@@ -93,6 +95,14 @@ export class TranslateService {
 		return key;
 	}
 
+	public toggleLanguage() {
+		this.language = this.language === 'en-US' ? 'pt-BR' : 'en-US';
+	}
+
+	public toggleCurrency() {
+		this.currency = this.currency === 'USD' ? 'BRL' : 'USD';
+	}
+
 	private getFile(language: Language) {
 		switch (language) {
 			case 'pt-BR':
@@ -100,16 +110,8 @@ export class TranslateService {
 			case 'en-US':
 				return enDict;
 			default:
-				this.setDefaultLanguage();
+				this.language = DEFAULT_LANGUAGE;
 				throw new Error(`Language file not found! Reseted to '${DEFAULT_LANGUAGE}'.`);
 		}
-	}
-
-	private setDefaultLanguage(): void {
-		this.language = DEFAULT_LANGUAGE;
-	}
-
-	private setDefaultCurrency(): void {
-		this.currency = DEFAULT_CURRENCY;
 	}
 }

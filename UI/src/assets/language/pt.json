@@ -58,7 +58,7 @@
 		},
 		"Income": {
 			"Alerts": {
-				"NoExpense": "Nenhuma receita cadastrada!"
+				"NoIncome": "Nenhuma receita cadastrada!"
 			},
 			"Amount": "Valor Pago",
 			"PaymentDate": "Data do Pagamento",

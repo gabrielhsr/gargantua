@@ -10,36 +10,81 @@
 		"DeleteItem": {
 			"Title": "Delete item",
 			"Message": "Would you like to delete the item '{{itemName}}'?"
+		},
+		"YesOrNo": {
+			"Title": "Confirmation"
 		}
 	},
 	"Common": {
 		"Send": "Send",
 		"Month": "Month",
 		"Cancel": "Cancel",
-		"Delete": "Delete"
+		"Delete": "Delete",
+		"Total": "Total",
+		"Edit": "Edit",
+		"Name": "Name",
+		"Yes": "Yes",
+		"No": "No",
+		"MoreOptions": "More Options"
 	},
 	"Sidebar": {
 		"Home": "Home Page",
-		"Configuration": "Configuration"
+		"Config": "Configurations",
+		"Expenses": "Expenses",
+		"Income": "Income"
 	},
 	"Pages": {
 		"Home": {
+			"Income": "Monthly Income",
+			"Expenses": "Monthly Expenses",
+			"Balance": "Monthly Balance"
+		},
+		"Expenses": {
 			"Alerts": {
 				"NoExpense": "No expense registered!"
 			},
-			"Expenses": "Expenses",
 			"DueDate": "Due Date",
 			"PurchaseDate": "Purchase Date",
 			"Category": "Category",
 			"PaymentMethod": "Payment Method",
 			"Description": "Description",
 			"Amount": "Amount Paid",
-			"AddDialog": {
-				"Title": "New Expense"
+			"NewExpense": "New Expense",
+			"EditExpense": "Edit Expense",
+			"FilterBy": "Filter By",
+			"SortBy": "Sort By",
+			"Installments": "Installments",
+			"Periodic": "Periodic"
+		},
+		"Income": {
+			"Alerts": {
+				"NoIncome": "No income registered!"
+			},
+			"Amount": "Amount Paid",
+			"PaymentDate": "Purchase Date",
+			"Description": "Description",
+			"PaymentMethod": "Payment Method",
+			"NewIncome": "New Income",
+			"EditIncome": "Edit Income",
+			"FilterBy": "Filter By",
+			"SortBy": "Sort By",
+			"Periodic": "Periodic",
+			"PeriodicTooltip": "Income of every month. For example: Salary.",
+			"EditOption": "Want to edit the recurrence or just this month?",
+			"JustMonth": "Just Month"
+		},
+		"Config": {
+			"Categories": "Categories",
+			"PaymentMethods": "Payment Methods",
+			"SavedWithSuccess": "Saved successfully!",
+			"AddNewItem": "Add new item...",
+			"Errors": {
+				"EntityInUse": "Item '{{itemName}}' cannot be deleted as it is in use by some expense record!"
 			}
 		}
 	},
 	"ErrorMessage": {
-		"required": "Required field."
+		"required": "Required field.",
+		"alreadyExist": "Cannot have items of the same name!"
 	}
 }

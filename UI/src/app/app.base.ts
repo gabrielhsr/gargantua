@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {  ThemeService } from './shared/services/theme.service';
 
 @Component({
 	selector: 'app-root',
@@ -6,15 +7,9 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.base.scss'],
 })
 export class AppBase {
-	public theme: string = 'light';
+	public isDark: boolean;
 
-	constructor() {
-		const stored = localStorage.getItem('theme');
-
-		if (stored) {
-			this.theme = stored;
-		} else {
-			localStorage.setItem('theme', this.theme);
-		}
+	constructor(private readonly theme: ThemeService) {
+		this.isDark = theme.isDark;
 	}
 }
