@@ -1,6 +1,4 @@
-<div [class.dark-theme]="isDark">
-	<topbar (sidebarButton)="sidebar.toggle()"></topbar>
-	<sidebar #sidebar>
-		<router-outlet></router-outlet>
-	</sidebar>
-</div>
+<topbar (sidebarButton)="sidebar.toggle()"></topbar>
+<sidebar #sidebar>
+	<router-outlet></router-outlet>
+</sidebar>

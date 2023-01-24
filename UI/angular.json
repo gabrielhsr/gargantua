@@ -49,7 +49,7 @@
 						"styles": [
 							"src/assets/bootstrap/scss/bootstrap.scss",
 							"src/styles.scss",
-							"src/assets/theme/md-purple.scss"
+							"src/assets/theme/md-theme.scss"
 						],
 						"scripts": [
 							"src/assets/bootstrap/js/bootstrap.min.js"

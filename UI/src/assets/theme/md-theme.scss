@@ -3,20 +3,16 @@
 
 @include mat.core();
 
-@import "./md-purple-primary.scss";
-@import "./md-purple-accent.scss";
-@import "./md-purple-warn.scss";
+@import "./md-orange.scss";
+@import "./md-turquoise.scss";
 
 @import "./bootstrap-theme.scss";
-
-// #F6AE2D
 
 $my-theme: mat.define-light-theme(
 	(
 		color: (
-			primary: mat.define-palette($md-purple),
-			accent: mat.define-palette($md-purple-accent),
-			warn: mat.define-palette($md-purple-warn),
+			primary: mat.define-palette($md-orange),
+			accent: mat.define-palette($md-turquoise),
 		),
 		typography: mat.define-typography-config(),
 		density: 0,
@@ -26,10 +22,9 @@ $my-theme: mat.define-light-theme(
 $my-dark-theme: mat.define-dark-theme(
 	(
 		color: (
-			primary: mat.define-palette($md-dark-purple),
-			accent: mat.define-palette($md-dark-purple-accent),
-			warn: mat.define-palette($md-dark-purple-warn),
-		),
+			primary: mat.define-palette($md-orange),
+			accent: mat.define-palette($md-turquoise-dark),
+		)
 	)
 );
 

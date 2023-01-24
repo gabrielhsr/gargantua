@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import {  ThemeService } from './shared/services/theme.service';
 
 @Component({
@@ -9,7 +9,12 @@ import {  ThemeService } from './shared/services/theme.service';
 export class AppBase {
 	public isDark: boolean;
 
-	constructor(private readonly theme: ThemeService) {
-		this.isDark = theme.isDark;
+	@HostBinding('class')
+	get theme() {
+		return this.isDark ? 'dark-theme' : ''
+	}
+
+	constructor(private readonly themeService: ThemeService) {
+		this.isDark = themeService.isDark;
 	}
 }
