@@ -27,6 +27,13 @@ mat-sidenav-content {
     background-color: $color-dark-selected;
 }
 
+.wave {
+	left: 0;
+	top: 0;
+	position: absolute;
+	width: 100%;
+}
+
 ::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {
 	background-color: rgba(0, 0, 0, 0.32) !important;
 }

@@ -54,7 +54,8 @@
 			"FilterBy": "Filter By",
 			"SortBy": "Sort By",
 			"Installments": "Installments",
-			"Periodic": "Periodic"
+			"Periodic": "Periodic",
+			"Detail": "Detail"
 		},
 		"Income": {
 			"Alerts": {

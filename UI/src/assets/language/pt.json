@@ -54,7 +54,8 @@
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por",
 			"Installments": "Parcelas",
-			"Periodic": "Recorrente"
+			"Periodic": "Recorrente",
+			"Detail": "Detalhar"
 		},
 		"Income": {
 			"Alerts": {

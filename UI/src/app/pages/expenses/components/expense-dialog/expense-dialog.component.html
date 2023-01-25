@@ -81,7 +81,9 @@
 		</div>
 
 		<div class="button-container">
-			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="expenseForm.invalid || expenseForm.pristine">{{ "Common.Send" | translate  }}</button>
+			<button mat-stroked-button (click)="detailExpense($event)" [disabled]="expenseForm.invalid">{{ "Pages.Expenses.Detail" | translate }}</button>
+
+			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="expenseForm.invalid || expenseForm.pristine">{{ "Common.Send" | translate }}</button>
 		</div>
 	</form>
 </mat-dialog-content>

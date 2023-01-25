@@ -11,7 +11,7 @@ export class AppBase {
 
 	@HostBinding('class')
 	get theme() {
-		return this.isDark ? 'dark-theme' : ''
+		return this.isDark ? 'dark-theme' : 'light-theme'
 	}
 
 	constructor(private readonly themeService: ThemeService) {

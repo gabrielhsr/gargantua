@@ -86,6 +86,10 @@ export class ExpenseDialogComponent implements OnInit {
 		return category?.name ?? '';
 	}
 
+	public detailExpense($event: Event) {
+		$event.preventDefault();
+	}
+
 	private filterCategories(val: string) {
 		if (typeof val !== "string") return this.categories;
 
