@@ -28,9 +28,9 @@ mat-sidenav-content {
 }
 
 .background {
-	background-image: url('/assets/images/background.svg');
+	background-image: url('/assets/images/bg.svg');
 	background-repeat: repeat-x;
-	background-size: auto 250px;
+	background-size: 100vw 250px;
 }
 
 ::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {
