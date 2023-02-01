@@ -1,5 +1,6 @@
 name: Build and deploy .NET Core application to Web App Gargantua with API Management Service Gargantua-Gargantua
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
