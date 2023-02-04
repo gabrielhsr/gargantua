@@ -36,6 +36,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+UpdateDatabase(app);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -51,3 +53,11 @@ app.UseCors();
 app.MapControllers();
 
 app.Run();
+
+static void UpdateDatabase(WebApplication app)
+{
+    using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    using var context = serviceScope.ServiceProvider.GetService<FinancialDbContext>();
+
+    context?.Database.Migrate();
+}
