@@ -51,6 +51,6 @@ jobs:
         password: ${{ secrets.SFTP_PWD }}
         server: ${{ secrets.SFTP_SERVER }}
         remote_path: ${{ secrets.SFTP_PATH }}
-        local_path: './${{ env.WEBAPP_PACKAGE_PATH }}/*'
+        local_path: './home/runner/work/gargantua/gargantua/WebAPI/publish/*'
         sftp_only: true
         delete_remote_files: true
