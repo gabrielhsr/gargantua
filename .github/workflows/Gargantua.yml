@@ -51,6 +51,6 @@ jobs:
         password: ${{ secrets.SFTP_PWD }}
         server: ${{ secrets.SFTP_SERVER }}
         remote_path: ${{ secrets.SFTP_PATH }}
-        local_path: ./${{ env.WEBAPP_PACKAGE_PATH }}/*
+        local_path: ./${{ env.WORKING_DIRECTORY }}/*
         sftp_only: true
         delete_remote_files: true
