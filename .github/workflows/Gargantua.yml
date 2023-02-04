@@ -34,9 +34,9 @@ jobs:
     - name: appsettings builder
       uses: microsoft/variable-substitution@v1
       with:
-        files: '${{env.WORKING_DIRECTORY}}/appsettings.json'
+        files: '${{ env.WORKING_DIRECTORY }}/appsettings.json'
       env:
-        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
+        ConnectionStrings.DbConnectionString: ${{ env.CONNECTION_STRING }}
     - name: Build
       run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
