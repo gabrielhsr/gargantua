@@ -6,12 +6,7 @@ on:
     - master
 env:
   WEBAPP_NAME: Gargantua
-  WEBAPP_PACKAGE_PATH: WebAPI\publish
-  SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION: 5.6.3
-  SWASHBUCKLE_DOTNET_CORE_VERSION: 3.1.x
-  API_IMPORT_SPECIFICATION_PATH: WebAPI\publish\swagger.json
-  API_IMPORT_DLL: WebAPI\bin\Release\net7.0\WebAPI.dll
-  API_IMPORT_VERSION: v1
+  WEBAPP_PACKAGE_PATH: WebAPI/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: WebAPI
@@ -40,7 +35,7 @@ jobs:
     - name: Publish
       run: dotnet publish ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.WEBAPP_PACKAGE_PATH }}
     - name: Publish Artifacts
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v3
       with:
         name: webapp
         path: ${{ env.WEBAPP_PACKAGE_PATH }}
