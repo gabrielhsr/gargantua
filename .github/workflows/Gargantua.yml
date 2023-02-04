@@ -39,3 +39,17 @@ jobs:
       with:
         name: webapp
         path: ${{ env.WEBAPP_PACKAGE_PATH }}
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: SFTP Deploy
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        username: ${{ secrets.SFTP_USER }}
+        password: ${{ secrets.SFTP_PWD }}
+        server: ${{ secrets.SFTP_SERVER }}
+        local_path: ${{ secrets.SFTP_PATH }}
+        remote_path: ${{ env.WEBAPP_PACKAGE_PATH }}
+        sftp_only: true
+        delete_remote_files: true
