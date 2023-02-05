@@ -33,3 +33,21 @@ jobs:
       with:
         name: angular
         path: ${{ env.UI_PACKAGE_PATH }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v3.0.2
+      with:
+        path: ${{ env.UI_PACKAGE_PATH }}        
+    - name: FTP Deploy
+      uses: sand4rt/ftp-deployer@v1.7
+      with:
+        host: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password:  ${{ secrets.FTP_PASSWORD }}
+        remote_folder: ${{ secrets.FTP_PATH }}
+        local_folder: ${{ env.UI_PACKAGE_PATH }}
+        cleanup: true
