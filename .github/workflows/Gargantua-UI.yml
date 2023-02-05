@@ -1,12 +1,11 @@
 name: Gargantua UI - Build & Deploy
-
 on:
   workflow_dispatch:
   push:
     branches:
     - master
     paths:
-      -UI/**
+    - UI/**
 env:
   UI_NAME: Gargantua
   UI_PACKAGE_PATH: UI/publish
