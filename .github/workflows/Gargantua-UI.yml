@@ -45,7 +45,7 @@ jobs:
     - name: Generate .htaccess
       uses: fertrig/create-file-action@1.0.2
       with:
-        path: '${{ env.UI_PACKAGE_PATH }}/angular'
+        path: '/home/runner/work/gargantua/gargantua/UI/dist/angular'
         file: '.htaccess'
         content: ${{ secrets.HTACCESS }}
     - name: FTP Deploy
