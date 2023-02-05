@@ -41,14 +41,7 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@v3.0.2
       with:
-        path: ${{ env.UI_PACKAGE_PATH }}        
-    - name: Generate .htaccess
-      uses: SpicyPizza/create-envfile@v1.3
-      with:
-        envkey_: ${{ secrets.HTACCESS }}
-        directory: '${{ env.UI_PACKAGE_PATH }}/angular'
-        file_name: .htaccess
-        fail_on_empty: false
+        path: ${{ env.UI_PACKAGE_PATH }}
     - name: FTP Deploy
       uses: sand4rt/ftp-deployer@v1.7
       with:
