@@ -42,6 +42,16 @@ jobs:
       uses: actions/download-artifact@v3.0.2
       with:
         path: ${{ env.UI_PACKAGE_PATH }}
+    - name: FTP Clean
+      uses: StephanThierry/ftp-delete-action@/v2.1
+      with:
+        host: ${{ secrets.FTP_HOST }}
+        user: ${{ secrets.FTP_USER }}
+        password:  ${{ secrets.FTP_PASSWORD }}
+        remoteFiles: '*.js;*.css;favicon.ico;*.txt;index.html'
+        remoteDirectories: 'assets'
+        workingDir: ${{ secrets.FTP_PATH }}
+        ignoreSSL: "1"
     - name: FTP Deploy
       uses: sand4rt/ftp-deployer@v1.7
       with:
@@ -50,4 +60,4 @@ jobs:
         password:  ${{ secrets.FTP_PASSWORD }}
         remote_folder: ${{ secrets.FTP_PATH }}
         local_folder: '${{ env.UI_PACKAGE_PATH }}/angular'
-        cleanup: true
+        cleanup: false
