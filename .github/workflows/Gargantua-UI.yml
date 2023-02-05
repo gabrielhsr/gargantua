@@ -1,0 +1,40 @@
+name: Gargantua UI - Build & Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+    paths:
+      -UI/**
+env:
+  UI_NAME: Gargantua
+  UI_PACKAGE_PATH: UI/publish
+  WORKING_DIRECTORY: UI
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+    - name: Checkout
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install 
+    - run: npm install
+    
+    - name: Install 
+    - run: npm run build
+    
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: angular
+        path: ${{ env.UI_PACKAGE_PATH }}
