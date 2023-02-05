@@ -4,6 +4,8 @@ on:
   push:
     branches:
     - master
+    paths:
+      -WebAPI/**
 env:
   WEBAPP_NAME: Gargantua
   WEBAPP_PACKAGE_PATH: WebAPI/publish
