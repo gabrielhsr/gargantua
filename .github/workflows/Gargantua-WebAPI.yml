@@ -23,13 +23,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}        
     - name: Restore
-      run: dotnet restore ${{ env.WORKING_DIRECTORY }}      
-    - name: appsettings builder
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: '${{ env.WORKING_DIRECTORY }}/appsettings.json'
-      env:
-        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}        
+      run: dotnet restore ${{ env.WORKING_DIRECTORY }}
     - name: Build
       run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
@@ -49,7 +43,13 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@v3.0.2
       with:
-        path: ${{ env.WEBAPP_PACKAGE_PATH }}        
+        path: ${{ env.WEBAPP_PACKAGE_PATH }}
+    - name: appsettings builder
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{ env.WEBAPP_PACKAGE_PATH }}/appsettings.json'
+      env:
+        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}    
     - name: SFTP Deploy
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
