@@ -43,9 +43,9 @@ jobs:
       with:
         path: ${{ env.UI_PACKAGE_PATH }}        
     - name: Generate .htaccess
-      uses: 1arp/create-a-file-action@0.2
+      uses: fertrig/create-file-action@1.0.2
       with:
-        path: '${{ env.UI_PACKAGE_PATH }}/angular/'
+        path: '${{ env.UI_PACKAGE_PATH }}/angular'
         file: '.htaccess'
         content: ${{ secrets.HTACCESS }}
     - name: FTP Deploy
