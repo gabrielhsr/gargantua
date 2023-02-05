@@ -40,8 +40,6 @@ export class IncomeDialogComponent implements OnInit {
 	public submitForm(): void {
 		this.loading = true;
 
-		console.log(this.incomeForm);
-
 		if (this.editMonth) {
 			const recurrentId = this.incomeForm?.get('recurrentId')!;
 			const periodicInput = this.incomeForm?.get('periodic')!;
