@@ -49,5 +49,5 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password:  ${{ secrets.FTP_PASSWORD }}
         remote_folder: ${{ secrets.FTP_PATH }}
-        local_folder: ${{ env.UI_PACKAGE_PATH }}
+        local_folder: '${{ env.UI_PACKAGE_PATH }}/angular'
         cleanup: true
