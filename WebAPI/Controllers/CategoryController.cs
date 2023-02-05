@@ -16,7 +16,7 @@ namespace Financial.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> Teste()
         {
-            return Ok("Teste");
+            return Ok("Teste 2");
         }
     }
 }
