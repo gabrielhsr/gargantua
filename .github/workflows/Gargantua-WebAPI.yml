@@ -1,4 +1,4 @@
-name: Gargantua Build & Deploy
+name: Gargantua WebAPI - Build & Deploy
 on:
   workflow_dispatch:
   push:
