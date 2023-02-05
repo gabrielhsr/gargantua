@@ -43,11 +43,12 @@ jobs:
       with:
         path: ${{ env.UI_PACKAGE_PATH }}        
     - name: Generate .htaccess
-      uses: fertrig/create-file-action@1.0.2
+      uses: SpicyPizza/create-envfile@v1.3
       with:
-        path: '/home/runner/work/gargantua/gargantua/UI/dist/angular'
-        file: '.htaccess'
-        content: ${{ secrets.HTACCESS }}
+        envkey_: ${{ secrets.HTACCESS }}
+        directory: '${{ env.UI_PACKAGE_PATH }}/angular'
+        file_name: .htaccess
+        fail_on_empty: false
     - name: FTP Deploy
       uses: sand4rt/ftp-deployer@v1.7
       with:
