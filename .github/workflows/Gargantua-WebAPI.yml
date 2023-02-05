@@ -1,4 +1,5 @@
 name: Gargantua WebAPI - Build & Deploy
+
 on:
   workflow_dispatch:
   push:
@@ -17,25 +18,32 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3  
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+        
     - name: Restore
       run: dotnet restore ${{ env.WORKING_DIRECTORY }}
+      
     - name: appsettings builder
       uses: microsoft/variable-substitution@v1
       with:
         files: '${{ env.WORKING_DIRECTORY }}/appsettings.json'
       env:
         ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
+        
     - name: Build
       run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
+    
     - name: Test
       run: dotnet test ${{ env.WORKING_DIRECTORY }} --no-build
+    
     - name: Publish
       run: dotnet publish ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.WEBAPP_PACKAGE_PATH }}
+    
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -50,6 +58,7 @@ jobs:
       uses: actions/download-artifact@v3.0.2
       with:
         path: ${{ env.WEBAPP_PACKAGE_PATH }}
+        
     - name: SFTP Deploy
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
@@ -60,6 +69,7 @@ jobs:
         local_path: './${{ env.WEBAPP_PACKAGE_PATH }}/*'
         sftp_only: true
         delete_remote_files: true
+        
     - name: Restart API
       uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
       with:
