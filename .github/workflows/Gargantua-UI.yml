@@ -24,8 +24,10 @@ jobs:
         cache-dependency-path: UI/package-lock.json
     - name: Install
       run: npm install
+      working-directory: ${{ env.WORKING_DIRECTORY }}
     - name: Install
       run: npm run build
+      working-directory: ${{ env.WORKING_DIRECTORY }}
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
       with:
