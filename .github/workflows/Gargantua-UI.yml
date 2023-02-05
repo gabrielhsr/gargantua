@@ -8,7 +8,7 @@ on:
     - UI/**
 env:
   UI_NAME: Gargantua
-  UI_PACKAGE_PATH: UI/publish
+  UI_PACKAGE_PATH: UI/dist
   WORKING_DIRECTORY: UI
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
     - name: Install
       run: npm install
       working-directory: ${{ env.WORKING_DIRECTORY }}
-    - name: Install
+    - name: Build
       run: npm run build
       working-directory: ${{ env.WORKING_DIRECTORY }}
     - name: Publish Artifacts
