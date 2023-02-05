@@ -43,7 +43,7 @@ jobs:
       with:
         path: ${{ env.UI_PACKAGE_PATH }}
     - name: FTP Clean
-      uses: StephanThierry/ftp-delete-action@/v2.1
+      uses: StephanThierry/ftp-delete-action@v2.1
       with:
         host: ${{ secrets.FTP_HOST }}
         user: ${{ secrets.FTP_USER }}
