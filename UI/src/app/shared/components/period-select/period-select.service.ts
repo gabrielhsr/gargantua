@@ -17,7 +17,7 @@ export class PeriodService {
 	constructor(private readonly update: UpdateService, private readonly periodEndpoint: PeriodEndpoint) {}
 
 	public getPeriods() {
-		return this.update.handle(this.periodEndpoint.getPeriods());
+		return this.update.handle(this.periodEndpoint.getPeriods(), 'getPeriods');
 	}
 
 	public changeSortOption(sortOption: SortOption) {

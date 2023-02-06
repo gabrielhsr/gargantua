@@ -25,13 +25,13 @@ export class IncomeService {
 	) {	}
 
 	public getAllIncomes() {
-		return this.update.handle(this.incomeEndpoint.get());
+		return this.update.handle(this.incomeEndpoint.get(), 'getAllIncomes');
 	}
 
 	public getIncomeByPeriod(period: Period) {
 		this.selectedPeriod = period;
 
-		return this.update.handle(this.incomeEndpoint.getIncomeByPeriod(period.month, period.year))
+		return this.update.handle(this.incomeEndpoint.getIncomeByPeriod(period.month, period.year), 'getIncomeByPeriod');
 	}
 
 	public saveIncome(income: Income) {

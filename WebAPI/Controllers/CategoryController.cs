@@ -12,11 +12,5 @@ namespace Financial.Controllers
         public CategoryController(IBaseService<Category> service) : base(service)
         {
         }
-
-        [HttpGet("test")]
-        public async Task<IActionResult> Teste()
-        {
-            return Ok("Teste 2");
-        }
     }
 }
