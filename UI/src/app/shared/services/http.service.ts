@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FeedbackService } from './feedback.service';
 
@@ -25,8 +25,8 @@ interface SuccessHandleResponse<T> {
 export class HttpService {
 	constructor(private readonly feedback: FeedbackService, private readonly httpClient: HttpClient) {}
 
-	public get<T>(url: string, params?: Params) {
-		return this.intercept(this.httpClient.get<T>(environment.baseApi + url, { params }));
+	public get<T>(endpoint: string, params?: Params) {
+		return this.intercept(this.httpClient.get<T>(environment.baseApi + endpoint, { params }));
 	}
 
 	public post<T>(endpoint: string, object: T) {

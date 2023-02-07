@@ -51,8 +51,8 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 		this.periodSubject
 			.pipe(
-				takeUntil(this.destroy),
-				switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period))
+				switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period)),
+				takeUntil(this.destroy)
 			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
@@ -72,7 +72,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public deleteExpense(expense: Expense) {
 		this.feedback
 			.confirmCancelDialog(expense.description)
-			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY))
+			.pipe(switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY), takeUntil(this.destroy))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 

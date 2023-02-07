@@ -43,7 +43,6 @@ export class HomePage implements OnInit, OnDestroy {
 	public ngOnInit(): void {
 		this.periodSubject
 			.pipe(
-				takeUntil(this.destroy),
 				switchMap((period) => {
 					if (period) {
 						const income = this.incomeService.getIncomeByPeriod(period);
@@ -53,7 +52,8 @@ export class HomePage implements OnInit, OnDestroy {
 					}
 
 					return of(period);
-				})
+				}),
+				takeUntil(this.destroy)
 			)
 			.subscribe((res) => {
 				this.loading = true;

@@ -41,8 +41,8 @@ export class InputComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 		this.subject
 			.pipe(
-				takeUntil(this.destroy),
-				switchMap((item) => this.type === 'category' ? this.saveCategory(item) : this.savePaymentMethod(item))
+				switchMap((item) => this.type === 'category' ? this.saveCategory(item) : this.savePaymentMethod(item)),
+				takeUntil(this.destroy)
 			)
 			.subscribe((res) => {
 				if (res.isSuccess) {
@@ -100,7 +100,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
 		this.feedback
 			.confirmCancelDialog(itemName)
-			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? operation : EMPTY))
+			.pipe(switchMap((res) => res?.confirm ? operation : EMPTY), takeUntil(this.destroy))
 			.subscribe((res) => {
 				if (res.isSuccess) {
 					this.feedback.successToast('Feedback.DeleteSuccess');

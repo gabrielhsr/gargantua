@@ -37,13 +37,13 @@ export class ExpenseService {
 	}
 
 	public getAllExpenses() {
-		return this.update.handle(this.expenseEndpoint.get());
+		return this.update.handle(this.expenseEndpoint.get(), 'getAllExpenses');
 	}
 
 	public getExpensesByPeriod(period: Period) {
 		this.selectedPeriod = period;
 
-		return this.update.handle(this.expenseEndpoint.getExpensesByPeriod(period.month, period.year));
+		return this.update.handle(this.expenseEndpoint.getExpensesByPeriod(period.month, period.year), 'getExpensesByPeriod');
 	}
 
 	public saveExpense(expense: Expense) {

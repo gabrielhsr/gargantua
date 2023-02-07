@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { HttpHandleResponse } from './http.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class UpdateService {
 		this.subject.next();
 	}
 
-	public handle<T>(getMethod: Observable<HttpHandleResponse<T>>) {
-		return this.subject.pipe(shareReplay(1), switchMap(() => getMethod));
+	public handle<T>(getMethod: Observable<HttpHandleResponse<T>>, src: string) {
+		return this.subject.pipe(switchMap(() => getMethod));
 	}
 }

@@ -25,8 +25,8 @@ export class ConfigPage implements OnInit, OnDestroy {
 	constructor(private readonly configService: ConfigService, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
 	public ngOnInit() {
-		this.itemUpdate.pipe(takeUntil(this.destroy), switchMap(() => this.configService.getAllCategories())).subscribe((res) => res.isSuccess ? (this.categories = res.value) : EMPTY);
-		this.itemUpdate.pipe(takeUntil(this.destroy),switchMap(() => this.configService.getAllPaymentMethods())).subscribe((res) => res.isSuccess ? (this.paymentMethods = res.value) : EMPTY);
+		this.itemUpdate.pipe(switchMap(() => this.configService.getAllCategories()), takeUntil(this.destroy)).subscribe((res) => res.isSuccess ? (this.categories = res.value) : EMPTY);
+		this.itemUpdate.pipe(switchMap(() => this.configService.getAllPaymentMethods()), takeUntil(this.destroy)).subscribe((res) => res.isSuccess ? (this.paymentMethods = res.value) : EMPTY);
 	}
 
 	public ngOnDestroy() {

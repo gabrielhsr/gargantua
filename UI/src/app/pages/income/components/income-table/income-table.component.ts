@@ -52,8 +52,8 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 		this.periodSubject
 			.pipe(
-				takeUntil(this.destroy),
-				switchMap((period) => period ? this.incomeService.getIncomeByPeriod(period) : of(period))
+				switchMap((period) => period ? this.incomeService.getIncomeByPeriod(period) : of(period)),
+				takeUntil(this.destroy)
 			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
@@ -73,7 +73,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public deleteIncome(income: Income) {
 		this.feedback
 			.confirmCancelDialog(income.description)
-			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY))
+			.pipe(switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY), takeUntil(this.destroy))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 
