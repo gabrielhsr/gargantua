@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, lastValueFrom, of, Subject, switchMap } from 'rxjs';
+import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { Income } from 'src/app/entities/income/income.model';
 import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -20,7 +20,7 @@ export interface SortOption {
 	templateUrl: './income-table.component.html',
 	styleUrls: ['./income-table.component.scss'],
 })
-export class IncomeTableComponent implements OnInit {
+export class IncomeTableComponent implements OnInit, OnDestroy {
 	public incomeLoading: boolean = true;
 
 	public periodIncome = new MatTableDataSource<Income>();
@@ -29,6 +29,7 @@ export class IncomeTableComponent implements OnInit {
 	public periodSubject = new Subject<Period | undefined>();
 
 	private lastSortOption?: SortOption;
+	private destroy = new Subject();
 
 	constructor(
 		private readonly incomeService: IncomeService,
@@ -50,7 +51,10 @@ export class IncomeTableComponent implements OnInit {
 
 	public ngOnInit() {
 		this.periodSubject
-			.pipe(switchMap((period) => period ? this.incomeService.getIncomeByPeriod(period) : of(period)))
+			.pipe(
+				takeUntil(this.destroy),
+				switchMap((period) => period ? this.incomeService.getIncomeByPeriod(period) : of(period))
+			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
 					this.periodIncome.data = res.value;
@@ -61,10 +65,15 @@ export class IncomeTableComponent implements OnInit {
 			});
 	}
 
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
+	}
+
 	public deleteIncome(income: Income) {
 		this.feedback
 			.confirmCancelDialog(income.description)
-			.pipe(switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY))
+			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 

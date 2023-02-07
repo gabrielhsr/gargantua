@@ -1,6 +1,6 @@
 import { MatFabMenu } from '@angular-material-extensions/fab-menu';
-import { Component, OnInit } from '@angular/core';
-import { combineLatest, of, Subject, switchMap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { combineLatest, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { TranslateService } from 'src/app/shared/translate/translate.service';
 import { ExpenseService } from '../expenses/services/expense.service';
@@ -10,7 +10,7 @@ import { IncomeService } from '../income/services/income.service';
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 	public periodSubject = new Subject<Period | undefined>();
 
 	public totalIncome: number = 0;
@@ -32,6 +32,8 @@ export class HomePage implements OnInit {
 		},
 	];
 
+	private destroy = new Subject();
+
 	constructor(
 		private readonly incomeService: IncomeService,
 		private readonly expensesService: ExpenseService,
@@ -40,16 +42,19 @@ export class HomePage implements OnInit {
 
 	public ngOnInit(): void {
 		this.periodSubject
-			.pipe(switchMap((period) => {
-				if (period) {
-					const income = this.incomeService.getIncomeByPeriod(period);
-					const expenses = this.expensesService.getExpensesByPeriod(period);
+			.pipe(
+				takeUntil(this.destroy),
+				switchMap((period) => {
+					if (period) {
+						const income = this.incomeService.getIncomeByPeriod(period);
+						const expenses = this.expensesService.getExpensesByPeriod(period);
 
-					return combineLatest({ income, expenses });
-				}
+						return combineLatest({ income, expenses });
+					}
 
-				return of(period);
-			}))
+					return of(period);
+				})
+			)
 			.subscribe((res) => {
 				this.loading = true;
 
@@ -63,6 +68,11 @@ export class HomePage implements OnInit {
 
 				this.loading = false;
 			});
+	}
+
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
 	}
 
 	public menuItemSelected(item: string | number) {

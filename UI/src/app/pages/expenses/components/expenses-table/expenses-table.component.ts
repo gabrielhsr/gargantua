@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, of, Subject, switchMap } from 'rxjs';
+import { EMPTY, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -20,13 +20,15 @@ export interface SortOption {
 	templateUrl: './expenses-table.component.html',
 	styleUrls: ['./expenses-table.component.scss'],
 })
-export class ExpensesTableComponent implements OnInit {
+export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic'], include: ['options'] });
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
 	public expensesLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
+
+	private destroy = new Subject();
 
 	constructor(
 		private readonly expenseService: ExpenseService,
@@ -48,7 +50,10 @@ export class ExpensesTableComponent implements OnInit {
 
 	public ngOnInit() {
 		this.periodSubject
-			.pipe(switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period)))
+			.pipe(
+				takeUntil(this.destroy),
+				switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period))
+			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
 					this.periodExpenses.data = res.value;
@@ -59,10 +64,15 @@ export class ExpensesTableComponent implements OnInit {
 			});
 	}
 
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
+	}
+
 	public deleteExpense(expense: Expense) {
 		this.feedback
 			.confirmCancelDialog(expense.description)
-			.pipe(switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY))
+			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY))
 			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
 	}
 

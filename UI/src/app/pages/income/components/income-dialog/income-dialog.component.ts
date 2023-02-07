@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Category } from 'src/app/entities/category/category.model';
@@ -8,6 +8,7 @@ import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'income-dialog',
@@ -15,11 +16,13 @@ import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 	styleUrls: ['./income-dialog.component.scss'],
 
 })
-export class IncomeDialogComponent implements OnInit {
+export class IncomeDialogComponent implements OnInit, OnDestroy {
 	public incomeForm?: FormGroup;
 	public loading: boolean = false;
 	public editMonth: boolean = false;
 	public showRecurrentCheck: boolean = true;
+
+	private destroy = new Subject();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editMonth?: boolean },
@@ -37,6 +40,11 @@ export class IncomeDialogComponent implements OnInit {
 		}
 	}
 
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
+	}
+
 	public submitForm(): void {
 		this.loading = true;
 
@@ -52,7 +60,7 @@ export class IncomeDialogComponent implements OnInit {
 
 		const formValue = this.incomeForm?.value as Income;
 
-		this.incomeService.saveIncome(formValue).subscribe((response) => {
+		this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy)).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
 				this.dialogRef.close();

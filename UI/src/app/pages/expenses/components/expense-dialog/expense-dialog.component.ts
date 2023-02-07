@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { forkJoin, map, Observable, startWith } from 'rxjs';
+import { forkJoin, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
@@ -16,7 +16,7 @@ import { ExpenseService } from '../../services/expense.service';
 	styleUrls: ['./expense-dialog.component.scss'],
 
 })
-export class ExpenseDialogComponent implements OnInit {
+export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	public categories?: Category[];
 	public paymentMethods?: PaymentMethod[];
 
@@ -25,6 +25,8 @@ export class ExpenseDialogComponent implements OnInit {
 
 	public filteredCategories?: Observable<Category[] | undefined>;
 	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
+
+	private destroy = new Subject();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public expense: Expense,
@@ -35,14 +37,16 @@ export class ExpenseDialogComponent implements OnInit {
 		forkJoin({
 			categories: this.expenseService.getCategories(),
 			paymentMethods: this.expenseService.getPaymentMethods(),
-		}).subscribe(({ categories, paymentMethods }) => {
-			if (categories.isSuccess && paymentMethods.isSuccess) {
-				this.categories = categories.value;
-				this.paymentMethods = paymentMethods.value;
+		})
+			.pipe(takeUntil(this.destroy))
+			.subscribe(({ categories, paymentMethods }) => {
+				if (categories.isSuccess && paymentMethods.isSuccess) {
+					this.categories = categories.value;
+					this.paymentMethods = paymentMethods.value;
 
-				this.loading = false;
-			}
-		});
+					this.loading = false;
+				}
+			});
 	}
 
 	public ngOnInit(): void {
@@ -50,6 +54,11 @@ export class ExpenseDialogComponent implements OnInit {
 
 		this.filteredCategories = this.expenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
 		this.filteredPaymentMethods = this.expenseForm?.get('paymentMethod')?.valueChanges.pipe(startWith(''), map(val => this.filterPaymentMethods(val)));
+	}
+
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
 	}
 
 	public submitForm(): void {
@@ -64,14 +73,16 @@ export class ExpenseDialogComponent implements OnInit {
 			formValue.paymentMethod = { name: formValue.paymentMethod, id: GuidHelper.default }
 		}
 
-		this.expenseService.saveExpense(formValue).subscribe((response) => {
-			if (response.isSuccess) {
-				this.feedback.successToast("Feedback.SaveSuccess");
-				this.dialogRef.close();
-			}
+		this.expenseService.saveExpense(formValue)
+			.pipe(takeUntil(this.destroy))
+			.subscribe((response) => {
+				if (response.isSuccess) {
+					this.feedback.successToast("Feedback.SaveSuccess");
+					this.dialogRef.close();
+				}
 
-			this.loading = false;
-		});
+				this.loading = false;
+			});
 	}
 
 	public showErrorMessage(input: string) {

@@ -1,5 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { BehaviorSubject, EMPTY, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, EMPTY, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
@@ -19,17 +19,19 @@ export class ConfigPage implements OnInit, OnDestroy {
 	public paymentMethods?: PaymentMethod[];
 
 	public itemUpdate = new BehaviorSubject<void>(undefined);
-	private itemUpdate$?: Subscription;
+
+	private destroy = new Subject();
 
 	constructor(private readonly configService: ConfigService, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
 	public ngOnInit() {
-		this.itemUpdate$ = this.itemUpdate.pipe(switchMap(() => this.configService.getAllCategories())).subscribe(res => res.isSuccess ? this.categories = res.value : EMPTY);
-		this.itemUpdate$ = this.itemUpdate.pipe(switchMap(() => this.configService.getAllPaymentMethods())).subscribe(res => res.isSuccess ? this.paymentMethods = res.value : EMPTY);
+		this.itemUpdate.pipe(takeUntil(this.destroy), switchMap(() => this.configService.getAllCategories())).subscribe((res) => res.isSuccess ? (this.categories = res.value) : EMPTY);
+		this.itemUpdate.pipe(takeUntil(this.destroy),switchMap(() => this.configService.getAllPaymentMethods())).subscribe((res) => res.isSuccess ? (this.paymentMethods = res.value) : EMPTY);
 	}
 
 	public ngOnDestroy() {
-		this.itemUpdate$?.unsubscribe();
+		this.destroy.next(null);
+        this.destroy.complete();
 	}
 
 	public addNewItem(list: ItemType) {

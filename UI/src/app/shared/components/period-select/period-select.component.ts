@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { DateHelper } from '../../helpers/date.helper';
 import { PeriodService } from './period-select.service';
@@ -24,11 +25,18 @@ export class PeriodSelectComponent implements OnInit {
 	public periods?: Period[];
 	public selectedPeriod?: Period;
 
+	private destroy = new Subject();
+
 	constructor(public readonly service: PeriodService) {}
 
 	public ngOnInit() {
 		this.service.sortOptions = this.sortOptions;
 		this.loadPeriods();
+	}
+
+	public ngOnDestroy(): void {
+		this.destroy.next(null);
+        this.destroy.complete();
 	}
 
 	public changeFilter(sortOption: SortOption) {
@@ -41,7 +49,7 @@ export class PeriodSelectComponent implements OnInit {
 	}
 
 	private loadPeriods() {
-		this.service.getPeriods().subscribe((res) => {
+		this.service.getPeriods().pipe(takeUntil(this.destroy)).subscribe((res) => {
 			if (!res.isSuccess) return;
 
 			this.periods = res.value;

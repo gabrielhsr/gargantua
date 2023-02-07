@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgModel } from '@angular/forms';
-import { EMPTY, Subject, Subscription, switchMap } from 'rxjs';
+import { EMPTY, Subject, switchMap, takeUntil } from 'rxjs';
 import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
 import { Category } from 'src/app/entities/category/category.model';
 import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMethod.endpoint';
@@ -27,11 +27,10 @@ export class InputComponent implements OnInit, OnDestroy {
 	@Output() public itemUpdated = new EventEmitter<void>();
 
 	public loading: boolean = false;
+	public form = new FormControl('');
 	public subject = new Subject<ItemUnion>();
 
-	private subject$?: Subscription;
-
-	public form = new FormControl('');
+	private destroy = new Subject();
 
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
@@ -40,11 +39,14 @@ export class InputComponent implements OnInit, OnDestroy {
 	) {}
 
 	public ngOnInit() {
-		this.subject$ = this.subject
-			.pipe(switchMap((item) => this.type === 'category' ? this.saveCategory(item) : this.savePaymentMethod(item)))
+		this.subject
+			.pipe(
+				takeUntil(this.destroy),
+				switchMap((item) => this.type === 'category' ? this.saveCategory(item) : this.savePaymentMethod(item))
+			)
 			.subscribe((res) => {
 				if (res.isSuccess) {
-					this.feedback.successToast("Pages.Config.SavedWithSuccess");
+					this.feedback.successToast('Pages.Config.SavedWithSuccess');
 				}
 
 				this.itemUpdated.emit();
@@ -53,7 +55,8 @@ export class InputComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnDestroy() {
-		this.subject$?.unsubscribe();
+		this.destroy.next(null);
+        this.destroy.complete();
 	}
 
 	public onBlur(event: FocusEvent, item: ItemUnion) {
@@ -97,7 +100,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
 		this.feedback
 			.confirmCancelDialog(itemName)
-			.pipe(switchMap((res) => res?.confirm ? operation : EMPTY))
+			.pipe(takeUntil(this.destroy), switchMap((res) => res?.confirm ? operation : EMPTY))
 			.subscribe((res) => {
 				if (res.isSuccess) {
 					this.feedback.successToast('Feedback.DeleteSuccess');
