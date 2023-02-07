@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	baseApi: 'https://gargantua-api.ghsr.com.br',
+	baseApi: 'https://localhost:5000',
 };

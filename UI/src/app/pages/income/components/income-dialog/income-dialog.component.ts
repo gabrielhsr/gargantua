@@ -24,7 +24,7 @@ export class IncomeDialogComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editMonth?: boolean },
 		private readonly dialogRef: MatDialogRef<IncomeDialogComponent>,
-		private readonly homeService: IncomeService,
+		private readonly incomeService: IncomeService,
 		private readonly feedback: FeedbackService
 	) {}
 
@@ -52,7 +52,7 @@ export class IncomeDialogComponent implements OnInit {
 
 		const formValue = this.incomeForm?.value as Income;
 
-		this.homeService.saveIncome(formValue).subscribe((response) => {
+		this.incomeService.saveIncome(formValue).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
 				this.dialogRef.close();
