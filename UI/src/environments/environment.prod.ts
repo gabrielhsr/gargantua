@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	baseApi: 'https://gargantua.ghsr.com.br',
+	baseApi: 'http://gargantua-api.ghsr.com.br',
 };
