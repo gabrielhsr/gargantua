@@ -7,6 +7,7 @@ import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMet
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
+import { ConfigService } from '../../services/config.service';
 
 export type ItemType = 'category' | 'paymentMethod';
 type ItemUnion = PaymentMethod | Category;
@@ -22,6 +23,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
 	@Input() public item!: ItemUnion;
 	@Input() public type!: ItemType;
+	@Input() public enableEdit: boolean = false;
 	@Input() public list?: Category[] | PaymentMethod[];
 
 	@Output() public itemUpdated = new EventEmitter<void>();
@@ -35,7 +37,8 @@ export class InputComponent implements OnInit, OnDestroy {
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
-		private readonly feedback: FeedbackService
+		private readonly feedback: FeedbackService,
+		private readonly configService: ConfigService
 	) {}
 
 	public ngOnInit() {
@@ -86,6 +89,10 @@ export class InputComponent implements OnInit, OnDestroy {
 
 	public savePaymentMethod(paymentMethod: PaymentMethod) {
 		return GuidHelper.isNullOrDefault(paymentMethod.id) ? this.paymentMethodEndpoint.post(paymentMethod) : this.paymentMethodEndpoint.put(paymentMethod, paymentMethod.id);
+	}
+
+	public editPaymentMethod(item: PaymentMethod) {
+		this.configService.openPaymentMethodDialog(item);
 	}
 
 	public deleteItem(item: ItemUnion) {

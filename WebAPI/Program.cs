@@ -1,7 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Financial.Data;
 using Financial.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 using Financial.Interfaces.Repositories;
 using Financial.Services;
 using Financial.Interfaces.Services;

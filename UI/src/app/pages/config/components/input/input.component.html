@@ -12,6 +12,16 @@
 
 	<mat-spinner matSuffix class="suffix-loading" *ngIf="loading"></mat-spinner>
 	<mat-icon
+		*ngIf="!loading && enableEdit"
+		matSuffix
+		preventDefault
+		color="accent"
+		class="edit-icon"
+		(click)="editPaymentMethod(item)"
+	>
+		edit
+	</mat-icon>
+	<mat-icon
 		*ngIf="!loading"
 		matSuffix
 		preventDefault
