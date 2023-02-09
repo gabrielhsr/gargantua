@@ -26,6 +26,8 @@ export class LoadingDirective implements OnInit, OnChanges {
 
 		this.renderer.appendChild(this.loadingElement, spinner);
 		this.renderer.appendChild(this.element.nativeElement, this.loadingElement);
+
+		this.toggleDisplay();
 	}
 
 	public ngOnChanges(simpleChanges: SimpleChanges) {

@@ -79,6 +79,10 @@
 			"PaymentMethods": "Formas de Pagamento",
 			"SavedWithSuccess": "Item salvo com sucesso!",
 			"AddNewItem": "Adicionar novo item...",
+			"Name": "Nome",
+			"DueDate":"Data de Vencimento",
+			"EditPaymentMethod": "Editar Forma de Pagamento",
+			"Bank": "Banco",
 			"Errors": {
 				"EntityInUse": "O item '{{itemName}}' não pode ser deletado pois está em uso por algum registro de despesa!"
 			}

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
 import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMethod.endpoint';
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { UpdateService } from 'src/app/shared/services/update.service';
 import { PaymentMethodDialogComponent } from '../components/payment-method-dialog/payment-method-dialog.component';
 
 @Injectable({
@@ -12,15 +13,16 @@ export class ConfigService {
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
-		private readonly dialog: MatDialog
+		private readonly dialog: MatDialog,
+		private readonly update: UpdateService
 	) {}
 
 	public getAllCategories() {
-		return this.categoryEndpoint.get();
+		return this.update.handle(this.categoryEndpoint.get());
 	}
 
 	public getAllPaymentMethods() {
-		return this.paymentMethodEndpoint.get();
+		return this.update.handle(this.paymentMethodEndpoint.get());
 	}
 
 	public openPaymentMethodDialog(paymentMethod: PaymentMethod) {

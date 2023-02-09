@@ -12,7 +12,7 @@ export class UpdateService {
 		this.subject.next();
 	}
 
-	public handle<T>(getMethod: Observable<HttpHandleResponse<T>>, src: string) {
+	public handle<T>(getMethod: Observable<HttpHandleResponse<T>>) {
 		return this.subject.pipe(switchMap(() => getMethod));
 	}
 }
