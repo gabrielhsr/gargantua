@@ -18,8 +18,6 @@ export class ConfigPage implements OnInit, OnDestroy {
 	public categories?: Category[];
 	public paymentMethods?: PaymentMethod[];
 
-	public itemUpdate = new BehaviorSubject<void>(undefined);
-
 	private destroy = new Subject();
 
 	constructor(

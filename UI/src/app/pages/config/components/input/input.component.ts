@@ -7,6 +7,7 @@ import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMet
 import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
+import { UpdateService } from 'src/app/shared/services/update.service';
 import { ConfigService } from '../../services/config.service';
 
 export type ItemType = 'category' | 'paymentMethod';
@@ -26,8 +27,6 @@ export class InputComponent implements OnInit, OnDestroy {
 	@Input() public enableEdit: boolean = false;
 	@Input() public list?: Category[] | PaymentMethod[];
 
-	@Output() public itemUpdated = new EventEmitter<void>();
-
 	public loading: boolean = false;
 	public form = new FormControl('');
 	public subject = new Subject<ItemUnion>();
@@ -38,7 +37,8 @@ export class InputComponent implements OnInit, OnDestroy {
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly feedback: FeedbackService,
-		private readonly configService: ConfigService
+		private readonly configService: ConfigService,
+		private readonly update: UpdateService
 	) {}
 
 	public ngOnInit() {
@@ -52,7 +52,7 @@ export class InputComponent implements OnInit, OnDestroy {
 					this.feedback.successToast('Pages.Config.SavedWithSuccess');
 				}
 
-				this.itemUpdated.emit();
+				this.update.run();
 				this.loading = false;
 			});
 	}
@@ -101,7 +101,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		const operation = this.type  === 'category' ? this.categoryEndpoint.delete(item.id) : this.paymentMethodEndpoint.delete(item.id);
 
 		if (!itemName) {
-			this.itemUpdated.emit();
+			this.update.run();
 			return;
 		}
 
@@ -115,7 +115,7 @@ export class InputComponent implements OnInit, OnDestroy {
 					if (res.type === 'entityInUse') this.feedback.errorToast('Pages.Config.Errors.EntityInUse', { itemName });
 				}
 
-				this.itemUpdated.emit();
+				this.update.run();
 			});
 	}
 

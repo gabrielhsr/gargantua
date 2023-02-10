@@ -1,5 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { forkJoin, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/entities/category/category.model';
@@ -99,6 +100,12 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 	public detailExpense($event: Event) {
 		$event.preventDefault();
+	}
+
+	public selectedPaymentMethod($event: MatAutocompleteSelectedEvent) {
+		const { dueDate } = $event.option.value as PaymentMethod;
+
+		this.expenseForm?.patchValue({ dueDate });
 	}
 
 	private filterCategories(val: string) {
