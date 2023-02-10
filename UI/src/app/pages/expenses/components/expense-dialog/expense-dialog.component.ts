@@ -105,7 +105,15 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	public selectedPaymentMethod($event: MatAutocompleteSelectedEvent) {
 		const { dueDate } = $event.option.value as PaymentMethod;
 
-		this.expenseForm?.patchValue({ dueDate });
+		const today = new Date();
+		const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+
+		if (dueDate) {
+			const day = dueDate >= lastDay ? lastDay : dueDate;
+			this.expenseForm?.patchValue({ dueDate: new Date(today.getFullYear(), today.getMonth(), day) });
+		} else {
+			this.expenseForm?.patchValue({ dueDate: null });
+		}
 	}
 
 	private filterCategories(val: string) {
