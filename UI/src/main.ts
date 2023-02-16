@@ -13,6 +13,7 @@ platformBrowserDynamic()
 	.catch((err) => console.error(err));
 
 // TODO: Fix cors, remove any
+// TODO: Fix bug new expense in home page
 // TODO: Change the way recurrent expenses and incomes work (duplicate to every month/year)
 // TODO: Add checkbox to delete in mass
 // TODO: Add a way to add a income of a type to the whole year and set the dates

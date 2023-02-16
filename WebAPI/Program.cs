@@ -11,6 +11,8 @@ var connectionString = builder.Configuration.GetConnectionString("DbConnectionSt
 // Cors
 var origins = builder.Configuration.GetSection("AllowedOrigins").Value.Split(",");
 
+Console.WriteLine(origins.FirstOrDefault());
+
 builder.Services.AddCors(opts => {
     opts.AddDefaultPolicy(policy => policy.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod());
 });
@@ -39,16 +41,17 @@ var app = builder.Build();
 
 UpdateDatabase(app);
 
+app.UseCors();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
 
-app.UseAuthorization();
-app.UseCors();
-
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
