@@ -9,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
 
 // Cors
-builder.Services.AddCors(opts =>{
-    opts.AddDefaultPolicy(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+var origins = builder.Configuration.GetSection("AllowedOrigins").Value.Split(",");
+
+builder.Services.AddCors(opts => {
+    opts.AddDefaultPolicy(policy => policy.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod());
 });
 
 // Database
@@ -37,21 +39,16 @@ var app = builder.Build();
 
 UpdateDatabase(app);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-}
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
 app.UseCors();
+
+app.UseHttpsRedirection();
 
 app.MapControllers();
 
