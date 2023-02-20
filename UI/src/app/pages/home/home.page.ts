@@ -1,6 +1,8 @@
 import { MatFabMenu } from '@angular-material-extensions/fab-menu';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { Expense } from 'src/app/entities/expense/expense.model';
+import { Income } from 'src/app/entities/income/income.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { TranslateService } from 'src/app/shared/translate/translate.service';
 import { ExpenseService } from '../expenses/services/expense.service';
@@ -78,10 +80,10 @@ export class HomePage implements OnInit, OnDestroy {
 	public menuItemSelected(item: string | number) {
 		switch (item) {
 			case 'income':
-				this.incomeService.openFormDialog();
+				this.incomeService.openFormDialog(new Income());
 				break;
 			case 'expense':
-				this.expensesService.openFormDialog();
+				this.expensesService.openFormDialog(new Expense());
 				break;
 			default:
 				console.error(`Unknown 'id' for mat-fab-menu. ID: ${item}`);
