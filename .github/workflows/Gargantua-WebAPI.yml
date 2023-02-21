@@ -47,7 +47,7 @@ jobs:
     - name: appsettings builder
       uses: microsoft/variable-substitution@v1
       with:
-        files: '${{ env.WEBAPP_PACKAGE_PATH }}/webapp/appsettings.json'
+        files: '${{ env.WEBAPP_PACKAGE_PATH }}/webapp/appsettings.Production.json'
       env:
         ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}    
     - name: SFTP Deploy
