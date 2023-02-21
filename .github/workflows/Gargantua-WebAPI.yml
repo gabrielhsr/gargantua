@@ -49,7 +49,8 @@ jobs:
       with:
         files: '${{ env.WEBAPP_PACKAGE_PATH }}/webapp/appsettings.Production.json'
       env:
-        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}    
+        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
+        IssuerSigningKey: ${{ secrets.ISSUER_KEY }}
     - name: SFTP Deploy
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
