@@ -3,8 +3,10 @@ using Financial.Data.Models;
 
 namespace Financial.Interfaces.Services
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationService : IBaseService<Login>
     {
-        AuthenticatedResponse ValidateProfile(Login login);
+        AuthRes ValidateProfile(Login login);
+        bool ValidateToken(string? token);
+        Task Register(Login login);
     }
 }

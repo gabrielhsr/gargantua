@@ -1,6 +1,6 @@
 ﻿namespace Financial.Data.DTO
 {
-    public class AuthenticatedResponse
+    public class AuthRes
     {
         public string? Token { get; set; }
     }

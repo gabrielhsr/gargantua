@@ -1,7 +1,6 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
-import { AuthenticatedResponse, Login } from './authentication.model';
+import { AuthRes, Login } from './authentication.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,6 +11,10 @@ export class AuthenticationEndpoint {
 	constructor(private readonly service: HttpService) {}
 
 	public signIn(login: Login) {
-		return this.service.post<Login, AuthenticatedResponse>(this.url + 'signIn', login);
+		return this.service.post<Login, AuthRes>(this.url + 'signIn', login);
+	}
+
+	public validateToken(token: string) {
+		return this.service.post<AuthRes, boolean>(this.url + 'validateToken', { token });
 	}
 }

@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FeedbackService } from './feedback.service';
@@ -23,7 +24,11 @@ interface SuccessHandleResponse<T> {
 	providedIn: 'root',
 })
 export class HttpService {
-	constructor(private readonly feedback: FeedbackService, private readonly httpClient: HttpClient) {}
+	constructor(
+		private readonly feedback: FeedbackService,
+		private readonly httpClient: HttpClient,
+		private readonly router: Router
+	) {}
 
 	public get<T>(endpoint: string, params?: Params) {
 		return this.intercept(this.httpClient.get<T>(environment.baseApi + endpoint, { params }));
@@ -60,8 +65,12 @@ export class HttpService {
 
 				const isMessage = typeof res.error === 'string';
 
+				console.log(res);
+
 				if (isMessage && res.error.includes('DELETE statement conflicted with the REFERENCE constraint')) {
 					response.type = 'entityInUse';
+				} else if (res.status === 401) {
+					this.router.navigate(['login']);
 				} else {
 					this.feedback.toast(res.message);
 				}

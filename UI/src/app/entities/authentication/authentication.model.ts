@@ -3,6 +3,6 @@ export class Login {
 	password: string = '';
 }
 
-export interface AuthenticatedResponse {
+export interface AuthRes {
 	token: string;
 }

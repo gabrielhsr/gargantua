@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import localePT from '@angular/common/locales/pt';
+import localeEN from '@angular/common/locales/en';
+
 import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 
 import { JwtModule } from '@auth0/angular-jwt';
@@ -14,19 +17,11 @@ import { SharedModule } from './shared/shared.module';
 
 import { TranslateService } from './shared/translate/translate.service';
 
-import localePT from '@angular/common/locales/pt';
-import localeEN from '@angular/common/locales/en';
-
 import { AppBase } from './app.base';
-
-import { environment } from 'src/environments/environment';
+import { AuthenticationHelper } from './shared/helpers/authentication.helper';
 
 registerLocaleData(localePT);
 registerLocaleData(localeEN);
-
-export function tokenGetter() {
-	return localStorage.getItem('jwt');
-}
 
 @NgModule({
 	declarations: [AppBase],
@@ -36,12 +31,7 @@ export function tokenGetter() {
 		AppRoutingModule,
 		SharedModule,
 		RouterModule,
-		JwtModule.forRoot({
-			config: {
-				tokenGetter: tokenGetter,
-				allowedDomains: [environment.allowedDomains]
-			},
-		}),
+		JwtModule.forRoot(AuthenticationHelper.JWT_CONFIG),
 	],
 	providers: [
 		{
