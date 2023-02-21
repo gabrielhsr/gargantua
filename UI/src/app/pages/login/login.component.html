@@ -1,0 +1,29 @@
+<div class="login-container">
+	<mat-card>
+		<mat-card-header class="justify-content-center">
+			<mat-card-title>{{ 'Pages.Login.Title' | translate }}</mat-card-title>
+		</mat-card-header>
+		<form *ngIf="loginForm" [formGroup]="loginForm">
+			<mat-card-content class="login-card" [loading]="loading">
+				<mat-form-field appearance="fill">
+					<mat-label>{{ 'Pages.Login.Email' | translate }}</mat-label>
+					<input matInput type="email" formControlName="email" />
+					<mat-error>{{ showErrorMessage('email') }}</mat-error>
+				</mat-form-field>
+
+				<mat-form-field>
+					<mat-label>{{ 'Pages.Login.Password' | translate }}</mat-label>
+					<input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+					<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+						<mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+					</button>
+					<mat-error>{{ showErrorMessage('password') }}</mat-error>
+				</mat-form-field>
+
+				<button mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="submitForm()">
+					{{ 'Pages.Login.Enter' | translate }}
+				</button>
+			</mat-card-content>
+		</form>
+	</mat-card>
+</div>

@@ -29,12 +29,12 @@ export class HttpService {
 		return this.intercept(this.httpClient.get<T>(environment.baseApi + endpoint, { params }));
 	}
 
-	public post<T>(endpoint: string, object: T) {
-		return this.intercept(this.httpClient.post<T>(environment.baseApi + endpoint, object));
+	public post<TBody, TReturn>(endpoint: string, object: TBody) {
+		return this.intercept(this.httpClient.post<TReturn>(environment.baseApi + endpoint, object));
 	}
 
-	public put<T>(endpoint: string, object: T, id: string) {
-		return this.intercept(this.httpClient.put<T>(environment.baseApi + endpoint + id, object));
+	public put<TBody, TReturn>(endpoint: string, object: TBody, id: string) {
+		return this.intercept(this.httpClient.put<TReturn>(environment.baseApi + endpoint + id, object));
 	}
 
 	public delete<T>(endpoint: string, id: string) {

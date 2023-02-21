@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Financial.Data.Models;
 using Financial.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Financial.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BaseController<TEntity> : ControllerBase where TEntity : BaseEntity
     {
         private readonly IBaseService<TEntity> service;

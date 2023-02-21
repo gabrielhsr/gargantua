@@ -34,6 +34,12 @@
 		"Income": "Receita"
 	},
 	"Pages": {
+		"Login": {
+			"Title": "Login",
+			"Password": "Senha",
+			"Email": "E-Mail",
+			"Enter": "Entrar"
+		},
 		"Home": {
 			"Income": "Receita Mensal",
 			"Expenses": "Despesa Mensal",
@@ -90,6 +96,9 @@
 	},
 	"ErrorMessage": {
 		"required": "Campo obrigatório.",
-		"alreadyExist": "Não pode ter itens de mesmo nome!"
+		"alreadyExist": "Não pode ter itens de mesmo nome!",
+		"email": "Campo deve conter um e-mail válido",
+		"minlength": "Campo deve ter no mínimo 5 caracteres.",
+		"maxlength": "Campo deve ter no máximo 12 caracteres."
 	}
 }

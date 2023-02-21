@@ -1,5 +1,5 @@
 <mat-toolbar class="toolbar">
-	<button mat-icon-button (click)="sidebarButton.emit()">
+	<button mat-icon-button (click)="sidebarButton.emit()" *ngIf="routeData?.showMenu">
 		<mat-icon>menu</mat-icon>
 	</button>
 
@@ -7,14 +7,16 @@
 
 	<span class="spacer"></span>
 
-	<!-- <button mat-icon-button (click)="changeTheme()">
-		<mat-icon>brush</mat-icon>
-	</button> -->
+	<ng-container *ngIf="routeData?.showMenu">
+		<!-- <button mat-icon-button (click)="changeTheme()">
+			<mat-icon>brush</mat-icon>
+		</button> -->
 
-	<button mat-icon-button (click)="changeCurrency()">
-		<mat-icon>attach_money</mat-icon>
-	</button>
-
+		<button mat-icon-button (click)="changeCurrency()">
+			<mat-icon>attach_money</mat-icon>
+		</button>
+	</ng-container>
+	
 	<button mat-icon-button (click)="changeLanguage()">
 		<mat-icon>language</mat-icon>
 	</button>

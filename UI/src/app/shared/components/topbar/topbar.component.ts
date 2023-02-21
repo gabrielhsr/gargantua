@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { capitalize } from '../../helpers/string.helper';
+import { Router, RoutesRecognized } from '@angular/router';
+import { RouteData } from 'src/app/app-routing.module';
 import { ThemeService } from '../../services/theme.service';
 import { TranslateService } from '../../translate/translate.service';
 
@@ -13,20 +13,19 @@ export class TopbarComponent {
 	@Output()
 	public sidebarButton = new EventEmitter();
 
-	public title: string;
+	public title: string = 'Gargantua';
+	public routeData?: RouteData;
 
 	constructor(
 		private readonly translate: TranslateService,
 		private readonly theme: ThemeService,
 		private readonly router: Router
 	) {
-		this.title = this.translate.instant('Sidebar.Home');
+		this.router.events.subscribe((data) => {
+			if (data instanceof RoutesRecognized) {
+				this.routeData = data.state.root.firstChild?.data as RouteData;
 
-		this.router.events.subscribe(nav => {
-			if (nav instanceof NavigationEnd) {
-				const routeName = capitalize(nav.url.replace('/', ''));
-
-				if (routeName) this.title = this.translate.instant(`Sidebar.${routeName}`);
+				if (this.routeData.title) this.title = this.translate.instant(this.routeData.title);
 			}
 		});
 	}

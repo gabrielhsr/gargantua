@@ -1,4 +1,5 @@
 export const environment = {
 	production: false,
-	baseApi: 'https://10.0.0.20:7242',
+	baseApi: 'https://localhost:7242',
+	allowedDomains: 'localhost:7242'
 };

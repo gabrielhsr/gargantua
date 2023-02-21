@@ -10,11 +10,11 @@ export abstract class BaseEndpoint<T> {
 	}
 
 	public post(object: T) {
-		return this.httpService.post<T>(this.url, object);
+		return this.httpService.post<T, T>(this.url, object);
 	}
 
 	public put(object: T, id: string) {
-		return this.httpService.put<T>(this.url, object, id);
+		return this.httpService.put<T, T>(this.url, object, id);
 	}
 
 	public delete(id: string) {
