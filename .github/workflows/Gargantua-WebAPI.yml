@@ -51,6 +51,7 @@ jobs:
       env:
         ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
         IssuerSigningKey: ${{ secrets.ISSUER_KEY }}
+        Pepper: ${{ secrets.PEPPER }}
     - name: SFTP Deploy
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
