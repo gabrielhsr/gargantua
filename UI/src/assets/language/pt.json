@@ -13,7 +13,8 @@
 		},
 		"YesOrNo": {
 			"Title": "Confirmação"
-		}
+		},
+		"TokenExpired": "Seu acesso expirou! Realize o login novamente."
 	},
 	"Common": {
 		"Send": "Enviar",
@@ -38,7 +39,8 @@
 			"Title": "Login",
 			"Password": "Senha",
 			"Email": "E-Mail",
-			"Enter": "Entrar"
+			"Enter": "Entrar",
+			"Unauthorized": "Usuário ou Senha Incorreta!"
 		},
 		"Home": {
 			"Income": "Receita Mensal",

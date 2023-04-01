@@ -65,8 +65,6 @@ export class HttpService {
 
 				const isMessage = typeof res.error === 'string';
 
-				console.log(res);
-
 				if (isMessage && res.error.includes('DELETE statement conflicted with the REFERENCE constraint')) {
 					response.type = 'entityInUse';
 				} else if (res.status === 401) {

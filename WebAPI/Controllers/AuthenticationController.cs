@@ -1,10 +1,6 @@
 ﻿using Financial.Data.DTO;
-using Financial.Data.Models;
 using Financial.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 
 namespace Financial.Controllers
@@ -21,18 +17,11 @@ namespace Financial.Controllers
         }
 
         [HttpPost("signIn")]
-        public IActionResult SignIn([FromBody] Login login) 
+        public async Task<IActionResult> SignIn([FromBody] Login user) 
         {
-            if (login is null || login.Email is null || login.Password is null)
-            {
-                return BadRequest();
-            }
-
             try
             {
-                var result = authenticationService.ValidateProfile(login);
-
-                return Ok(result);
+                return Ok(await authenticationService.LoginAsync(user));
             }
             catch (AuthenticationException)
             {
@@ -46,14 +35,6 @@ namespace Financial.Controllers
             var isValid = authenticationService.ValidateToken(dto.Token);
 
             return isValid ? Ok() : Unauthorized();
-        }
-
-        [HttpPost("signUp")]
-        public IActionResult Register([FromBody] Login dto)
-        {
-            authenticationService.Register(dto);
-
-            return Ok();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Financial.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Income> Income { get; set; }
-        public DbSet<Login> Login { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

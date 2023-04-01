@@ -2,14 +2,16 @@
 
 namespace Financial.Data.Models
 {
-    public class Login: BaseEntity
+    public class User: BaseEntity
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string? Password { get; set; }
+        public string PasswordHash { get; set; }
+
+        public string PasswordSalt { get; set; }
     }
 }

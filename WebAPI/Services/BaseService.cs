@@ -24,7 +24,7 @@ namespace Financial.Services
             return await baseRepository.GetAllAsync();
         }
 
-        public virtual async Task<T?> GetAsync(Guid id)
+        public virtual async Task<T> GetAsync(Guid id)
         {
             return await baseRepository.GetAsync(id);
         }

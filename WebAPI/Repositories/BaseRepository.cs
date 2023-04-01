@@ -46,7 +46,7 @@ namespace Financial.Repositories
             return await context.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T?> GetAsync(Guid id)
+        public virtual async Task<T> GetAsync(Guid id)
         {
             return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
