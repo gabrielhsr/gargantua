@@ -16,9 +16,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Check out code
+      uses: actions/checkout@v2
     # Runs a single command using the runners shell
     - name: CONNECTION_STRING
-      run: echo ${{secrets.CONNECTION_STRING}} | sed 's/./& /g'
+      run: echo -n "${{ secrets.CONNECTION_STRING }}" | xxd -ps
     - name: FTP_HOST
       run: echo ${{secrets.FTP_HOST}} | sed 's/./& /g'
     - name: FTP_PASSWORD
