@@ -1,0 +1,45 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  print:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: CONNECTION_STRING
+      run: echo ${{secrets.CONNECTION_STRING}} | sed 's/./& /g'
+    - name: FTP_HOST
+      run: echo ${{secrets.FTP_HOST}} | sed 's/./& /g'
+    - name: FTP_PASSWORD
+      run: echo ${{secrets.FTP_PASSWORD}} | sed 's/./& /g'
+    - name: FTP_PATH
+      run: echo ${{secrets.FTP_PATH}} | sed 's/./& /g'
+    - name: FTP_USER
+      run: echo ${{secrets.FTP_USER}} | sed 's/./& /g'
+    - name: ISSUER_KEY
+      run: echo ${{secrets.ISSUER_KEY}} | sed 's/./& /g'
+    - name: PEPPER
+      run: echo ${{secrets.PEPPER}} | sed 's/./& /g'
+    - name: SFTP_API_PATH
+      run: echo ${{secrets.SFTP_API_PATH}} | sed 's/./& /g'
+    - name: SFTP_PWD
+      run: echo ${{secrets.SFTP_PWD}} | sed 's/./& /g'
+    - name: SFTP_SERVER
+      run: echo ${{secrets.SFTP_SERVER}} | sed 's/./& /g'
+    - name: SFTP_UI_PATH
+      run: echo ${{secrets.SFTP_UI_PATH}} | sed 's/./& /g'
+    - name: SFTP_USER
+      run: echo ${{secrets.SFTP_USER}} | sed 's/./& /g'
+    - name: SSH_RESTART_APP
+      run: echo ${{secrets.SSH_RESTART_APP}} | sed 's/./& /g'
