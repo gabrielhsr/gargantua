@@ -19,29 +19,14 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     # Runs a single command using the runners shell
-    - name: CONNECTION_STRING
-      run: echo -n "${{ secrets.CONNECTION_STRING }}" | xxd -ps
-    - name: FTP_HOST
-      run: echo ${{secrets.FTP_HOST}} | sed 's/./& /g'
-    - name: FTP_PASSWORD
-      run: echo ${{secrets.FTP_PASSWORD}} | sed 's/./& /g'
-    - name: FTP_PATH
-      run: echo ${{secrets.FTP_PATH}} | sed 's/./& /g'
-    - name: FTP_USER
-      run: echo ${{secrets.FTP_USER}} | sed 's/./& /g'
-    - name: ISSUER_KEY
-      run: echo ${{secrets.ISSUER_KEY}} | sed 's/./& /g'
-    - name: PEPPER
-      run: echo ${{secrets.PEPPER}} | sed 's/./& /g'
-    - name: SFTP_API_PATH
-      run: echo ${{secrets.SFTP_API_PATH}} | sed 's/./& /g'
-    - name: SFTP_PWD
-      run: echo ${{secrets.SFTP_PWD}} | sed 's/./& /g'
-    - name: SFTP_SERVER
-      run: echo ${{secrets.SFTP_SERVER}} | sed 's/./& /g'
-    - name: SFTP_UI_PATH
-      run: echo ${{secrets.SFTP_UI_PATH}} | sed 's/./& /g'
-    - name: SFTP_USER
-      run: echo ${{secrets.SFTP_USER}} | sed 's/./& /g'
-    - name: SSH_RESTART_APP
-      run: echo ${{secrets.SSH_RESTART_APP}} | sed 's/./& /g'
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_SECRETS: ${{ toJSON(secrets) }}
+        file_name: .env
+        fail_on_empty: false
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: cats
+        path: .
