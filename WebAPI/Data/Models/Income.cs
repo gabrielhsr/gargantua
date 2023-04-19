@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Financial.Data.Models
 {
@@ -18,5 +19,8 @@ namespace Financial.Data.Models
         public bool Periodic { get; set; } = false;
 
         public Guid? RecurrentId { get; set; } = null;
+
+        [JsonIgnore]
+        public virtual User User { get; set; }
     }
 }

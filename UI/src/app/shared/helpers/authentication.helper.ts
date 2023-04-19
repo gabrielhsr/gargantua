@@ -9,6 +9,10 @@ export class AuthenticationHelper {
 		localStorage.setItem(TOKEN_KEY, token);
 	}
 
+	public static deleteToken() {
+		localStorage.removeItem(TOKEN_KEY);
+	}
+
 	public static getToken() {
 		const storedToken = localStorage.getItem(TOKEN_KEY);
 

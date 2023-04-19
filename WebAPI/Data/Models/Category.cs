@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace Financial.Data.Models
 {
@@ -10,7 +9,6 @@ namespace Financial.Data.Models
             Expenses = new List<Expense>();
         }
 
-        [Required]
         public string Name { get; set; }
 
         [JsonIgnore]

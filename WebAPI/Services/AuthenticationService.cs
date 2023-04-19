@@ -4,25 +4,20 @@ using Financial.Data.Models;
 using Financial.Helpers;
 using Financial.Interfaces.Repositories;
 using Financial.Interfaces.Services;
+using Financial.Interfaces.Services.Base;
+using Financial.Services.Base;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Financial.Services
 {
     public class AuthenticationService: BaseService<User>, IAuthenticationService
     {
-        private readonly FinancialDbContext context;
         private readonly TokenHelper tokenHelper;
         private readonly string pepper;
         private readonly int iteration = 5;
 
-        public AuthenticationService(IBaseRepository<User> repository, IConfiguration configuration, FinancialDbContext context) : base(repository)
+        public AuthenticationService(IDependencyAggregate<User> aggregate, IConfiguration configuration) : base(aggregate)
         {
             var validIssuer = configuration.GetSection("ValidIssuer").Value;
             var validAudience = configuration.GetSection("ValidAudience").Value;
@@ -31,12 +26,11 @@ namespace Financial.Services
             tokenHelper = new TokenHelper(validIssuer, validAudience, tokenSecretKey);
 
             this.pepper = configuration.GetSection("Pepper").Value;
-            this.context = context;
         }
 
         public async Task<AuthRes> LoginAsync(Login user)
         {
-            var storedUser = await context.User.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
+            var storedUser = await dbContext.User.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
 
             if (storedUser is not null)
             {
@@ -44,7 +38,7 @@ namespace Financial.Services
 
                 if (passwordHash == storedUser.PasswordHash)
                 {
-                    return new AuthRes { Token = tokenHelper.GenerateToken() };
+                    return new AuthRes { Token = tokenHelper.GenerateToken(storedUser) };
                 }
             }
 
@@ -66,8 +60,8 @@ namespace Financial.Services
 
             user.PasswordHash = PasswordHelper.ComputeHash("", user.PasswordSalt, pepper, iteration);
 
-            await context.AddAsync(user);
-            await context.SaveChangesAsync();
+            await dbContext.AddAsync(user);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

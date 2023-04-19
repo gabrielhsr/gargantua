@@ -32,7 +32,8 @@
 		"Home": "Página Inicial",
 		"Config": "Configurações",
 		"Expenses": "Despesas",
-		"Income": "Receita"
+		"Income": "Receita",
+		"LogOut": "Sair"
 	},
 	"Pages": {
 		"Login": {

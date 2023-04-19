@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Financial.Data.Models
@@ -32,5 +33,8 @@ namespace Financial.Data.Models
 
         [Required]
         public virtual PaymentMethod PaymentMethod { get; set; }
+
+        [JsonIgnore]
+        public virtual User User { get; set; }
     }
 }

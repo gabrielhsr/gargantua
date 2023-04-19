@@ -1,4 +1,4 @@
-﻿namespace Financial.Interfaces.Services
+﻿namespace Financial.Interfaces.Services.Base
 {
     public interface IBaseService<T>
     {

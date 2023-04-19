@@ -1,17 +1,32 @@
-﻿using Financial.Data.Models;
+﻿using Financial.Data;
+using Financial.Data.Models;
 using Financial.Helpers;
 using Financial.Interfaces.Repositories;
-using Financial.Interfaces.Services;
+using Financial.Interfaces.Services.Base;
+using System.Security.Claims;
 
-namespace Financial.Services
+namespace Financial.Services.Base
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
         private readonly IBaseRepository<T> baseRepository;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public BaseService(IBaseRepository<T> baseRepository)
+        public readonly FinancialDbContext dbContext;
+
+        public Guid UserId 
+        { 
+            get {
+                return Guid.Parse(httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+            }
+            private set { } 
+        }
+
+        public BaseService(IDependencyAggregate<T> dependencyAggregate)
         {
-            this.baseRepository = baseRepository;
+            baseRepository = dependencyAggregate.BaseRepository;
+            httpContextAccessor = dependencyAggregate.HttpContextAccessor;
+            dbContext = dependencyAggregate.DbContext;
         }
 
         public virtual async Task RemoveAsync(Guid id)

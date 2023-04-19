@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ThemeService } from '../../services/theme.service';
+import { AuthenticationHelper } from '../../helpers/authentication.helper';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'sidebar',
@@ -10,7 +12,7 @@ import { ThemeService } from '../../services/theme.service';
 export class SidebarComponent {
 	@ViewChild('sidenav') private sidenav?: MatSidenav;
 
-	constructor(public readonly theme: ThemeService) {	}
+	constructor(public readonly theme: ThemeService, private readonly router: Router) {	}
 
 	public get activeStyle(): string {
 		return this.theme.isDark ? 'active-item-dark' : 'active-item';
@@ -22,5 +24,11 @@ export class SidebarComponent {
 		}
 
 		this.sidenav.toggle();
+	}
+
+	public logOut() {
+		this.sidenav?.close();
+		AuthenticationHelper.deleteToken();
+		this.router.navigate(['login']);
 	}
 }

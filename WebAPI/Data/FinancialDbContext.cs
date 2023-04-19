@@ -28,6 +28,16 @@ namespace Financial.Data
                 .WithMany(x => x.Expenses)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Expense>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Expenses)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Income>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Incomes)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
     }

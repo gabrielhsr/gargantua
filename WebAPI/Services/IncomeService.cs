@@ -1,21 +1,28 @@
 ﻿using Financial.Data.DTO;
 using Financial.Data.Models;
-using Financial.Helpers;
-using Financial.Interfaces.Repositories;
 using Financial.Interfaces.Services;
+using Financial.Interfaces.Services.Base;
+using Financial.Services.Base;
 
 namespace Financial.Services
 {
     public class IncomeService : BaseService<Income>, IIncomeService
     {
+        public IncomeService(IDependencyAggregate<Income> aggregate) : base(aggregate) { }
 
-        public IncomeService(IBaseRepository<Income> repository) : base(repository) { }
+        public override async Task<Income> SaveAsync(Guid id, Income entity)
+        {
+            entity.User = await dbContext.Set<User>().FindAsync(UserId);
+
+            return await base.SaveAsync(id, entity);
+        }
 
         public async Task<IList<Period>> GetPeriods()
         {
             var income = await base.GetAllAsync();
 
             var periods = income
+                .Where(income => income.User.Id == UserId)
                 .OrderBy(x => x.PaymentDate)
                 .Select(x => new Period { Month = x.PaymentDate.Month, Year = x.PaymentDate.Year })
                 .Distinct()
@@ -29,6 +36,7 @@ namespace Financial.Services
             var allIncome = await base.GetAllAsync();
 
             var incomeByPeriod = allIncome
+                .Where(income => income.User.Id == UserId)
                 .Where(income => income.Periodic || period.Equals(income.PaymentDate))
                 .Where(income => !income.Periodic || !allIncome.Any(any => any.RecurrentId == income.Id && period.Equals(any.PaymentDate)))
                 .Select(income =>

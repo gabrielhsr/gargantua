@@ -7,6 +7,8 @@ using Financial.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Financial.Services.Base;
+using Financial.Interfaces.Services.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
@@ -24,8 +26,14 @@ builder.Services.AddDbContext<FinancialDbContext>(opts =>
     opts.UseLazyLoadingProxies().UseSqlServer(connectionString);
 });
 
+// HttpContext
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 // Repositories
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+// DI Aggregator
+builder.Services.AddScoped(typeof(IDependencyAggregate<>), typeof(DependencyAggregate<>));
 
 // Services
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
@@ -33,6 +41,7 @@ builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<IPeriodService, PeriodService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
 
 builder.Services.AddAuthentication(options =>
 {

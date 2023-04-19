@@ -1,7 +1,7 @@
 ﻿using Financial.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Financial.Interfaces.Services;
 using Financial.Data.DTO;
+using Financial.Interfaces.Services.Base;
 
 namespace Financial.Controllers
 {

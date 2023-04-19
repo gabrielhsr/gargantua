@@ -12,3 +12,11 @@
 	width: 85vw;
     max-width: 500px;
 }
+
+.show-password {
+	margin: 15px;
+
+	:hover {
+		cursor: pointer;
+	}
+}

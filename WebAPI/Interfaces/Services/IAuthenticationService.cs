@@ -1,5 +1,6 @@
 ﻿using Financial.Data.DTO;
 using Financial.Data.Models;
+using Financial.Interfaces.Services.Base;
 
 namespace Financial.Interfaces.Services
 {

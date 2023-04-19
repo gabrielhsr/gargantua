@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Financial.Data.Models;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,7 +21,7 @@ namespace Financial.Helpers
             this.validAudience = validAudience;
         }
 
-        public string GenerateToken()
+        public string GenerateToken(User user)
         {
             
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -28,8 +29,14 @@ namespace Financial.Helpers
             var tokenOptions = new JwtSecurityToken(
                 issuer: validIssuer,
                 audience: validAudience,
-                claims: new List<Claim>(),
-                expires: DateTime.Now.AddMinutes(5),
+                claims: new List<Claim>()
+                {
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Email),
+                    new Claim(ClaimTypes.NameIdentifier, user.Email),
+                    new Claim(ClaimTypes.Email, user.Email),    
+                },
+                expires: DateTime.Now.AddMonths(1),
                 signingCredentials: credentials
             );
 

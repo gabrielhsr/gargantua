@@ -14,13 +14,13 @@
 				<mat-form-field>
 					<mat-label>{{ 'Pages.Login.Password' | translate }}</mat-label>
 					<input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
-					<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+					<div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
 						<mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
-					</button>
+					</div>
 					<mat-error>{{ showErrorMessage('password') }}</mat-error>
 				</mat-form-field>
 
-				<button mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="submitForm()">
+				<button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="submitForm()">
 					{{ 'Pages.Login.Enter' | translate }}
 				</button>
 			</mat-card-content>

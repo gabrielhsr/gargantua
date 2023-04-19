@@ -10,7 +10,6 @@ namespace Financial.Data.Models
             Expenses = new List<Expense>();
         }
 
-        [Required]
         public string Name { get; set; } = string.Empty;
         public string Bank { get; set; }
         public int? DueDate { get; set; }

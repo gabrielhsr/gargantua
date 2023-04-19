@@ -13,5 +13,9 @@ namespace Financial.Data.Models
         public string PasswordHash { get; set; }
 
         public string PasswordSalt { get; set; }
+
+        public virtual IList<Expense> Expenses { get; set; }
+
+        public virtual IList<Income> Incomes { get; set; }
     }
 }
