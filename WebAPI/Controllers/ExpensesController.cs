@@ -27,5 +27,13 @@ namespace Financial.Controllers
         {
             return await service.GetExpensesByPeriod(new Period { Month = month, Year = year });
         }
+
+        [HttpPost("markAsPaid")]
+        public async Task<IActionResult> MarkAsPaid([FromBody] IList<Guid> ids)
+        {
+            await service.MarkAsPaid(ids);
+
+            return Ok();
+        }
     }
 }

@@ -8,6 +8,7 @@ import { toTitleCase } from 'src/app/shared/helpers/string.helper';
 import { TableHelper } from 'src/app/shared/helpers/table.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
+import { ExpensePaidService } from '../../services/expense-paid.service';
 
 export interface SortOption {
 	text: string;
@@ -19,6 +20,7 @@ export interface SortOption {
 	selector: 'expenses-table',
 	templateUrl: './expenses-table.component.html',
 	styleUrls: ['./expenses-table.component.scss'],
+	providers: [ExpensePaidService]
 })
 export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic'], include: ['options'] });
@@ -32,7 +34,8 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private readonly expenseService: ExpenseService,
-		private readonly feedback: FeedbackService
+		private readonly feedback: FeedbackService,
+		public readonly expensePaidService: ExpensePaidService
 	) {}
 
 	public get totalAmount() {

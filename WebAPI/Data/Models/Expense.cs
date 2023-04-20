@@ -27,6 +27,7 @@ namespace Financial.Data.Models
         [Range(1, int.MaxValue)]
         public int Installments { get; set; } = 1;
         public bool Periodic { get; set; } = false;
+        public bool Paid { get; set; } = false;
 
         [Required]
         public virtual Category Category { get; set; }

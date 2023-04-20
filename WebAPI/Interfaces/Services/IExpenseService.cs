@@ -8,5 +8,6 @@ namespace Financial.Interfaces.Services
     {
         Task<IList<Period>> GetPeriods();
         Task<IList<Expense>> GetExpensesByPeriod(Period period);
+        Task MarkAsPaid(IList<Guid> ids);
     }
 }

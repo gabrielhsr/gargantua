@@ -21,4 +21,8 @@ export class ExpenseEndpoint extends BaseEndpoint<Expense> {
 	public getExpensesByPeriod(month: number, year: number) {
 		return this.service.get<Expense[]>(this.url + 'expensesByPeriod', { month, year });
 	}
+
+	public markAsPaid(ids: string[]) {
+		return this.service.post<string[], void>(this.url + 'markAsPaid', ids);
+	}
 }

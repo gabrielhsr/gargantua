@@ -47,6 +47,7 @@ namespace Financial.Services
 
             var expensesByPeriod = expenses
                 .Where(expense => expense.User.Id == UserId)
+                .Where(expense => expense.Paid is false)
                 .Select(expense =>
                 {
                     var lastCharge = expense.PurchaseDate.AddMonths(expense.Installments - 1);
@@ -78,6 +79,17 @@ namespace Financial.Services
                 .ToList();
 
             return expensesByPeriod;
+        }
+
+        public async Task MarkAsPaid(IList<Guid> ids)
+        {
+            foreach (var id in ids)
+            {
+                var expense = await GetAsync(id);
+                expense.Paid = true;
+            }
+
+            dbContext.SaveChanges();
         }
     }
 }

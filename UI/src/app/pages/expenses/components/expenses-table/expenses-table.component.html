@@ -1,8 +1,15 @@
-<period-select
-	[sortOptions]="sortOptions"
-	(periodChange)="periodSubject.next($event)"
-	(filterChange)="sort($event)"
-></period-select>
+<div class="header-container">
+	<period-select
+		[sortOptions]="sortOptions"
+		(periodChange)="periodSubject.next($event)"
+		(filterChange)="sort($event)"
+	></period-select>
+
+	<div class="action-container">
+		<button mat-flat-button (click)="expensePaidService.toggle()">{{ (expensePaidService.shouldSave ? 'Common.Cancel' : 'Pages.Expenses.MarkAsPaid') | translate }}</button>
+		<button mat-flat-button *ngIf="expensePaidService.shouldSave" (click)="expensePaidService.save()">{{ 'Pages.Expenses.SavePaidExpenses' | translate }}</button>
+	</div>
+</div>
 
 <div [loading]="expensesLoading">
 	<ng-container *ngIf="periodExpenses.data.length else noRegister">

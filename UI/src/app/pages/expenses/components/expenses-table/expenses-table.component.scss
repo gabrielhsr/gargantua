@@ -8,6 +8,17 @@ expenses-mobile-view {
 	display: block;
 }
 
+.header-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 22px;
+}
+
+.action-container {
+	display: flex;
+	gap: 10px;
+}
+
 @include media-breakpoint-up(lg) {
 	expenses-desktop-view {
 		display: block;
@@ -15,5 +26,12 @@ expenses-mobile-view {
 
 	expenses-mobile-view {
 		display: none;
+	}
+
+	.header-container {
+		flex-direction: row;
+		margin-bottom: 0;
+		justify-content: space-between;
+		align-items: center;
 	}
 }

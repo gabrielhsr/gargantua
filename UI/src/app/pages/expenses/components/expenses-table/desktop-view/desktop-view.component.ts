@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
+import { ExpensePaidService } from '../../../services/expense-paid.service';
 
 @Component({
   selector: 'expenses-desktop-view',
@@ -19,7 +21,7 @@ export class DesktopViewComponent implements AfterViewInit {
 
 	@ViewChild(MatSort) public sort?: MatSort;
 
-	public expandedElement?: Expense | null;
+	constructor(public readonly expensePaidService: ExpensePaidService) {}
 
 	public ngAfterViewInit() {
 		if (this.sort && this.periodExpenses) {
@@ -28,6 +30,6 @@ export class DesktopViewComponent implements AfterViewInit {
 			return;
 		}
 
-		console.error('MatSort property not initialized.')
+		console.error('MatSort property not initialized.');
 	}
 }

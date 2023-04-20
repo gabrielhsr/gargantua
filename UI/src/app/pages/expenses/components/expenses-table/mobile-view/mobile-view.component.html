@@ -10,21 +10,28 @@
 		>
 			<mat-expansion-panel-header>
 				<mat-panel-title class="panel-title">
-					<div class="item">
-						<div class="sub-title">
-							{{ "Pages.Expenses.Description" | translate }}
-						</div>
-						<div [ngClass]="panel.expanded ? '' : 'sub-value'">
-							{{ expense.description }}
-						</div>
-					</div>
+					<mat-checkbox
+						*ngIf="expensePaidService.showCheckBox"
+						(change)="expensePaidService.markAsPaid($event.checked, expense)"
+					></mat-checkbox>
 
-					<div class="item">
-						<div class="sub-title">
-							{{ "Pages.Expenses.PurchaseDate" | translate }}
+					<div class="item-container">
+						<div class="item">
+							<div class="sub-title">
+								{{ "Pages.Expenses.Description" | translate }}
+							</div>
+							<div [ngClass]="panel.expanded ? '' : 'sub-value'">
+								{{ expense.description }}
+							</div>
 						</div>
-						<div class="sub-value">
-							{{ expense.purchaseDate | date }}
+
+						<div class="item">
+							<div class="sub-title">
+								{{ "Pages.Expenses.PurchaseDate" | translate }}
+							</div>
+							<div class="sub-value">
+								{{ expense.purchaseDate | date }}
+							</div>
 						</div>
 					</div>
 				</mat-panel-title>

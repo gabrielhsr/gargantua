@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/entities/expense/expense.model';
+import { ExpensePaidService } from '../../../services/expense-paid.service';
 
 @Component({
   selector: 'expenses-mobile-view',
@@ -16,6 +17,8 @@ export class MobileViewComponent {
 
 	@Output() public editExpense = new EventEmitter<Expense>();
 	@Output() public deleteExpense = new EventEmitter<Expense>();
+
+	constructor(public readonly expensePaidService: ExpensePaidService) {}
 
 	public openedPanels: string[] = [];
 

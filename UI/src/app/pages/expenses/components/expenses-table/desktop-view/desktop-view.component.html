@@ -48,6 +48,11 @@
 		<th mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">
 			<div class="d-flex justify-content-end">
+				<mat-checkbox
+					*ngIf="expensePaidService.showCheckBox"
+					(change)="expensePaidService.markAsPaid($event.checked, expense)"
+				></mat-checkbox>
+
 				<button mat-icon-button color="primary" (click)="editExpense.emit(expense)">
 					<mat-icon>edit</mat-icon>
 				</button>

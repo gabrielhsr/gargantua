@@ -64,7 +64,9 @@
 			"SortBy": "Ordernar por",
 			"Installments": "Parcelas",
 			"Periodic": "Recorrente",
-			"Detail": "Detalhar"
+			"Detail": "Detalhar",
+			"MarkAsPaid": "Pagar",
+			"SavePaidExpenses": "Salvar Pagas"
 		},
 		"Income": {
 			"Alerts": {

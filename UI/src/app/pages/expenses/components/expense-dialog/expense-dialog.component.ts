@@ -99,6 +99,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public detailExpense($event: Event) {
+		// Detail expense, ex: one purchase with various itens, value of each item
 		$event.preventDefault();
 	}
 
