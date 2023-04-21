@@ -1,7 +1,7 @@
 <div class="period-container" *ngIf="periods?.length">
-	<mat-form-field class="period-form-field">
+	<mat-form-field class="period-form-field" appearance="outline">
 		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
-		<mat-select  [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)" [compareWith]="compareWith">
+		<mat-select [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)" [compareWith]="compareWith">
 			<mat-option *ngFor="let period of periods" [value]="period">
 				{{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
 			</mat-option>

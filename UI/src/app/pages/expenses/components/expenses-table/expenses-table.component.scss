@@ -8,16 +8,24 @@ expenses-mobile-view {
 	display: block;
 }
 
+.main-container {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+}
+
 .header-container {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 22px;
+	padding: 22px 22px 0 22px;
 }
 
 .action-container {
 	display: flex;
 	gap: 22px;
 	align-items: center;
+	margin-bottom: 22px;
 }
 
 @include media-breakpoint-up(lg) {

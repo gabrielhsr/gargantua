@@ -22,7 +22,7 @@ export class MobileViewComponent {
 
 	public openedPanels: string[] = [];
 
-	public forgetPanel(id: string) {
+	public forgotPanel(id: string) {
 		return this.openedPanels = this.openedPanels.filter(x => x !== id);
 	}
 }

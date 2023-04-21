@@ -5,7 +5,7 @@
 			*ngFor="let expense of periodExpenses?.data"
 			[expanded]="openedPanels.includes(expense.id)"
 			(opened)="openedPanels.push(expense.id)"
-			(closed)="forgetPanel(expense.id)"
+			(closed)="forgotPanel(expense.id)"
 			#panel
 		>
 			<mat-expansion-panel-header>
@@ -17,21 +17,13 @@
 
 					<div class="item-container">
 						<div class="item">
-							<div class="sub-title">
-								{{ "Pages.Expenses.Description" | translate }}
-							</div>
-							<div [ngClass]="panel.expanded ? '' : 'sub-value'">
-								{{ expense.description }}
-							</div>
+							<div class="sub-title">{{ "Pages.Expenses.Description" | translate }}</div>
+							<div [ngClass]="panel.expanded ? '' : 'sub-value'">{{ expense.description }}</div>
 						</div>
 
 						<div class="item">
-							<div class="sub-title">
-								{{ "Pages.Expenses.PurchaseDate" | translate }}
-							</div>
-							<div class="sub-value">
-								{{ expense.purchaseDate | date }}
-							</div>
+							<div class="sub-title">{{ "Pages.Expenses.PurchaseDate" | translate }}</div>
+							<div class="sub-value">{{ expense.purchaseDate | date }}</div>
 						</div>
 					</div>
 				</mat-panel-title>
@@ -44,32 +36,20 @@
 			<div class="panel-content">
 				<div class="sub-content">
 					<div class="item">
-						<div class="sub-title">
-							{{ "Pages.Expenses.DueDate" | translate }}
-						</div>
-						<div class="sub-value">
-							{{ expense.dueDate | date }}
-						</div>
+						<div class="sub-title">{{ "Pages.Expenses.DueDate" | translate }}</div>
+						<div class="sub-value">{{ expense.dueDate | date }}</div>
 					</div>
 
 					<div class="item">
-						<div class="sub-title">
-							{{ "Pages.Expenses.Category" | translate }}
-						</div>
-						<div class="sub-value">
-							{{ expense.category?.name }}
-						</div>
+						<div class="sub-title">{{ "Pages.Expenses.Category" | translate }}</div>
+						<div class="sub-value">{{ expense.category?.name }}</div>
 					</div>
 				</div>
 
 				<div class="sub-content">
 					<div class="item">
-						<div class="sub-title">
-							{{ "Pages.Expenses.PaymentMethod" | translate }}
-						</div>
-						<div class="sub-value">
-							{{ expense.paymentMethod?.name }}
-						</div>
+						<div class="sub-title">{{ "Pages.Expenses.PaymentMethod" | translate }}</div>
+						<div class="sub-value">{{ expense.paymentMethod?.name }}</div>
 					</div>
 				</div>
 			</div>

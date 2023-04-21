@@ -77,8 +77,13 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public deleteExpense(expense: Expense) {
 		this.feedback
 			.confirmCancelDialog(expense.description)
-			.pipe(switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY), takeUntil(this.destroy))
-			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
+			.pipe(
+				switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY),
+				takeUntil(this.destroy)
+			)
+			.subscribe(({ isSuccess }) => {
+				if (isSuccess) this.feedback.successToast('Feedback.DeleteSuccess');
+			});
 	}
 
 	public editExpense(expense: Expense) {

@@ -1,5 +1,5 @@
-<div [loading]="expensesLoading">
-	<div class="header-container">
+<div class="main-container" [loading]="expensesLoading">
+	<mat-card class="header-container">
 		<period-select
 			[sortOptions]="sortOptions"
 			(periodChange)="periodSubject.next($event)"
@@ -9,18 +9,19 @@
 		<div class="action-container">
 			<mat-slide-toggle (change)="togglePaid($event.checked)">{{ 'Pages.Expenses.ShowPaid' | translate }}</mat-slide-toggle>
 
-			<button mat-flat-button (click)="expensePaidService.toggle()">
+			<button mat-stroked-button color="primary" (click)="expensePaidService.toggle()">
 				{{ (expensePaidService.showActions ? "Common.Cancel" : "Pages.Expenses.MarkAsPaid") | translate }}
 			</button>
 			<button
-				mat-flat-button
+				mat-stroked-button
+				color="accent"
 				*ngIf="expensePaidService.shouldSave"
 				(click)="expensePaidService.save()"
 			>
 				{{ "Pages.Expenses.SavePaidExpenses" | translate }}
 			</button>
 		</div>
-	</div>
+	</mat-card>
 
 	<ng-container *ngIf="periodExpenses.data.length else noRegister">
 		<expenses-desktop-view
