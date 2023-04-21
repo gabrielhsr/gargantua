@@ -9,10 +9,9 @@ namespace Financial.Core.Services.Base
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
-        private readonly IBaseRepository<T> baseRepository;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public readonly FinancialDbContext dbContext;
+        public readonly IBaseRepository<T> repository;
 
         public Guid UserId
         {
@@ -25,39 +24,38 @@ namespace Financial.Core.Services.Base
 
         public BaseService(IDependencyAggregate<T> dependencyAggregate)
         {
-            baseRepository = dependencyAggregate.BaseRepository;
+            repository = dependencyAggregate.BaseRepository;
             httpContextAccessor = dependencyAggregate.HttpContextAccessor;
-            dbContext = dependencyAggregate.DbContext;
         }
 
         public virtual async Task RemoveAsync(Guid id)
         {
-            await baseRepository.DeleteAsync(id);
+            await repository.DeleteAsync(id);
         }
 
         public virtual async Task<IList<T>> GetAllAsync()
         {
-            return await baseRepository.GetAllAsync();
+            return await repository.GetAllAsync();
         }
 
         public virtual async Task<T> GetAsync(Guid id)
         {
-            return await baseRepository.GetAsync(id);
+            return await repository.GetAsync(id);
         }
 
         public virtual async Task<T> SaveAsync(Guid id, T entity)
         {
             if (IdHelper.IsNullOrDefault(id))
             {
-                await baseRepository.AddAsync(entity);
+                await repository.AddAsync(entity);
             }
             else
             {
-                if (await baseRepository.Exists(id))
+                if (await repository.Exists(id))
                 {
                     entity.Id = id;
 
-                    await baseRepository.UpdateAsync(entity);
+                    await repository.UpdateAsync(entity);
                 }
                 else
                 {

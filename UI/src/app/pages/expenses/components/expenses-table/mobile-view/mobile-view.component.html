@@ -11,7 +11,7 @@
 			<mat-expansion-panel-header>
 				<mat-panel-title class="panel-title">
 					<mat-checkbox
-						*ngIf="expensePaidService.showCheckBox"
+						*ngIf="expensePaidService.showActions"
 						(change)="expensePaidService.markAsPaid($event.checked, expense)"
 					></mat-checkbox>
 

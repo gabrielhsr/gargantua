@@ -15,13 +15,13 @@ namespace Financial.Core.Services
 
         public override async Task<Expense> SaveAsync(Guid id, Expense entity)
         {
-            if (entity.Category.Id != Guid.Empty) dbContext.Entry(entity.Category).State = EntityState.Unchanged;
-            if (entity.PaymentMethod.Id != Guid.Empty) dbContext.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
+            if (entity.Category.Id != Guid.Empty) repository.Context.Entry(entity.Category).State = EntityState.Unchanged;
+            if (entity.PaymentMethod.Id != Guid.Empty) repository.Context.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
 
             if (entity.Periodic) entity.Installments = 1;
 
             entity.DueDate ??= entity.PurchaseDate;
-            entity.User = await dbContext.Set<User>().FindAsync(UserId);
+            entity.User = await repository.Context.Set<User>().FindAsync(UserId);
 
             return await base.SaveAsync(id, entity);
         }
@@ -47,7 +47,6 @@ namespace Financial.Core.Services
 
             var expensesByPeriod = expenses
                 .Where(expense => expense.User.Id == UserId)
-                .Where(expense => expense.Paid is false)
                 .Select(expense =>
                 {
                     var lastCharge = expense.PurchaseDate.AddMonths(expense.Installments - 1);
@@ -81,15 +80,10 @@ namespace Financial.Core.Services
             return expensesByPeriod;
         }
 
-        public async Task MarkAsPaid(IList<Guid> ids)
+        public async Task MarkAsPaid(IList<Expense> expenses)
         {
-            foreach (var id in ids)
-            {
-                var expense = await GetAsync(id);
-                expense.Paid = true;
-            }
-
-            dbContext.SaveChanges();
+            repository.Context.UpdateRange(expenses);
+            await repository.Context.SaveChangesAsync();
         }
     }
 }

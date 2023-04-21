@@ -30,9 +30,9 @@ namespace Financial.Controllers
         }
 
         [HttpPost("markAsPaid")]
-        public async Task<IActionResult> MarkAsPaid([FromBody] IList<Guid> ids)
+        public async Task<IActionResult> MarkAsPaid([FromBody] IList<Expense> expenses)
         {
-            await service.MarkAsPaid(ids);
+            await service.MarkAsPaid(expenses);
 
             return Ok();
         }

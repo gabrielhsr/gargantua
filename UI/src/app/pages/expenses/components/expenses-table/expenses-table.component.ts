@@ -23,12 +23,13 @@ export interface SortOption {
 	providers: [ExpensePaidService]
 })
 export class ExpensesTableComponent implements OnInit, OnDestroy {
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic'], include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic', 'paid'], include: ['options'] });
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
 	public expensesLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
+	private originalData: Expense[] = [];
 
 	private destroy = new Subject();
 
@@ -59,7 +60,8 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
-					this.periodExpenses.data = res.value;
+					this.originalData = res.value;
+					this.togglePaid(false);
 					this.sort();
 				}
 
@@ -99,5 +101,9 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 			throw new Error(`Key named '${sortOption.value}' not finded in object of type 'Expense'!`);
 		});
+	}
+
+	public togglePaid(showPaid: boolean) {
+		this.periodExpenses.data = showPaid ? this.originalData : this.originalData.filter(expense => !expense.paid);
 	}
 }

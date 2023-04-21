@@ -16,7 +16,8 @@ expenses-mobile-view {
 
 .action-container {
 	display: flex;
-	gap: 10px;
+	gap: 22px;
+	align-items: center;
 }
 
 @include media-breakpoint-up(lg) {

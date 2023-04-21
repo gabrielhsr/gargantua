@@ -12,7 +12,7 @@ namespace Financial.Core.Services
 
         public override async Task<Income> SaveAsync(Guid id, Income entity)
         {
-            entity.User = await dbContext.Set<User>().FindAsync(UserId);
+            entity.User = await repository.Context.Set<User>().FindAsync(UserId);
 
             return await base.SaveAsync(id, entity);
         }

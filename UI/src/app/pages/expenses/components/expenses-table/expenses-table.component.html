@@ -1,17 +1,27 @@
-<div class="header-container">
-	<period-select
-		[sortOptions]="sortOptions"
-		(periodChange)="periodSubject.next($event)"
-		(filterChange)="sort($event)"
-	></period-select>
-
-	<div class="action-container">
-		<button mat-flat-button (click)="expensePaidService.toggle()">{{ (expensePaidService.shouldSave ? 'Common.Cancel' : 'Pages.Expenses.MarkAsPaid') | translate }}</button>
-		<button mat-flat-button *ngIf="expensePaidService.shouldSave" (click)="expensePaidService.save()">{{ 'Pages.Expenses.SavePaidExpenses' | translate }}</button>
-	</div>
-</div>
-
 <div [loading]="expensesLoading">
+	<div class="header-container">
+		<period-select
+			[sortOptions]="sortOptions"
+			(periodChange)="periodSubject.next($event)"
+			(filterChange)="sort($event)"
+		></period-select>
+
+		<div class="action-container">
+			<mat-slide-toggle (change)="togglePaid($event.checked)">{{ 'Pages.Expenses.ShowPaid' | translate }}</mat-slide-toggle>
+
+			<button mat-flat-button (click)="expensePaidService.toggle()">
+				{{ (expensePaidService.showActions ? "Common.Cancel" : "Pages.Expenses.MarkAsPaid") | translate }}
+			</button>
+			<button
+				mat-flat-button
+				*ngIf="expensePaidService.shouldSave"
+				(click)="expensePaidService.save()"
+			>
+				{{ "Pages.Expenses.SavePaidExpenses" | translate }}
+			</button>
+		</div>
+	</div>
+
 	<ng-container *ngIf="periodExpenses.data.length else noRegister">
 		<expenses-desktop-view
 			[periodExpenses]="periodExpenses"

@@ -15,7 +15,7 @@ export class ExpensePaidService {
 		private readonly update: UpdateService
 	) {}
 
-	public get showCheckBox(): boolean {
+	public get showActions(): boolean {
 		return this.checkBoxState;
 	}
 
@@ -30,18 +30,20 @@ export class ExpensePaidService {
 	}
 
 	public markAsPaid(check: boolean, expense: Expense) {
-		if (check) {
+		const item = this.paidExpenses.findIndex(paidExpense => paidExpense.id == expense.id);
+
+		expense.paid = check;
+
+		if (item < 0) {
 			this.paidExpenses.push(expense);
 		} else {
-			this.paidExpenses = this.paidExpenses.filter(paidExpense => paidExpense.id !== expense.id);
+			this.paidExpenses[item] = expense;
 		}
 	}
 
 	public save() {
-		const ids = this.paidExpenses.map(expense => expense.id);
-
-		this.expenseEndpoint.markAsPaid(ids).subscribe(res => {
-			if (res.isSuccess) {
+		this.expenseEndpoint.markAsPaid(this.paidExpenses).subscribe(({ isSuccess }) => {
+			if (isSuccess) {
 				this.feedback.successToast();
 				this.update.run();
 			}

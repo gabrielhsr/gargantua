@@ -11,4 +11,5 @@ export class Expense extends BaseEntity {
 	paymentMethod: PaymentMethod | null = null;
 	installments: number = 1;
 	periodic: boolean = false;
+	paid: boolean = false;
 }

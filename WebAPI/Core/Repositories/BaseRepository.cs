@@ -7,16 +7,17 @@ namespace Financial.Core.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly FinancialDbContext context;
+        public FinancialDbContext Context { get; }
 
         public BaseRepository(FinancialDbContext context)
         {
-            this.context = context;
+            Context = context;
         }
+
         public virtual async Task<T> AddAsync(T entity)
         {
-            await context.AddAsync(entity);
-            await context.SaveChangesAsync();
+            await Context.AddAsync(entity);
+            await Context.SaveChangesAsync();
 
             return entity;
         }
@@ -30,30 +31,30 @@ namespace Financial.Core.Repositories
                 throw new Exception("Id not found!");
             }
 
-            context.Set<T>().Remove(entity);
-            await context.SaveChangesAsync();
+            Context.Set<T>().Remove(entity);
+            await Context.SaveChangesAsync();
         }
 
         public virtual async Task<bool> Exists(Guid id)
         {
-            var entity = await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             return entity != null;
         }
 
         public virtual async Task<List<T>> GetAllAsync()
         {
-            return await context.Set<T>().ToListAsync();
+            return await Context.Set<T>().ToListAsync();
         }
 
         public virtual async Task<T> GetAsync(Guid id)
         {
-            return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public virtual async Task<T> UpdateAsync(T entity)
         {
-            context.Update(entity);
-            await context.SaveChangesAsync();
+            Context.Update(entity);
+            await Context.SaveChangesAsync();
 
             return entity;
         }

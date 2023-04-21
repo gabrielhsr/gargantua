@@ -28,7 +28,7 @@ namespace Financial.Core.Services
 
         public async Task<AuthRes> LoginAsync(Login user)
         {
-            var storedUser = await dbContext.User.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
+            var storedUser = await repository.Context.User.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
 
             if (storedUser is not null)
             {
@@ -58,8 +58,8 @@ namespace Financial.Core.Services
 
             user.PasswordHash = PasswordHelper.ComputeHash("", user.PasswordSalt, pepper, iteration);
 
-            await dbContext.AddAsync(user);
-            await dbContext.SaveChangesAsync();
+            await repository.Context.AddAsync(user);
+            await repository.Context.SaveChangesAsync();
         }
     }
 }

@@ -22,7 +22,7 @@ export class ExpenseEndpoint extends BaseEndpoint<Expense> {
 		return this.service.get<Expense[]>(this.url + 'expensesByPeriod', { month, year });
 	}
 
-	public markAsPaid(ids: string[]) {
-		return this.service.post<string[], void>(this.url + 'markAsPaid', ids);
+	public markAsPaid(expenses: Expense[]) {
+		return this.service.post<Expense[], void>(this.url + 'markAsPaid', expenses);
 	}
 }

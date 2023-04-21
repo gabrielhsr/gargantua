@@ -47,19 +47,11 @@
 	<ng-container matColumnDef="options">
 		<th mat-header-cell *matHeaderCellDef></th>
 		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">
-			<div class="d-flex justify-content-end">
-				<mat-checkbox
-					*ngIf="expensePaidService.showCheckBox"
-					(change)="expensePaidService.markAsPaid($event.checked, expense)"
-				></mat-checkbox>
-
-				<button mat-icon-button color="primary" (click)="editExpense.emit(expense)">
-					<mat-icon>edit</mat-icon>
-				</button>
-
-				<button mat-icon-button color="warn" (click)="deleteExpense.emit(expense)">
-					<mat-icon>delete</mat-icon>
-				</button>
+			<div class="d-flex justify-content-end align-items-center">
+				<ng-container
+					[ngTemplateOutlet]="expensePaidService.showActions ? paymentActions : defaultActions"
+					[ngTemplateOutletContext]="{ expense }"
+				></ng-container>
 			</div>
 		</td>
 		<td mat-footer-cell *matFooterCellDef></td>
@@ -69,3 +61,17 @@
 	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
+
+<ng-template #paymentActions let-expense="expense">
+	<mat-checkbox (change)="expensePaidService.markAsPaid($event.checked, expense)" [checked]="expense.paid"></mat-checkbox>
+</ng-template>
+
+<ng-template #defaultActions let-expense="expense">
+	<button mat-icon-button color="primary" (click)="editExpense.emit(expense)">
+		<mat-icon>edit</mat-icon>
+	</button>
+
+	<button mat-icon-button color="warn" (click)="deleteExpense.emit(expense)">
+		<mat-icon>delete</mat-icon>
+	</button>
+</ng-template>
