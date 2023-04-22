@@ -26,7 +26,8 @@
 		"Name": "Nome",
 		"Yes": "Sim",
 		"No": "Não",
-		"MoreOptions": "Mais Opções"
+		"MoreOptions": "Mais Opções",
+		"Save": "Salvar"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",

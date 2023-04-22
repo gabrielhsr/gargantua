@@ -12,12 +12,12 @@ expenses-mobile-view {
 	display: flex;
 	flex-direction: column;
 	gap: 22px;
+	margin-top: 22px;
 }
 
 .header-container {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 22px;
 	padding: 22px 22px 0 22px;
 }
 
@@ -26,6 +26,7 @@ expenses-mobile-view {
 	gap: 22px;
 	align-items: center;
 	margin-bottom: 22px;
+	justify-content: space-between;
 }
 
 @include media-breakpoint-up(lg) {
@@ -39,8 +40,12 @@ expenses-mobile-view {
 
 	.header-container {
 		flex-direction: row;
-		margin-bottom: 0;
 		justify-content: space-between;
 		align-items: center;
 	}
+
+	.main-container {
+		margin-top: 0;
+	}
+
 }

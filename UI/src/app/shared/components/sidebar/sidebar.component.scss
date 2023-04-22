@@ -1,8 +1,5 @@
+@import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 @import "/src/assets/theme/colors.scss";
-
-mat-sidenav-content {
-	padding: 22px !important;
-}
 
 .sidebar-container {
 	height: calc(100vh - var(--topbar-height));
@@ -35,4 +32,10 @@ mat-sidenav-content {
 
 ::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {
 	background-color: rgba(0, 0, 0, 0.32) !important;
+}
+
+@include media-breakpoint-up(lg) {
+	mat-sidenav-content {
+		padding: 22px !important;
+	}
 }

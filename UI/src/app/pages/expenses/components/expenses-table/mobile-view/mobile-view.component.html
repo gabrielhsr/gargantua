@@ -8,10 +8,11 @@
 			(closed)="forgotPanel(expense.id)"
 			#panel
 		>
-			<mat-expansion-panel-header>
+			<mat-expansion-panel-header [ngStyle]="{ 'padding-left' : !expensePaidService.showActions ? '24px' : '12px' }">
 				<mat-panel-title class="panel-title">
 					<mat-checkbox
 						*ngIf="expensePaidService.showActions"
+						(click)="$event.stopPropagation();"
 						(change)="expensePaidService.markAsPaid($event.checked, expense)"
 					></mat-checkbox>
 
