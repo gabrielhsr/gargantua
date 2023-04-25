@@ -12,6 +12,7 @@
 				<mat-panel-title class="panel-title">
 					<mat-checkbox
 						*ngIf="expensePaidService.showActions"
+						[checked]="expense.paid"
 						(click)="$event.stopPropagation();"
 						(change)="expensePaidService.markAsPaid($event.checked, expense)"
 					></mat-checkbox>

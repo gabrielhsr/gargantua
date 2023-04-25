@@ -29,6 +29,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public expensesLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
+	private lastFilterOption?: boolean;
 	private originalData: Expense[] = [];
 
 	private destroy = new Subject();
@@ -61,7 +62,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			.subscribe((res) => {
 				if (res?.isSuccess) {
 					this.originalData = res.value;
-					this.togglePaid(false);
+					this.filter();
 					this.sort();
 				}
 
@@ -108,7 +109,9 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	public togglePaid(showPaid: boolean) {
-		this.periodExpenses.data = showPaid ? this.originalData : this.originalData.filter(expense => !expense.paid);
+	public filter(showPaid?: boolean) {
+		this.lastFilterOption = showPaid ?? this.lastFilterOption;
+
+		this.periodExpenses.data = this.lastFilterOption ? this.originalData : this.originalData.filter(expense => !expense.paid);
 	}
 }

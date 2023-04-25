@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
-import { Expense } from 'src/app/entities/expense/expense.model';
+import { Expense, PaidExpense } from 'src/app/entities/expense/expense.model';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { UpdateService } from 'src/app/shared/services/update.service';
 
 @Injectable()
 export class ExpensePaidService {
 	private checkBoxState: boolean = false;
-	private paidExpenses: Expense[] = [];
+	private paidExpenses: PaidExpense[] = [];
 
 	constructor(
 		private readonly expenseEndpoint: ExpenseEndpoint,
@@ -31,13 +31,15 @@ export class ExpensePaidService {
 
 	public markAsPaid(check: boolean, expense: Expense) {
 		const item = this.paidExpenses.findIndex(paidExpense => paidExpense.id == expense.id);
+		const expensePaid = new PaidExpense();
 
-		expense.paid = check;
+		expensePaid.id = expense.id;
+		expensePaid.paid = check;
 
 		if (item < 0) {
-			this.paidExpenses.push(expense);
+			this.paidExpenses.push(expensePaid);
 		} else {
-			this.paidExpenses[item] = expense;
+			this.paidExpenses[item] = expensePaid;
 		}
 	}
 

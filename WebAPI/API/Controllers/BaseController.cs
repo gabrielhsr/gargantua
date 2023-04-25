@@ -30,7 +30,7 @@ namespace Financial.API.Controllers
         [HttpGet("{id}")]
         public virtual async Task<ActionResult<TEntity>> GetEntity(Guid id)
         {
-            var entity = await service.GetAsync(id);
+            var entity = await service.GetByIdAsync(id);
 
             if (entity == null)
             {
@@ -69,7 +69,7 @@ namespace Financial.API.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> DeleteEntity(Guid id)
         {
-            var entitiy = await service.GetAsync(id);
+            var entitiy = await service.GetByIdAsync(id);
 
             if (entitiy == null)
             {

@@ -1,6 +1,5 @@
 ﻿using Financial.Core.Helpers;
 using Financial.Core.Services.Base;
-using Financial.Domain.Data;
 using Financial.Domain.DTO;
 using Financial.Domain.Interfaces.Services;
 using Financial.Domain.Interfaces.Services.Base;
@@ -80,9 +79,15 @@ namespace Financial.Core.Services
             return expensesByPeriod;
         }
 
-        public async Task MarkAsPaid(IList<Expense> expenses)
+        public async Task MarkAsPaid(IList<ExpensePaid> expenses)
         {
-            repository.Context.UpdateRange(expenses);
+            foreach (var expense in expenses)
+            {
+                var storedExpense = await GetByIdAsync(expense.Id);
+
+                storedExpense.Paid = expense.Paid;
+            }
+
             await repository.Context.SaveChangesAsync();
         }
     }

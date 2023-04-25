@@ -13,3 +13,8 @@ export class Expense extends BaseEntity {
 	periodic: boolean = false;
 	paid: boolean = false;
 }
+
+export class PaidExpense {
+	id: string = "00000000-0000-0000-0000-000000000000";
+	paid: boolean = false;
+}

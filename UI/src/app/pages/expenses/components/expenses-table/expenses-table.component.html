@@ -7,7 +7,7 @@
 		></period-select>
 
 		<div class="action-container">
-			<mat-slide-toggle (change)="togglePaid($event.checked)">{{ 'Pages.Expenses.ShowPaid' | translate }}</mat-slide-toggle>
+			<mat-slide-toggle (change)="filter($event.checked)">{{ 'Pages.Expenses.ShowPaid' | translate }}</mat-slide-toggle>
 
 			<button mat-stroked-button color="primary" (click)="expensePaidService.toggle()">
 				{{ (expensePaidService.showActions ? "Common.Cancel" : "Pages.Expenses.MarkAsPaid") | translate }}
