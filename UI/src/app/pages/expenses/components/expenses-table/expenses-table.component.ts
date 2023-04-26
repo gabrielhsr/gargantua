@@ -27,10 +27,10 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
 	public expensesLoading: boolean = true;
+	public originalData: Expense[] = [];
 
 	private lastSortOption?: SortOption;
 	private lastFilterOption?: boolean;
-	private originalData: Expense[] = [];
 
 	private destroy = new Subject();
 

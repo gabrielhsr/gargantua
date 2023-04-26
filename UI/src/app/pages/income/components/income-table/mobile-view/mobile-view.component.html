@@ -35,7 +35,15 @@
 			</mat-expansion-panel-header>
 
 			<div class="panel-content">
-				<!-- content to show -->
+				<div class="sub-content">
+					<div class="item">
+						<div class="sub-title">{{ "Pages.Income.Payer" | translate }}</div>
+						<div class="sub-value">{{ income.payer }}</div>
+					</div>
+				</div>
+
+				<div class="sub-content">
+				</div>
 			</div>
 			<mat-action-row>
 				<button mat-icon-button color="primary" (click)="editIncome.emit(income)">

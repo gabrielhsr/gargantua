@@ -1,10 +1,12 @@
-<period-select
-	[sortOptions]="sortOptions"
-	(periodChange)="periodSubject.next($event)"
-	(filterChange)="sort($event)"
-></period-select>
+<div class="main-container" [loading]="incomeLoading">
+	<mat-card class="header-container">
+		<period-select
+			[sortOptions]="sortOptions"
+			(periodChange)="periodSubject.next($event)"
+			(filterChange)="sort($event)"
+		></period-select>
+	</mat-card>
 
-<div [loading]="incomeLoading">
 	<ng-container *ngIf="periodIncome.data.length else noRegister">
 		<income-desktop-view
 			[periodIncome]="periodIncome"

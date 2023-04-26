@@ -85,7 +85,9 @@
 			"Periodic": "Recorrente",
 			"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário.",
 			"EditOption": "Desejar editar a recorrência ou somente este mês?",
-			"JustMonth": "Somente Mês"
+			"JustMonth": "Somente Mês",
+			"Payer": "Pagador",
+			"Installments": "Parcelas"
 		},
 		"Config": {
 			"Categories": "Categorias",

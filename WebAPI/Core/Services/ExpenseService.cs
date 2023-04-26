@@ -54,16 +54,15 @@ namespace Financial.Core.Services
                     {
                         var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
 
-                        expense.Periodic = true;
                         expense.Description += $" ({expense.Installments - currentCharge}/{expense.Installments})";
                     }
 
                     return expense;
                 })
-                .Where(expense => expense.Periodic || period.Equals(expense.DueDate))
+                .Where(expense => expense.Periodic || expense.Installments > 1 || period.Equals(expense.DueDate))
                 .Select(expense =>
                 {
-                    if (expense.Periodic)
+                    if (expense.Periodic || expense.Installments > 1)
                     {
                         var yearDiff = period.Year - expense.PurchaseDate.Year;
                         var monthDiff = period.Month - expense.PurchaseDate.Month;

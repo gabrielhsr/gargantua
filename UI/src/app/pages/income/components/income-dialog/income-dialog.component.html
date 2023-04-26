@@ -12,6 +12,12 @@
 			<mat-error>{{ showErrorMessage('description') }}</mat-error>
 		</mat-form-field>
 
+		<mat-form-field>
+			<mat-label>{{ "Pages.Income.Payer" | translate }}</mat-label>
+			<input matInput type="text" formControlName="payer"/>
+			<mat-error>{{ showErrorMessage('payer') }}</mat-error>
+		</mat-form-field>
+
 		<div class="two-input-container">
 			<mat-form-field>
 				<mat-label>{{ "Pages.Income.Amount" | translate }}</mat-label>
@@ -28,10 +34,22 @@
 			</mat-form-field>
 		</div>
 
-		<div class="checkbox-tooltip" *ngIf="showRecurrentCheck">
-			<mat-checkbox formControlName="periodic">{{ "Pages.Income.Periodic" | translate }}</mat-checkbox>
-			<mat-icon fontIcon="help" [matTooltip]="'Pages.Income.PeriodicTooltip' | translate" matTooltipPosition="right"></mat-icon>
-		</div>
+		<mat-expansion-panel class="mat-elevation-z0" *ngIf="showRecurrentCheck">
+			<mat-expansion-panel-header>
+				<mat-panel-title>{{ 'Common.MoreOptions' | translate }}</mat-panel-title>
+			</mat-expansion-panel-header>
+
+			<div class="checkbox-tooltip">
+				<mat-checkbox formControlName="periodic" #periodic>{{ "Pages.Income.Periodic" | translate }}</mat-checkbox>
+				<mat-icon fontIcon="help" [matTooltip]="'Pages.Income.PeriodicTooltip' | translate" matTooltipPosition="right"></mat-icon>
+			</div>
+
+			<mat-form-field *ngIf="!periodic.checked">
+				<mat-label>{{ "Pages.Income.Installments" | translate }}</mat-label>
+				<input matInput type="number" min="1" formControlName="installments"/>
+				<mat-error>{{ showErrorMessage('installments') }}</mat-error>
+			</mat-form-field>
+		</mat-expansion-panel>
 
 		<div class="button-container">
 			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="incomeForm.invalid || incomeForm.pristine">{{ "Common.Send" | translate  }}</button>

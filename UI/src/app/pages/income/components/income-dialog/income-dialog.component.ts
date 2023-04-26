@@ -86,7 +86,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 		const formsControl = FormHelper.build(income, {
 			allValidators: {
 				validators: [Validators.required],
-				exclude: ['recurrentId'],
+				exclude: ['recurrentId', 'displayDescription'],
 			},
 		});
 

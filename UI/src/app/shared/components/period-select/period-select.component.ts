@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { DateHelper } from '../../helpers/date.helper';
 import { PeriodService } from './period-select.service';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 
 interface SortOption {
 	text: string;
@@ -21,6 +22,7 @@ export class PeriodSelectComponent implements OnInit {
 	@Output() public filterChange = new EventEmitter<SortOption>();
 
 	@Input() public sortOptions: SortOption[] = [];
+	@Input() public appearance: MatFormFieldAppearance = "outline";
 
 	public periods?: Period[];
 	public selectedPeriod?: Period;

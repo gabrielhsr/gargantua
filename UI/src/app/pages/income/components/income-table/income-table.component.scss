@@ -8,6 +8,27 @@ income-mobile-view {
 	display: block;
 }
 
+.main-container {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+	margin-top: 22px;
+}
+
+.header-container {
+	display: flex;
+	flex-direction: column;
+	padding: 22px 22px 0 22px;
+}
+
+.action-container {
+	display: flex;
+	gap: 22px;
+	align-items: center;
+	margin-bottom: 22px;
+	justify-content: space-between;
+}
+
 @include media-breakpoint-up(lg) {
 	income-desktop-view {
 		display: block;
@@ -15,5 +36,15 @@ income-mobile-view {
 
 	income-mobile-view {
 		display: none;
+	}
+
+	.header-container {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.main-container {
+		margin-top: 0;
 	}
 }

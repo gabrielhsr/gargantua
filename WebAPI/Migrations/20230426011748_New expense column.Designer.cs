@@ -4,6 +4,7 @@ using Financial.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Financial.Migrations
 {
     [DbContext(typeof(FinancialDbContext))]
-    partial class FinancialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230426011748_New expense column")]
+    partial class Newexpensecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Expense", b =>
@@ -84,7 +87,7 @@ namespace Financial.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Expenses", (string)null);
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Income", b =>
@@ -99,9 +102,6 @@ namespace Financial.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Installments")
-                        .HasColumnType("int");
 
                     b.Property<string>("Payer")
                         .IsRequired()
@@ -123,7 +123,7 @@ namespace Financial.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Income", (string)null);
+                    b.ToTable("Income");
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.PaymentMethod", b =>
@@ -143,7 +143,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethods", (string)null);
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.User", b =>
@@ -165,7 +165,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Expense", b =>

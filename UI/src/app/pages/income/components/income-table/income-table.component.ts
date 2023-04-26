@@ -24,7 +24,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public incomeLoading: boolean = true;
 
 	public periodIncome = new MatTableDataSource<Income>();
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: ['id', 'periodic', 'recurrentId'], include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription'], include: ['options'] });
 
 	public periodSubject = new Subject<Period | undefined>();
 
@@ -78,7 +78,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	}
 
 	public async editIncome(income: Income) {
-		if (income.periodic) {
+		if (income.periodic && income.installments === 1) {
 			const dialog$ = this.feedback.yesOrNoDialog('Pages.Income.EditOption', 'Pages.Income.JustMonth', 'Pages.Income.Periodic');
 			const response = await lastValueFrom(dialog$);
 

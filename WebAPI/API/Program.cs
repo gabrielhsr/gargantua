@@ -42,7 +42,6 @@ builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<IPeriodService, PeriodService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

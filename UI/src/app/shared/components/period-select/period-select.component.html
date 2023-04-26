@@ -1,5 +1,5 @@
 <div class="period-container" *ngIf="periods?.length">
-	<mat-form-field class="period-form-field" appearance="outline">
+	<mat-form-field class="period-form-field" [appearance]="appearance">
 		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
 		<mat-select [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)" [compareWith]="compareWith">
 			<mat-option *ngFor="let period of periods" [value]="period">
