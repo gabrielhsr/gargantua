@@ -27,6 +27,9 @@ namespace Financial.Domain.Models
         [Range(1, int.MaxValue)]
         public int Installments { get; set; } = 1;
 
+        [Range(1, int.MaxValue)]
+        public int MonthInterval { get; set; } = 1;
+
         public Guid? RecurrentId { get; set; } = null;
 
         [JsonIgnore]

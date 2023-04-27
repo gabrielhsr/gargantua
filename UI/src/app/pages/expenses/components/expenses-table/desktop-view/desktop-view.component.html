@@ -9,7 +9,7 @@
 >
 	<ng-container matColumnDef="description">
 		<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription>{{ "Pages.Expenses.Description" | translate }}</th>
-		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.description }}</td>
+		<td mat-cell *matCellDef="let expense; dataSouce: periodExpenses">{{ expense.displayDescription }}</td>
 		<td mat-footer-cell *matFooterCellDef>{{ "Common.Total" | translate }}</td>
 	</ng-container>
 

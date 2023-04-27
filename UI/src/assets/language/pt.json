@@ -68,7 +68,9 @@
 			"Detail": "Detalhar",
 			"MarkAsPaid": "Pagar",
 			"SavePaidExpenses": "Salvar Pagas",
-			"ShowPaid": "Mostrar Pagas"
+			"ShowPaid": "Mostrar Pagas",
+			"EditOption": "Desejar editar a recorrência ou somente este mês?",
+			"JustMonth": "Somente Mês"
 		},
 		"Income": {
 			"Alerts": {
@@ -87,7 +89,8 @@
 			"EditOption": "Desejar editar a recorrência ou somente este mês?",
 			"JustMonth": "Somente Mês",
 			"Payer": "Pagador",
-			"Installments": "Parcelas"
+			"Installments": "Parcelas",
+			"MonthInterval": "Intervalo Entre Meses"
 		},
 		"Config": {
 			"Categories": "Categorias",

@@ -56,7 +56,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 			periodicInput.patchValue(false);
 			recurrentId.patchValue(id.value);
 			id.patchValue(GuidHelper.default);
-		};
+		}
 
 		const formValue = this.incomeForm?.value as Income;
 

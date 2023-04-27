@@ -23,6 +23,8 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 	public expenseForm?: FormGroup;
 	public loading: boolean = true;
+	public editMonth: boolean = false;
+	public showRecurrentCheck: boolean = true;
 
 	public filteredCategories?: Observable<Category[] | undefined>;
 	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
@@ -30,7 +32,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	private destroy = new Subject();
 
 	constructor(
-		@Inject(MAT_DIALOG_DATA) public expense: Expense,
+		@Inject(MAT_DIALOG_DATA) public data: { expense?: Expense, editMonth?: boolean },
 		private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
 		private readonly expenseService: ExpenseService,
 		private readonly feedback: FeedbackService
@@ -51,7 +53,12 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-		this.createForm(this.expense ?? new Expense());
+		this.createForm(this.data.expense ?? new Expense());
+		this.editMonth = this.data.editMonth ?? false;
+
+		if ((this.editMonth || this.expenseForm?.get('recurrentId')?.value)) {
+			this.showRecurrentCheck = false;
+		}
 
 		this.filteredCategories = this.expenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
 		this.filteredPaymentMethods = this.expenseForm?.get('paymentMethod')?.valueChanges.pipe(startWith(''), map(val => this.filterPaymentMethods(val)));
@@ -64,6 +71,17 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 	public submitForm(): void {
 		this.loading = true;
+
+		if (this.editMonth) {
+			const recurrentId = this.expenseForm?.get('recurrentId')!;
+			const periodicInput = this.expenseForm?.get('periodic')!;
+			const id = this.expenseForm?.get('id')!;
+
+			periodicInput.patchValue(false);
+			recurrentId.patchValue(id.value);
+			id.patchValue(GuidHelper.default);
+		}
+
 		const formValue = this.expenseForm?.value as Expense;
 
 		if (typeof formValue.category === "string") {
@@ -96,11 +114,6 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 	public displayFn(category: Category | PaymentMethod) {
 		return category?.name ?? '';
-	}
-
-	public detailExpense($event: Event) {
-		// Detail expense, ex: one purchase with various itens, value of each item
-		$event.preventDefault();
 	}
 
 	public selectedPaymentMethod($event: MatAutocompleteSelectedEvent) {
@@ -141,7 +154,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 		const formsControl = FormHelper.build(expense, {
 			allValidators: {
 				validators: [Validators.required],
-				exclude: ['dueDate'],
+				exclude: ['dueDate', 'displayDescription', 'recurrentId'],
 			}
 		});
 

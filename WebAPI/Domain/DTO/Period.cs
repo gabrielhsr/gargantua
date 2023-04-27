@@ -10,6 +10,7 @@
         public override int GetHashCode() => Month.GetHashCode() ^ Year.GetHashCode();
         public override bool Equals(object obj) => obj is Period objPeriod && Equals(objPeriod) || obj is DateTimeOffset objDate && Equals(objDate);
         public bool EqualOrGreater(DateTimeOffset other) => Year >= other.Year && Month >= other.Month;
+        public bool EqualOrGreater(DateTimeOffset? other) => Year >= other?.Year && Month >= other?.Month;
     }
 }
 

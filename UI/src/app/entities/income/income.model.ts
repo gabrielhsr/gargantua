@@ -9,4 +9,5 @@ export class Income extends BaseEntity {
 	recurrentId: string | null = null;
 	payer: string = '';
 	installments: number = 1;
+	monthInterval: number = 1;
 }

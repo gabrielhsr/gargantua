@@ -69,6 +69,13 @@ namespace Financial.Core.Services
                 })
                 .Where(income => income.Periodic || period.Equals(income.PaymentDate) || (income.Installments > 1 && period.EqualOrGreater(income.PaymentDate))) // Filter if it's periodic OR is the selected period OR have more than one installment and is the selected period or greater
                 .Where(income => !allIncome.Any(any => any.RecurrentId == income.Id && period.Equals(any.PaymentDate))) // Filter to check if a Income is part of a periodic income and has been solo edited
+                .Where(income =>
+                {
+                    // Filter if the selected period matches a income interval
+                    var monthDifference = period.Month - income.PaymentDate.Month + 12 * (period.Year - income.PaymentDate.Year);
+
+                    return monthDifference == 0 || monthDifference % income.MonthInterval == 0 ? true : false;
+                })
                 .Select(income =>
                 {
                     // Calculate the date based on selected period

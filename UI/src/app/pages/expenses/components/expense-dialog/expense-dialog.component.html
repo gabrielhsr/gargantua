@@ -2,7 +2,7 @@
 	<mat-icon>close</mat-icon>
 </button>
 
-<h2 mat-dialog-title>{{ expense.description ? ("Pages.Expenses.EditExpense" | translate) : ("Pages.Expenses.NewExpense" | translate) }}</h2>
+<h2 mat-dialog-title>{{ data.expense?.description ? ("Pages.Expenses.EditExpense" | translate) : ("Pages.Expenses.NewExpense" | translate) }}</h2>
 
 <mat-dialog-content [loading]="loading">
 	<form *ngIf="expenseForm && paymentMethods && categories" [formGroup]="expenseForm">
@@ -69,7 +69,7 @@
 				</mat-form-field>
 			</div>
 
-			<mat-expansion-panel class="mat-elevation-z0">
+			<mat-expansion-panel class="mat-elevation-z0" *ngIf="showRecurrentCheck">
 				<mat-expansion-panel-header>
 					<mat-panel-title>{{ 'Common.MoreOptions' | translate }}</mat-panel-title>
 				</mat-expansion-panel-header>

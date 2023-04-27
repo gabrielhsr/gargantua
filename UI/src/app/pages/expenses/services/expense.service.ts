@@ -64,8 +64,8 @@ export class ExpenseService {
 		);
 	}
 
-	public openFormDialog(expense?: Expense) {
-		this.dialog.open(ExpenseDialogComponent, { data: expense, panelClass: ['responsive-dialog'] });
+	public openFormDialog(expense?: Expense, editMonth?: boolean) {
+		this.dialog.open(ExpenseDialogComponent, { data: { expense, editMonth }, panelClass: ['responsive-dialog'] });
 	}
 }
 

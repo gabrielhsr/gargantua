@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -9,6 +9,8 @@ import { TableHelper } from 'src/app/shared/helpers/table.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
 import { ExpensePaidService } from '../../services/expense-paid.service';
+
+const IGNORE_COLUMNS = ['id', 'installments', 'periodic', 'paid', 'displayDescription', 'recurrentId'];
 
 export interface SortOption {
 	text: string;
@@ -23,7 +25,7 @@ export interface SortOption {
 	providers: [ExpensePaidService]
 })
 export class ExpensesTableComponent implements OnInit, OnDestroy {
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: ['id', 'installments', 'periodic', 'paid'], include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Expense(), { remove: IGNORE_COLUMNS, include: ['options'] });
 	public periodExpenses = new MatTableDataSource<Expense>();
 	public periodSubject = new Subject<Period | undefined>();
 	public expensesLoading: boolean = true;
@@ -87,8 +89,15 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	public editExpense(expense: Expense) {
-		this.expenseService.openFormDialog(expense);
+	public async editExpense(expense: Expense) {
+		if (expense.periodic && expense.installments === 1) {
+			const dialog$ = this.feedback.yesOrNoDialog('Pages.Expenses.EditOption', 'Pages.Expenses.JustMonth', 'Pages.Expenses.Periodic');
+			const response = await lastValueFrom(dialog$);
+
+			this.expenseService.openFormDialog(expense, response?.confirm);
+		} else {
+			this.expenseService.openFormDialog(expense);
+		}
 	}
 
 	public sort(category?: SortOption) {

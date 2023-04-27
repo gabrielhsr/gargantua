@@ -9,6 +9,8 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
 import { TableHelper } from 'src/app/shared/helpers/table.helper';
 
+const IGNORE_COLUMNS = ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription', 'monthInterval'];
+
 export interface SortOption {
 	text: string;
 	value: keyof Income;
@@ -24,7 +26,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public incomeLoading: boolean = true;
 
 	public periodIncome = new MatTableDataSource<Income>();
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription'], include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: IGNORE_COLUMNS, include: ['options'] });
 
 	public periodSubject = new Subject<Period | undefined>();
 
@@ -42,10 +44,10 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 
 	public get sortOptions(): SortOption[] {
 		return this.displayedColumns
-			.filter((x) => x !== 'options')
-			.map((x) => {
-				const defaultOption: SortOption = { text: `Pages.Income.${toTitleCase(x)}`, value: x as keyof Income };
-				return x === 'paymentDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
+			.filter((column) => column !== 'options')
+			.map((column) => {
+				const defaultOption: SortOption = { text: `Pages.Income.${toTitleCase(column)}`, value: column as keyof Income };
+				return column === 'paymentDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}
 
