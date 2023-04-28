@@ -33,7 +33,6 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 	private lastSortOption?: SortOption;
 	private lastFilterOption?: boolean;
-
 	private destroy = new Subject();
 
 	constructor(
@@ -48,10 +47,10 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 	public get sortOptions(): SortOption[] {
 		return this.displayedColumns
-			.filter((x) => x !== 'options')
-			.map((x) => {
-				const defaultOption: SortOption = { text: `Pages.Expenses.${toTitleCase(x)}`, value: x as keyof Expense };
-				return x === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
+			.filter((column) => column !== 'options')
+			.map((column) => {
+				const defaultOption: SortOption = { text: `Pages.Expenses.${toTitleCase(column)}`, value: column as keyof Expense };
+				return column === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}
 

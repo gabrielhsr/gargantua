@@ -1,18 +1,12 @@
-import { BaseEntity } from "../base.model";
+import { Movement } from "../movement/movement.model";
 import { Category } from "../category/category.model";
 import { PaymentMethod } from "../paymentMethod/paymentMethod.model";
 
-export class Expense extends BaseEntity {
-	description: string = '';
-	displayDescription: string = '';
+export class Expense extends Movement {
 	purchaseDate: Date = new Date();
 	dueDate: Date | null = null;
-	amount: number | null = null;
 	category: Category | null = null;
 	paymentMethod: PaymentMethod | null = null;
-	recurrentId: string | null = null;
-	installments: number = 1;
-	periodic: boolean = false;
 	paid: boolean = false;
 }
 

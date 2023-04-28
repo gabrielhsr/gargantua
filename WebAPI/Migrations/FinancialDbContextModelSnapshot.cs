@@ -36,7 +36,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Expense", b =>
@@ -87,7 +87,7 @@ namespace Financial.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Expenses");
+                    b.ToTable("Expenses", (string)null);
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Income", b =>
@@ -129,7 +129,7 @@ namespace Financial.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Income");
+                    b.ToTable("Income", (string)null);
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.PaymentMethod", b =>
@@ -149,7 +149,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethods");
+                    b.ToTable("PaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.User", b =>
@@ -171,7 +171,7 @@ namespace Financial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Financial.Domain.Models.Expense", b =>

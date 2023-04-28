@@ -1,4 +1,5 @@
-﻿using Financial.Core.Helpers;
+﻿using Financial.Core.Extensions;
+using Financial.Core.Helpers;
 using Financial.Core.Services.Base;
 using Financial.Domain.DTO;
 using Financial.Domain.Interfaces.Services;
@@ -52,43 +53,16 @@ namespace Financial.Core.Services
 
             var incomeByPeriod = allIncome
                 .Where(income => income.User.Id == UserId) // Filter by logged used
-                .Select(income =>
-                {
-                    // Calculate installment based on selected period and changes description. Ex: Car Fix (2/10)
-                    var lastCharge = income.PaymentDate.AddMonths(income.Installments - 1);
-                    income.DisplayDescription = income.Description;
-
-                    if (DateHelper.InTimeRange(period, income.PaymentDate, lastCharge) && income.Installments > 1)
-                    {
-                        var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
-
-                        income.DisplayDescription += $" ({income.Installments - currentCharge}/{income.Installments})";
-                    }
-
-                    return income;
-                })
-                .Where(income => income.Periodic || period.Equals(income.PaymentDate) || (income.Installments > 1 && period.EqualOrGreater(income.PaymentDate))) // Filter if it's periodic OR is the selected period OR have more than one installment and is the selected period or greater
-                .Where(income => !allIncome.Any(any => any.RecurrentId == income.Id && period.Equals(any.PaymentDate))) // Filter to check if a Income is part of a periodic income and has been solo edited
+                .CalculateInstallment(period)
+                .FilterByPeriod(period)
                 .Where(income =>
                 {
                     // Filter if the selected period matches a income interval
                     var monthDifference = period.Month - income.PaymentDate.Month + 12 * (period.Year - income.PaymentDate.Year);
 
-                    return monthDifference == 0 || monthDifference % income.MonthInterval == 0 ? true : false;
+                    return monthDifference == 0 || monthDifference % income.MonthInterval == 0;
                 })
-                .Select(income =>
-                {
-                    // Calculate the date based on selected period
-                    if (income.Periodic || income.Installments > 1)
-                    {
-                        var yearDiff = period.Year - income.PaymentDate.Year;
-                        var monthDiff = period.Month - income.PaymentDate.Month;
-
-                        income.PaymentDate = income.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
-                    };
-
-                    return income;
-                })
+                .CalculateDate(period)
                 .OrderBy(income => income.PaymentDate) // Order by payment date
                 .ToList();
 

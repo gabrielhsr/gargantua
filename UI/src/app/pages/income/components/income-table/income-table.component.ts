@@ -23,12 +23,10 @@ export interface SortOption {
 	styleUrls: ['./income-table.component.scss'],
 })
 export class IncomeTableComponent implements OnInit, OnDestroy {
-	public incomeLoading: boolean = true;
-
-	public periodIncome = new MatTableDataSource<Income>();
 	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: IGNORE_COLUMNS, include: ['options'] });
-
+	public periodIncome = new MatTableDataSource<Income>();
 	public periodSubject = new Subject<Period | undefined>();
+	public incomeLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
 	private destroy = new Subject();
@@ -75,8 +73,13 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public deleteIncome(income: Income) {
 		this.feedback
 			.confirmCancelDialog(income.description)
-			.pipe(switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY), takeUntil(this.destroy))
-			.subscribe((res) => res.isSuccess ? this.feedback.successToast('Feedback.DeleteSuccess') : null);
+			.pipe(
+				switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY),
+				takeUntil(this.destroy)
+			)
+			.subscribe(({ isSuccess }) => {
+				if (isSuccess) this.feedback.successToast('Feedback.DeleteSuccess');
+			});
 	}
 
 	public async editIncome(income: Income) {
