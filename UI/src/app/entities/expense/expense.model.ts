@@ -7,7 +7,6 @@ export class Expense extends Movement {
 	dueDate: Date | null = null;
 	category: Category | null = null;
 	paymentMethod: PaymentMethod | null = null;
-	paid: boolean = false;
 }
 
 export class PaidExpense {

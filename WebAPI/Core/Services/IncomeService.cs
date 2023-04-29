@@ -51,22 +51,14 @@ namespace Financial.Core.Services
         {
             var allIncome = await base.GetAllAsync();
 
-            var incomeByPeriod = allIncome
+            return allIncome
                 .Where(income => income.User.Id == UserId) // Filter by logged used
                 .CalculateInstallment(period)
                 .FilterByPeriod(period)
-                .Where(income =>
-                {
-                    // Filter if the selected period matches a income interval
-                    var monthDifference = period.Month - income.PaymentDate.Month + 12 * (period.Year - income.PaymentDate.Year);
-
-                    return monthDifference == 0 || monthDifference % income.MonthInterval == 0;
-                })
+                .ToList() // Temporary fix for deferred execution not wanted
                 .CalculateDate(period)
                 .OrderBy(income => income.PaymentDate) // Order by payment date
                 .ToList();
-
-            return incomeByPeriod;
         }
     }
 }

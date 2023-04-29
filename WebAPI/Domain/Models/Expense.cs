@@ -17,8 +17,6 @@ namespace Financial.Domain.Models
         [Required]
         public DateTimeOffset PurchaseDate { get; set; }
 
-        public bool Paid { get; set; } = false;
-
         [Required]
         public virtual Category Category { get; set; }
 

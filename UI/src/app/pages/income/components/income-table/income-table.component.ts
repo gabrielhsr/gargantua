@@ -9,7 +9,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
 import { TableHelper } from 'src/app/shared/helpers/table.helper';
 
-const IGNORE_COLUMNS = ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription', 'monthInterval'];
+const IGNORE_COLUMNS = ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription', 'monthInterval', 'paid'];
 
 export interface SortOption {
 	text: string;

@@ -11,8 +11,5 @@ namespace Financial.Domain.Models
 
         [Required]
         public string Payer { get; set; } = string.Empty;
-
-        [Range(1, int.MaxValue)]
-        public int MonthInterval { get; set; } = 1;
     }
 }

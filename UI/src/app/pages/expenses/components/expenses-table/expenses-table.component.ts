@@ -10,7 +10,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
 import { ExpensePaidService } from '../../services/expense-paid.service';
 
-const IGNORE_COLUMNS = ['id', 'installments', 'periodic', 'paid', 'displayDescription', 'recurrentId'];
+const IGNORE_COLUMNS = ['id', 'installments', 'periodic', 'paid', 'displayDescription', 'recurrentId', 'monthInterval'];
 
 export interface SortOption {
 	text: string;

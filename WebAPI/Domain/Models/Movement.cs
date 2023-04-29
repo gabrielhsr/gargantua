@@ -25,5 +25,10 @@ namespace Financial.Domain.Models
 
         [JsonIgnore]
         public virtual User User { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int MonthInterval { get; set; } = 1;
+
+        public bool Paid { get; set; } = false;
     }
 }

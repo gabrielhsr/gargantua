@@ -7,4 +7,6 @@ export class Movement extends BaseEntity {
 	periodic: boolean = false;
 	recurrentId: string | null = null;
 	installments: number = 1;
+	monthInterval: number = 1;
+	paid: boolean = false;
 }

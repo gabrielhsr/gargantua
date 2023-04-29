@@ -57,15 +57,14 @@ namespace Financial.Core.Services
         {
             var allExpenses = await base.GetAllAsync();
 
-            var expensesByPeriod = allExpenses
+            return allExpenses
                 .Where(expense => expense.User.Id == UserId) // Filter by logged used
                 .CalculateInstallment(period)
                 .FilterByPeriod(period)
+                .ToList() // Temporary fix for deferred execution not wanted
                 .CalculateDate(period)
                 .OrderBy(expense => expense.DueDate) // Order by due date
                 .ToList();
-
-            return expensesByPeriod;
         }
 
         public async Task MarkAsPaid(IList<ExpensePaid> expenses)

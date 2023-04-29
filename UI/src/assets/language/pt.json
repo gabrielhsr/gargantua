@@ -70,7 +70,8 @@
 			"SavePaidExpenses": "Salvar Pagas",
 			"ShowPaid": "Mostrar Pagas",
 			"EditOption": "Desejar editar a recorrência ou somente este mês?",
-			"JustMonth": "Somente Mês"
+			"JustMonth": "Somente Mês",
+			"MonthInterval": "Intervalo Entre Meses"
 		},
 		"Income": {
 			"Alerts": {
