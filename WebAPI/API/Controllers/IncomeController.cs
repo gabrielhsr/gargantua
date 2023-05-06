@@ -17,15 +17,15 @@ namespace Financial.API.Controllers
         }
 
         [HttpGet("periods")]
-        public async Task<IList<Period>> GetPeriods()
+        public IList<Period> GetPeriods()
         {
-            return await service.GetPeriods();
+            return service.GetPeriods();
         }
 
         [HttpGet("incomeByPeriod")]
-        public async Task<IList<Income>> GetIncomeByPeriod(int month, int year)
+        public IList<Income> GetIncomeByPeriod(int month, int year)
         {
-            return await service.GetIncomeByPeriod(new Period { Month = month, Year = year });
+            return service.GetIncomeByPeriod(new Period { Month = month, Year = year });
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Financial.Domain.Interfaces.Services
 {
     public interface IIncomeService : IBaseService<Income>
     {
-        Task<IList<Period>> GetPeriods();
-        Task<IList<Income>> GetIncomeByPeriod(Period period);
+        IList<Period> GetPeriods();
+        IList<Income> GetIncomeByPeriod(Period period);
     }
 }

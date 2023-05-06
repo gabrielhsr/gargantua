@@ -18,15 +18,15 @@ namespace Financial.Controllers
         }
 
         [HttpGet("periods")]
-        public async Task<IList<Period>> GetPeriods()
+        public IList<Period> GetPeriods()
         {
-            return await service.GetPeriods();
+            return service.GetPeriods();
         }
 
         [HttpGet("expensesByPeriod")]
-        public async Task<IList<Expense>> GetExpensesByPeriod(int month, int year)
+        public IList<Expense> GetExpensesByPeriod(int month, int year)
         {
-            return await service.GetExpensesByPeriod(new Period { Month = month, Year = year });
+            return service.GetExpensesByPeriod(new Period { Month = month, Year = year });
         }
 
         [HttpPost("markAsPaid")]

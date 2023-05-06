@@ -33,14 +33,14 @@ namespace Financial.Core.Services.Base
             await repository.DeleteAsync(id);
         }
 
-        public virtual async Task<IList<T>> GetAllAsync()
+        public virtual IQueryable<T> GetAll()
         {
-            return await repository.GetAllAsync();
+            return repository.GetAll();
         }
 
         public virtual async Task<T> GetByIdAsync(Guid id)
         {
-            return await repository.GetAsync(id);
+            return await repository.GetByIdAsync(id);
         }
 
         public virtual async Task<T> SaveAsync(Guid id, T entity)

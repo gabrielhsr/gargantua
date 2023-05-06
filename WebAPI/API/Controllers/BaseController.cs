@@ -19,11 +19,9 @@ namespace Financial.API.Controllers
 
         // GET: api/Entity
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<TEntity>>> GetEntities()
+        public virtual ActionResult<IEnumerable<TEntity>> GetEntities()
         {
-            var records = await service.GetAllAsync();
-
-            return Ok(records);
+            return Ok(service.GetAll());
         }
 
         // GET: api/Entity/5

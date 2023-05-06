@@ -4,6 +4,6 @@ namespace Financial.Domain.Interfaces.Services
 {
     public interface IPeriodService
     {
-        Task<IList<Period>> GetPeriods();
+        IList<Period> GetPeriods();
     }
 }

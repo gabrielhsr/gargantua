@@ -38,13 +38,11 @@ namespace Financial.Core.Services
             await base.RemoveAsync(id);
         }
 
-        public async Task<IList<Period>> GetPeriods()
+        public IList<Period> GetPeriods()
         {
-            var expenses = await base.GetAllAsync();
-
-            var periods = expenses
+            var periods = base.GetAll()
                 .Where(expense => expense.User.Id == UserId)
-                .Where(x => x.DueDate is not null)
+                .Where(x => x.DueDate != null)
                 .OrderBy(x => x.DueDate)
                 .Select(x => new Period { Month = x.DueDate!.Value.Month, Year = x.DueDate!.Value.Year })
                 .Distinct()
@@ -53,11 +51,9 @@ namespace Financial.Core.Services
             return periods;
         }
 
-        public async Task<IList<Expense>> GetExpensesByPeriod(Period period)
+        public IList<Expense> GetExpensesByPeriod(Period period)
         {
-            var allExpenses = await base.GetAllAsync();
-
-            return allExpenses
+            return base.GetAll()
                 .Where(expense => expense.User.Id == UserId) // Filter by logged used
                 .CalculateInstallment(period)
                 .FilterByPeriod(period)

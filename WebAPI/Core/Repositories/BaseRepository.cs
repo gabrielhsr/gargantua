@@ -24,7 +24,7 @@ namespace Financial.Core.Repositories
 
         public virtual async Task DeleteAsync(Guid id)
         {
-            var entity = await GetAsync(id);
+            var entity = await GetByIdAsync(id);
 
             if (entity is null)
             {
@@ -41,12 +41,12 @@ namespace Financial.Core.Repositories
             return entity != null;
         }
 
-        public virtual async Task<List<T>> GetAllAsync()
+        public virtual IQueryable<T> GetAll()
         {
-            return await Context.Set<T>().ToListAsync();
+            return Context.Set<T>().AsQueryable();
         }
 
-        public virtual async Task<T> GetAsync(Guid id)
+        public virtual async Task<T> GetByIdAsync(Guid id)
         {
             return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }

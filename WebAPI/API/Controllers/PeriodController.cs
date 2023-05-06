@@ -18,9 +18,9 @@ namespace Financial.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<Period>> GetPeriods()
+        public IList<Period> GetPeriods()
         {
-            return await service.GetPeriods();
+            return service.GetPeriods();
         }
     }
 }
