@@ -1,4 +1,3 @@
-import { MatFabMenu } from '@angular-material-extensions/fab-menu';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
@@ -7,6 +6,7 @@ import { Period } from 'src/app/entities/period/period.dto';
 import { TranslateService } from 'src/app/shared/translate/translate.service';
 import { ExpenseService } from '../expenses/services/expense.service';
 import { IncomeService } from '../income/services/income.service';
+
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.page.html',
@@ -19,20 +19,20 @@ export class HomePage implements OnInit, OnDestroy {
 	public totalExpenses: number = 0;
 	public loading: boolean = true;
 
-	public fabButtons: MatFabMenu[] = [
-		{
-			id: 'income',
-			icon: 'attach_money',
-			tooltip: this.translate.instant('Pages.Income.NewIncome'),
-			tooltipPosition: 'left'
-		},
-		{
-			id: 'expense',
-			icon: 'money_off',
-			tooltip: this.translate.instant('Pages.Expenses.NewExpense'),
-			tooltipPosition: 'left'
-		},
-	];
+	// public fabButtons: MatFabMenu[] = [
+	// 	{
+	// 		id: 'income',
+	// 		icon: 'attach_money',
+	// 		tooltip: this.translate.instant('Pages.Income.NewIncome'),
+	// 		tooltipPosition: 'left'
+	// 	},
+	// 	{
+	// 		id: 'expense',
+	// 		icon: 'money_off',
+	// 		tooltip: this.translate.instant('Pages.Expenses.NewExpense'),
+	// 		tooltipPosition: 'left'
+	// 	},
+	// ];
 
 	private destroy = new Subject();
 
