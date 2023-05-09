@@ -9,8 +9,16 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
 import { TableHelper } from 'src/app/shared/helpers/table.helper';
 
-const IGNORE_COLUMNS = ['id', 'periodic', 'recurrentId', 'installments', 'displayDescription', 'monthInterval', 'paid'];
-
+const IGNORE_COLUMNS = [
+	'id',
+	'periodic',
+	'recurrentId',
+	'installments',
+	'displayDescription',
+	'monthInterval',
+	'paid',
+	'paymentDate',
+];
 export interface SortOption {
 	text: string;
 	value: keyof Income;
@@ -83,7 +91,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	}
 
 	public async editIncome(income: Income) {
-		if (income.periodic && income.installments === 1) {
+		if (income.periodic || income.installments > 1) {
 			const dialog$ = this.feedback.yesOrNoDialog('Pages.Income.EditOption', 'Pages.Income.JustMonth', 'Pages.Income.Periodic');
 			const response = await lastValueFrom(dialog$);
 

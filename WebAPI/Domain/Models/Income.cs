@@ -9,6 +9,9 @@ namespace Financial.Domain.Models
         [Required]
         public DateTimeOffset PaymentDate { get; set; }
 
+        [NotMapped]
+        public DateTimeOffset DisplayPaymentDate { get; set; }
+
         [Required]
         public string Payer { get; set; } = string.Empty;
     }

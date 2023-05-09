@@ -20,9 +20,9 @@
 		<td mat-footer-cell *matFooterCellDef></td>
 	</ng-container>
 
-	<ng-container matColumnDef="paymentDate">
+	<ng-container matColumnDef="displayPaymentDate">
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "Pages.Income.PaymentDate" | translate }}</th>
-		<td mat-cell *matCellDef="let income; dataSouce: periodIncome">{{ income.paymentDate | date }}</td>
+		<td mat-cell *matCellDef="let income; dataSouce: periodIncome">{{ income.displayPaymentDate | date }}</td>
 		<td mat-footer-cell *matFooterCellDef></td>
 	</ng-container>
 

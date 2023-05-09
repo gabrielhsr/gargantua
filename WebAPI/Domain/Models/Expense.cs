@@ -14,8 +14,14 @@ namespace Financial.Domain.Models
         
         public DateTimeOffset? DueDate { get; set; }
 
+        [NotMapped]
+        public DateTimeOffset? DisplayDueDate { get; set; }
+
         [Required]
         public DateTimeOffset PurchaseDate { get; set; }
+
+        [NotMapped]
+        public DateTimeOffset DisplayPurchaseDate { get; set; }
 
         [Required]
         public virtual Category Category { get; set; }

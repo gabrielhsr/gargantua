@@ -18,7 +18,7 @@ namespace Financial.Core.Extensions
                     var yearDiff = period.Year - income.PaymentDate.Year;
                     var monthDiff = period.Month - income.PaymentDate.Month;
 
-                    income.PaymentDate = income.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
+                    income.DisplayPaymentDate = income.PaymentDate.AddMonths(monthDiff).AddYears(yearDiff);
                 };
 
                 return income;
@@ -37,8 +37,8 @@ namespace Financial.Core.Extensions
                     var dueYearDiff = expense.DueDate.HasValue ? period.Year - (int)expense.DueDate?.Year : 0;
                     var dueMonthDiff = expense.DueDate.HasValue ? period.Month - (int)expense.DueDate?.Month : 0;
 
-                    expense.PurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff).AddYears(purchaseYearDiff);
-                    expense.DueDate = expense.DueDate?.AddMonths(dueMonthDiff).AddYears(dueYearDiff);
+                    expense.DisplayPurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff).AddYears(purchaseYearDiff);
+                    expense.DisplayDueDate = expense.DueDate?.AddMonths(dueMonthDiff).AddYears(dueYearDiff);
                 };
 
                 return expense;

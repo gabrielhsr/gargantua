@@ -11,12 +11,16 @@ namespace Financial.Core.Extensions
     {
         public static IEnumerable<Income> CalculateInstallment(this IEnumerable<Income> incomes, Period period)
         {
-            return incomes.Select(income => income.Calculate<Income>(period, income.PaymentDate));
+            return incomes
+                .Select(income => income.Calculate<Income>(period, income.PaymentDate))
+                .ToList();
         }
 
         public static IEnumerable<Expense> CalculateInstallment(this IEnumerable<Expense> expenses, Period period)
         {
-            return expenses.Select(expense => expense.Calculate<Expense>(period, expense.PurchaseDate));
+            return expenses
+                .Select(expense => expense.Calculate<Expense>(period, expense.PurchaseDate))
+                .ToList();
         }
 
         private static T Calculate<T>(this Movement movement, Period period, DateTimeOffset date) where T : Movement
@@ -24,7 +28,7 @@ namespace Financial.Core.Extensions
             var lastCharge = date.AddMonths(movement.Installments - 1);
             movement.DisplayDescription = movement.Description;
 
-            if (DateHelper.InTimeRange(period, date, lastCharge) && movement.Installments > 1)
+            if (movement.Installments > 1)
             {
                 var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
 

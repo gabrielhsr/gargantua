@@ -4,7 +4,9 @@ import { PaymentMethod } from "../paymentMethod/paymentMethod.model";
 
 export class Expense extends Movement {
 	purchaseDate: Date = new Date();
+	displayPurchaseDate: Date = new Date();
 	dueDate: Date | null = null;
+	displayDueDate: Date | null = null;
 	category: Category | null = null;
 	paymentMethod: PaymentMethod | null = null;
 }

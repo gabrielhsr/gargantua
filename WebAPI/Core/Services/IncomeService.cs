@@ -51,7 +51,6 @@ namespace Financial.Core.Services
                 .Where(income => income.User.Id == UserId) // Filter by logged used
                 .CalculateInstallment(period)
                 .FilterByPeriod(period)
-                .ToList() // Temporary fix for deferred execution not wanted
                 .CalculateDate(period)
                 .OrderBy(income => income.PaymentDate) // Order by payment date
                 .ToList();
