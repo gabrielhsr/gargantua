@@ -11,31 +11,54 @@ namespace Financial.Core.Extensions
     {
         public static IEnumerable<Income> CalculateInstallment(this IEnumerable<Income> incomes, Period period)
         {
-            return incomes
-                .Select(income => income.Calculate<Income>(period, income.PaymentDate))
-                .ToList();
+            return incomes.Select(income => income.CalculateIncome(period, incomes)).ToList();
         }
 
         public static IEnumerable<Expense> CalculateInstallment(this IEnumerable<Expense> expenses, Period period)
         {
-            return expenses
-                .Select(expense => expense.Calculate<Expense>(period, expense.PurchaseDate))
-                .ToList();
+            return expenses.Select(expense => expense.CalculateExpense(period, expenses)).ToList();
         }
 
-        private static T Calculate<T>(this Movement movement, Period period, DateTimeOffset date) where T : Movement
+        private static Income CalculateIncome(this Income income, Period period, IEnumerable<Income> incomes)
         {
-            var lastCharge = date.AddMonths(movement.Installments - 1);
-            movement.DisplayDescription = movement.Description;
+            var lastCharge = income.PaymentDate.AddMonths(income.Installments - 1);
+            income.DisplayDescription = income.Description;
 
-            if (movement.Installments > 1)
+            if (income.Installments > 1)
             {
+                var monthEdit = incomes.FirstOrDefault(edit => edit.Id == income.RecurrentId);
                 var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
 
-                movement.DisplayDescription += $" ({movement.Installments - currentCharge}/{movement.Installments})";
+                income.DisplayDescription += $" ({income.Installments - currentCharge}/{income.Installments})";
+
+                if (monthEdit?.DisplayDescription != null)
+                {
+                    income.DisplayDescription = monthEdit.DisplayDescription;
+                }
             }
 
-            return (T)movement;
+            return income;
+        }
+
+        private static Expense CalculateExpense(this Expense expense, Period period, IEnumerable<Expense> expenses)
+        {
+            var lastCharge = expense.PurchaseDate.AddMonths(expense.Installments - 1);
+            expense.DisplayDescription = expense.Description;
+
+            if (expense.Installments > 1)
+            {
+                var monthEdit = expenses.FirstOrDefault(edit => edit.Id == expense.RecurrentId);
+                var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
+
+                expense.DisplayDescription += $" ({expense.Installments - currentCharge}/{expense.Installments})";
+
+                if (monthEdit?.DisplayDescription != null)
+                {
+                    expense.DisplayDescription = monthEdit.DisplayDescription;
+                }
+            }
+
+            return expense;
         }
     }
 }

@@ -27,7 +27,9 @@
 		"Yes": "Sim",
 		"No": "Não",
 		"MoreOptions": "Mais Opções",
-		"Save": "Salvar"
+		"Save": "Salvar",
+		"Periodic": "Recorrente",
+		"OnlyMonth": "Somente Mês"
 	},
 	"Sidebar": {
 		"Home": "Página Inicial",
@@ -55,6 +57,8 @@
 			},
 			"DueDate": "Data de Vencimento",
 			"PurchaseDate": "Data da Compra",
+			"DisplayDueDate": "Data de Vencimento",
+			"DisplayPurchaseDate": "Data da Compra",
 			"Category": "Categoria",
 			"PaymentMethod": "Forma de Pagamento",
 			"Description": "Descrição",
@@ -64,31 +68,29 @@
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por",
 			"Installments": "Parcelas",
-			"Periodic": "Recorrente",
 			"Detail": "Detalhar",
 			"MarkAsPaid": "Pagar",
 			"SavePaidExpenses": "Salvar Pagas",
 			"ShowPaid": "Mostrar Pagas",
 			"EditOption": "Desejar editar a recorrência ou somente este mês?",
-			"JustMonth": "Somente Mês",
 			"MonthInterval": "Intervalo Entre Meses"
 		},
 		"Income": {
 			"Alerts": {
-				"NoIncome": "Nenhuma receita cadastrada!"
+				"NoIncome": "Nenhuma receita cadastrada!",
+				"DeleteRecurrent": "Deseja deletar toda a recorrência ou somente a edição deste mês?. Importante: Ao deletar somente a edição do mês, a recorrência original ira aparecer no lugar."
 			},
 			"Amount": "Valor Pago",
 			"PaymentDate": "Data do Pagamento",
+			"DisplayPaymentDate": "Data do Pagamento",
 			"Description": "Descrição",
 			"PaymentMethod": "Forma de Pagamento",
 			"NewIncome": "Nova Receita",
 			"EditIncome": "Editar Receita",
 			"FilterBy": "Filtrar por",
 			"SortBy": "Ordernar por",
-			"Periodic": "Recorrente",
 			"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário.",
 			"EditOption": "Desejar editar a recorrência ou somente este mês?",
-			"JustMonth": "Somente Mês",
 			"Payer": "Pagador",
 			"Installments": "Parcelas",
 			"MonthInterval": "Intervalo Entre Meses"

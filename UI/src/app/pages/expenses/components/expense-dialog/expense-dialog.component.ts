@@ -58,6 +58,9 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 		if ((this.editMonth || this.expenseForm?.get('recurrentId')?.value)) {
 			this.showRecurrentCheck = false;
+
+			this.expenseForm?.patchValue({ dueDate: this.expenseForm.get('displayDueDate')?.value });
+			this.expenseForm?.patchValue({ purchaseDate: this.expenseForm.get('displayPurchaseDate')?.value });
 		}
 
 		this.filteredCategories = this.expenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
@@ -154,8 +157,14 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 		const formsControl = FormHelper.build(expense, {
 			allValidators: {
 				validators: [Validators.required],
-				exclude: ['dueDate', 'displayDescription', 'recurrentId'],
-			}
+				exclude: [
+					'dueDate',
+					'displayPurchaseDate',
+					'displayDueDate',
+					'displayDescription',
+					'recurrentId',
+				],
+			},
 		});
 
 		this.expenseForm = new FormGroup(formsControl);

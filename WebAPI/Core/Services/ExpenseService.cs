@@ -29,13 +29,16 @@ namespace Financial.Core.Services
         public override async Task RemoveAsync(Guid id)
         {
             var expense = await GetByIdAsync(id);
+            var mainId = expense.RecurrentId is not null ? (Guid)expense.RecurrentId : id;
 
-            if (expense.RecurrentId is not null)
+            var recurrentMonthEdit = GetAll().Where(monthEdit => monthEdit.RecurrentId == mainId);
+
+            foreach (var monthEdit in recurrentMonthEdit)
             {
-                await base.RemoveAsync((Guid)expense.RecurrentId);
+                await base.RemoveAsync(monthEdit.Id);
             }
 
-            await base.RemoveAsync(id);
+            await base.RemoveAsync(mainId);
         }
 
         public IList<Period> GetPeriods()
@@ -58,7 +61,7 @@ namespace Financial.Core.Services
                 .CalculateInstallment(period)
                 .FilterByPeriod(period)
                 .CalculateDate(period)
-                .OrderBy(expense => expense.DueDate) // Order by due date
+                .OrderBy(expense => expense.DisplayDueDate) // Order by due date
                 .ToList();
         }
 

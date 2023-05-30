@@ -87,7 +87,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 	public deleteExpense(expense: Expense) {
 		this.feedback
-			.confirmCancelDialog(expense.description)
+			.deleteDialog(expense.description)
 			.pipe(
 				switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY),
 				takeUntil(this.destroy)
@@ -98,8 +98,8 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	}
 
 	public async editExpense(expense: Expense) {
-		if (expense.periodic && expense.installments === 1) {
-			const dialog$ = this.feedback.yesOrNoDialog('Pages.Expenses.EditOption', 'Pages.Expenses.JustMonth', 'Pages.Expenses.Periodic');
+		if ((expense.periodic || expense.installments > 1) && !expense.recurrentId) {
+			const dialog$ = this.feedback.yesOrNoDialog('Pages.Expenses.EditOption', 'Common.OnlyMonth', 'Common.Periodic');
 			const response = await lastValueFrom(dialog$);
 
 			this.expenseService.openFormDialog(expense, response?.confirm);

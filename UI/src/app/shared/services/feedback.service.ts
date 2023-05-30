@@ -27,11 +27,11 @@ export class FeedbackService {
 		this.snackBar.open(message);
 	}
 
-	public confirmCancelDialog(itemName: string) {
+	public deleteDialog(itemName: string) {
 		return this.dialog.open<ConfirmDialogComponent, string, { confirm: boolean }>(ConfirmDialogComponent, { data: itemName }).afterClosed();
 	}
 
-	public yesOrNoDialog(message: string, yesText: string, noText: string) {
+	public yesOrNoDialog(message: string, yesText?: string, noText?: string) {
 		const data = { message, yesText, noText };
 
 		return this.dialog.open<YesOrNoDialogComponent, YesOrNoData, { confirm: boolean }>(YesOrNoDialogComponent, { data }).afterClosed();

@@ -79,8 +79,12 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteIncome(income: Income) {
+		// const dialogToOpen = income.recurrentId
+		// 	? this.feedback.yesOrNoDialog('Pages.Income.Alerts.DeleteRecurrent', 'Common.OnlyMonth', 'Common.Periodic')
+		// 	: this.feedback.confirmCancelDialog(income.description);
+
 		this.feedback
-			.confirmCancelDialog(income.description)
+			.deleteDialog(income.description)
 			.pipe(
 				switchMap((res) => res?.confirm ? this.incomeService.removeIncome(income.id) : EMPTY),
 				takeUntil(this.destroy)
@@ -92,7 +96,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 
 	public async editIncome(income: Income) {
 		if (income.periodic || income.installments > 1) {
-			const dialog$ = this.feedback.yesOrNoDialog('Pages.Income.EditOption', 'Pages.Income.JustMonth', 'Pages.Income.Periodic');
+			const dialog$ = this.feedback.yesOrNoDialog('Pages.Income.EditOption', 'Common.OnlyMonth', 'Common.Periodic');
 			const response = await lastValueFrom(dialog$);
 
 			this.incomeService.openFormDialog(income, response?.confirm);

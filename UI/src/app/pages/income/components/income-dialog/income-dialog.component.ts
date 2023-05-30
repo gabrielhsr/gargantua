@@ -36,10 +36,10 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 		this.createForm(this.data.income ?? new Income());
 		this.editMonth = this.data.editMonth ?? false;
 
-		console.log(this.data);
-
 		if ((this.editMonth || this.incomeForm?.get('recurrentId')?.value)) {
 			this.showRecurrentCheck = false;
+
+			this.incomeForm?.patchValue({ paymentDate: this.incomeForm.get('displayPaymentDate')?.value });
 		}
 	}
 
@@ -89,7 +89,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 		const formsControl = FormHelper.build(income, {
 			allValidators: {
 				validators: [Validators.required],
-				exclude: ['recurrentId', 'displayDescription', 'paymentDate'],
+				exclude: ['recurrentId', 'displayDescription', 'displayPaymentDate'],
 			},
 		});
 

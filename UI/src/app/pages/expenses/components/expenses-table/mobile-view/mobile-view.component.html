@@ -25,7 +25,7 @@
 
 						<div class="item">
 							<div class="sub-title">{{ "Pages.Expenses.PurchaseDate" | translate }}</div>
-							<div class="sub-value">{{ expense.purchaseDate | date }}</div>
+							<div class="sub-value">{{ expense.displayPurchaseDate | date }}</div>
 						</div>
 					</div>
 				</mat-panel-title>
@@ -39,7 +39,7 @@
 				<div class="sub-content">
 					<div class="item">
 						<div class="sub-title">{{ "Pages.Expenses.DueDate" | translate }}</div>
-						<div class="sub-value">{{ expense.dueDate | date }}</div>
+						<div class="sub-value">{{ expense.displayDueDate | date }}</div>
 					</div>
 
 					<div class="item">

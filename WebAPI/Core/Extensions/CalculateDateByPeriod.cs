@@ -13,6 +13,8 @@ namespace Financial.Core.Extensions
         {
             return incomes.Select(income =>
             {
+                income.DisplayPaymentDate = income.PaymentDate;
+
                 if (income.Periodic || income.Installments > 1)
                 {
                     var yearDiff = period.Year - income.PaymentDate.Year;
@@ -29,6 +31,9 @@ namespace Financial.Core.Extensions
         {
             return expenses.Select(expense =>
             {
+                expense.DisplayDueDate = expense.DueDate;
+                expense.DisplayPurchaseDate = expense.PurchaseDate;
+
                 if (expense.Periodic || expense.Installments > 1)
                 {
                     var purchaseYearDiff = period.Year - expense.PurchaseDate.Year;

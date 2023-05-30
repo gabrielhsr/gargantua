@@ -106,7 +106,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		}
 
 		this.feedback
-			.confirmCancelDialog(itemName)
+			.deleteDialog(itemName)
 			.pipe(switchMap((res) => res?.confirm ? operation : EMPTY), takeUntil(this.destroy))
 			.subscribe((res) => {
 				if (res.isSuccess) {

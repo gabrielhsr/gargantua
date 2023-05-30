@@ -10,7 +10,8 @@ namespace Financial.Core.Extensions
         {
             return incomes
                 .Where(income => income.Filter(period, income.PaymentDate))
-                .Where(income => income.FilterSoloEdit(period, income.PaymentDate, incomes))
+                .Where(income => income.FilterRecurrentIncomeSoloEdit(period, incomes))
+                .Where(income => income.FilterInstallmentIncomeSoloEdit(period, incomes))
                 .Where(income => income.FilterByInterval(period, income.PaymentDate));
         }
 
@@ -18,20 +19,48 @@ namespace Financial.Core.Extensions
         {
             return expenses
                 .Where(expense => expense.Filter(period, expense.DueDate))
-                .Where(expense => expense.FilterSoloEdit(period, expense.DueDate, expenses))
+                .Where(expense => expense.FilterRecurrentExpenseSoloEdit(period, expenses))
+                .Where(expense => expense.FilterInstallmentExpenseSoloEdit(period, expenses))
                 .Where(expense => expense.FilterByInterval(period, expense.DueDate));
         }
 
         private static bool Filter(this Movement movement, Period period, DateTimeOffset? date)
         {
-            return movement.Periodic
-                || period.Equals(date)
-                || (movement.Installments > 1 && period.EqualOrGreater(date));
+            return movement.Periodic || period.Equals(date) || (movement.Installments > 1 && period.EqualOrGreater(date));
         }
 
-        private static bool FilterSoloEdit(this Movement movement, Period period, DateTimeOffset? date, IEnumerable<Movement> movements)
+        private static bool FilterRecurrentExpenseSoloEdit(this Expense expense, Period period, IEnumerable<Expense> expenses)
         {
-            return !movements.Any(any => any.RecurrentId == movement.Id && period.Equals(date));
+            var monthEdit = expenses.FirstOrDefault(edit => edit.RecurrentId == expense.Id && period.Equals(edit.DueDate));
+
+            return !expenses.Any(any => any.RecurrentId == expense.Id && period.Equals(monthEdit?.DueDate));
+        }
+
+        private static bool FilterInstallmentExpenseSoloEdit(this Expense expense, Period period, IEnumerable<Expense> expenses)
+        {
+            var monthEdit = expenses.FirstOrDefault(edit => edit.Id == expense.RecurrentId);
+
+            return monthEdit == null
+                || expense.Installments == 1
+                || period.Equals(expense.DueDate)
+                || period.Equals(monthEdit.DueDate);
+        }
+
+        private static bool FilterRecurrentIncomeSoloEdit(this Income income, Period period, IEnumerable<Income> incomes)
+        {
+            var monthEdit = incomes.FirstOrDefault(edit => edit.RecurrentId == income.Id && period.Equals(edit.PaymentDate));
+
+            return !incomes.Any(any => any.RecurrentId == income.Id && period.Equals(monthEdit?.PaymentDate));
+        }
+
+        private static bool FilterInstallmentIncomeSoloEdit(this Income income, Period period, IEnumerable<Income> incomes)
+        {
+            var monthEdit = incomes.FirstOrDefault(edit => edit.Id == income.RecurrentId);
+
+            return monthEdit == null 
+                || income.Installments == 1 
+                || period.Equals(income.PaymentDate)
+                || period.Equals(monthEdit.PaymentDate);
         }
 
         private static bool FilterByInterval(this Movement movement, Period period, DateTimeOffset? date)
