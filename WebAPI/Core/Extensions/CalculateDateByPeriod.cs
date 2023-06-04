@@ -34,16 +34,20 @@ namespace Financial.Core.Extensions
                 expense.DisplayDueDate = expense.DueDate;
                 expense.DisplayPurchaseDate = expense.PurchaseDate;
 
-                if (expense.Periodic || expense.Installments > 1)
+                if (expense.Periodic)
                 {
                     var purchaseYearDiff = period.Year - expense.PurchaseDate.Year;
                     var purchaseMonthDiff = period.Month - expense.PurchaseDate.Month;
 
-                    var dueYearDiff = expense.DueDate.HasValue ? period.Year - (int)expense.DueDate?.Year : 0;
-                    var dueMonthDiff = expense.DueDate.HasValue ? period.Month - (int)expense.DueDate?.Month : 0;
-
                     expense.DisplayPurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff).AddYears(purchaseYearDiff);
-                    expense.DisplayDueDate = expense.DueDate?.AddMonths(dueMonthDiff).AddYears(dueYearDiff);
+                };
+
+                if (expense.Periodic || expense.Installments > 1)
+                {
+                    var dueYearDiff = period.Year - expense.DueDate.Year;
+                    var dueMonthDiff = period.Month - expense.DueDate.Month;
+
+                    expense.DisplayDueDate = expense.DueDate.AddMonths(dueMonthDiff).AddYears(dueYearDiff);
                 };
 
                 return expense;

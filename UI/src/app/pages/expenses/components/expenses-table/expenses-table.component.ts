@@ -59,7 +59,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			.filter((column) => column !== 'options')
 			.map((column) => {
 				const defaultOption: SortOption = { text: `Pages.Expenses.${toTitleCase(column)}`, value: column as keyof Expense };
-				return column === 'purchaseDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
+				return column === 'dueDate' ? { ...defaultOption, order: 'asc' } : defaultOption;
 			});
 	}
 

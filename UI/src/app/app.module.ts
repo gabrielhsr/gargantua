@@ -19,6 +19,7 @@ import { TranslateService } from './shared/translate/translate.service';
 
 import { AppBase } from './app.base';
 import { AuthenticationHelper } from './shared/helpers/authentication.helper';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 registerLocaleData(localePT);
 registerLocaleData(localeEN);

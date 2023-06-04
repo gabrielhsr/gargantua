@@ -12,7 +12,7 @@ namespace Financial.Domain.Models
             PaymentMethod = new PaymentMethod();
         }
         
-        public DateTimeOffset? DueDate { get; set; }
+        public DateTimeOffset DueDate { get; set; }
 
         [NotMapped]
         public DateTimeOffset? DisplayDueDate { get; set; }
@@ -21,7 +21,7 @@ namespace Financial.Domain.Models
         public DateTimeOffset PurchaseDate { get; set; }
 
         [NotMapped]
-        public DateTimeOffset DisplayPurchaseDate { get; set; }
+        public DateTimeOffset? DisplayPurchaseDate { get; set; }
 
         [Required]
         public virtual Category Category { get; set; }

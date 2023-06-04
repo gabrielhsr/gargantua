@@ -20,7 +20,6 @@ namespace Financial.Core.Services
 
             if (entity.Periodic) entity.Installments = 1;
 
-            entity.DueDate ??= entity.PurchaseDate;
             entity.User = await repository.Context.Set<User>().FindAsync(UserId);
 
             return await base.SaveAsync(id, entity);
@@ -45,9 +44,8 @@ namespace Financial.Core.Services
         {
             var periods = base.GetAll()
                 .Where(expense => expense.User.Id == UserId)
-                .Where(x => x.DueDate != null)
                 .OrderBy(x => x.DueDate)
-                .Select(x => new Period { Month = x.DueDate!.Value.Month, Year = x.DueDate!.Value.Year })
+                .Select(x => new Period { Month = x.DueDate.Month, Year = x.DueDate.Year })
                 .Distinct()
                 .ToList();
 

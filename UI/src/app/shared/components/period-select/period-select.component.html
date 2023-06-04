@@ -3,7 +3,7 @@
 		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
 		<mat-select [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)" [compareWith]="compareWith">
 			<mat-option *ngFor="let period of periods" [value]="period">
-				{{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
+				({{period.month}}) {{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
 			</mat-option>
 		</mat-select>
 	</mat-form-field>

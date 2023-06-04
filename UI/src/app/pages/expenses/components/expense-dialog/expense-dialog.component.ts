@@ -95,6 +95,10 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 			formValue.paymentMethod = { name: formValue.paymentMethod, id: GuidHelper.default }
 		}
 
+		if (!formValue.dueDate) {
+			formValue.dueDate = formValue.purchaseDate;
+		}
+
 		this.expenseService.saveExpense(formValue)
 			.pipe(takeUntil(this.destroy))
 			.subscribe((response) => {

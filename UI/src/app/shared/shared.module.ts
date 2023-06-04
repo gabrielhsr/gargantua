@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Directives
 import { AutocompleteDisableDirective } from './directives/autocomplete-disable.directive';
 import { TypeSafeMatCellDef } from './directives/type-safe-mat-cell-def.directive';
+import { LoadingDirective } from './directives/loading.directive';
+import { PreventDefaultDirective } from './directives/prevent-default.directive';
 
 // Pipes
 import { TranslatePipe } from './translate/translate.pipe';
@@ -24,8 +26,6 @@ import { YesOrNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog
 // Modules
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { MaterialModule } from './material/material.module';
-import { LoadingDirective } from './directives/loading.directive';
-import { PreventDefaultDirective } from './directives/prevent-default.directive';
 
 
 @NgModule({

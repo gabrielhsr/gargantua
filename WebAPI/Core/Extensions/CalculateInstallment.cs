@@ -42,13 +42,13 @@ namespace Financial.Core.Extensions
 
         private static Expense CalculateExpense(this Expense expense, Period period, IEnumerable<Expense> expenses)
         {
-            var lastCharge = expense.PurchaseDate.AddMonths(expense.Installments - 1);
+            var finalCharge = expense.DueDate.AddMonths(expense.Installments - 1); // Less one because the dueDate count as an Installment
             expense.DisplayDescription = expense.Description;
 
             if (expense.Installments > 1)
             {
                 var monthEdit = expenses.FirstOrDefault(edit => edit.Id == expense.RecurrentId);
-                var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
+                var currentCharge = finalCharge.Month - period.Month + 12 * (finalCharge.Year - period.Year);
 
                 expense.DisplayDescription += $" ({expense.Installments - currentCharge}/{expense.Installments})";
 
