@@ -9,40 +9,42 @@ using Financial.Core.Services.Base;
 using Financial.Core.Services;
 using Financial.Domain.Interfaces.Repositories;
 using Financial.Domain.Interfaces.Services;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
+var services = builder.Services;
 
 // Cors
 var origins = builder.Configuration.GetSection("AllowedOrigins").Value!.Split(",");
 
-builder.Services.AddCors(opts => {
+services.AddCors(opts => {
     opts.AddDefaultPolicy(policy => policy.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod());
 });
 
 // Database
-builder.Services.AddDbContext<FinancialDbContext>(opts =>
+services.AddDbContext<FinancialDbContext>(opts =>
 {
     opts.UseLazyLoadingProxies().UseSqlServer(connectionString);
 });
 
 // HttpContext
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Repositories
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 // DI Aggregator
-builder.Services.AddScoped(typeof(IDependencyAggregate<>), typeof(DependencyAggregate<>));
+services.AddScoped(typeof(IDependencyAggregate<>), typeof(DependencyAggregate<>));
 
 // Services
-builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-builder.Services.AddScoped<IExpenseService, ExpenseService>();
-builder.Services.AddScoped<IIncomeService, IncomeService>();
-builder.Services.AddScoped<IPeriodService, PeriodService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+services.AddScoped<IExpenseService, ExpenseService>();
+services.AddScoped<IIncomeService, IncomeService>();
+services.AddScoped<IPeriodService, PeriodService>();
+services.AddScoped<IAuthenticationService, AuthenticationService>();
 
-builder.Services.AddAuthentication(options =>
+services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -61,10 +63,16 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddRazorPages();
+services
+    .AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+    });
+
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+services.AddRazorPages();
 
 var app = builder.Build();
 
