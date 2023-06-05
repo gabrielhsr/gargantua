@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Expense } from 'src/app/entities/expense/expense.model';
 import { Period } from 'src/app/entities/period/period.dto';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -66,6 +66,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 		this.periodSubject
 			.pipe(
+				tap(() => this.expensesLoading = true),
 				switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period)),
 				takeUntil(this.destroy)
 			)

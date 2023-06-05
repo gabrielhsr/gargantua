@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Period } from 'src/app/entities/period/period.dto';
 import { Income } from 'src/app/entities/income/income.model';
 import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
@@ -60,6 +60,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 		this.periodSubject
 			.pipe(
+				tap(() => this.incomeLoading = true),
 				switchMap((period) => period ? this.incomeService.getIncomeByPeriod(period) : of(period)),
 				takeUntil(this.destroy)
 			)

@@ -21,13 +21,13 @@ namespace Financial.Core.Extensions
 
         private static Income CalculateIncome(this Income income, Period period, IEnumerable<Income> incomes)
         {
-            var lastCharge = income.PaymentDate.AddMonths(income.Installments - 1);
+            var finalCharge = income.PaymentDate.AddMonths(income.Installments - 1); // Less one because the dueDate count as an Installment
             income.DisplayDescription = income.Description;
 
             if (income.Installments > 1)
             {
                 var monthEdit = incomes.FirstOrDefault(edit => edit.Id == income.RecurrentId);
-                var currentCharge = lastCharge.Month - period.Month + 12 * (lastCharge.Year - period.Year);
+                var currentCharge = finalCharge.Month - period.Month + 12 * (finalCharge.Year - period.Year);
 
                 income.DisplayDescription += $" ({income.Installments - currentCharge}/{income.Installments})";
 

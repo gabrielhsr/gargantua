@@ -1,5 +1,5 @@
 <div class="main-container" [loading]="incomeLoading">
-	<mat-card class="header-container">
+	<mat-card class="header-container" [hidden]="!periodIncome.data.length">
 		<period-select
 			[sortOptions]="sortOptions"
 			(periodChange)="periodSubject.next($event)"
