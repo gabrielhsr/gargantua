@@ -34,7 +34,7 @@ namespace Financial.Core.Extensions
                 expense.DisplayDueDate = expense.DueDate;
                 expense.DisplayPurchaseDate = expense.PurchaseDate;
 
-                if (expense.Periodic)
+                if (expense.Periodic && expense.DueDate.Month != expense.PurchaseDate.Month)
                 {
                     var purchaseYearDiff = period.Year - expense.PurchaseDate.Year;
                     var purchaseMonthDiff = period.Month - expense.PurchaseDate.Month;
