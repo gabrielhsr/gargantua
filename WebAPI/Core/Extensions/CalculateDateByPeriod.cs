@@ -34,13 +34,19 @@ namespace Financial.Core.Extensions
                 expense.DisplayDueDate = expense.DueDate;
                 expense.DisplayPurchaseDate = expense.PurchaseDate;
 
-                if (expense.Periodic && expense.DueDate.Month != expense.PurchaseDate.Month)
+                if (expense.Periodic)
                 {
                     var purchaseYearDiff = period.Year - expense.PurchaseDate.Year;
                     var purchaseMonthDiff = period.Month - expense.PurchaseDate.Month;
 
-                    expense.DisplayPurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff - 1).AddYears(purchaseYearDiff);
-                    expense.DisplayDueDate = expense.DueDate.AddMonths(purchaseMonthDiff - 1).AddYears(purchaseYearDiff);
+                    expense.DisplayPurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff).AddYears(purchaseYearDiff);
+                    expense.DisplayDueDate = expense.DueDate.AddMonths(purchaseMonthDiff).AddYears(purchaseYearDiff);
+
+                    if (expense.DueDate.Month != expense.PurchaseDate.Month)
+                    {
+                        expense.DisplayPurchaseDate = expense.PurchaseDate.AddMonths(purchaseMonthDiff - 1).AddYears(purchaseYearDiff);
+                        expense.DisplayDueDate = expense.DueDate.AddMonths(purchaseMonthDiff - 1).AddYears(purchaseYearDiff);
+                    }
                 };
 
                 if (expense.Installments > 1)

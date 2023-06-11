@@ -63,6 +63,12 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 
 		const formValue = this.incomeForm?.value as Income;
 
+		if (formValue.periodic) {
+			formValue.installments = 1;
+		} else {
+			formValue.monthInterval = 1;
+		}
+
 		this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy)).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
