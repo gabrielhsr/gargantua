@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { BehaviorSubject, EMPTY, Subject, takeUntil } from 'rxjs';
-import { Category } from 'src/app/entities/category/category.model';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { Category } from 'src/app/domain/category/category.model';
+import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { InputComponent, ItemType } from './components/input/input.component';
 import { ConfigService } from './services/config.service';
@@ -18,7 +18,7 @@ export class ConfigPage implements OnInit, OnDestroy {
 	public categories?: Category[];
 	public paymentMethods?: PaymentMethod[];
 
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		private readonly configService: ConfigService,

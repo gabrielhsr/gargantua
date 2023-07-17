@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
-import { IncomeEndpoint } from 'src/app/entities/income/income.endpoint';
+import { IncomeEndpoint } from 'src/app/domain/income/income.endpoint';
 
-import { Period } from 'src/app/entities/period/period.dto';
+import { Period } from 'src/app/domain/period/period.dto';
 
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 
 import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
-import { Income } from 'src/app/entities/income/income.model';
+import { Income } from 'src/app/domain/income/income.model';
 import { UpdateService } from 'src/app/shared/services/update.service';
 
 @Injectable({

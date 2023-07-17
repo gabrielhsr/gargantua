@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { PeriodEndpoint } from 'src/app/entities/period/period.endpoint';
+import { PeriodEndpoint } from 'src/app/domain/period/period.endpoint';
 import { UpdateService } from '../../services/update.service';
 
 export interface SortOption {

@@ -3,9 +3,9 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Subject, takeUntil } from 'rxjs';
-import { Category } from 'src/app/entities/category/category.model';
-import { Income } from 'src/app/entities/income/income.model';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { Category } from 'src/app/domain/category/category.model';
+import { Income } from 'src/app/domain/income/income.model';
+import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
@@ -23,7 +23,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 	public editMonth: boolean = false;
 	public showRecurrentCheck: boolean = true;
 
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: { income?: Income, editMonth?: boolean },
@@ -44,8 +44,8 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
-		this.destroy.next(null);
-        this.destroy.complete();
+		this.destroy$.next();
+        this.destroy$.complete();
 	}
 
 	public submitForm(): void {
@@ -69,7 +69,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 			formValue.monthInterval = 1;
 		}
 
-		this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy)).subscribe((response) => {
+		this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy$)).subscribe((response) => {
 			if (response.isSuccess) {
 				this.feedback.successToast("Feedback.SaveSuccess");
 				this.dialogRef.close();

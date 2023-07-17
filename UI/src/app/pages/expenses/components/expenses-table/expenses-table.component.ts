@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { Expense } from 'src/app/entities/expense/expense.model';
-import { Period } from 'src/app/entities/period/period.dto';
+import { Expense } from 'src/app/domain/expense/expense.model';
+import { Period } from 'src/app/domain/period/period.dto';
 import { sortingExpenseDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
 import { TableHelper } from 'src/app/shared/helpers/table.helper';
@@ -42,7 +42,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
 	private lastSortOption?: SortOption;
 	private lastFilterOption?: boolean;
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		private readonly expenseService: ExpenseService,
@@ -68,7 +68,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			.pipe(
 				tap(() => this.expensesLoading = true),
 				switchMap((period) => period ? this.expenseService.getExpensesByPeriod(period) : of(period)),
-				takeUntil(this.destroy)
+				takeUntil(this.destroy$)
 			)
 			.subscribe((res) => {
 				if (res?.isSuccess) {
@@ -82,8 +82,8 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
-		this.destroy.next(null);
-        this.destroy.complete();
+		this.destroy$.next();
+        this.destroy$.complete();
 	}
 
 	public deleteExpense(expense: Expense) {
@@ -91,7 +91,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 			.deleteDialog(expense.description)
 			.pipe(
 				switchMap((res) => res?.confirm ? this.expenseService.removeExpense(expense.id) : EMPTY),
-				takeUntil(this.destroy)
+				takeUntil(this.destroy$)
 			)
 			.subscribe(({ isSuccess }) => {
 				if (isSuccess) this.feedback.successToast('Feedback.DeleteSuccess');

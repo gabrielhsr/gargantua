@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CanActivate, Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
 import { TranslateService } from '../translate/translate.service';
+
 @Injectable({
 	providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard {
 	constructor(
 		private readonly router: Router,
 		private readonly matSnackBar: MatSnackBar,

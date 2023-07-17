@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
-import { Expense, PaidExpense } from 'src/app/entities/expense/expense.model';
+import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
+import { Expense, PaidExpense } from 'src/app/domain/expense/expense.model';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { UpdateService } from 'src/app/shared/services/update.service';
 

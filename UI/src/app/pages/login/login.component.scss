@@ -3,6 +3,7 @@
 .login-container {
 	display: flex;
 	justify-content: center;
+	margin-top: 22px;
 }
 
 .login-card {
@@ -18,5 +19,11 @@
 
 	:hover {
 		cursor: pointer;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	.login-container {
+		margin-top: auto;
 	}
 }

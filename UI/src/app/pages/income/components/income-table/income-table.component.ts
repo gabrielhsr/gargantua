@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { Period } from 'src/app/entities/period/period.dto';
-import { Income } from 'src/app/entities/income/income.model';
+import { Period } from 'src/app/domain/period/period.dto';
+import { Income } from 'src/app/domain/income/income.model';
 import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
@@ -37,7 +37,7 @@ export class IncomeTableComponent implements OnInit, OnDestroy {
 	public incomeLoading: boolean = true;
 
 	private lastSortOption?: SortOption;
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		private readonly incomeService: IncomeService,

@@ -1,4 +1,4 @@
-import { Period } from "src/app/entities/period/period.dto";
+import { Period } from "src/app/domain/period/period.dto";
 
 export class DateHelper {
 	public static FromPeriod(period: Period) {

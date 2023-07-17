@@ -2,8 +2,8 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMethod.endpoint';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
+import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { UpdateService } from 'src/app/shared/services/update.service';
@@ -17,7 +17,7 @@ export class PaymentMethodDialogComponent implements OnInit, OnDestroy {
 	public paymentMethodForm?: FormGroup;
 	public loading: boolean = false;
 
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public paymentMethod: PaymentMethod,

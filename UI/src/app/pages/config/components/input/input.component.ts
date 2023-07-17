@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgModel } from '@angular/forms';
 import { EMPTY, Subject, switchMap, takeUntil } from 'rxjs';
-import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
-import { Category } from 'src/app/entities/category/category.model';
-import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMethod.endpoint';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
+import { Category } from 'src/app/domain/category/category.model';
+import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
+import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { UpdateService } from 'src/app/shared/services/update.service';
@@ -31,7 +31,7 @@ export class InputComponent implements OnInit, OnDestroy {
 	public form = new FormControl('');
 	public subject = new Subject<ItemUnion>();
 
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		private readonly categoryEndpoint: CategoryEndpoint,

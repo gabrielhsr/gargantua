@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Income } from 'src/app/entities/income/income.model';
+import { Income } from 'src/app/domain/income/income.model';
 import { DateHelper } from 'src/app/shared/helpers/date.helper';
 import { IncomeService } from './services/income.service';
 

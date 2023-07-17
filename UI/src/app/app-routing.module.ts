@@ -29,15 +29,15 @@ const routes: Routes = [
 		},
 		canActivate: [AuthGuard]
 	},
-	{
-		path: 'config',
-		loadChildren: () => import('./pages/config/config.module').then((m) => m.ConfigModule),
-		data: {
-			title: 'Sidebar.Config',
-			showMenu: true
-		},
-		canActivate: [AuthGuard]
-	},
+	// {
+	// 	path: 'config',
+	// 	loadChildren: () => import('./pages/config/config.module').then((m) => m.ConfigModule),
+	// 	data: {
+	// 		title: 'Sidebar.Config',
+	// 		showMenu: true
+	// 	},
+	// 	canActivate: [AuthGuard]
+	// },
 	{
 		path: 'expenses',
 		loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
@@ -47,15 +47,15 @@ const routes: Routes = [
 		},
 		canActivate: [AuthGuard]
 	},
-	{
-		path: 'income',
-		loadChildren: () => import('./pages/income/income.module').then((m) => m.IncomeModule),
-		data: {
-			title: 'Sidebar.Income',
-			showMenu: true
-		},
-		canActivate: [AuthGuard]
-	},
+	// {
+	// 	path: 'income',
+	// 	loadChildren: () => import('./pages/income/income.module').then((m) => m.IncomeModule),
+	// 	data: {
+	// 		title: 'Sidebar.Income',
+	// 		showMenu: true
+	// 	},
+	// 	canActivate: [AuthGuard]
+	// },
 ];
 
 @NgModule({

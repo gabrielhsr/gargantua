@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Expense } from 'src/app/entities/expense/expense.model';
+import { Expense } from 'src/app/domain/expense/expense.model';
 import { DateHelper } from 'src/app/shared/helpers/date.helper';
 import { ExpenseService } from './services/expense.service';
 

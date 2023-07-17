@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Income } from 'src/app/entities/income/income.model';
+import { Income } from 'src/app/domain/income/income.model';
 
 @Component({
   selector: 'income-desktop-view',

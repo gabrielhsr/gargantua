@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 
-import { PaymentMethodEndpoint } from 'src/app/entities/paymentMethod/paymentMethod.endpoint';
-import { CategoryEndpoint } from 'src/app/entities/category/category.endpoint';
-import { ExpenseEndpoint } from 'src/app/entities/expense/expense.endpoint';
+import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
+import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
+import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
 
-import { Expense } from 'src/app/entities/expense/expense.model';
-import { Period } from 'src/app/entities/period/period.dto';
+import { Expense } from 'src/app/domain/expense/expense.model';
+import { Period } from 'src/app/domain/period/period.dto';
 
 import { GuidHelper } from '../../../shared/helpers/guid.helper';
 

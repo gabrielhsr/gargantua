@@ -3,9 +3,9 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { forkJoin, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
-import { Category } from 'src/app/entities/category/category.model';
-import { Expense } from 'src/app/entities/expense/expense.model';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { Category } from 'src/app/domain/category/category.model';
+import { Expense } from 'src/app/domain/expense/expense.model';
+import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
@@ -29,7 +29,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	public filteredCategories?: Observable<Category[] | undefined>;
 	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
 
-	private destroy = new Subject();
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: { expense?: Expense, editMonth?: boolean },
@@ -41,7 +41,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 			categories: this.expenseService.getCategories(),
 			paymentMethods: this.expenseService.getPaymentMethods(),
 		})
-			.pipe(takeUntil(this.destroy))
+			.pipe(takeUntil(this.destroy$))
 			.subscribe(({ categories, paymentMethods }) => {
 				if (categories.isSuccess && paymentMethods.isSuccess) {
 					this.categories = categories.value;
@@ -68,8 +68,8 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
-		this.destroy.next(null);
-        this.destroy.complete();
+		this.destroy$.next();
+        this.destroy$.complete();
 	}
 
 	public submitForm(): void {
@@ -104,7 +104,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 		formValue.dueDate ??= formValue.purchaseDate;
 
 		this.expenseService.saveExpense(formValue)
-			.pipe(takeUntil(this.destroy))
+			.pipe(takeUntil(this.destroy$))
 			.subscribe((response) => {
 				if (response.isSuccess) {
 					this.feedback.successToast("Feedback.SaveSuccess");
