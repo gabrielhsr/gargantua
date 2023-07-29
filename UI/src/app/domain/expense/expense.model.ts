@@ -1,6 +1,7 @@
 import { Movement } from "../movement/movement.model";
 import { Category } from "../category/category.model";
 import { PaymentMethod } from "../paymentMethod/paymentMethod.model";
+import { Guid } from "../base.model";
 
 export class Expense extends Movement {
 	purchaseDate: Date = new Date();
@@ -12,6 +13,6 @@ export class Expense extends Movement {
 }
 
 export class PaidExpense {
-	id: string = "00000000-0000-0000-0000-000000000000";
+	id: string = Guid.default;
 	paid: boolean = false;
 }

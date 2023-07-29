@@ -1,16 +1,12 @@
+import { Guid } from 'src/app/domain/base.model';
+import { Income } from 'src/app/domain/income/income.model';
+import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
+import { IncomeEndpoint } from 'src/app/domain/income/income.endpoint';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs';
-
-import { IncomeEndpoint } from 'src/app/domain/income/income.endpoint';
-
-import { Period } from 'src/app/domain/period/period.dto';
-
-import { GuidHelper } from '../../../shared/helpers/guid.helper';
-
-import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
-import { Income } from 'src/app/domain/income/income.model';
+import { Period } from 'src/app/domain/period/period.model';
 import { UpdateService } from 'src/app/shared/services/update.service';
+import { tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -35,7 +31,7 @@ export class IncomeService {
 	}
 
 	public saveIncome(income: Income) {
-		const operation = GuidHelper.isNullOrDefault(income.id) ? this.incomeEndpoint.post(income) : this.incomeEndpoint.put(income, income.id);
+		const operation = Guid.isNullOrDefault(income.id) ? this.incomeEndpoint.post(income) : this.incomeEndpoint.put(income, income.id);
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {

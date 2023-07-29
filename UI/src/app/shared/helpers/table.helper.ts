@@ -1,7 +1,7 @@
 // [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id')
 
 interface Options {
-	remove: string[];
+	exclude: string[];
 	include: string[];
 }
 
@@ -10,6 +10,6 @@ export class TableHelper {
 		const itemKeys = Object.keys(item);
 		const include = options.include ?? [];
 
-		return [...itemKeys, ...include].filter((x) => !options.remove?.includes(x));
+		return [...itemKeys, ...include].filter((x) => !options.exclude?.includes(x));
 	}
 }

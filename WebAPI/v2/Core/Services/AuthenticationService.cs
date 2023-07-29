@@ -48,15 +48,15 @@ namespace Financial.v2.Core.Services
             return tokenHelper.ValidateToken(token);
         }
 
-        private async Task Register()
+        public async Task RegisterAsync(Login login)
         {
             var user = new User
             {
-                Email = "",
+                Email = login.Email,
                 PasswordSalt = PasswordHelper.GenerateSalt()
             };
 
-            user.PasswordHash = PasswordHelper.ComputeHash("", user.PasswordSalt, pepper, iteration);
+            user.PasswordHash = PasswordHelper.ComputeHash(login.Password, user.PasswordSalt, pepper, iteration);
 
             await repository.Context.AddAsync(user);
             await repository.Context.SaveChangesAsync();

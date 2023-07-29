@@ -30,6 +30,20 @@ namespace Financial.v2.Controllers
             }
         }
 
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Login user)
+        {
+            try
+            {
+                await authenticationService.RegisterAsync(user);
+                return Ok();
+            }
+            catch (AuthenticationException)
+            {
+                return Unauthorized();
+            }
+        }
+
         [HttpPost("validateToken")]
         public IActionResult ValidateToken([FromBody] AuthRes dto)
         {

@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
 import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
-import { TranslateService } from 'src/app/shared/translate/translate.service';
-import { Login } from 'src/app/domain/authentication/authentication.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
+import { Login } from 'src/app/domain/authentication/authentication.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { TranslateService } from 'src/app/shared/translate/translate.service';
 
 @Component({
 	selector: 'app-login',
@@ -83,9 +83,28 @@ export class LoginComponent implements OnInit, OnDestroy {
 			});
 	}
 
+	public registerForm() {
+		const formValue = this.loginForm?.value as Login;
+
+		this.loading = true;
+
+		this.authenticationEndpoint
+			.register(formValue)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((response) => {
+				if (response.isSuccess) {
+					this.matSnackBar.open(this.translate.instant("Pages.Login.SuccessRegister"))
+				} else {
+					this.matSnackBar.open(this.translate.instant("Pages.Login.Unauthorized"))
+				}
+
+				this.loading = false;
+			});
+	}
+
 	private createForm(): void {
-		const formsControl = FormHelper.build(new Login(), {
-			allValidators: {
+		this.loginForm = FormHelper.build(new Login(), {
+			validators: {
 				validators: [Validators.required],
 			},
 			specificValidators: {
@@ -93,7 +112,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 				password: [Validators.minLength(5), Validators.maxLength(20)],
 			},
 		});
-
-		this.loginForm = new FormGroup(formsControl);
 	}
 }

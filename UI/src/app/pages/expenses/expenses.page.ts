@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Expense } from 'src/app/domain/expense/expense.model';
 import { DateHelper } from 'src/app/shared/helpers/date.helper';
+import { Expense } from 'src/app/domain/expense/expense.model';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class ExpensesPage {
 		const selectedPeriod = this.expenseService.selectedPeriod;
 
 		if (selectedPeriod) {
-			newExpense.purchaseDate = DateHelper.FromPeriod(selectedPeriod);
+			// newExpense.purchaseDate = DateHelper.FromPeriod(selectedPeriod);
 		}
 
 		this.expenseService.openFormDialog(newExpense);

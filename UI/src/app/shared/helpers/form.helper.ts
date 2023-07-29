@@ -1,9 +1,10 @@
 import { FormControl, FormGroup, ValidationErrors } from "@angular/forms";
+
 import { TranslateService } from "../translate/translate.service";
 
-interface buildOptions {
+interface BuildOptions {
 	exclude: string[];
-	allValidators: AllValidators;
+	validators: ValidationErrors;
 	specificValidators: SpecificValidators;
 }
 
@@ -41,8 +42,9 @@ export class FormHelper {
 		return '';
 	}
 
-	public static build(object: object, options: Partial<buildOptions>) {
-		const formObj: {[key: string]: FormControl} = {};
+	public static build<T>(item: T, options: Partial<BuildOptions>): FormGroup {
+		const controls: {[key: string]: FormControl} = {};
+		const object = item as object;
 
 		Object.keys(object)
 			.filter(key => options.exclude ? !options.exclude.includes(key) : key)
@@ -50,21 +52,21 @@ export class FormHelper {
 				const key = item as keyof typeof object;
 				const validators = this.buildValidators(options, key);
 
-				formObj[key] = new FormControl(object[key], validators);
-			})
+				controls[key] = new FormControl(object[key], validators);
+			});
 
-		return formObj;
+		return new FormGroup(controls);
 	}
 
-	private static buildValidators(options: Partial<buildOptions>, key: string): ValidationErrors {
-		const allValidators = options.allValidators?.validators ?? [];
-		const specificValidator = options.specificValidators?.[key] ? options.specificValidators[key] : [];
+	private static buildValidators(options: Partial<BuildOptions>, key: string): ValidationErrors {
+		const allValidators = options.validators ?? [];
+		const specificValidator = options.specificValidators?.[key] ? options.specificValidators[key] : [] as ValidationErrors;
 
 		const validators: any = [];
 
-		Object.keys(allValidators).forEach((allKey) => {
-			if (!options.allValidators?.exclude?.includes(key)) validators.push(allValidators[allKey]);
-		});
+		// Object.keys(allValidators).forEach((allKey) => {
+		// 	if (!options.validators?.exclude?.includes(key)) validators.push(allValidators[allKey]);
+		// });
 
 		Object.keys(specificValidator).forEach((specificKey) => validators.push(specificValidator[specificKey]));
 

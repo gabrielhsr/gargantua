@@ -3,6 +3,7 @@
 		<mat-card-header class="justify-content-center">
 			<mat-card-title>{{ 'Pages.Login.Title' | translate }}</mat-card-title>
 		</mat-card-header>
+
 		<form *ngIf="loginForm" [formGroup]="loginForm">
 			<mat-card-content class="login-card" [loading]="loading">
 				<mat-form-field appearance="fill">
@@ -22,6 +23,10 @@
 
 				<button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="submitForm()">
 					{{ 'Pages.Login.Enter' | translate }}
+				</button>
+
+				<button type="submit" class="register-button" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="registerForm()">
+					{{ 'Pages.Login.Register' | translate }}
 				</button>
 			</mat-card-content>
 		</form>

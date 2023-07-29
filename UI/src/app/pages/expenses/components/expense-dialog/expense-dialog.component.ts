@@ -7,9 +7,9 @@ import { Category } from 'src/app/domain/category/category.model';
 import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
-import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { ExpenseService } from '../../services/expense.service';
+import { Guid } from 'src/app/domain/base.model';
 
 @Component({
 	selector: 'expense-dialog',
@@ -82,17 +82,17 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 			periodicInput.patchValue(false);
 			recurrentId.patchValue(id.value);
-			id.patchValue(GuidHelper.default);
+			id.patchValue(Guid.default);
 		}
 
 		const formValue = this.expenseForm?.value as Expense;
 
 		if (typeof formValue.category === "string") {
-			formValue.category = { name: formValue.category, id: GuidHelper.default }
+			formValue.category = { name: formValue.category, id: Guid.default }
 		}
 
 		if (typeof formValue.paymentMethod === "string") {
-			formValue.paymentMethod = { name: formValue.paymentMethod, id: GuidHelper.default }
+			formValue.paymentMethod = { name: formValue.paymentMethod, id: Guid.default }
 		}
 
 		if (formValue.periodic) {
@@ -163,7 +163,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
 	private createForm(expense: Expense): void {
 		const formsControl = FormHelper.build(expense, {
-			allValidators: {
+			validators: {
 				validators: [Validators.required],
 				exclude: [
 					'dueDate',
@@ -175,6 +175,6 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 			},
 		});
 
-		this.expenseForm = new FormGroup(formsControl);
+		// this.expenseForm = new FormGroup(formsControl);
 	}
 }

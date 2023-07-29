@@ -1,25 +1,15 @@
-<div class="period-container" *ngIf="periods?.length">
+<div class="period-container" [formGroup]="periodForm">
 	<mat-form-field class="period-form-field" [appearance]="appearance">
 		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
-		<mat-select [(value)]="selectedPeriod" (selectionChange)="periodChange.emit($event.value)" [compareWith]="compareWith">
-			<mat-option *ngFor="let period of periods" [value]="period">
-				({{period.month}}) {{ ( period.month + '/01/' + period.year) | date : 'MMMM YYYY' | titlecase }}
-			</mat-option>
+		<mat-select formControlName="month" (selectionChange)="emitEvent()">
+			<mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
 		</mat-select>
 	</mat-form-field>
 
-	<button mat-icon-button class="filter-button" [matMenuTriggerFor]="filterMenu" *ngIf="sortOptions.length">
-		<mat-icon>sort</mat-icon>
-	</button>
+	<mat-form-field class="period-form-field" [appearance]="appearance">
+		<mat-label>{{ 'Common.Year' | translate }}</mat-label>
+		<mat-select formControlName="year" (selectionChange)="emitEvent()">
+			<mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+		</mat-select>
+	</mat-form-field>
 </div>
-
-<mat-menu #filterMenu="matMenu">
-	<div preventDefault>
-		<div mat-menu-item disabled>{{ 'Pages.Expenses.SortBy' | translate }}:</div>
-
-		<button mat-menu-item *ngFor="let option of service.sortOptions" (click)="changeFilter(option)">
-			<mat-icon *ngIf="option.order">{{ option.order === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
-			{{ option.text | translate }}
-		</button>
-	</div>
-</mat-menu>

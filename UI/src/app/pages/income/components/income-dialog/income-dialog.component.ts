@@ -7,9 +7,9 @@ import { Category } from 'src/app/domain/category/category.model';
 import { Income } from 'src/app/domain/income/income.model';
 import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
-import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
+import { Guid } from 'src/app/domain/base.model';
 
 @Component({
 	selector: 'income-dialog',
@@ -58,7 +58,7 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 
 			periodicInput.patchValue(false);
 			recurrentId.patchValue(id.value);
-			id.patchValue(GuidHelper.default);
+			id.patchValue(Guid.default);
 		}
 
 		const formValue = this.incomeForm?.value as Income;
@@ -93,12 +93,12 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 
 	private createForm(income: Income): void {
 		const formsControl = FormHelper.build(income, {
-			allValidators: {
+			validators: {
 				validators: [Validators.required],
 				exclude: ['recurrentId', 'displayDescription', 'displayPaymentDate'],
 			},
 		});
 
-		this.incomeForm = new FormGroup(formsControl);
+		// this.incomeForm = new FormGroup(formsControl);
 	}
 }

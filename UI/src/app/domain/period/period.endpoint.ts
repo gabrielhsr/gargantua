@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { BaseEndpoint } from '../base.endpoint';
-import { Period } from '../period/period.dto';
+import { Period } from './period.model';
 
 @Injectable({
 	providedIn: 'root',

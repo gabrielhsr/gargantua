@@ -22,6 +22,10 @@
 	}
 }
 
+.register-button {
+	margin-top: 15px;
+}
+
 @include media-breakpoint-up(lg) {
 	.login-container {
 		margin-top: auto;

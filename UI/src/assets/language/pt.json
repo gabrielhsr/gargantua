@@ -19,6 +19,7 @@
 	"Common": {
 		"Send": "Enviar",
 		"Month": "Mês",
+		"Year": "Ano",
 		"Cancel": "Cancelar",
 		"Delete": "Deletar",
 		"Total": "Total",
@@ -44,7 +45,9 @@
 			"Password": "Senha",
 			"Email": "E-Mail",
 			"Enter": "Entrar",
-			"Unauthorized": "Usuário ou Senha Incorreta!"
+			"Unauthorized": "Usuário ou Senha Incorreta!",
+			"SuccessRegister": "Registrado com sucesso!",
+			"Register": "Registrar Conta"
 		},
 		"Home": {
 			"Income": "Receita Mensal",

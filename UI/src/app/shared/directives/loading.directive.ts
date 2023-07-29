@@ -1,5 +1,5 @@
 import { Directive, OnInit, OnChanges, HostBinding, Input, ElementRef, Renderer2, SimpleChanges } from '@angular/core';
-import { GuidHelper } from '../helpers/guid.helper';
+import { Guid } from 'src/app/domain/base.model';
 
 @Directive({
 	selector: '[loading]',
@@ -18,7 +18,7 @@ export class LoadingDirective implements OnInit, OnChanges {
 	public ngOnInit() {
 		const spinner: Element = this.renderer.createElement('div');
 
-		this.guid = 'loading-container-' + GuidHelper.generate();
+		this.guid = 'loading-container-' + Guid.new();
 
 		this.renderer.addClass(this.loadingElement, 'loading-container');
 		this.renderer.addClass(this.loadingElement, this.guid);

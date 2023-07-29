@@ -32,8 +32,8 @@ export class PaymentMethodDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
-		this.destroy.next(null);
-		this.destroy.complete();
+		this.destroy$.next(null);
+		this.destroy$.complete();
 	}
 
 	public showErrorMessage(input: string) {
@@ -64,7 +64,7 @@ export class PaymentMethodDialogComponent implements OnInit, OnDestroy {
 
 	private createForm(paymentMethod: PaymentMethod): void {
 		const formsControl = FormHelper.build(paymentMethod, {
-			allValidators: {
+			validators: {
 				validators: [Validators.required],
 				exclude: ['dueDate', 'bank'],
 			}

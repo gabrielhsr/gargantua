@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { Period } from 'src/app/domain/period/period.dto';
-import { DateHelper } from '../../helpers/date.helper';
-import { PeriodService } from './period-select.service';
-import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Months, Period } from 'src/app/domain/period/period.model';
 
-interface SortOption {
-	text: string;
-	value: any;
-	order?: 'asc' | 'desc';
-}
+import { FormHelper } from '../../helpers/form.helper';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { PeriodService } from './period-select.service';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'period-select',
@@ -18,22 +14,30 @@ interface SortOption {
 	providers: [PeriodService]
 })
 export class PeriodSelectComponent implements OnInit {
-	@Output() public periodChange = new EventEmitter<Period>();
-	@Output() public filterChange = new EventEmitter<SortOption>();
-
-	@Input() public sortOptions: SortOption[] = [];
 	@Input() public appearance: MatFormFieldAppearance = "outline";
+	@Input() public fillCurrentDate: boolean = false;
 
-	public periods?: Period[];
-	public selectedPeriod?: Period;
+	@Output() public periodChange = new EventEmitter<Period>();
+
+	public periodForm = FormHelper.build(new Period(), { validators: [Validators.required] });
+	public years = [2023, 2024];
 
 	private destroy$ = new Subject<void>();
 
 	constructor(public readonly service: PeriodService) {}
 
+	public get months() {
+		return Object.keys(Months).filter(month => isNaN(Number(month)));
+	}
+
 	public ngOnInit() {
-		this.service.sortOptions = this.sortOptions;
-		this.loadPeriods();
+		if (this.fillCurrentDate) {
+			const current = new Date();
+			const month = Months[current.getMonth() - 1];
+			const year = current.getFullYear();
+
+			this.periodForm.patchValue({ month, year });
+		}
 	}
 
 	public ngOnDestroy(): void {
@@ -41,37 +45,7 @@ export class PeriodSelectComponent implements OnInit {
         this.destroy$.complete();
 	}
 
-	public changeFilter(sortOption: SortOption) {
-		this.service.changeSortOption(sortOption);
-		this.filterChange.emit(this.service.sortOption.value);
-	}
-
-	public compareWith(oldPeriod?: Period, newPeriod?: Period) {
-		return oldPeriod?.month === newPeriod?.month && oldPeriod?.year === newPeriod?.year;
-	}
-
-	private loadPeriods() {
-		this.service.getPeriods().pipe(takeUntil(this.destroy$)).subscribe((res) => {
-			if (!res.isSuccess) return;
-
-			this.periods = res.value;
-
-			if (this.periods.length) {
-				const currentPeriod = DateHelper.PeriodNow();
-
-				const selectedPeriodExist = this.periods.some(period => this.compareWith(period, this.selectedPeriod));
-				const currentPeriodExist = this.periods.some(period => this.compareWith(period, currentPeriod));
-
-				if (!selectedPeriodExist) {
-					if (currentPeriodExist) {
-						this.selectedPeriod = currentPeriod;
-					} else {
-						this.selectedPeriod = this.periods.at(-1);
-					}
-				}
-			}
-
-			this.periodChange.emit(this.selectedPeriod);
-		});
+	public emitEvent() {
+		this.periodChange.emit(this.periodForm.value);
 	}
 }

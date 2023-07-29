@@ -1,17 +1,14 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 
-import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
-import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
-
 import { Expense } from 'src/app/domain/expense/expense.model';
-import { Period } from 'src/app/domain/period/period.dto';
-
-import { GuidHelper } from '../../../shared/helpers/guid.helper';
-
 import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
+import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
+import { Guid } from 'src/app/domain/base.model';
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
+import { Period } from 'src/app/domain/period/period.model';
 import { UpdateService } from 'src/app/shared/services/update.service';
 
 @Injectable({
@@ -47,7 +44,7 @@ export class ExpenseService {
 	}
 
 	public saveExpense(expense: Expense) {
-		const operation = GuidHelper.isNullOrDefault(expense.id) ? this.expenseEndpoint.post(expense) : this.expenseEndpoint.put(expense, expense.id);
+		const operation = Guid.isNullOrDefault(expense.id) ? this.expenseEndpoint.post(expense) : this.expenseEndpoint.put(expense, expense.id);
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {

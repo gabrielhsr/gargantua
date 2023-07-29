@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, of, Subject, switchMap, takeUntil } from 'rxjs';
-import { Period } from 'src/app/domain/period/period.dto';
+import { Subject, combineLatest, of, switchMap, takeUntil } from 'rxjs';
+
 import { IncomeService } from '../income/services/income.service';
+import { Period } from 'src/app/domain/period/period.model';
 
 @Component({
 	selector: 'page-home',

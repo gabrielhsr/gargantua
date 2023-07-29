@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, lastValueFrom, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { Period } from 'src/app/domain/period/period.dto';
+import { EMPTY, Subject, lastValueFrom, of, switchMap, takeUntil, tap } from 'rxjs';
+
+import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { Income } from 'src/app/domain/income/income.model';
+import { IncomeService } from '../../services/income.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Period } from 'src/app/domain/period/period.model';
+import { TableHelper } from 'src/app/shared/helpers/table.helper';
 import { sortingIncomeDataAccessor } from 'src/app/shared/helpers/sort.helper';
 import { toTitleCase } from 'src/app/shared/helpers/string.helper';
-import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { IncomeService } from '../../services/income.service';
-import { TableHelper } from 'src/app/shared/helpers/table.helper';
 
 const IGNORE_COLUMNS = [
 	'id',
@@ -31,7 +32,7 @@ export interface SortOption {
 	styleUrls: ['./income-table.component.scss'],
 })
 export class IncomeTableComponent implements OnInit, OnDestroy {
-	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { remove: IGNORE_COLUMNS, include: ['options'] });
+	public displayedColumns: string[] = TableHelper.GenerateColumns(new Income(), { exclude: IGNORE_COLUMNS, include: ['options'] });
 	public periodIncome = new MatTableDataSource<Income>();
 	public periodSubject = new Subject<Period | undefined>();
 	public incomeLoading: boolean = true;

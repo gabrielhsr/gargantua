@@ -14,6 +14,10 @@ export class AuthenticationEndpoint {
 		return this.http.post<Login, AuthRes>(this.url + 'signIn', login);
 	}
 
+	public register(login: Login) {
+		return this.http.post<Login, void>(this.url + 'register', login);
+	}
+
 	public validateToken(token: string) {
 		return this.http.post<AuthRes, boolean>(this.url + 'validateToken', { token });
 	}
