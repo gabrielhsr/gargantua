@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
 import { Expense, PaidExpense } from 'src/app/domain/expense/expense.model';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { UpdateService } from 'src/app/shared/services/update.service';
+import { RefreshService } from 'src/app/shared/services/refresh.service';
 
 @Injectable()
 export class ExpensePaidService {
@@ -12,7 +12,7 @@ export class ExpensePaidService {
 	constructor(
 		private readonly expenseEndpoint: ExpenseEndpoint,
 		private readonly feedback: FeedbackService,
-		private readonly update: UpdateService
+		private readonly update: RefreshService
 	) {}
 
 	public get showActions(): boolean {
@@ -47,7 +47,7 @@ export class ExpensePaidService {
 		this.expenseEndpoint.markAsPaid(this.paidExpenses).subscribe(({ isSuccess }) => {
 			if (isSuccess) {
 				this.feedback.successToast();
-				this.update.run();
+				this.update.execute();
 			}
 		});
 	}

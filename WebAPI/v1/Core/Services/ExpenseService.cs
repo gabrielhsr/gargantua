@@ -25,7 +25,7 @@ namespace Financial.v1.Core.Services
             return await base.SaveAsync(id, entity);
         }
 
-        public override async Task RemoveAsync(Guid id)
+        public override async Task<Expense> RemoveAsync(Guid id)
         {
             var expense = await GetByIdAsync(id);
             var mainId = expense.RecurrentId is not null ? (Guid)expense.RecurrentId : id;
@@ -37,7 +37,7 @@ namespace Financial.v1.Core.Services
                 await base.RemoveAsync(monthEdit.Id);
             }
 
-            await base.RemoveAsync(mainId);
+            return await base.RemoveAsync(mainId);
         }
 
         public IList<Period> GetPeriods()

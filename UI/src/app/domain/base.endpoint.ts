@@ -1,9 +1,7 @@
 import { HttpService } from '../shared/services/http.service';
 
 export abstract class BaseEndpoint<T> {
-	public abstract url: string;
-
-	constructor(protected httpService: HttpService) {}
+	constructor(protected httpService: HttpService, public readonly url: string) {}
 
 	public get() {
 		return this.httpService.get<T[]>(this.url);

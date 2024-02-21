@@ -1,7 +1,5 @@
 import { FormControl, FormGroup, ValidationErrors } from "@angular/forms";
 
-import { TranslateService } from "../translate/translate.service";
-
 interface BuildOptions {
 	exclude: string[];
 	validators: ValidationErrors;
@@ -17,7 +15,7 @@ interface AllValidators {
 	exclude?: string[]
 }
 
-const messageErrors = new TranslateService().instant('ErrorMessage');
+const messageErrors: any[] = [];
 
 export class FormHelper {
 	public static showErrorMessage(input: string, form: FormGroup) {

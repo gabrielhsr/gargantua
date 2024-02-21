@@ -1,12 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
 import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { UpdateService } from 'src/app/shared/services/update.service';
+import { RefreshService } from 'src/app/shared/services/refresh.service';
 
 @Component({
 	selector: 'app-payment-method-dialog',
@@ -24,7 +24,7 @@ export class PaymentMethodDialogComponent implements OnInit, OnDestroy {
 		private readonly dialogRef: MatDialogRef<PaymentMethodDialogComponent>,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly feedback: FeedbackService,
-		private readonly update: UpdateService
+		private readonly update: RefreshService
 	) {	}
 
 	public ngOnInit(): void {
@@ -55,7 +55,7 @@ export class PaymentMethodDialogComponent implements OnInit, OnDestroy {
 				if (isSuccess) {
 					this.feedback.successToast("Feedback.SaveSuccess");
 					this.dialogRef.close();
-					this.update.run();
+					this.update.execute();
 				}
 
 				this.loading = false;

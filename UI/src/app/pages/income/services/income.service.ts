@@ -1,12 +1,12 @@
-import { Guid } from 'src/app/domain/base.model';
-import { Income } from 'src/app/domain/income/income.model';
-import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
-import { IncomeEndpoint } from 'src/app/domain/income/income.endpoint';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Period } from 'src/app/domain/period/period.model';
-import { UpdateService } from 'src/app/shared/services/update.service';
 import { tap } from 'rxjs';
+import { Guid } from 'src/app/domain/base.model';
+import { IncomeEndpoint } from 'src/app/domain/income/income.endpoint';
+import { Income } from 'src/app/domain/income/income.model';
+import { Period } from 'src/app/domain/period/period.model';
+import { RefreshService } from 'src/app/shared/services/refresh.service';
+import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
 
 @Injectable({
 	providedIn: 'root',
@@ -17,7 +17,7 @@ export class IncomeService {
 	constructor(
 		private readonly incomeEndpoint: IncomeEndpoint,
 		private readonly dialog: MatDialog,
-		private readonly update: UpdateService
+		private readonly update: RefreshService
 	) {	}
 
 	public getAllIncomes() {
@@ -35,7 +35,7 @@ export class IncomeService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.update.run();
+				if (isSuccess) this.update.execute();
 			})
 		);
 	}
@@ -43,7 +43,7 @@ export class IncomeService {
 	public removeIncome(id: string) {
 		return this.incomeEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.update.run();
+				if (isSuccess) this.update.execute();
 			})
 		);
 	}

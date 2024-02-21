@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DateHelper } from 'src/app/shared/helpers/date.helper';
 import { Expense } from 'src/app/domain/expense/expense.model';
+import { RequestCommand } from 'src/app/shared/utils/request-command';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
@@ -9,15 +9,14 @@ import { ExpenseService } from './services/expense.service';
 	styleUrls: ['./expenses.page.scss'],
 })
 export class ExpensesPage {
-	constructor(private readonly expenseService: ExpenseService) {}
+	constructor(private readonly expenseService: ExpenseService) {
+		const command = new RequestCommand(this.expenseService.getCategories());
+
+		command.execute();
+	}
 
 	public openAddDialog() {
 		const newExpense = new Expense();
-		const selectedPeriod = this.expenseService.selectedPeriod;
-
-		if (selectedPeriod) {
-			// newExpense.purchaseDate = DateHelper.FromPeriod(selectedPeriod);
-		}
 
 		this.expenseService.openFormDialog(newExpense);
 	}

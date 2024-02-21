@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
-import { TranslateService } from '../translate/translate.service';
 
 @Injectable({
 	providedIn: 'root',

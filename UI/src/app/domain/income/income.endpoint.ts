@@ -8,10 +8,8 @@ import { Income } from './income.model';
 	providedIn: 'root',
 })
 export class IncomeEndpoint extends BaseEndpoint<Income> {
-	public override url = '/api/Income/';
-
 	constructor(private readonly service: HttpService) {
-		super(service);
+		super(service, '/api/Income/');
 	}
 
 	public getIncomePeriods() {

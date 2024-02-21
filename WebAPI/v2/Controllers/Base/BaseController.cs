@@ -19,7 +19,7 @@ namespace Financial.v2.Controllers.Base
 
         // GET: api/Entity
         [HttpGet]
-        public virtual ActionResult<IEnumerable<TEntity>> GetEntities()
+        public virtual ActionResult<IQueryable<TEntity>> GetEntities()
         {
             return Ok(service.GetAll());
         }
@@ -74,9 +74,7 @@ namespace Financial.v2.Controllers.Base
                 return NotFound();
             }
 
-            await service.RemoveAsync(id);
-
-            return NoContent();
+            return Ok(await service.RemoveAsync(id));
         }
     }
 }

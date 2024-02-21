@@ -7,9 +7,7 @@ import { Category } from './category.model';
 	providedIn: 'root',
 })
 export class CategoryEndpoint extends BaseEndpoint<Category> {
-	public override url = '/api/Category/';
-
 	constructor(private readonly service: HttpService) {
-		super(service);
+		super(service, '/api/Category/');
 	}
 }

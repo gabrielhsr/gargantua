@@ -25,9 +25,11 @@
 }
 
 .background {
-	background-image: url('/assets/images/bg.svg');
-	background-repeat: repeat-x;
-	background-size: 100vw 250px;
+	background-color: $color-background;
+}
+
+mat-sidenav-content {
+	padding-top: 10px;
 }
 
 ::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {

@@ -8,7 +8,7 @@ namespace Financial.v2.Domain.Interfaces.Repositories.Base
         Task<T> GetByIdAsync(Guid id);
         IQueryable<T> GetAll();
         Task<T> AddAsync(T entity);
-        Task DeleteAsync(Guid id);
+        Task<T> DeleteAsync(Guid id);
         Task<T> UpdateAsync(T entity);
         Task<bool> Exists(Guid id);
     }

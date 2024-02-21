@@ -22,7 +22,7 @@ namespace Financial.v2.Core.Repositories.Base
             return entity;
         }
 
-        public virtual async Task DeleteAsync(Guid id)
+        public virtual async Task<T> DeleteAsync(Guid id)
         {
             var entity = await GetByIdAsync(id);
 
@@ -33,6 +33,8 @@ namespace Financial.v2.Core.Repositories.Base
 
             Context.Set<T>().Remove(entity);
             await Context.SaveChangesAsync();
+
+            return entity;
         }
 
         public virtual async Task<bool> Exists(Guid id)

@@ -1,15 +1,15 @@
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
-import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
-import { Expense } from 'src/app/domain/expense/expense.model';
-import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
-import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
-import { Guid } from 'src/app/domain/base.model';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Guid } from 'src/app/domain/base.model';
+import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
+import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
+import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
 import { Period } from 'src/app/domain/period/period.model';
-import { UpdateService } from 'src/app/shared/services/update.service';
+import { RefreshService } from 'src/app/shared/services/refresh.service';
+import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,7 +21,7 @@ export class ExpenseService {
 		private readonly categoryEndpoint: CategoryEndpoint,
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly expenseEndpoint: ExpenseEndpoint,
-		private readonly update: UpdateService,
+		private readonly update: RefreshService,
 		private readonly dialog: MatDialog
 	) {	}
 
@@ -48,7 +48,7 @@ export class ExpenseService {
 
 		return operation.pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.update.run() ;
+				if (isSuccess) this.update.execute() ;
 			})
 		);
 	}
@@ -56,7 +56,7 @@ export class ExpenseService {
 	public removeExpense(id: string) {
 		return this.expenseEndpoint.delete(id).pipe(
 			tap(({ isSuccess }) => {
-				if (isSuccess) this.update.run();
+				if (isSuccess) this.update.execute();
 			})
 		);
 	}

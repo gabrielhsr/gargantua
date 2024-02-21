@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgModel } from '@angular/forms';
 import { EMPTY, Subject, switchMap, takeUntil } from 'rxjs';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
@@ -7,7 +7,7 @@ import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMetho
 import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { UpdateService } from 'src/app/shared/services/update.service';
+import { RefreshService } from 'src/app/shared/services/refresh.service';
 import { ConfigService } from '../../services/config.service';
 
 export type ItemType = 'category' | 'paymentMethod';
@@ -38,7 +38,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
 		private readonly feedback: FeedbackService,
 		private readonly configService: ConfigService,
-		private readonly update: UpdateService
+		private readonly update: RefreshService
 	) {}
 
 	public ngOnInit() {
@@ -52,7 +52,7 @@ export class InputComponent implements OnInit, OnDestroy {
 					this.feedback.successToast('Pages.Config.SavedWithSuccess');
 				}
 
-				this.update.run();
+				this.update.execute();
 				this.loading = false;
 			});
 	}
@@ -101,7 +101,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		const operation = this.type  === 'category' ? this.categoryEndpoint.delete(item.id) : this.paymentMethodEndpoint.delete(item.id);
 
 		if (!itemName) {
-			this.update.run();
+			this.update.execute();
 			return;
 		}
 
@@ -115,7 +115,7 @@ export class InputComponent implements OnInit, OnDestroy {
 					if (res.type === 'entityInUse') this.feedback.errorToast('Pages.Config.Errors.EntityInUse', { itemName });
 				}
 
-				this.update.run();
+				this.update.execute();
 			});
 	}
 

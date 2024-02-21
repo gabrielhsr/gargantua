@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { RouteData } from 'src/app/app-routing.module';
 import { ThemeService } from '../../services/theme.service';
-import { TranslateService } from '../../translate/translate.service';
 
 @Component({
 	selector: 'topbar',
@@ -25,19 +25,19 @@ export class TopbarComponent {
 			if (data instanceof RoutesRecognized) {
 				this.routeData = data.state.root.firstChild?.data as RouteData;
 
-				if (this.routeData.title) this.title = this.translate.instant(this.routeData.title);
+				if (this.routeData.title) this.title = this.routeData.title;
 			}
 		});
 	}
 
 	public changeLanguage(): void {
-		this.translate.toggleLanguage();
-		location.reload();
-	}
+		const currentLang = this.translate.currentLang;
 
-	public changeCurrency(): void {
-		this.translate.toggleCurrency();
-		location.reload();
+		if (!currentLang || currentLang === 'pt-br') {
+			this.translate.use('en');
+		} else {
+			this.translate.use('pt-br');
+		}
 	}
 
 	public changeTheme(): void {

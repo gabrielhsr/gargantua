@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { HttpHandleResponse } from './http.service';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class UpdateService {
+export class RefreshService {
 	private subject = new BehaviorSubject<void>(undefined);
 
-	public run() {
+	public execute() {
 		this.subject.next();
 	}
 

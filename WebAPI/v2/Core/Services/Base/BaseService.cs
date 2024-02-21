@@ -26,9 +26,9 @@ namespace Financial.v2.Core.Services.Base
             httpContextAccessor = dependencyAggregate.HttpContextAccessor;
         }
 
-        public virtual async Task RemoveAsync(Guid id)
+        public virtual async Task<T> RemoveAsync(Guid id)
         {
-            await repository.DeleteAsync(id);
+            return await repository.DeleteAsync(id);
         }
 
         public virtual IQueryable<T> GetAll()

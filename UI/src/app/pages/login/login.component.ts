@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
-import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
-import { FormHelper } from 'src/app/shared/helpers/form.helper';
-import { Login } from 'src/app/domain/authentication/authentication.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TranslateService } from 'src/app/shared/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
+import { Login } from 'src/app/domain/authentication/authentication.model';
+import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
+import { FormHelper } from 'src/app/shared/helpers/form.helper';
 
 @Component({
 	selector: 'app-login',
