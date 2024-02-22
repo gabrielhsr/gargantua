@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 export interface RouteData {
@@ -38,15 +38,15 @@ const routes: Routes = [
 	// 	},
 	// 	canActivate: [AuthGuard]
 	// },
-	{
-		path: 'expenses',
-		loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
-		data: {
-			title: 'Sidebar.Expenses',
-			showMenu: true
-		},
-		canActivate: [AuthGuard]
-	},
+	// {
+	// 	path: 'expenses',
+	// 	loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
+	// 	data: {
+	// 		title: 'Sidebar.Expenses',
+	// 		showMenu: true
+	// 	},
+	// 	canActivate: [AuthGuard]
+	// },
 	// {
 	// 	path: 'income',
 	// 	loadChildren: () => import('./pages/income/income.module').then((m) => m.IncomeModule),
@@ -56,6 +56,11 @@ const routes: Routes = [
 	// 	},
 	// 	canActivate: [AuthGuard]
 	// },
+	{
+		path: '**',
+		redirectTo: 'home',
+		pathMatch: 'full'
+	},
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { HttpHandleResponse } from './http.service';
+import { CommandResponse } from '../utils/request-command';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,7 +12,7 @@ export class RefreshService {
 		this.subject.next();
 	}
 
-	public handle<T>(getMethod: Observable<HttpHandleResponse<T>>) {
+	public handle<T>(getMethod: Observable<CommandResponse<T>>) {
 		return this.subject.pipe(switchMap(() => getMethod));
 	}
 }

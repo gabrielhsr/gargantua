@@ -1,125 +1,126 @@
 {
-  "Language": "Português",
-  "Example": "Exemplo",
-  "Title": "Finanças",
-  "Feedback": {
-    "GenericSuccess": "Sucesso!",
-    "GenericError": "Erro!",
-    "SaveSuccess": "Salvo com sucesso!",
-    "DeleteSuccess": "Deletado com sucesso!",
-    "DeleteItem": {
-      "Title": "Deletar Item",
-      "Message": "Você gostaria de deletar o item '{{itemName}}'?"
-    },
-    "YesOrNo": {
-      "Title": "Confirmação"
-    },
-    "TokenExpired": "Seu acesso expirou! Realize o login novamente."
-  },
-  "Common": {
-    "Send": "Enviar",
-    "Month": "Mês",
-    "Year": "Ano",
-    "Cancel": "Cancelar",
-    "Delete": "Deletar",
-    "Total": "Total",
-    "Edit": "Editar",
-    "Name": "Nome",
-    "Yes": "Sim",
-    "No": "Não",
-    "MoreOptions": "Mais Opções",
-    "Save": "Salvar",
-    "Periodic": "Recorrente",
-    "OnlyMonth": "Somente Mês"
-  },
-  "Sidebar": {
-    "Home": "Página Inicial",
-    "Config": "Configurações",
-    "Expenses": "Despesas",
-    "Income": "Receita",
-    "LogOut": "Sair"
-  },
-  "Pages": {
-    "Login": {
-      "Title": "Login",
-      "Password": "Senha",
-      "Email": "E-Mail",
-      "Enter": "Entrar",
-      "Unauthorized": "Usuário ou Senha Incorreta!",
-      "SuccessRegister": "Registrado com sucesso!",
-      "Register": "Registrar Conta"
-    },
-    "Home": {
-      "Income": "Receita Mensal",
-      "Expenses": "Despesa Mensal",
-      "Balance": "Saldo Mensal"
-    },
-    "Expenses": {
-      "Alerts": {
-        "NoExpense": "Nenhuma despesa cadastrada!"
-      },
-      "DueDate": "Data de Vencimento",
-      "PurchaseDate": "Data da Compra",
-      "DisplayDueDate": "Data de Vencimento",
-      "DisplayPurchaseDate": "Data da Compra",
-      "Category": "Categoria",
-      "PaymentMethod": "Forma de Pagamento",
-      "Description": "Descrição",
-      "Amount": "Valor Pago",
-      "NewExpense": "Nova Despesa",
-      "EditExpense": "Editar Despesa",
-      "FilterBy": "Filtrar por",
-      "SortBy": "Ordernar por",
-      "Installments": "Parcelas",
-      "Detail": "Detalhar",
-      "MarkAsPaid": "Pagar",
-      "SavePaidExpenses": "Salvar Pagas",
-      "ShowPaid": "Mostrar Pagas",
-      "EditOption": "Desejar editar a recorrência ou somente este mês?",
-      "MonthInterval": "Intervalo Entre Meses",
-      "Periodic": "Periódico"
-    },
-    "Income": {
-      "Alerts": {
-        "NoIncome": "Nenhuma receita cadastrada!",
-        "DeleteRecurrent": "Deseja deletar toda a recorrência ou somente a edição deste mês?. Importante: Ao deletar somente a edição do mês, a recorrência original ira aparecer no lugar."
-      },
-      "Amount": "Valor Pago",
-      "PaymentDate": "Data do Pagamento",
-      "DisplayPaymentDate": "Data do Pagamento",
-      "Description": "Descrição",
-      "PaymentMethod": "Forma de Pagamento",
-      "NewIncome": "Nova Receita",
-      "EditIncome": "Editar Receita",
-      "FilterBy": "Filtrar por",
-      "SortBy": "Ordernar por",
-      "PeriodicTooltip": "Receita que entra todo mês. Ex: Salário.",
-      "EditOption": "Desejar editar a recorrência ou somente este mês?",
-      "Payer": "Pagador",
-      "Installments": "Parcelas",
-      "MonthInterval": "Intervalo Entre Meses",
-      "JustMonth": "Apenas um mês",
-      "Periodic": "Periódico"
-    },
-    "Config": {
-      "Categories": "Categorias",
-      "PaymentMethods": "Formas de Pagamento",
-      "SavedWithSuccess": "Item salvo com sucesso!",
-      "AddNewItem": "Adicionar novo item...",
-      "Name": "Nome",
-      "DueDate": "Data de Vencimento",
-      "EditPaymentMethod": "Editar Forma de Pagamento",
-      "Bank": "Banco",
-      "Errors": {
-        "EntityInUse": "O item '{{itemName}}' não pode ser deletado pois está em uso por algum registro de despesa!"
-      }
-    }
-  },
-  "ErrorMessage": {
-    "required": "Campo obrigatório.",
-    "alreadyExist": "Não pode ter itens de mesmo nome!",
-    "email": "Campo deve conter um e-mail válido",
-    "minlength": "Campo deve ter no mínimo 5 caracteres.",
-    "maxlength": "Campo deve ter no máximo 12 caracteres."
-  }
+	"Language": "Português",
+	"Example": "Exemplo",
+	"Title": "Finanças",
+	"Feedback": {
+		"GenericSuccess": "Sucesso!",
+		"GenericError": "Erro ao realizar ação!",
+		"SaveSuccess": "Salvo com sucesso!",
+		"SaveError": "Erro ao salvar!",
+		"SuccessAction": "Ação realizada com sucesso!",
+		"DeleteSuccess": "Deletado com sucesso!",
+		"DeleteItem": {
+			"Title": "Deletar Item",
+			"Message": "Você gostaria de deletar o item '{{itemName}}'?"
+		},
+		"YesOrNo": {
+			"Title": "Confirmação"
+		},
+		"TokenExpired": "Seu acesso expirou! Realize o login novamente."
+	},
+	"Common": {
+		"Send": "Enviar",
+		"Month": "Mês",
+		"Year": "Ano",
+		"Cancel": "Cancelar",
+		"Delete": "Deletar",
+		"Total": "Total",
+		"Edit": "Editar",
+		"Name": "Nome",
+		"Yes": "Sim",
+		"No": "Não",
+		"MoreOptions": "Mais Opções",
+		"Save": "Salvar",
+		"Periodic": "Recorrente",
+		"OnlyMonth": "Somente Mês"
+	},
+	"Sidebar": {
+		"Home": "Página Inicial",
+		"Config": "Configurações",
+		"Expenses": "Despesas",
+		"Income": "Receita",
+		"LogOut": "Sair"
+	},
+	"Login": {
+		"Title": "Login",
+		"Password": "Senha",
+		"Email": "E-Mail",
+		"Enter": "Entrar",
+		"Unauthorized": "Usuário ou Senha Incorreta!",
+		"SuccessRegister": "Registrado com sucesso!",
+		"Success": "Logado com sucesso!",
+		"Register": "Registrar Conta"
+	},
+	"Home": {
+		"Income": "Receita Mensal",
+		"Expenses": "Despesa Mensal",
+		"Balance": "Saldo Mensal"
+	},
+	"Expenses": {
+		"Alerts": {
+			"NoExpense": "Nenhuma despesa cadastrada!"
+		},
+		"DueDate": "Data de Vencimento",
+		"PurchaseDate": "Data da Compra",
+		"DisplayDueDate": "Data de Vencimento",
+		"DisplayPurchaseDate": "Data da Compra",
+		"Category": "Categoria",
+		"PaymentMethod": "Forma de Pagamento",
+		"Description": "Descrição",
+		"Amount": "Valor Pago",
+		"NewExpense": "Nova Despesa",
+		"EditExpense": "Editar Despesa",
+		"FilterBy": "Filtrar por",
+		"SortBy": "Ordernar por",
+		"Installments": "Parcelas",
+		"Detail": "Detalhar",
+		"MarkAsPaid": "Pagar",
+		"SavePaidExpenses": "Salvar Pagas",
+		"ShowPaid": "Mostrar Pagas",
+		"EditOption": "Desejar editar a recorrência ou somente este mês?",
+		"MonthInterval": "Intervalo Entre Meses",
+		"Periodic": "Periódico"
+	},
+	"Income": {
+		"Alerts": {
+			"NoIncome": "Nenhuma receita cadastrada!",
+			"DeleteRecurrent": "Deseja deletar toda a recorrência ou somente a edição deste mês?. Importante: Ao deletar somente a edição do mês, a recorrência original ira aparecer no lugar."
+		},
+		"Amount": "Valor Pago",
+		"PaymentDate": "Data do Pagamento",
+		"DisplayPaymentDate": "Data do Pagamento",
+		"Description": "Descrição",
+		"PaymentMethod": "Forma de Pagamento",
+		"NewIncome": "Nova Receita",
+		"EditIncome": "Editar Receita",
+		"FilterBy": "Filtrar por",
+		"SortBy": "Ordernar por",
+		"PeriodicTooltip": "Receita que entra todo mês. Ex: Salário.",
+		"EditOption": "Desejar editar a recorrência ou somente este mês?",
+		"Payer": "Pagador",
+		"Installments": "Parcelas",
+		"MonthInterval": "Intervalo Entre Meses",
+		"JustMonth": "Apenas um mês",
+		"Periodic": "Periódico"
+	},
+	"Config": {
+		"Categories": "Categorias",
+		"PaymentMethods": "Formas de Pagamento",
+		"SavedWithSuccess": "Item salvo com sucesso!",
+		"AddNewItem": "Adicionar novo item...",
+		"Name": "Nome",
+		"DueDate": "Data de Vencimento",
+		"EditPaymentMethod": "Editar Forma de Pagamento",
+		"Bank": "Banco",
+		"Errors": {
+			"EntityInUse": "O item '{{itemName}}' não pode ser deletado pois está em uso por algum registro de despesa!"
+		}
+	},
+	"ErrorMessage": {
+		"required": "Campo obrigatório.",
+		"alreadyExist": "Não pode ter itens de mesmo nome!",
+		"email": "Campo deve conter um e-mail válido",
+		"minlength": "Campo deve ter no mínimo 5 caracteres.",
+		"maxlength": "Campo deve ter no máximo 12 caracteres."
+	}
 }

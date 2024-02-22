@@ -20,7 +20,7 @@ export class AuthGuard {
 		if (token) return true;
 
 		this.router.navigate(['login']);
-		this.matSnackBar.open(this.translate.instant("Feedback.TokenExpired"));
+		
 		return false;
 	}
 }

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { YesOrNoData, YesOrNoDialogComponent } from '../components/yes-no-dialog/yes-no-dialog.component';
+import { CommandResponse } from '../utils/request-command';
 
 @Injectable({
 	providedIn: 'root',
@@ -35,5 +36,29 @@ export class FeedbackService {
 		const data = { message, yesText, noText };
 
 		return this.dialog.open<YesOrNoDialogComponent, YesOrNoData, { confirm: boolean }>(YesOrNoDialogComponent, { data }).afterClosed();
+	}
+
+	public toastResponse<T>(
+		res: CommandResponse<T>,
+		successKey: string = "Feedback.SaveSuccess",
+		errorKey: string = "Feedback.SaveError"
+	) {
+		if (res.isSuccess) {
+			this.snackBar.open(this.translate.instant(successKey))
+		} else {
+			this.snackBar.open(this.translate.instant(errorKey))
+		}
+	}
+
+	public toastSuccessResponse<T>(res: CommandResponse<T>, successKey: string = "Feedback.SuccessAction") {
+		if (res.isSuccess) {
+			this.snackBar.open(this.translate.instant(successKey))
+		}
+	}
+
+	public toastErrorResponse<T>(res: CommandResponse<T>, errorKey: string = "Feedback.GenericError") {
+		if (!res.isSuccess) {
+			this.snackBar.open(this.translate.instant(errorKey))
+		}
 	}
 }

@@ -8,7 +8,6 @@ namespace Financial.v2.Domain.Interfaces.Services
     {
         Task<AuthRes> LoginAsync(Login user);
         bool ValidateToken(string token);
-
         Task RegisterAsync(Login user);
     }
 }

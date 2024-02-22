@@ -1,15 +1,15 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
+import { Guid } from 'src/app/domain/base.model';
 import { Category } from 'src/app/domain/category/category.model';
 import { Income } from 'src/app/domain/income/income.model';
 import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';
-import { Guid } from 'src/app/domain/base.model';
 
 @Component({
 	selector: 'income-dialog',
@@ -69,14 +69,14 @@ export class IncomeDialogComponent implements OnInit, OnDestroy {
 			formValue.monthInterval = 1;
 		}
 
-		this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy$)).subscribe((response) => {
-			if (response.isSuccess) {
-				this.feedback.successToast("Feedback.SaveSuccess");
-				this.dialogRef.close();
-			}
+		// this.incomeService.saveIncome(formValue).pipe(takeUntil(this.destroy$)).subscribe((response) => {
+		// 	if (response.isSuccess) {
+		// 		this.feedback.successToast("Feedback.SaveSuccess");
+		// 		this.dialogRef.close();
+		// 	}
 
-			this.loading = false;
-		});
+		// 	this.loading = false;
+		// });
 	}
 
 	public showErrorMessage(input: string) {

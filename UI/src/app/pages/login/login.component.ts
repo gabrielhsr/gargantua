@@ -1,14 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
-import { Login } from 'src/app/domain/authentication/authentication.model';
 import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
+import { FeedbackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
 	selector: 'app-login',
@@ -17,100 +16,69 @@ import { FormHelper } from 'src/app/shared/helpers/form.helper';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 	public hidePassword = true;
-	public loginForm?: FormGroup;
-	public loading = false;
+	public loginForm: FormGroup = new FormGroup({});
 
-	private destroy$ = new Subject<void>();
+	public validateTokenCommand = this.authenticationEndpoint.validateTokenCommand(() => AuthenticationHelper.getToken());
+	public signInCommand = this.authenticationEndpoint.signInCommand(() => this.loginForm?.value);
+	public registerCommand = this.authenticationEndpoint.registerCommand(() => this.loginForm?.value);
+
+	private readonly destroy$ = new Subject<void>();
 
 	constructor(
 		private readonly authenticationEndpoint: AuthenticationEndpoint,
 		private readonly router: Router,
-		private readonly matSnackBar: MatSnackBar,
+		private readonly feedback: FeedbackService,
 		private readonly translate: TranslateService
 	) {}
+
+	public get isLoading() {
+		return this.validateTokenCommand.isLoading || this.signInCommand.isLoading || this.registerCommand.isLoading;
+	}
 
 	public ngOnInit(): void {
 		this.createForm();
 
-		const token = AuthenticationHelper.getToken();
+		this.validateTokenCommand.response$
+			.pipe(takeUntil(this.destroy$), filter(({ isSuccess }) => isSuccess))
+			.subscribe((res) => {
+				if (res.isSuccess) {
+					this.router.navigate(['home']);
+				}
+			});
 
-		if (token) {
-			this.loading = true;
+		this.signInCommand.response$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((res) => {
+				this.feedback.toastErrorResponse(res);
 
-			this.authenticationEndpoint.validateToken(token)
-				.pipe(takeUntil(this.destroy$))
-				.subscribe(res => {
-					if (res.isSuccess) {
-						this.router.navigate(['home']);
-					}
+				if (res.isSuccess) {
+					AuthenticationHelper.saveToken(res.value.token);
+					this.router.navigate(['home']);
+				}
+			});
 
-					this.loading = false;
-				});
-		}
+		this.registerCommand.response$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((res) => this.feedback.toastResponse(res, "Login.SuccessRegister", "Login.Unauthorized"));
+
+		this.validateTokenCommand.execute();
 	}
 
 	public ngOnDestroy(): void {
+		this.validateTokenCommand.destroy();
+		this.signInCommand.destroy();
+		this.registerCommand.destroy();
+
 		this.destroy$.next();
 		this.destroy$.complete();
 	}
 
 	public showErrorMessage(input: string) {
-		if (this.loginForm) {
-			return FormHelper.showErrorMessage(input, this.loginForm);
-		}
-
-		throw 'Form not initialized!';
-	}
-
-	public submitForm(): void {
-		const formValue = this.loginForm?.value as Login;
-
-		this.loading = true;
-
-		this.authenticationEndpoint
-			.signIn(formValue)
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((response) => {
-				if (response.isSuccess) {
-					AuthenticationHelper.saveToken(response.value.token);
-
-					this.router.navigate(['home']);
-				} else {
-					this.matSnackBar.open(this.translate.instant("Pages.Login.Unauthorized"))
-				}
-
-				this.loading = false;
-			});
-	}
-
-	public registerForm() {
-		const formValue = this.loginForm?.value as Login;
-
-		this.loading = true;
-
-		this.authenticationEndpoint
-			.register(formValue)
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((response) => {
-				if (response.isSuccess) {
-					this.matSnackBar.open(this.translate.instant("Pages.Login.SuccessRegister"))
-				} else {
-					this.matSnackBar.open(this.translate.instant("Pages.Login.Unauthorized"))
-				}
-
-				this.loading = false;
-			});
+		return FormHelper.showErrorMessage(input, this.loginForm);
 	}
 
 	private createForm(): void {
-		this.loginForm = FormHelper.build(new Login(), {
-			validators: {
-				validators: [Validators.required],
-			},
-			specificValidators: {
-				email: [Validators.email],
-				password: [Validators.minLength(5), Validators.maxLength(20)],
-			},
-		});
+		this.loginForm.addControl("email", [Validators.required, Validators.email]);
+		this.loginForm.addControl("password", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]);
 	}
 }
