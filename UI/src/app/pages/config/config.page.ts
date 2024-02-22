@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { BehaviorSubject, EMPTY, Subject, takeUntil } from 'rxjs';
+import { EMPTY, Subject, takeUntil } from 'rxjs';
 import { Category } from 'src/app/domain/category/category.model';
-import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
+import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
 import { InputComponent, ItemType } from './components/input/input.component';
 import { ConfigService } from './services/config.service';

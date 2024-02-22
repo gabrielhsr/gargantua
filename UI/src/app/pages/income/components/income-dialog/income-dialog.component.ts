@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { Guid } from 'src/app/domain/base.model';
 import { Category } from 'src/app/domain/category/category.model';
 import { Income } from 'src/app/domain/income/income.model';
-import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
+import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { IncomeService } from '../../services/income.service';

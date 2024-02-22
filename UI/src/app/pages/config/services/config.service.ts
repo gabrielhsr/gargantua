@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
-import { PaymentMethodEndpoint } from 'src/app/domain/paymentMethod/paymentMethod.endpoint';
-import { PaymentMethod } from 'src/app/domain/paymentMethod/paymentMethod.model';
+import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
+import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { RefreshService } from 'src/app/shared/services/refresh.service';
 import { PaymentMethodDialogComponent } from '../components/payment-method-dialog/payment-method-dialog.component';
 

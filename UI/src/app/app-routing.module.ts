@@ -38,15 +38,15 @@ const routes: Routes = [
 	// 	},
 	// 	canActivate: [AuthGuard]
 	// },
-	// {
-	// 	path: 'expenses',
-	// 	loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
-	// 	data: {
-	// 		title: 'Sidebar.Expenses',
-	// 		showMenu: true
-	// 	},
-	// 	canActivate: [AuthGuard]
-	// },
+	{
+		path: 'expenses',
+		loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
+		data: {
+			title: 'Sidebar.Expenses',
+			showMenu: true
+		},
+		canActivate: [AuthGuard]
+	},
 	// {
 	// 	path: 'income',
 	// 	loadChildren: () => import('./pages/income/income.module').then((m) => m.IncomeModule),

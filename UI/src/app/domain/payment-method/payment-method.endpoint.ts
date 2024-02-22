@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseEndpoint } from '../base.endpoint';
-import { Category } from './category.model';
+import { PaymentMethod } from './payment-method.model';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class CategoryEndpoint extends BaseEndpoint<Category> {
-	public override activator: Category = new Category();
+export class PaymentMethodEndpoint extends BaseEndpoint<PaymentMethod> {
+	public override activator: PaymentMethod = new PaymentMethod();
 
 	constructor(private readonly client: HttpClient) {
-		super(client, 'api/Category');
+		super(client, 'api/PaymentMethod');
 	}
 }

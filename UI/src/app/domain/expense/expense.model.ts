@@ -1,7 +1,7 @@
-import { Movement } from "../movement/movement.model";
-import { Category } from "../category/category.model";
-import { PaymentMethod } from "../paymentMethod/paymentMethod.model";
 import { Guid } from "../base.model";
+import { Category } from "../category/category.model";
+import { Movement } from "../movement/movement.model";
+import { PaymentMethod } from "../payment-method/payment-method.model";
 
 export class Expense extends Movement {
 	purchaseDate: Date = new Date();

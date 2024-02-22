@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Expense } from 'src/app/domain/expense/expense.model';
-import { RequestCommand } from 'src/app/shared/utils/request-command';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
@@ -9,11 +8,7 @@ import { ExpenseService } from './services/expense.service';
 	styleUrls: ['./expenses.page.scss'],
 })
 export class ExpensesPage {
-	constructor(private readonly expenseService: ExpenseService) {
-		const command = new RequestCommand(this.expenseService.getCategories());
-
-		command.execute();
-	}
+	constructor(private readonly expenseService: ExpenseService) {}
 
 	public openAddDialog() {
 		const newExpense = new Expense();

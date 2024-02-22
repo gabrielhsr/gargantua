@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExpensesPage } from './expenses.page';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ExpenseDialogComponent } from './components/expense-dialog/expense-dialog.component';
-import { DesktopViewComponent } from './components/expenses-table/desktop-view/desktop-view.component';
-import { MobileViewComponent } from './components/expenses-table/mobile-view/mobile-view.component';
-import { ExpensesTableComponent } from './components/expenses-table/expenses-table.component';
+import { ExpensesPage } from './expenses.page';
 
 const routes: Routes = [
 	{
@@ -18,10 +15,10 @@ const routes: Routes = [
 @NgModule({
 	declarations: [
 		ExpensesPage,
-		ExpensesTableComponent,
-		ExpenseDialogComponent,
-		DesktopViewComponent,
-		MobileViewComponent
+		ExpenseDialogComponent
+		// ExpensesTableComponent,
+		// DesktopViewComponent,
+		// MobileViewComponent
 	],
 	imports: [
 		CommonModule,
