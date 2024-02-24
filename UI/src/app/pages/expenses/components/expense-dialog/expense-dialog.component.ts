@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
 import { Category } from 'src/app/domain/category/category.model';
@@ -39,7 +39,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     }
 
 	public ngOnInit(): void {
-		this.createForm(this.expense ?? new Expense());
+		this.createForm();
 
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
@@ -64,6 +64,16 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 		return category?.name ?? '';
 	}
 
-	private createForm(expense: Expense): void {
+	public clearInput(controlName: string[]) {
+		controlName.forEach((name => this.expenseForm.controls[name].patchValue(null)));
+	}
+
+	private createForm(): void {
+		this.expenseForm.addControl('description', new FormControl(null, [Validators.required]));
+		this.expenseForm.addControl('amount', new FormControl(null, [Validators.required]));
+		this.expenseForm.addControl('category', new FormControl(null, [Validators.required]));
+		this.expenseForm.addControl('paymentMethod', new FormControl(null, [Validators.required]));
+		this.expenseForm.addControl('dueDate', new FormControl(null, [Validators.required]));
+		this.expenseForm.addControl('purchaseDate', new FormControl(null, [Validators.required]));
 	}
 }

@@ -79,7 +79,7 @@ mat-dialog-content {
 	.responsive-dialog {
 		max-width: unset !important;
 		width: 100%;
-		height: calc(100vh - var(--topbar-height));
+		height: 100vh;
 		align-self: flex-end;
 
 		.mat-mdc-dialog-container {
@@ -90,6 +90,10 @@ mat-dialog-content {
 
 			.mat-mdc-dialog-content {
 				max-height: unset !important;
+			}
+
+			.mdc-dialog__surface {
+				border-radius: 0;
 			}
 		}
 	}

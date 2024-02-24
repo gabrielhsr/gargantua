@@ -14,12 +14,6 @@ mat-form-field {
 	gap: 16px;
 }
 
-.close-button {
-	position: absolute;
-	right: 10px;
-    top: 10px;
-}
-
 mat-expansion-panel-header {
 	align-items: flex-start;
 	padding: 6px 12px;
@@ -34,4 +28,18 @@ mat-expansion-panel-header {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 21px;
+}
+
+.title-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 24px 0 24px;
+	font-family: var(--mdc-dialog-subhead-font, Roboto, sans-serif);
+	line-height: var(--mdc-dialog-subhead-line-height, 1.5rem);
+	font-size: var(--mdc-dialog-subhead-size, 1rem);
+	font-weight: var(--mdc-dialog-subhead-weight, 400);
+	letter-spacing: var(--mdc-dialog-subhead-tracking, 0.03125em);
+	color: var(--mdc-dialog-subhead-color, rgba(0, 0, 0, 0.87));
 }

@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, filter, takeUntil } from 'rxjs';
 
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
 import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
@@ -27,8 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	constructor(
 		private readonly authenticationEndpoint: AuthenticationEndpoint,
 		private readonly router: Router,
-		private readonly feedback: FeedbackService,
-		private readonly translate: TranslateService
+		private readonly feedback: FeedbackService
 	) {}
 
 	public get isLoading() {
@@ -78,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	private createForm(): void {
-		this.loginForm.addControl("email", [Validators.required, Validators.email]);
-		this.loginForm.addControl("password", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]);
+		this.loginForm.addControl("email", new FormControl('', [Validators.required, Validators.email]));
+		this.loginForm.addControl("password", new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
 	}
 }

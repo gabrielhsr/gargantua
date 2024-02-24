@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ng2-currency-mask';
 import { AppBase } from './app.base';
 import { AuthenticationHelper } from './shared/helpers/authentication.helper';
 
@@ -25,6 +26,16 @@ registerLocaleData(localeEN);
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+    align: "right",
+    allowNegative: true,
+    decimal: ",",
+    precision: 2,
+    prefix: "R$ ",
+    suffix: "",
+    thousands: "."
+};
 
 @NgModule({
 	declarations: [AppBase],
@@ -50,6 +61,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 		{
 			provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
 			useValue: { duration: 2500 }
+		},
+		{ 
+			provide: CURRENCY_MASK_CONFIG, 
+			useValue: CustomCurrencyMaskConfig
 		}
 	],
 	bootstrap: [AppBase],

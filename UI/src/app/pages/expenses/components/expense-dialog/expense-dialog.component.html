@@ -1,28 +1,32 @@
-<button class="close-button" mat-icon-button mat-dialog-close *ngIf="!isLoading">
-	<mat-icon>close</mat-icon>
-</button>
-
-<h2 mat-dialog-title>{{ "Expenses.NewExpense" | translate }}</h2>
+<div class="title-container">
+	{{ "Expenses.NewExpense" | translate }}
+	<button mat-icon-button mat-dialog-close *ngIf="!isLoading">
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
 
 <mat-dialog-content [loading]="isLoading">
 	<form [formGroup]="expenseForm">
 		<div class="form-container">
 			<mat-form-field>
 				<mat-label>{{ "Expenses.Description" | translate }}</mat-label>
-				<input matInput type="text" formControlName="description"/>
+				<input matInput type="text" formControlName="description" #description/>
+				<mat-icon *ngIf="description.value" matSuffix (click)="clearInput(['description'])">clear</mat-icon>
 				<mat-error>{{ showErrorMessage('description') }}</mat-error>
 			</mat-form-field>
 
 			<mat-form-field>
 				<mat-label>{{ "Expenses.Amount" | translate }}</mat-label>
-				<input matInput currencyMask formControlName="amount"/>
+				<input matInput currencyMask formControlName="amount" #amount/>
+				<mat-icon *ngIf="amount.value" matSuffix (click)="clearInput(['amount'])">clear</mat-icon>
 				<mat-error>{{ showErrorMessage('amount') }}</mat-error>
 			</mat-form-field>
 
 			<div class="two-input-container">
 				<mat-form-field>
 					<mat-label>{{ "Expenses.Category" | translate }}</mat-label>
-					<input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete">
+					<input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete" #category>
+					<mat-icon *ngIf="category.value" matSuffix (click)="clearInput(['category'])">clear</mat-icon>
 
 					<mat-autocomplete #categoryAutoComplete="matAutocomplete" [displayWith]="displayFn">
 						<mat-option *ngFor="let category of filteredCategories | async" [value]="category">
@@ -35,7 +39,8 @@
 
 				<mat-form-field>
 					<mat-label>{{ "Expenses.PaymentMethod" | translate }}</mat-label>
-					<input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete">
+					<input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete" #paymentMethod>
+					<mat-icon *ngIf="paymentMethod.value" matSuffix (click)="clearInput(['paymentMethod'])">clear</mat-icon>
 
 					<mat-autocomplete #paymentMethodAutoComplete="matAutocomplete" [displayWith]="displayFn">
 						<mat-option *ngFor="let paymentMethod of filteredPaymentMethods | async" [value]="paymentMethod">
