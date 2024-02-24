@@ -40,6 +40,8 @@ export class RequestCommand<T> {
                     return response;
                 }),
                 catchError((res: HttpErrorResponse) => {
+                    console.log(res);
+
                     const response: CommandResponse<T> = {
                         isSuccess: false,
                         error: res.message,

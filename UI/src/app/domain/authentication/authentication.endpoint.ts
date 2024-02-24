@@ -32,8 +32,6 @@ export class AuthenticationEndpoint {
 	}
 
 	private signIn(login: Login) {
-		console.log(login);
-
 		return this.http.post<AuthRes>(this.url + 'signIn', login);
 	}
 

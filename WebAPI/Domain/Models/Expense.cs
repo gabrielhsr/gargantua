@@ -8,6 +8,8 @@ namespace Financial.Domain.Models
 
         public Guid IdPaymentMethod { get; set; }
 
+        public Guid IdUser { get; set; }
+
         public string Description { get; set; }
 
         public decimal Amount { get; set; }
@@ -16,8 +18,10 @@ namespace Financial.Domain.Models
 
         public DateTimeOffset PurchaseDate { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public PaymentMethod PaymentMethod { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

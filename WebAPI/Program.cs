@@ -27,7 +27,8 @@ services.AddCors(opts =>
 // Database
 services.AddDbContext<FinancialDbContext>(opts =>
 {
-    opts.UseLazyLoadingProxies().UseSqlServer(connectionString);
+    opts.UseLazyLoadingProxies()
+        .UseSqlServer(connectionString);
 });
 
 // HttpContext

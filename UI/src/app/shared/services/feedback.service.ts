@@ -43,6 +43,8 @@ export class FeedbackService {
 		successKey: string = "Feedback.SaveSuccess",
 		errorKey: string = "Feedback.SaveError"
 	) {
+		console.log(res);
+
 		if (res.isSuccess) {
 			this.snackBar.open(this.translate.instant(successKey))
 		} else {

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe((res) => {
 				this.feedback.toastErrorResponse(res);
 
-				if (res.isSuccess) {
+				if (res.isSuccess && res.value) {
 					AuthenticationHelper.saveToken(res.value.token);
 					this.router.navigate(['home']);
 				}

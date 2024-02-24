@@ -6,6 +6,6 @@ namespace Financial.Domain.Models
     {
         public string Name { get; set; }
 
-        public IList<Expense> Expense { get; set; }
+        public virtual IList<Expense> Expense { get; set; }
     }
 }

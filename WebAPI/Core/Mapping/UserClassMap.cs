@@ -10,6 +10,8 @@ namespace Financial.Core.Mapping
         {
             builder.ToTable("User");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Id)
                 .HasColumnName("Id")
                 .IsRequired(true);
@@ -17,6 +19,20 @@ namespace Financial.Core.Mapping
             builder.Property(x => x.Email)
                 .HasColumnName("Email")
                 .HasMaxLength(int.MaxValue)
+                .IsRequired(true);
+
+            builder.Property(x => x.PasswordHash)
+                .HasColumnName("PasswordHash")
+                .IsRequired(true);
+
+            builder.Property(x => x.PasswordSalt)
+                .HasColumnName("PasswordSalt")
+                .IsRequired(true);
+
+            builder.HasMany(x => x.Expenses)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.IdUser)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired(true);
         }
     }
