@@ -3,7 +3,7 @@ import { Expense } from 'src/app/domain/expense/expense.model';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
-	selector: 'page-expenses',
+	selector: 'g-page-expenses',
 	templateUrl: './expenses.page.html',
 	styleUrls: ['./expenses.page.scss'],
 })

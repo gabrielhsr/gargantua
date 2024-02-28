@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { RouteData } from 'src/app/app-routing.module';
+import { RouteData } from 'src/app/g-routing.module';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({

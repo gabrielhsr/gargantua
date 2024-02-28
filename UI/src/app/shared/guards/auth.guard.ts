@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthGuard {
-	constructor(
-		private readonly router: Router,
-		private readonly matSnackBar: MatSnackBar,
-		private readonly translate: TranslateService
-	) {}
+	constructor(private readonly router: Router) {}
 
 	public canActivate(): boolean {
 		const token = AuthenticationHelper.getToken();

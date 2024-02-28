@@ -5,8 +5,7 @@ using System.Security.Authentication;
 
 namespace Financial.Controllers
 {
-    [Route("api/{version:apiVersion}/[controller]")]
-    [ApiVersion("2.0")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {

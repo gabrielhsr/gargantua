@@ -9,7 +9,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 import { RefreshService } from 'src/app/shared/services/refresh.service';
 
 @Component({
-	selector: 'app-payment-method-dialog',
+	selector: 'g-payment-method-dialog',
 	templateUrl: './payment-method-dialog.component.html',
 	styleUrls: ['./payment-method-dialog.component.scss'],
 })

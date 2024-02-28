@@ -9,7 +9,7 @@ import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
-	selector: 'app-login',
+	selector: 'g-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss'],
 })
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.validateTokenCommand.response$
 			.pipe(takeUntil(this.destroy$), filter(({ isSuccess }) => isSuccess))
 			.subscribe((res) => {
-				if (res.isSuccess) {
+				if (res.value) {
 					this.router.navigate(['home']);
 				}
 			});

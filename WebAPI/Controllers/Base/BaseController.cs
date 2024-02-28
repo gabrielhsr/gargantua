@@ -2,14 +2,14 @@
 using Financial.Domain.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace Financial.Controllers.Base
 {
-    [Route("api/{version:apiVersion}/[controller]")]
-    [ApiVersion("2.0")]
-    [ApiController]
+    [Route("api/[controller]")]
     [Authorize]
-    public class BaseController<TEntity> : ControllerBase where TEntity : BaseEntity
+    public class BaseController<TEntity> : ODataController where TEntity : BaseEntity
     {
         private readonly IBaseService<TEntity> service;
 
@@ -20,14 +20,15 @@ namespace Financial.Controllers.Base
 
         // GET: api/Entity
         [HttpGet]
-        public virtual ActionResult<IQueryable<TEntity>> GetEntities()
+        [EnableQuery]
+        public virtual IQueryable<TEntity> Get()
         {
-            return Ok(service.GetAll());
+            return service.GetAll();
         }
 
         // GET: api/Entity/5
         [HttpGet("{id}")]
-        public virtual async Task<ActionResult<TEntity>> GetEntity(Guid id)
+        public virtual async Task<ActionResult<TEntity>> Get(Guid id)
         {
             var entity = await service.GetByIdAsync(id);
 
@@ -42,7 +43,7 @@ namespace Financial.Controllers.Base
         // PUT: api/Entity/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public virtual async Task<IActionResult> PutEntity(Guid id, TEntity entity)
+        public virtual async Task<IActionResult> Put(Guid id, TEntity entity)
         {
             var result = await service.SaveAsync(id, entity);
 
@@ -57,7 +58,7 @@ namespace Financial.Controllers.Base
         // POST: api/Entity
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public virtual async Task<ActionResult<TEntity>> PostEntity(TEntity entitiy)
+        public virtual async Task<ActionResult<TEntity>> Post(TEntity entitiy)
         {
             var newEntitiy = await service.SaveAsync(Guid.Empty, entitiy);
 
@@ -66,7 +67,7 @@ namespace Financial.Controllers.Base
 
         // DELETE: api/Entities/5
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> DeleteEntity(Guid id)
+        public virtual async Task<IActionResult> Delete(Guid id)
         {
             var entitiy = await service.GetByIdAsync(id);
 

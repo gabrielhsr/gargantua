@@ -40,8 +40,8 @@ export class FeedbackService {
 
 	public toastResponse<T>(
 		res: CommandResponse<T>,
-		successKey: string = "Feedback.SaveSuccess",
-		errorKey: string = "Feedback.SaveError"
+		successKey = "Feedback.SaveSuccess",
+		errorKey = "Feedback.SaveError"
 	) {
 		console.log(res);
 
@@ -52,13 +52,13 @@ export class FeedbackService {
 		}
 	}
 
-	public toastSuccessResponse<T>(res: CommandResponse<T>, successKey: string = "Feedback.SuccessAction") {
+	public toastSuccessResponse<T>(res: CommandResponse<T>, successKey = "Feedback.SuccessAction") {
 		if (res.isSuccess) {
 			this.snackBar.open(this.translate.instant(successKey))
 		}
 	}
 
-	public toastErrorResponse<T>(res: CommandResponse<T>, errorKey: string = "Feedback.GenericError") {
+	public toastErrorResponse<T>(res: CommandResponse<T>, errorKey = "Feedback.GenericError") {
 		if (!res.isSuccess) {
 			this.snackBar.open(this.translate.instant(errorKey))
 		}

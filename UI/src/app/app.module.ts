@@ -10,7 +10,7 @@ import localePT from '@angular/common/locales/pt';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './g-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { HttpClient } from '@angular/common/http';

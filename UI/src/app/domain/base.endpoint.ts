@@ -12,7 +12,7 @@ export abstract class BaseEndpoint<T extends BaseEntity> {
 	constructor(protected httpClient: HttpClient, public readonly url: string) {}
 
 	public get() {
-		return this.httpClient.get<T[]>(`${this.apiUrl}\\${this.url}`);
+		return this.httpClient.get<T[]>(`${this.apiUrl}\\${this.url}?$count=true&filter=name eq 'Teste'`);
 	}
 
 	public getById(id: string) {
@@ -37,7 +37,7 @@ export abstract class BaseEndpoint<T extends BaseEntity> {
 
 	public getByIdCommand(id: () => string) {
 		const entityId = id();
-		const endpoint = this.isDefaultId(entityId) ? of(this.activator) : this.getById(entityId);
+		const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.getById(entityId);
 
 		return new RequestCommand(() => endpoint);
 	}
@@ -45,17 +45,13 @@ export abstract class BaseEndpoint<T extends BaseEntity> {
 	public saveCommand(entity: () => T) {
 		const obj = entity();
 
-		return this.isDefaultId(obj.id) ? this.post(obj) : this.put(obj);
+		return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
 	}
 
 	public deleteCommand(id: () => string) {
 		const entityId = id();
-		const endpoint = this.isDefaultId(entityId) ? of(this.activator) : this.delete(entityId);
+		const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.delete(entityId);
 
 		return new RequestCommand(() => endpoint);
-	}
-
-	private isDefaultId(id: string) {
-		return id === Guid.default;
 	}
 }

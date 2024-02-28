@@ -1,3 +1,4 @@
+using Financial.Core.Common.Helpers;
 using Financial.Core.Repositories.Base;
 using Financial.Core.Services;
 using Financial.Core.Services.Base;
@@ -6,7 +7,6 @@ using Financial.Domain.Interfaces.Repositories.Base;
 using Financial.Domain.Interfaces.Services;
 using Financial.Domain.Interfaces.Services.Base;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -69,22 +69,17 @@ services
     .AddOData(options =>
     {
         options
-            .Count()
-            .Filter()
             .OrderBy()
-            .Expand();
+            .Filter()
+            .Count()
+            .Expand()
+            .SetMaxTop(100)
+            .AddRouteComponents("api", OdataHelper.GetEdmModel());
     })
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
     });
-
-services.AddApiVersioning(setup =>
-{
-    setup.DefaultApiVersion = ApiVersion.Default;
-    setup.AssumeDefaultVersionWhenUnspecified = true;
-    setup.ReportApiVersions = true;
-});
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();

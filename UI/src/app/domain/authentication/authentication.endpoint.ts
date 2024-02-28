@@ -9,7 +9,7 @@ import { AuthRes, Login } from './authentication.model';
 	providedIn: 'root',
 })
 export class AuthenticationEndpoint {
-	public url = environment.baseApi + '/api/2.0/Authentication/';
+	public url = environment.baseApi + '/api/Authentication/';
 
 	constructor(private readonly http: HttpClient) {}
 

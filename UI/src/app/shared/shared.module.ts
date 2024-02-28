@@ -40,8 +40,8 @@ import { MaterialModule } from './material/material.module';
 		// Components
 		TopbarComponent,
 		SidebarComponent,
-  		ConfirmDialogComponent,
-    	PeriodSelectComponent,
+		ConfirmDialogComponent,
+		PeriodSelectComponent,
 		YesOrNoDialogComponent
 	],
 	imports: [

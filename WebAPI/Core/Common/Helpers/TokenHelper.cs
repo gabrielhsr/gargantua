@@ -29,10 +29,10 @@ namespace Financial.Core.Common.Helpers
                 audience: validAudience,
                 claims: new List<Claim>()
                 {
-                    new Claim("Id", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.Email),
-                    new Claim(ClaimTypes.Email, user.Email),
+                    new("Id", user.Id.ToString()),
+                    new(ClaimTypes.Name, user.Email),
+                    new(ClaimTypes.NameIdentifier, user.Email),
+                    new(ClaimTypes.Email, user.Email),
                 },
                 expires: DateTime.Now.AddMonths(1),
                 signingCredentials: credentials
