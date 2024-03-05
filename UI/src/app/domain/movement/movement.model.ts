@@ -1,12 +1,12 @@
 import { BaseEntity } from "../base.model";
 
 export class Movement extends BaseEntity {
-	description: string = '';
-	displayDescription: string = '';
-	amount: number | null = null;
-	periodic: boolean = false;
-	recurrentId: string | null = null;
-	installments: number = 1;
-	monthInterval: number = 1;
-	paid: boolean = false;
+	public description: string = '';
+	public displayDescription: string = '';
+	public amount: number | null = null;
+	public periodic: boolean = false;
+	public recurrentId: string | null = null;
+	public installments: number = 1;
+	public monthInterval: number = 1;
+	public paid: boolean = false;
 }

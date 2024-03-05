@@ -1,9 +1,12 @@
 {
 	"root": true,
-	"ignorePatterns": ["projects/**/*"],
 	"overrides": [
 		{
 			"files": ["*.ts"],
+			"parserOptions": {
+				"project": ["tsconfig.json", "tsconfig.app.json", "tsconfig.spec.json"]
+			},
+			"plugins": ["@stylistic/ts"],
 			"extends": [
 				"eslint:recommended",
 				"plugin:@typescript-eslint/recommended",
@@ -11,35 +14,41 @@
 				"plugin:@angular-eslint/template/process-inline-templates"
 			],
 			"rules": {
-				"@angular-eslint/directive-selector": [
-					"error",
-					{
-						"type": "attribute",
-						"prefix": "g",
-						"style": "camelCase"
-					}
-				],
-				"@angular-eslint/component-selector": [
-					"error",
-					{
-						"type": "element",
-						"prefix": "g",
-						"style": "kebab-case"
-					}
-				],
-				"@angular-eslint/component-class-suffix": [
-					"error",
-					{
-						"suffixes": ["Page", "Component", "Base"]
-					}
-				],
-				"@typescript-eslint/no-inferrable-types": [
-					"error",
-					{
-						"ignoreParameters": true,
-						"ignoreProperties": true
-					}
-				]
+				"@angular-eslint/directive-selector": ["error", { "type": "attribute", "prefix": "", "style": "camelCase" }], // Directive Selector must be camelCase
+				"@angular-eslint/component-selector": ["error", { "type": "element", "prefix": "", "style": "kebab-case" }], // Component Selector must be kebab-case
+				"@angular-eslint/component-class-suffix": ["error", { "suffixes": ["Page", "Component", "Base"] }], // Allowed Component Suffixes
+				"@angular-eslint/directive-class-suffix": "off", // DISABLED: Directive must have Directive in name
+				"@typescript-eslint/no-inferrable-types": ["error", { "ignoreParameters": true, "ignoreProperties": true }], // Variable inferred. Ex: const maxValue = 5 ✅ | const maxValue: number = 5 ❌
+				"array-callback-return": "error", // Array methods must return values. Ex: map, filter, reduce
+				"no-await-in-loop": "error", // Self explanatory
+				"no-constant-binary-expression": "error", // Disallow expressions where the operation doesn't affect the value. Ex: const x = a + b ?? c;
+				"no-constructor-return": "error", // Self explanatory
+				"no-duplicate-imports": "error", // Self explanatory
+				"no-new-native-nonconstructor": "error", // Disallow new operators with global non-constructor functions. Ex: new Symbol()
+				"no-promise-executor-return": "error", // Disallow returning values from Promise executor functions. Must use resolve() reject()
+				"no-self-compare": "error", // Self explanatory; const x = 1; const equal = 1 === 1;
+				"no-template-curly-in-string": "error", // Force `` if have ${} in string
+				"no-unmodified-loop-condition": "error", // Disallow unmodified loop conditions; while (node) { node = node.parent }
+				"no-unused-private-class-members": "error", // Self explanatory
+				"require-atomic-updates": "error",
+				"camelcase": "error",
+				"@typescript-eslint/adjacent-overload-signatures": "error",
+				"@typescript-eslint/array-type": ["error", { "default": "array", "readonly": "array" }],
+				"@stylistic/ts/block-spacing": "error", 
+				"@stylistic/ts/brace-style": [ "error", "1tbs", { "allowSingleLine": true }],
+				"@typescript-eslint/class-literal-property-style": "error",
+				"@stylistic/ts/comma-dangle": "error",
+				"@stylistic/ts/comma-spacing": "error",
+				"@typescript-eslint/consistent-generic-constructors": "error",
+				"@typescript-eslint/consistent-indexed-object-style": "error", // Force Record<string, unknown> insted of { [key: string]: unknown; }
+				// "consistent-return": "off",
+				// "@typescript-eslint/consistent-return": "error",
+				"@typescript-eslint/consistent-type-assertions": "error",
+				"default-param-last": "off",
+    			"@typescript-eslint/default-param-last": "error",
+				"dot-notation": "off",
+    			"@typescript-eslint/dot-notation": "error",
+				"@typescript-eslint/explicit-member-accessibility": ["error", { "overrides": { "constructors": "off" } }]
 			}
 		},
 		{

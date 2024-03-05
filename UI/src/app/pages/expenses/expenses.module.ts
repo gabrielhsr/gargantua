@@ -8,8 +8,8 @@ import { ExpensesPage } from './expenses.page';
 const routes: Routes = [
 	{
 		path: '',
-		component: ExpensesPage,
-	},
+		component: ExpensesPage
+	}
 ];
 
 @NgModule({
@@ -25,6 +25,6 @@ const routes: Routes = [
 		SharedModule,
 		RouterModule.forChild(routes)
 	],
-	exports: [ExpensesPage],
+	exports: [ExpensesPage]
 })
 export class ExpensesModule {}

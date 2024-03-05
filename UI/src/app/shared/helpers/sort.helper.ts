@@ -1,7 +1,7 @@
 import { Expense } from "src/app/domain/expense/expense.model";
 import { Income } from "src/app/domain/income/income.model";
 
-export const sortingExpenseDataAccessor: any = (item: Expense, property: keyof Expense) => {
+export const sortingExpenseDataAccessor = (item: Expense, property: keyof Expense) => {
 	switch (property) {
 		case 'paymentMethod':
 			return item.paymentMethod?.name;
@@ -12,7 +12,7 @@ export const sortingExpenseDataAccessor: any = (item: Expense, property: keyof E
 	}
 };
 
-export const sortingIncomeDataAccessor: any = (item: Income, property: keyof Income) => {
+export const sortingIncomeDataAccessor = (item: Income, property: keyof Income) => {
 	switch (property) {
 		default:
 			return item[property];

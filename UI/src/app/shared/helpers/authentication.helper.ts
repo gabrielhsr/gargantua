@@ -29,7 +29,7 @@ export class AuthenticationHelper {
 				tokenGetter: this.getToken,
 				allowedDomains: [environment.allowedDomains],
 				skipWhenExpired: true
-			},
+			}
 		};
 	}
 }

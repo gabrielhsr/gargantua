@@ -1,8 +1,8 @@
-import { Directive, OnInit, OnChanges, HostBinding, Input, ElementRef, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { Guid } from 'src/app/domain/base.model';
 
 @Directive({
-	selector: '[loading]',
+	selector: '[loading]'
 })
 export class LoadingDirective implements OnInit, OnChanges {
 	@HostBinding('style.position')

@@ -10,7 +10,7 @@ export interface YesOrNoData {
 @Component({
 	selector: 'yes-no-dialog',
 	templateUrl: './yes-no-dialog.component.html',
-	styleUrls: ['./yes-no-dialog.component.scss'],
+	styleUrls: ['./yes-no-dialog.component.scss']
 })
 export class YesOrNoDialogComponent {
 	constructor(@Inject(MAT_DIALOG_DATA) public data: YesOrNoData) {}

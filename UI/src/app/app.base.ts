@@ -4,7 +4,7 @@ import { ThemeService } from './shared/services/theme.service';
 @Component({
 	selector: 'g-root',
 	templateUrl: './app.base.html',
-	styleUrls: ['./app.base.scss'],
+	styleUrls: ['./app.base.scss']
 })
 export class AppBase {
 	public isDark: boolean;

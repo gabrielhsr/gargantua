@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthRes, Login } from './authentication.model';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class AuthenticationEndpoint {
 	public url = environment.baseApi + '/api/Authentication/';

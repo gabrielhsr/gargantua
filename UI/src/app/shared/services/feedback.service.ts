@@ -7,7 +7,7 @@ import { YesOrNoData, YesOrNoDialogComponent } from '../components/yes-no-dialog
 import { CommandResponse } from '../utils/request-command';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class FeedbackService {
 	constructor(
@@ -16,11 +16,11 @@ export class FeedbackService {
 		private readonly translate: TranslateService
 	) {}
 
-	public successToast(dictionaryKey?: string, args?: { [key: string]: string }) {
+	public successToast(dictionaryKey?: string, args?: Record<string, string>) {
 		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey, args) : this.translate.instant('Feedback.GenericSuccess'));
 	}
 
-	public errorToast(dictionaryKey?: string, args?: { [key: string]: string }) {
+	public errorToast(dictionaryKey?: string, args?: Record<string, string>) {
 		this.toast(dictionaryKey ? this.translate.instant(dictionaryKey, args) : this.translate.instant('Feedback.GenericError'));
 	}
 

@@ -1,6 +1,6 @@
 export class Login {
-	email: string = '';
-	password: string = '';
+	public email: string = '';
+	public password: string = '';
 }
 
 export interface AuthRes {

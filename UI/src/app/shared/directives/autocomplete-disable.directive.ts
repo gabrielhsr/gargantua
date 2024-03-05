@@ -1,10 +1,10 @@
-import { Directive, HostBinding, Attribute } from '@angular/core';
+import { Attribute, Directive, HostBinding } from '@angular/core';
 
 @Directive({
-	selector: '[matInput]',
+	selector: '[matInput]'
 })
 export class AutocompleteDisableDirective {
-	@HostBinding('attr.autocomplete') auto;
+	@HostBinding('attr.autocomplete') public auto;
 	constructor(@Attribute('autocomplete') autocomplete: string) {
 		this.auto = autocomplete || 'off';
 	}

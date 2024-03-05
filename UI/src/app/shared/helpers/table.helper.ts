@@ -1,5 +1,3 @@
-// [...Object.keys(new Expense()), 'options'].filter((x) => x !== 'id')
-
 interface Options {
 	exclude: string[];
 	include: string[];

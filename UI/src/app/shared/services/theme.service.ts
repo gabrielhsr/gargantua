@@ -6,7 +6,7 @@ const DEFAULT_THEME = 'light';
 type Theme = 'light' | 'dark';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class ThemeService {
 	private get theme(): Theme {

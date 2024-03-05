@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class AuthGuard {
 	constructor(private readonly router: Router) {}

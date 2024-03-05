@@ -11,7 +11,7 @@ import { FormHelper } from 'src/app/shared/helpers/form.helper';
 @Component({
 	selector: 'expense-dialog',
 	templateUrl: './expense-dialog.component.html',
-	styleUrls: ['./expense-dialog.component.scss'],
+	styleUrls: ['./expense-dialog.component.scss']
 
 })
 export class ExpenseDialogComponent implements OnInit, OnDestroy {
@@ -54,6 +54,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 	}
 
 	public submitForm(): void {
+		console.log(this.expenseForm.value);
 	}
 
 	public showErrorMessage(input: string) {

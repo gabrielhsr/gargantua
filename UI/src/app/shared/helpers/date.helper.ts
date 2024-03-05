@@ -1,4 +1,3 @@
-import { Period } from "src/app/domain/period/period.model";
 
 export class DateHelper {
 	// public static FromPeriod(period: Period) {

@@ -34,7 +34,7 @@ export class RequestCommand<T> {
                 map((value) => {
                     const response: CommandResponse<T> = {
                         isSuccess: true,
-                        value: value,
+                        value: value
                     };
     
                     return response;

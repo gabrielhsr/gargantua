@@ -10,7 +10,7 @@ import localePT from '@angular/common/locales/pt';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { AppRoutingModule } from './g-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { HttpClient } from '@angular/common/http';
@@ -53,9 +53,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 					useFactory: HttpLoaderFactory,
 					deps: [HttpClient]
 				}
-			},
+			}
 		),
-		JwtModule.forRoot(AuthenticationHelper.JWT_CONFIG),
+		JwtModule.forRoot(AuthenticationHelper.JWT_CONFIG)
 	],
 	providers: [
 		{
@@ -67,6 +67,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 			useValue: CustomCurrencyMaskConfig
 		}
 	],
-	bootstrap: [AppBase],
+	bootstrap: [AppBase]
 })
 export class AppModule {}

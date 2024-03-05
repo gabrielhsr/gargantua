@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomePage } from './home.page';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { HomePage } from './home.page';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: HomePage,
-	},
+		component: HomePage
+	}
 ];
 
 @NgModule({
@@ -16,8 +16,8 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
 		SharedModule,
-		RouterModule.forChild(routes),
+		RouterModule.forChild(routes)
 	],
-	exports: [HomePage],
+	exports: [HomePage]
 })
 export class HomeModule {}

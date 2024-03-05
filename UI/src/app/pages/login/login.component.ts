@@ -11,7 +11,7 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
 @Component({
 	selector: 'g-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.scss'],
+	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
 	public hidePassword = true;

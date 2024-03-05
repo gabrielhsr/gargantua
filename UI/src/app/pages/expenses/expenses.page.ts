@@ -5,7 +5,7 @@ import { ExpenseService } from './services/expense.service';
 @Component({
 	selector: 'g-page-expenses',
 	templateUrl: './expenses.page.html',
-	styleUrls: ['./expenses.page.scss'],
+	styleUrls: ['./expenses.page.scss']
 })
 export class ExpensesPage {
 	constructor(private readonly expenseService: ExpenseService) {}

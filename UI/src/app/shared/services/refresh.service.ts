@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { CommandResponse } from '../utils/request-command';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class RefreshService {
 	private subject = new BehaviorSubject<void>(undefined);

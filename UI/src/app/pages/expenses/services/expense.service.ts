@@ -6,7 +6,7 @@ import { Period } from 'src/app/domain/period/period.model';
 import { ExpenseDialogComponent } from '../components/expense-dialog/expense-dialog.component';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class ExpenseService {
 	public selectedPeriod?: Period;

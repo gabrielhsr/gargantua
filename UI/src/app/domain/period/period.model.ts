@@ -1,6 +1,6 @@
 export class Period {
-	month: number = 0;
-	year: number = 0;
+	public month: number = 0;
+	public year: number = 0;
 }
 
 export enum Months {

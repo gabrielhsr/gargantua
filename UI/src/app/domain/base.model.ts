@@ -1,5 +1,5 @@
 export abstract class BaseEntity {
-	id: string = Guid.default;
+	public id: string = Guid.default;
 }
 
 export class Guid {
