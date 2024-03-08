@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } 
 
 export interface CommandResponse<T> {
     isSuccess: boolean;
-	value: T;
+    value: T;
     error?: string;
 }
 

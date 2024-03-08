@@ -1,50 +1,50 @@
 @import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 expenses-desktop-view {
-	display: none;
+    display: none;
 }
 
 expenses-mobile-view {
-	display: block;
+    display: block;
 }
 
 .main-container {
-	display: flex;
-	flex-direction: column;
-	gap: 22px;
-	margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 22px;
 }
 
 .header-container {
-	display: flex;
-	flex-direction: column;
-	padding: 22px 22px 0 22px;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 22px 0 22px;
 }
 
 .action-container {
-	display: flex;
-	gap: 22px;
-	align-items: center;
-	margin-bottom: 22px;
-	justify-content: space-between;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 22px;
+    justify-content: space-between;
 }
 
 @include media-breakpoint-up(lg) {
-	expenses-desktop-view {
-		display: block;
-	}
+    expenses-desktop-view {
+        display: block;
+    }
 
-	expenses-mobile-view {
-		display: none;
-	}
+    expenses-mobile-view {
+        display: none;
+    }
 
-	.header-container {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-	.main-container {
-		margin-top: 0;
-	}
+    .main-container {
+        margin-top: 0;
+    }
 }

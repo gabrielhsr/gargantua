@@ -1,35 +1,35 @@
 <button class="close-button" mat-icon-button mat-dialog-close *ngIf="!loading">
-	<mat-icon>close</mat-icon>
+    <mat-icon>close</mat-icon>
 </button>
 
 <h2 mat-dialog-title>{{ "Pages.Config.EditPaymentMethod" | translate }}</h2>
 
 <mat-dialog-content [loading]="loading">
-	<form *ngIf="paymentMethodForm" [formGroup]="paymentMethodForm">
-		<div class="form-container">
-			<mat-form-field>
-				<mat-label>{{ "Pages.Config.Name" | translate }}</mat-label>
-				<input matInput type="text" formControlName="name" />
-				<mat-error>{{ showErrorMessage('name') }}</mat-error>
-			</mat-form-field>
+    <form *ngIf="paymentMethodForm" [formGroup]="paymentMethodForm">
+        <div class="form-container">
+            <mat-form-field>
+                <mat-label>{{ "Pages.Config.Name" | translate }}</mat-label>
+                <input matInput type="text" formControlName="name" />
+                <mat-error>{{ showErrorMessage('name') }}</mat-error>
+            </mat-form-field>
 
-			<div class="two-input-container">
-				<mat-form-field>
-					<mat-label>{{ "Pages.Config.DueDate" | translate }}</mat-label>
-					<input matInput type="number" formControlName="dueDate" min="1" max="31" />
-					<mat-error>{{ showErrorMessage('dueDate') }}</mat-error>
-				</mat-form-field>
+            <div class="two-input-container">
+                <mat-form-field>
+                    <mat-label>{{ "Pages.Config.DueDate" | translate }}</mat-label>
+                    <input matInput type="number" formControlName="dueDate" min="1" max="31" />
+                    <mat-error>{{ showErrorMessage('dueDate') }}</mat-error>
+                </mat-form-field>
 
-				<mat-form-field>
-					<mat-label>{{ "Pages.Config.Bank" | translate }}</mat-label>
-					<input matInput type="text" formControlName="bank" />
-					<mat-error>{{ showErrorMessage('bank') }}</mat-error>
-				</mat-form-field>
-			</div>
-		</div>
+                <mat-form-field>
+                    <mat-label>{{ "Pages.Config.Bank" | translate }}</mat-label>
+                    <input matInput type="text" formControlName="bank" />
+                    <mat-error>{{ showErrorMessage('bank') }}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
 
-		<div class="button-container">
-			<button mat-flat-button color="primary" (click)="submitForm()" [disabled]="paymentMethodForm.invalid || paymentMethodForm.pristine">{{ "Common.Send" | translate }}</button>
-		</div>
-	</form>
+        <div class="button-container">
+            <button mat-flat-button color="primary" (click)="submitForm()" [disabled]="paymentMethodForm.invalid || paymentMethodForm.pristine">{{ "Common.Send" | translate }}</button>
+        </div>
+    </form>
 </mat-dialog-content>

@@ -7,50 +7,50 @@
 // // import { ConfigService } from './services/config.service';
 
 // // @Component({
-// // 	selector: 'page-config',
-// // 	templateUrl: './config.page.html',
-// // 	styleUrls: ['./config.page.scss'],
+// //     selector: 'page-config',
+// //     templateUrl: './config.page.html',
+// //     styleUrls: ['./config.page.scss'],
 // // })
 // // export class ConfigPage implements OnInit, OnDestroy {
-// // 	@ViewChildren('categoryInputs') categoryInputs?: QueryList<InputComponent>;
-// // 	@ViewChildren('paymentMethodInputs') paymentMethodInputs?: QueryList<InputComponent>;
+// //     @ViewChildren('categoryInputs') categoryInputs?: QueryList<InputComponent>;
+// //     @ViewChildren('paymentMethodInputs') paymentMethodInputs?: QueryList<InputComponent>;
 
-// // 	public categories?: Category[];
-// // 	public paymentMethods?: PaymentMethod[];
+// //     public categories?: Category[];
+// //     public paymentMethods?: PaymentMethod[];
 
-// // 	private destroy$ = new Subject<void>();
+// //     private destroy$ = new Subject<void>();
 
-// // 	constructor(
-// // 		private readonly configService: ConfigService,
-// // 		private readonly changeDetectorRef: ChangeDetectorRef
-// // 	) {}
+// //     constructor(
+// //         private readonly configService: ConfigService,
+// //         private readonly changeDetectorRef: ChangeDetectorRef
+// //     ) {}
 
-// // 	public ngOnInit() {
-// // 		this.configService.getAllCategories()
-// // 			.pipe(takeUntil(this.destroy))
-// // 			.subscribe((res) => res.isSuccess ? (this.categories = res.value) : EMPTY);
+// //     public ngOnInit() {
+// //         this.configService.getAllCategories()
+// //             .pipe(takeUntil(this.destroy))
+// //             .subscribe((res) => res.isSuccess ? (this.categories = res.value) : EMPTY);
 
-// // 		this.configService.getAllPaymentMethods()
-// // 			.pipe(takeUntil(this.destroy))
-// // 			.subscribe((res) => res.isSuccess ? (this.paymentMethods = res.value) : EMPTY);
-// // 	}
+// //         this.configService.getAllPaymentMethods()
+// //             .pipe(takeUntil(this.destroy))
+// //             .subscribe((res) => res.isSuccess ? (this.paymentMethods = res.value) : EMPTY);
+// //     }
 
-// // 	public ngOnDestroy() {
-// // 		this.destroy.next(null);
+// //     public ngOnDestroy() {
+// //         this.destroy.next(null);
 // //         this.destroy.complete();
-// // 	}
+// //     }
 
-// // 	public addNewItem(list: ItemType) {
-// // 		const listToAdd = list === 'category' ? this.categories : this.paymentMethods;
+// //     public addNewItem(list: ItemType) {
+// //         const listToAdd = list === 'category' ? this.categories : this.paymentMethods;
 
-// // 		listToAdd?.push({ name: '', id: GuidHelper.default });
+// //         listToAdd?.push({ name: '', id: GuidHelper.default });
 
-// // 		this.changeDetectorRef.detectChanges();
+// //         this.changeDetectorRef.detectChanges();
 
-// // 		if (list === 'category') {
-// // 			this.categoryInputs?.last?.focus();
-// // 		} else {
-// // 			this.paymentMethodInputs?.last?.focus();
-// // 		}
-// // 	}
+// //         if (list === 'category') {
+// //             this.categoryInputs?.last?.focus();
+// //         } else {
+// //             this.paymentMethodInputs?.last?.focus();
+// //         }
+// //     }
 // // }

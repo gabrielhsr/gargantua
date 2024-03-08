@@ -4,18 +4,18 @@
 // // import { Expense, PaidExpense } from './expense.model';
 
 // // @Injectable({
-// // 	providedIn: 'root',
+// //     providedIn: 'root',
 // // })
 // // export class ExpenseEndpoint extends BaseEndpoint<Expense> {
-// // 	constructor(private readonly service: HttpService) {
-// // 		super(service, '/api/Expense');
-// // 	}
+// //     constructor(private readonly service: HttpService) {
+// //         super(service, '/api/Expense');
+// //     }
 
-// // 	public getExpensesByPeriod(month: number, year: number) {
-// // 		return this.service.get<Expense[]>(`${this.url}\\expensesByPeriod`, { month, year });
-// // 	}
+// //     public getExpensesByPeriod(month: number, year: number) {
+// //         return this.service.get<Expense[]>(`${this.url}\\expensesByPeriod`, { month, year });
+// //     }
 
-// // 	public markAsPaid(expenses: PaidExpense[]) {
-// // 		return this.service.post<PaidExpense[], void>(`${this.url}\\markAsPaid`, expenses);
-// // 	}
+// //     public markAsPaid(expenses: PaidExpense[]) {
+// //         return this.service.post<PaidExpense[], void>(`${this.url}\\markAsPaid`, expenses);
+// //     }
 // // }

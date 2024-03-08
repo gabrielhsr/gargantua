@@ -1,105 +1,105 @@
 <div class="title-container">
-	{{ "Expenses.NewExpense" | translate }}
-	<button mat-icon-button mat-dialog-close *ngIf="!isLoading">
-		<mat-icon>close</mat-icon>
-	</button>
+    {{ "Expenses.NewExpense" | translate }}
+    <button mat-icon-button mat-dialog-close *ngIf="!isLoading">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 
 <mat-dialog-content [loading]="isLoading">
-	<form [formGroup]="expenseForm">
-		<div class="form-container">
-			<mat-form-field>
-				<mat-label>{{ "Expenses.Description" | translate }}</mat-label>
-				<input matInput type="text" formControlName="description" #description/>
-				<mat-icon *ngIf="description.value" matSuffix (click)="clearInput(['description'])">clear</mat-icon>
-				<mat-error>{{ showErrorMessage('description') }}</mat-error>
-			</mat-form-field>
+    <form [formGroup]="expenseForm">
+        <div class="form-container">
+            <mat-form-field>
+                <mat-label>{{ "Expenses.Description" | translate }}</mat-label>
+                <input matInput type="text" formControlName="description" #description/>
+                <mat-icon *ngIf="description.value" matSuffix (click)="clearInput(['description'])">clear</mat-icon>
+                <mat-error>{{ showErrorMessage('description') }}</mat-error>
+            </mat-form-field>
 
-			<mat-form-field>
-				<mat-label>{{ "Expenses.Amount" | translate }}</mat-label>
-				<input matInput currencyMask formControlName="amount" #amount/>
-				<mat-icon *ngIf="amount.value" matSuffix (click)="clearInput(['amount'])">clear</mat-icon>
-				<mat-error>{{ showErrorMessage('amount') }}</mat-error>
-			</mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ "Expenses.Amount" | translate }}</mat-label>
+                <input matInput currencyMask formControlName="amount" #amount/>
+                <mat-icon *ngIf="amount.value" matSuffix (click)="clearInput(['amount'])">clear</mat-icon>
+                <mat-error>{{ showErrorMessage('amount') }}</mat-error>
+            </mat-form-field>
 
-			<div class="two-input-container">
-				<mat-form-field>
-					<mat-label>{{ "Expenses.Category" | translate }}</mat-label>
-					<input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete" #category>
-					<mat-icon *ngIf="category.value" matSuffix (click)="clearInput(['category'])">clear</mat-icon>
+            <div class="two-input-container">
+                <mat-form-field>
+                    <mat-label>{{ "Expenses.Category" | translate }}</mat-label>
+                    <input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete" #category>
+                    <mat-icon *ngIf="category.value" matSuffix (click)="clearInput(['category'])">clear</mat-icon>
 
-					<mat-autocomplete #categoryAutoComplete="matAutocomplete" [displayWith]="displayFn">
-						<mat-option *ngFor="let category of filteredCategories | async" [value]="category">
-							{{ category.name }}
-						</mat-option>
-					</mat-autocomplete>
+                    <mat-autocomplete #categoryAutoComplete="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                            {{ category.name }}
+                        </mat-option>
+                    </mat-autocomplete>
 
-					<mat-error>{{ showErrorMessage('category') }}</mat-error>
-				</mat-form-field>
+                    <mat-error>{{ showErrorMessage('category') }}</mat-error>
+                </mat-form-field>
 
-				<mat-form-field>
-					<mat-label>{{ "Expenses.PaymentMethod" | translate }}</mat-label>
-					<input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete" #paymentMethod>
-					<mat-icon *ngIf="paymentMethod.value" matSuffix (click)="clearInput(['paymentMethod'])">clear</mat-icon>
+                <mat-form-field>
+                    <mat-label>{{ "Expenses.PaymentMethod" | translate }}</mat-label>
+                    <input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete" #paymentMethod>
+                    <mat-icon *ngIf="paymentMethod.value" matSuffix (click)="clearInput(['paymentMethod'])">clear</mat-icon>
 
-					<mat-autocomplete #paymentMethodAutoComplete="matAutocomplete" [displayWith]="displayFn">
-						<mat-option *ngFor="let paymentMethod of filteredPaymentMethods | async" [value]="paymentMethod">
-							{{ paymentMethod.name }}
-						</mat-option>
-					</mat-autocomplete>
+                    <mat-autocomplete #paymentMethodAutoComplete="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let paymentMethod of filteredPaymentMethods | async" [value]="paymentMethod">
+                            {{ paymentMethod.name }}
+                        </mat-option>
+                    </mat-autocomplete>
 
-					<mat-error>{{ showErrorMessage('paymentMethod') }}</mat-error>
-				</mat-form-field>
-			</div>
+                    <mat-error>{{ showErrorMessage('paymentMethod') }}</mat-error>
+                </mat-form-field>
+            </div>
 
-			<div class="two-input-container">
-				<mat-form-field>
-					<mat-label>{{ "Expenses.DueDate" | translate }}</mat-label>
-					<input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" />
-					<mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-					<mat-datepicker #dueDatePicker></mat-datepicker>
-					<mat-error>{{ showErrorMessage('dueDate') }}</mat-error>
-				</mat-form-field>
+            <div class="two-input-container">
+                <mat-form-field>
+                    <mat-label>{{ "Expenses.DueDate" | translate }}</mat-label>
+                    <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" />
+                    <mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dueDatePicker></mat-datepicker>
+                    <mat-error>{{ showErrorMessage('dueDate') }}</mat-error>
+                </mat-form-field>
 
-				<mat-form-field>
-					<mat-label>{{ "Expenses.PurchaseDate" | translate }}</mat-label>
-					<input matInput [matDatepicker]="purchaseDatePicker" formControlName="purchaseDate" />
-					<mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
-					<mat-datepicker #purchaseDatePicker></mat-datepicker>
-					<mat-error>{{ showErrorMessage('purchaseDate') }}</mat-error>
-				</mat-form-field>
-			</div>
+                <mat-form-field>
+                    <mat-label>{{ "Expenses.PurchaseDate" | translate }}</mat-label>
+                    <input matInput [matDatepicker]="purchaseDatePicker" formControlName="purchaseDate" />
+                    <mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #purchaseDatePicker></mat-datepicker>
+                    <mat-error>{{ showErrorMessage('purchaseDate') }}</mat-error>
+                </mat-form-field>
+            </div>
 
-			<mat-expansion-panel class="mat-elevation-z0" *ngIf="showRecurrentCheck">
-				<mat-expansion-panel-header>
-					<mat-panel-title>{{ 'Common.MoreOptions' | translate }}</mat-panel-title>
-				</mat-expansion-panel-header>
+            <mat-expansion-panel class="mat-elevation-z0" *ngIf="showRecurrentCheck">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ 'Common.MoreOptions' | translate }}</mat-panel-title>
+                </mat-expansion-panel-header>
 
-				<mat-checkbox formControlName="periodic" #periodic>{{ "Common.Periodic" | translate }}</mat-checkbox>
+                <mat-checkbox formControlName="periodic" #periodic>{{ "Common.Periodic" | translate }}</mat-checkbox>
 
-				<mat-form-field *ngIf="!periodic.checked">
-					<mat-label>{{ "Expenses.Installments" | translate }}</mat-label>
-					<input matInput type="number" min="1" formControlName="installments"/>
-					<mat-error>{{ showErrorMessage('installments') }}</mat-error>
-				</mat-form-field>
+                <mat-form-field *ngIf="!periodic.checked">
+                    <mat-label>{{ "Expenses.Installments" | translate }}</mat-label>
+                    <input matInput type="number" min="1" formControlName="installments"/>
+                    <mat-error>{{ showErrorMessage('installments') }}</mat-error>
+                </mat-form-field>
 
-				<mat-form-field *ngIf="periodic.checked">
-					<mat-label>{{ "Expenses.MonthInterval" | translate }}</mat-label>
-					<input matInput type="number" min="1" formControlName="monthInterval"/>
-					<mat-error>{{ showErrorMessage('monthInterval') }}</mat-error>
-				</mat-form-field>
-			</mat-expansion-panel>
-		</div>
+                <mat-form-field *ngIf="periodic.checked">
+                    <mat-label>{{ "Expenses.MonthInterval" | translate }}</mat-label>
+                    <input matInput type="number" min="1" formControlName="monthInterval"/>
+                    <mat-error>{{ showErrorMessage('monthInterval') }}</mat-error>
+                </mat-form-field>
+            </mat-expansion-panel>
+        </div>
 
-		<div class="button-container">
-			<button 
-				mat-flat-button
-				color="primary"
-				(click)="submitForm()"
-				[disabled]="expenseForm.invalid || expenseForm.pristine"
-			>
-				{{ "Common.Send" | translate }}
-			</button>
-		</div>
-	</form>
+        <div class="button-container">
+            <button 
+                mat-flat-button
+                color="primary"
+                (click)="submitForm()"
+                [disabled]="expenseForm.invalid || expenseForm.pristine"
+            >
+                {{ "Common.Send" | translate }}
+            </button>
+        </div>
+    </form>
 </mat-dialog-content>

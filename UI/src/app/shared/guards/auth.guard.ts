@@ -3,18 +3,18 @@ import { Router } from '@angular/router';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthGuard {
-	constructor(private readonly router: Router) {}
+    constructor(private readonly router: Router) {}
 
-	public canActivate(): boolean {
-		const token = AuthenticationHelper.getToken();
+    public canActivate(): boolean {
+        const token = AuthenticationHelper.getToken();
 
-		if (token) return true;
+        if (token) return true;
 
-		this.router.navigate(['login']);
-		
-		return false;
-	}
+        this.router.navigate(['login']);
+        
+        return false;
+    }
 }

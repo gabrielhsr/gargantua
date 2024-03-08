@@ -24,7 +24,7 @@ registerLocaleData(localePT);
 registerLocaleData(localeEN);
 
 export function HttpLoaderFactory(http: HttpClient) {
-	return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -38,35 +38,35 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 };
 
 @NgModule({
-	declarations: [AppBase],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		AppRoutingModule,
-		SharedModule,
-		RouterModule,
-		TranslateModule.forRoot(
-			{
-				defaultLanguage: 'pt-br',
-				loader: {
-					provide: TranslateLoader,
-					useFactory: HttpLoaderFactory,
-					deps: [HttpClient]
-				}
-			}
-		),
-		JwtModule.forRoot(AuthenticationHelper.JWT_CONFIG)
-	],
-	providers: [
-		{
-			provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-			useValue: { duration: 2500 }
-		},
-		{ 
-			provide: CURRENCY_MASK_CONFIG, 
-			useValue: CustomCurrencyMaskConfig
-		}
-	],
-	bootstrap: [AppBase]
+    declarations: [AppBase],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        SharedModule,
+        RouterModule,
+        TranslateModule.forRoot(
+            {
+                defaultLanguage: 'pt-br',
+                loader: {
+                    provide: TranslateLoader,
+                    useFactory: HttpLoaderFactory,
+                    deps: [HttpClient]
+                }
+            }
+        ),
+        JwtModule.forRoot(AuthenticationHelper.JWT_CONFIG)
+    ],
+    providers: [
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: { duration: 2500 }
+        },
+        { 
+            provide: CURRENCY_MASK_CONFIG, 
+            useValue: CustomCurrencyMaskConfig
+        }
+    ],
+    bootstrap: [AppBase]
 })
 export class AppModule {}

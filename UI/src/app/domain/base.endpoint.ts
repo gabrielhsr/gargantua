@@ -5,53 +5,53 @@ import { RequestCommand } from "../shared/utils/request-command";
 import { BaseEntity, Guid } from "./base.model";
 
 export abstract class BaseEndpoint<T extends BaseEntity> {
-	private apiUrl = environment.baseApi;
+    private apiUrl = environment.baseApi;
 
-	public abstract activator: T;
+    public abstract activator: T;
 
-	constructor(protected httpClient: HttpClient, public readonly url: string) {}
+    constructor(protected httpClient: HttpClient, public readonly url: string) {}
 
-	public get() {
-		return this.httpClient.get<T[]>(`${this.apiUrl}\\${this.url}?$count=true&filter=name eq 'Teste'`);
-	}
+    public get() {
+        return this.httpClient.get<T[]>(`${this.apiUrl}\\${this.url}?$count=true&filter=name eq 'Teste'`);
+    }
 
-	public getById(id: string) {
-		return this.httpClient.get<T>(`${this.apiUrl}\\${this.url}\\${id}`);
-	}
+    public getById(id: string) {
+        return this.httpClient.get<T>(`${this.apiUrl}\\${this.url}\\${id}`);
+    }
 
-	public post(object: T) {
-		return this.httpClient.post<T>(`${this.apiUrl}\\${this.url}`, object);
-	}
+    public post(object: T) {
+        return this.httpClient.post<T>(`${this.apiUrl}\\${this.url}`, object);
+    }
 
-	public put(object: T) {
-		return this.httpClient.put<T>(`${this.apiUrl}\\${this.url}\\${object.id}`, object);
-	}
+    public put(object: T) {
+        return this.httpClient.put<T>(`${this.apiUrl}\\${this.url}\\${object.id}`, object);
+    }
 
-	public delete(id: string) {
-		return this.httpClient.delete<T>(`${this.apiUrl}\\${this.url}\\${id}`);
-	}
+    public delete(id: string) {
+        return this.httpClient.delete<T>(`${this.apiUrl}\\${this.url}\\${id}`);
+    }
 
-	public getCommand() {
-		return new RequestCommand(() => this.get());
-	}
+    public getCommand() {
+        return new RequestCommand(() => this.get());
+    }
 
-	public getByIdCommand(id: () => string) {
-		const entityId = id();
-		const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.getById(entityId);
+    public getByIdCommand(id: () => string) {
+        const entityId = id();
+        const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.getById(entityId);
 
-		return new RequestCommand(() => endpoint);
-	}
+        return new RequestCommand(() => endpoint);
+    }
 
-	public saveCommand(entity: () => T) {
-		const obj = entity();
+    public saveCommand(entity: () => T) {
+        const obj = entity();
 
-		return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
-	}
+        return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
+    }
 
-	public deleteCommand(id: () => string) {
-		const entityId = id();
-		const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.delete(entityId);
+    public deleteCommand(id: () => string) {
+        const entityId = id();
+        const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.delete(entityId);
 
-		return new RequestCommand(() => endpoint);
-	}
+        return new RequestCommand(() => endpoint);
+    }
 }

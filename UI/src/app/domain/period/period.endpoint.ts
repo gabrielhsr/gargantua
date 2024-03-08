@@ -4,16 +4,16 @@
 // // import { Period } from './period.model';
 
 // // @Injectable({
-// // 	providedIn: 'root',
+// //     providedIn: 'root',
 // // })
 // // export class PeriodEndpoint extends BaseEndpoint<Period> {
-// // 	public override url = '/api/Period/';
+// //     public override url = '/api/Period/';
 
-// // 	constructor(private readonly service: HttpService) {
-// // 		super(service);
-// // 	}
+// //     constructor(private readonly service: HttpService) {
+// //         super(service);
+// //     }
 
-// // 	public getPeriods() {
-// // 		return this.service.get<Period[]>(this.url);
-// // 	}
+// //     public getPeriods() {
+// //         return this.service.get<Period[]>(this.url);
+// //     }
 // // }

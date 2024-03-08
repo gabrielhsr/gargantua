@@ -1,15 +1,15 @@
 <div class="period-container" [formGroup]="periodForm">
-	<mat-form-field class="period-form-field" [appearance]="appearance">
-		<mat-label>{{ 'Common.Month' | translate }}</mat-label>
-		<mat-select formControlName="month" (selectionChange)="emitEvent()">
-			<mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
-		</mat-select>
-	</mat-form-field>
+    <mat-form-field class="period-form-field" [appearance]="appearance">
+        <mat-label>{{ 'Common.Month' | translate }}</mat-label>
+        <mat-select formControlName="month" (selectionChange)="emitEvent()">
+            <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-	<mat-form-field class="period-form-field" [appearance]="appearance">
-		<mat-label>{{ 'Common.Year' | translate }}</mat-label>
-		<mat-select formControlName="year" (selectionChange)="emitEvent()">
-			<mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
-		</mat-select>
-	</mat-form-field>
+    <mat-form-field class="period-form-field" [appearance]="appearance">
+        <mat-label>{{ 'Common.Year' | translate }}</mat-label>
+        <mat-select formControlName="year" (selectionChange)="emitEvent()">
+            <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>

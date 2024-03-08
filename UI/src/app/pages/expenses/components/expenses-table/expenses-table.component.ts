@@ -7,44 +7,44 @@
 // // import { Subject } from 'rxjs';
 
 // // const IGNORE_COLUMNS = [
-// // 	'id',
-// // 	'installments',
-// // 	'periodic',
-// // 	'paid',
-// // 	'displayDescription',
-// // 	'recurrentId',
-// // 	'monthInterval',
-// // 	'purchaseDate',
-// // 	'dueDate',
+// //     'id',
+// //     'installments',
+// //     'periodic',
+// //     'paid',
+// //     'displayDescription',
+// //     'recurrentId',
+// //     'monthInterval',
+// //     'purchaseDate',
+// //     'dueDate',
 // // ];
 
 // // export interface SortOption {
-// // 	text: string;
-// // 	value: keyof Expense;
-// // 	order?: 'asc' | 'desc';
+// //     text: string;
+// //     value: keyof Expense;
+// //     order?: 'asc' | 'desc';
 // // }
 
 // // @Component({
-// // 	selector: 'expenses-table',
-// // 	templateUrl: './expenses-table.component.html',
-// // 	styleUrls: ['./expenses-table.component.scss'],
-// // 	providers: [ExpensePaidService]
+// //     selector: 'expenses-table',
+// //     templateUrl: './expenses-table.component.html',
+// //     styleUrls: ['./expenses-table.component.scss'],
+// //     providers: [ExpensePaidService]
 // // })
 // // export class ExpensesTableComponent implements OnInit, OnDestroy {
-// // 	private destroy$ = new Subject<void>();
+// //     private destroy$ = new Subject<void>();
 
-// // 	constructor(
-// // 		private readonly expenseService: ExpenseService,
-// // 		private readonly feedback: FeedbackService,
-// // 		private readonly expensePaidService: ExpensePaidService
-// // 	) {}
+// //     constructor(
+// //         private readonly expenseService: ExpenseService,
+// //         private readonly feedback: FeedbackService,
+// //         private readonly expensePaidService: ExpensePaidService
+// //     ) {}
 
-// // 	public ngOnInit() {
+// //     public ngOnInit() {
 
-// // 	}
+// //     }
 
-// // 	public ngOnDestroy(): void {
-// // 		this.destroy$.next();
+// //     public ngOnDestroy(): void {
+// //         this.destroy$.next();
 // //         this.destroy$.complete();
-// // 	}
+// //     }
 // // }

@@ -4,12 +4,12 @@ import { BaseEndpoint } from '../base.endpoint';
 import { Category } from './category.model';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class CategoryEndpoint extends BaseEndpoint<Category> {
-	public override activator: Category = new Category();
+    public override activator: Category = new Category();
 
-	constructor(private readonly client: HttpClient) {
-		super(client, 'api/Category');
-	}
+    constructor(private readonly client: HttpClient) {
+        super(client, 'api/Category');
+    }
 }

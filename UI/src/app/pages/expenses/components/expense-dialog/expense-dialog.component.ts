@@ -9,27 +9,27 @@ import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.mode
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
 
 @Component({
-	selector: 'expense-dialog',
-	templateUrl: './expense-dialog.component.html',
-	styleUrls: ['./expense-dialog.component.scss']
+    selector: 'expense-dialog',
+    templateUrl: './expense-dialog.component.html',
+    styleUrls: ['./expense-dialog.component.scss']
 
 })
 export class ExpenseDialogComponent implements OnInit, OnDestroy {
     @Input() public expense?: Expense;
 
-	public expenseForm: FormGroup = new FormGroup({});
+    public expenseForm: FormGroup = new FormGroup({});
     
     public categoryCommand = this.categoryEndpoint.getCommand();
     public paymentMethodCommand = this.paymentMethodEndpoint.getCommand();
 
     public filteredCategories?: Observable<Category[] | undefined>;
-	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
+    public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
     
     public showRecurrentCheck = false;
 
-	private readonly destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
-	constructor(
+    constructor(
         private readonly categoryEndpoint: CategoryEndpoint,
         private readonly paymentMethodEndpoint: PaymentMethodEndpoint
     ) {}
@@ -38,43 +38,43 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         return this.categoryCommand.isLoading || this.paymentMethodCommand.isLoading;
     }
 
-	public ngOnInit(): void {
-		this.createForm();
+    public ngOnInit(): void {
+        this.createForm();
 
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
-	}
+    }
 
-	public ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this.categoryCommand.destroy();
         this.paymentMethodCommand.destroy();
         
-		this.destroy$.next();
+        this.destroy$.next();
         this.destroy$.complete();
-	}
+    }
 
-	public submitForm(): void {
-		console.log(this.expenseForm.value);
-	}
+    public submitForm(): void {
+        console.log(this.expenseForm.value);
+    }
 
-	public showErrorMessage(input: string) {
+    public showErrorMessage(input: string) {
         return FormHelper.showErrorMessage(input, this.expenseForm);
-	}
+    }
 
-	public displayFn(category: Category | PaymentMethod) {
-		return category?.name ?? '';
-	}
+    public displayFn(category: Category | PaymentMethod) {
+        return category?.name ?? '';
+    }
 
-	public clearInput(controlName: string[]) {
-		controlName.forEach((name => this.expenseForm.controls[name].patchValue(null)));
-	}
+    public clearInput(controlName: string[]) {
+        controlName.forEach((name => this.expenseForm.controls[name].patchValue(null)));
+    }
 
-	private createForm(): void {
-		this.expenseForm.addControl('description', new FormControl(null, [Validators.required]));
-		this.expenseForm.addControl('amount', new FormControl(null, [Validators.required]));
-		this.expenseForm.addControl('category', new FormControl(null, [Validators.required]));
-		this.expenseForm.addControl('paymentMethod', new FormControl(null, [Validators.required]));
-		this.expenseForm.addControl('dueDate', new FormControl(null, [Validators.required]));
-		this.expenseForm.addControl('purchaseDate', new FormControl(null, [Validators.required]));
-	}
+    private createForm(): void {
+        this.expenseForm.addControl('description', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('amount', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('category', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('paymentMethod', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('dueDate', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('purchaseDate', new FormControl(null, [Validators.required]));
+    }
 }

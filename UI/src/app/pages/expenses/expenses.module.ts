@@ -6,25 +6,25 @@ import { ExpenseDialogComponent } from './components/expense-dialog/expense-dial
 import { ExpensesPage } from './expenses.page';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: ExpensesPage
-	}
+    {
+        path: '',
+        component: ExpensesPage
+    }
 ];
 
 @NgModule({
-	declarations: [
-		ExpensesPage,
-		ExpenseDialogComponent
-		// ExpensesTableComponent,
-		// DesktopViewComponent,
-		// MobileViewComponent
-	],
-	imports: [
-		CommonModule,
-		SharedModule,
-		RouterModule.forChild(routes)
-	],
-	exports: [ExpensesPage]
+    declarations: [
+        ExpensesPage,
+        ExpenseDialogComponent
+        // ExpensesTableComponent,
+        // DesktopViewComponent,
+        // MobileViewComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes)
+    ],
+    exports: [ExpensesPage]
 })
 export class ExpensesModule {}

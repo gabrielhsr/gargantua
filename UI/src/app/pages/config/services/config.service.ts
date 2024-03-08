@@ -7,25 +7,25 @@
 // // import { PaymentMethodDialogComponent } from '../components/payment-method-dialog/payment-method-dialog.component';
 
 // // @Injectable({
-// // 	providedIn: 'root'
+// //     providedIn: 'root'
 // // })
 // // export class ConfigService {
-// // 	constructor(
-// // 		private readonly categoryEndpoint: CategoryEndpoint,
-// // 		private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
-// // 		private readonly dialog: MatDialog,
-// // 		private readonly update: RefreshService
-// // 	) {}
+// //     constructor(
+// //         private readonly categoryEndpoint: CategoryEndpoint,
+// //         private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
+// //         private readonly dialog: MatDialog,
+// //         private readonly update: RefreshService
+// //     ) {}
 
-// // 	public getAllCategories() {
-// // 		return this.update.handle(this.categoryEndpoint.get());
-// // 	}
+// //     public getAllCategories() {
+// //         return this.update.handle(this.categoryEndpoint.get());
+// //     }
 
-// // 	public getAllPaymentMethods() {
-// // 		return this.update.handle(this.paymentMethodEndpoint.get());
-// // 	}
+// //     public getAllPaymentMethods() {
+// //         return this.update.handle(this.paymentMethodEndpoint.get());
+// //     }
 
-// // 	public openPaymentMethodDialog(paymentMethod: PaymentMethod) {
-// // 		this.dialog.open(PaymentMethodDialogComponent, { data: paymentMethod, panelClass: ['responsive-dialog'] })
-// // 	}
+// //     public openPaymentMethodDialog(paymentMethod: PaymentMethod) {
+// //         this.dialog.open(PaymentMethodDialogComponent, { data: paymentMethod, panelClass: ['responsive-dialog'] })
+// //     }
 // // }

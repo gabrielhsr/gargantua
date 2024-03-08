@@ -4,21 +4,21 @@
 // // import { IncomeService } from './services/income.service';
 
 // // @Component({
-// // 	selector: 'page-income',
-// // 	templateUrl: './income.page.html',
-// // 	styleUrls: ['./income.page.scss']
+// //     selector: 'page-income',
+// //     templateUrl: './income.page.html',
+// //     styleUrls: ['./income.page.scss']
 // // })
 // // export class IncomePage {
-// // 	constructor(private readonly incomeService: IncomeService) {}
+// //     constructor(private readonly incomeService: IncomeService) {}
 
-// // 	public openAddDialog() {
-// // 		const newIncome = new Income();
-// // 		const selectedPeriod = this.incomeService.selectedPeriod;
+// //     public openAddDialog() {
+// //         const newIncome = new Income();
+// //         const selectedPeriod = this.incomeService.selectedPeriod;
 
-// // 		if (selectedPeriod) {
-// // 			newIncome.paymentDate = DateHelper.FromPeriod(selectedPeriod);
-// // 		}
+// //         if (selectedPeriod) {
+// //             newIncome.paymentDate = DateHelper.FromPeriod(selectedPeriod);
+// //         }
 
-// // 		this.incomeService.openFormDialog(newIncome);
-// // 	}
+// //         this.incomeService.openFormDialog(newIncome);
+// //     }
 // // }

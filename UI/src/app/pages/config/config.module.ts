@@ -7,23 +7,23 @@
 // // import { PaymentMethodDialogComponent } from './components/payment-method-dialog/payment-method-dialog.component';
 
 // // const routes: Routes = [
-// // 	{
-// // 		path: '',
-// // 		component: ConfigPage,
-// // 	},
+// //     {
+// //         path: '',
+// //         component: ConfigPage,
+// //     },
 // // ];
 
 // // @NgModule({
-// // 	declarations: [
-// // 		ConfigPage,
-// // 		InputComponent, 
-// // 		PaymentMethodDialogComponent
-// // 	],
-// // 	imports: [
-// // 		CommonModule,
-// // 		SharedModule,
-// // 		RouterModule.forChild(routes)
-// // 	],
-// // 	exports: [ConfigPage],
+// //     declarations: [
+// //         ConfigPage,
+// //         InputComponent, 
+// //         PaymentMethodDialogComponent
+// //     ],
+// //     imports: [
+// //         CommonModule,
+// //         SharedModule,
+// //         RouterModule.forChild(routes)
+// //     ],
+// //     exports: [ConfigPage],
 // // })
 // // export class ConfigModule {}

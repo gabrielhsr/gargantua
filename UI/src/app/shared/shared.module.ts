@@ -28,53 +28,53 @@ import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
-	declarations: [
-		// Directives
-		TypeSafeMatCellDef,
-		AutocompleteDisableDirective,
-		LoadingDirective,
-		PreventDefaultDirective,
+    declarations: [
+        // Directives
+        TypeSafeMatCellDef,
+        AutocompleteDisableDirective,
+        LoadingDirective,
+        PreventDefaultDirective,
 
-		// Pipes
+        // Pipes
 
-		// Components
-		TopbarComponent,
-		SidebarComponent,
-		ConfirmDialogComponent,
-		PeriodSelectComponent,
-		YesOrNoDialogComponent
-	],
-	imports: [
-		// Modules
-		CommonModule,
-		MaterialModule,
-		RouterModule,
-		ReactiveFormsModule,
-		FormsModule,
-		TranslateModule
-	],
-	exports: [
-		// Modules
-		MaterialModule,
-		HttpClientModule,
-		ReactiveFormsModule,
-		FormsModule,
-		CurrencyMaskModule,
-		TranslateModule,
+        // Components
+        TopbarComponent,
+        SidebarComponent,
+        ConfirmDialogComponent,
+        PeriodSelectComponent,
+        YesOrNoDialogComponent
+    ],
+    imports: [
+        // Modules
+        CommonModule,
+        MaterialModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        TranslateModule
+    ],
+    exports: [
+        // Modules
+        MaterialModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CurrencyMaskModule,
+        TranslateModule,
 
-		// Directives
-		TypeSafeMatCellDef,
-		AutocompleteDisableDirective,
-		LoadingDirective,
-		PreventDefaultDirective,
+        // Directives
+        TypeSafeMatCellDef,
+        AutocompleteDisableDirective,
+        LoadingDirective,
+        PreventDefaultDirective,
 
-		// Pipes
+        // Pipes
 
-		// Components
-		TopbarComponent,
-		SidebarComponent,
-		PeriodSelectComponent
-	],
-	providers: []
+        // Components
+        TopbarComponent,
+        SidebarComponent,
+        PeriodSelectComponent
+    ],
+    providers: []
 })
 export class SharedModule {}

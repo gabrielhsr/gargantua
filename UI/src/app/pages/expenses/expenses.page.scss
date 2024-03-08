@@ -1,11 +1,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 .expenses-container {
-	padding-bottom: 110px;
+    padding-bottom: 110px;
 }
 
 @include media-breakpoint-up(lg) {
-	.expenses-container {
-		padding-bottom: auto;
-	}
+    .expenses-container {
+        padding-bottom: auto;
+    }
 }

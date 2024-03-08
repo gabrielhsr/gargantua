@@ -9,25 +9,25 @@
 // import { IncomeDialogComponent } from './components/income-dialog/income-dialog.component';
 
 // const routes: Routes = [
-// 	{
-// 		path: '',
-// 		component: IncomePage,
-// 	},
+//     {
+//         path: '',
+//         component: IncomePage,
+//     },
 // ];
 
 // @NgModule({
-// 	declarations: [
-// 		IncomePage,
-// 		IncomeTableComponent,
-// 		IncomeMobileViewComponent,
-// 		IncomeDesktopViewComponent,
-// 		IncomeDialogComponent
-// 	],
-// 	imports: [
-// 		CommonModule,
-// 		SharedModule,
-// 		RouterModule.forChild(routes)
-// 	],
-// 	exports: [IncomePage]
+//     declarations: [
+//         IncomePage,
+//         IncomeTableComponent,
+//         IncomeMobileViewComponent,
+//         IncomeDesktopViewComponent,
+//         IncomeDialogComponent
+//     ],
+//     imports: [
+//         CommonModule,
+//         SharedModule,
+//         RouterModule.forChild(routes)
+//     ],
+//     exports: [IncomePage]
 // })
 // export class IncomeModule {}

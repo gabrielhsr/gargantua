@@ -5,18 +5,18 @@
 // import { Income } from './income.model';
 
 // @Injectable({
-// 	providedIn: 'root',
+//     providedIn: 'root',
 // })
 // export class IncomeEndpoint extends BaseEndpoint<Income> {
-// 	constructor(private readonly service: HttpService) {
-// 		super(service, '/api/Income/');
-// 	}
+//     constructor(private readonly service: HttpService) {
+//         super(service, '/api/Income/');
+//     }
 
-// 	public getIncomePeriods() {
-// 		return this.service.get<Period[]>(this.url + 'periods');
-// 	}
+//     public getIncomePeriods() {
+//         return this.service.get<Period[]>(this.url + 'periods');
+//     }
 
-// 	public getIncomeByPeriod(month: number, year: number) {
-// 		return this.service.get<Income[]>(this.url + 'incomeByPeriod', { month, year });
-// 	}
+//     public getIncomeByPeriod(month: number, year: number) {
+//         return this.service.get<Income[]>(this.url + 'incomeByPeriod', { month, year });
+//     }
 // }

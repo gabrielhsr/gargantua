@@ -4,12 +4,12 @@ import { BaseEndpoint } from '../base.endpoint';
 import { PaymentMethod } from './payment-method.model';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class PaymentMethodEndpoint extends BaseEndpoint<PaymentMethod> {
-	public override activator: PaymentMethod = new PaymentMethod();
+    public override activator: PaymentMethod = new PaymentMethod();
 
-	constructor(private readonly client: HttpClient) {
-		super(client, 'api/PaymentMethod');
-	}
+    constructor(private readonly client: HttpClient) {
+        super(client, 'api/PaymentMethod');
+    }
 }

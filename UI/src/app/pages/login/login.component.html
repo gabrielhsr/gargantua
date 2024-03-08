@@ -1,34 +1,34 @@
 <div class="login-container">
-	<mat-card>
-		<mat-card-header class="justify-content-center">
-			<mat-card-title>{{ 'Login.Title' | translate }}</mat-card-title>
-		</mat-card-header>
+    <mat-card>
+        <mat-card-header class="justify-content-center">
+            <mat-card-title>{{ 'Login.Title' | translate }}</mat-card-title>
+        </mat-card-header>
 
-		<form *ngIf="loginForm" [formGroup]="loginForm">
-			<mat-card-content class="login-card" [loading]="isLoading">
-				<mat-form-field appearance="fill">
-					<mat-label>{{ 'Login.Email' | translate }}</mat-label>
-					<input matInput type="email" formControlName="email" />
-					<mat-error>{{ showErrorMessage('email') }}</mat-error>
-				</mat-form-field>
+        <form *ngIf="loginForm" [formGroup]="loginForm">
+            <mat-card-content class="login-card" [loading]="isLoading">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'Login.Email' | translate }}</mat-label>
+                    <input matInput type="email" formControlName="email" />
+                    <mat-error>{{ showErrorMessage('email') }}</mat-error>
+                </mat-form-field>
 
-				<mat-form-field>
-					<mat-label>{{ 'Login.Password' | translate }}</mat-label>
-					<input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
-					<div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
-						<mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
-					</div>
-					<mat-error>{{ showErrorMessage('password') }}</mat-error>
-				</mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'Login.Password' | translate }}</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+                    <div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+                    </div>
+                    <mat-error>{{ showErrorMessage('password') }}</mat-error>
+                </mat-form-field>
 
-				<button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="signInCommand.execute()">
-					{{ 'Login.Enter' | translate }}
-				</button>
+                <button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="signInCommand.execute()">
+                    {{ 'Login.Enter' | translate }}
+                </button>
 
-				<button type="submit" class="register-button" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="registerCommand.execute()">
-					{{ 'Login.Register' | translate }}
-				</button>
-			</mat-card-content>
-		</form>
-	</mat-card>
+                <button type="submit" class="register-button" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="registerCommand.execute()">
+                    {{ 'Login.Register' | translate }}
+                </button>
+            </mat-card-content>
+        </form>
+    </mat-card>
 </div>

@@ -1,11 +1,11 @@
 @import "/src/assets/theme/colors.scss";
 
 .spacer {
-	flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 .toolbar {
-	height: var(--topbar-height);
-	background-color: $color-topbar;
-	color: white;
+    height: var(--topbar-height);
+    background-color: $color-topbar;
+    color: white;
 }

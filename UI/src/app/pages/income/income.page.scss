@@ -1,11 +1,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 .income-container {
-	padding-bottom: 110px;
+    padding-bottom: 110px;
 }
 
 @include media-breakpoint-up(lg) {
-	.income-container {
-		padding-bottom: auto;
-	}
+    .income-container {
+        padding-bottom: auto;
+    }
 }

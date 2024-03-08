@@ -3,15 +3,15 @@ import { Subject } from 'rxjs';
 
 
 @Component({
-	selector: 'page-home',
-	templateUrl: './home.page.html',
-	styleUrls: ['./home.page.scss']
+    selector: 'page-home',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnDestroy {
-	private destroy$ = new Subject<void>();
+    private destroy$ = new Subject<void>();
 
-	public ngOnDestroy(): void {
-		this.destroy$.next();
+    public async ngOnDestroy(): Promise<void> {
+        this.destroy$.next();
         this.destroy$.complete();
-	}
+    }
 }

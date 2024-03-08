@@ -9,47 +9,47 @@
 // import { IncomeDialogComponent } from '../components/income-dialog/income-dialog.component';
 
 // @Injectable({
-// 	providedIn: 'root',
+//     providedIn: 'root',
 // })
 // export class IncomeService {
-// 	public selectedPeriod?: Period;
+//     public selectedPeriod?: Period;
 
-// 	constructor(
-// 		private readonly incomeEndpoint: IncomeEndpoint,
-// 		private readonly dialog: MatDialog,
-// 		private readonly update: RefreshService
-// 	) {	}
+//     constructor(
+//         private readonly incomeEndpoint: IncomeEndpoint,
+//         private readonly dialog: MatDialog,
+//         private readonly update: RefreshService
+//     ) {    }
 
-// 	public getAllIncomes() {
-// 		return this.update.handle(this.incomeEndpoint.get());
-// 	}
+//     public getAllIncomes() {
+//         return this.update.handle(this.incomeEndpoint.get());
+//     }
 
-// 	public getIncomeByPeriod(period: Period) {
-// 		this.selectedPeriod = period;
+//     public getIncomeByPeriod(period: Period) {
+//         this.selectedPeriod = period;
 
-// 		return this.update.handle(this.incomeEndpoint.getIncomeByPeriod(period.month, period.year));
-// 	}
+//         return this.update.handle(this.incomeEndpoint.getIncomeByPeriod(period.month, period.year));
+//     }
 
-// 	public saveIncome(income: Income) {
-// 		const operation = Guid.isNullOrDefault(income.id) ? this.incomeEndpoint.post(income) : this.incomeEndpoint.put(income, income.id);
+//     public saveIncome(income: Income) {
+//         const operation = Guid.isNullOrDefault(income.id) ? this.incomeEndpoint.post(income) : this.incomeEndpoint.put(income, income.id);
 
-// 		return operation.pipe(
-// 			tap(({ isSuccess }) => {
-// 				if (isSuccess) this.update.execute();
-// 			})
-// 		);
-// 	}
+//         return operation.pipe(
+//             tap(({ isSuccess }) => {
+//                 if (isSuccess) this.update.execute();
+//             })
+//         );
+//     }
 
-// 	public removeIncome(id: string) {
-// 		return this.incomeEndpoint.delete(id).pipe(
-// 			tap(({ isSuccess }) => {
-// 				if (isSuccess) this.update.execute();
-// 			})
-// 		);
-// 	}
+//     public removeIncome(id: string) {
+//         return this.incomeEndpoint.delete(id).pipe(
+//             tap(({ isSuccess }) => {
+//                 if (isSuccess) this.update.execute();
+//             })
+//         );
+//     }
 
-// 	public openFormDialog(income?: Income, editMonth?: boolean) {
-// 		this.dialog.open(IncomeDialogComponent, { data: { income, editMonth }, panelClass: ['responsive-dialog'] });
-// 	}
+//     public openFormDialog(income?: Income, editMonth?: boolean) {
+//         this.dialog.open(IncomeDialogComponent, { data: { income, editMonth }, panelClass: ['responsive-dialog'] });
+//     }
 // }
 
