@@ -1,72 +1,72 @@
-name: Gargantua WebAPI - Build & Deploy
-on:
-  workflow_dispatch:
-  push:
-    branches:
-    - master
-    paths:
-    - WebAPI/**
-env:
-  WEBAPP_NAME: Gargantua
-  WEBAPP_PACKAGE_PATH: WebAPI/publish
-  CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 7.0.x
-  WORKING_DIRECTORY: WebAPI
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-    - uses: actions/checkout@v3      
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}        
-    - name: Restore
-      run: dotnet restore ${{ env.WORKING_DIRECTORY }}
-    - name: Build
-      run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Test
-      run: dotnet test ${{ env.WORKING_DIRECTORY }} --no-build    
-    - name: Publish
-      run: dotnet publish ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.WEBAPP_PACKAGE_PATH }}
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: webapp
-        path: ${{ env.WEBAPP_PACKAGE_PATH }}
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment: production
-    steps:
-    - name: Download Artifact
-      uses: actions/download-artifact@v3.0.2
-      with:
-        path: ${{ env.WEBAPP_PACKAGE_PATH }}
-    - name: appsettings builder
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: '${{ env.WEBAPP_PACKAGE_PATH }}/webapp/appsettings.Production.json'
-      env:
-        ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
-        IssuerSigningKey: ${{ secrets.ISSUER_KEY }}
-        Pepper: ${{ secrets.PEPPER }}
-    - name: SFTP Deploy
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      with:
-        username: ${{ secrets.SFTP_USER }}
-        password: ${{ secrets.SFTP_PWD }}
-        server: ${{ secrets.SFTP_SERVER }}
-        remote_path: ${{ secrets.SFTP_API_PATH }}
-        local_path: './${{ env.WEBAPP_PACKAGE_PATH }}/*'
-        sftp_only: true
-        delete_remote_files: true
-    - name: Restart API
-      uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
-      with:
-        host: ${{ secrets.SFTP_SERVER }}
-        user: ${{ secrets.SFTP_USER }}
-        pass: ${{ secrets.SFTP_PWD }}
-        first_ssh: ${{ secrets.SSH_RESTART_APP }}
+# name: Gargantua WebAPI - Build & Deploy
+# on:
+  # workflow_dispatch:
+  # push:
+    # branches:
+    # - master
+    # paths:
+    # - WebAPI/**
+# env:
+  # WEBAPP_NAME: Gargantua
+  # WEBAPP_PACKAGE_PATH: WebAPI/publish
+  # CONFIGURATION: Release
+  # DOTNET_CORE_VERSION: 7.0.x
+  # WORKING_DIRECTORY: WebAPI
+# jobs:
+  # build:
+    # runs-on: ubuntu-latest
+    # environment: production
+    # steps:
+    # - uses: actions/checkout@v3      
+    # - name: Setup .NET Core
+      # uses: actions/setup-dotnet@v3
+      # with:
+        # dotnet-version: ${{ env.DOTNET_CORE_VERSION }}        
+    # - name: Restore
+      # run: dotnet restore ${{ env.WORKING_DIRECTORY }}
+    # - name: Build
+      # run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
+    # - name: Test
+      # run: dotnet test ${{ env.WORKING_DIRECTORY }} --no-build    
+    # - name: Publish
+      # run: dotnet publish ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.WEBAPP_PACKAGE_PATH }}
+    # - name: Publish Artifacts
+      # uses: actions/upload-artifact@v3
+      # with:
+        # name: webapp
+        # path: ${{ env.WEBAPP_PACKAGE_PATH }}
+  # deploy:
+    # runs-on: ubuntu-latest
+    # needs: build
+    # environment: production
+    # steps:
+    # - name: Download Artifact
+      # uses: actions/download-artifact@v3.0.2
+      # with:
+        # path: ${{ env.WEBAPP_PACKAGE_PATH }}
+    # - name: appsettings builder
+      # uses: microsoft/variable-substitution@v1
+      # with:
+        # files: '${{ env.WEBAPP_PACKAGE_PATH }}/webapp/appsettings.Production.json'
+      # env:
+        # ConnectionStrings.DbConnectionString: ${{ secrets.CONNECTION_STRING }}
+        # IssuerSigningKey: ${{ secrets.ISSUER_KEY }}
+        # Pepper: ${{ secrets.PEPPER }}
+    # - name: SFTP Deploy
+      # uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      # with:
+        # username: ${{ secrets.SFTP_USER }}
+        # password: ${{ secrets.SFTP_PWD }}
+        # server: ${{ secrets.SFTP_SERVER }}
+        # remote_path: ${{ secrets.SFTP_API_PATH }}
+        # local_path: './${{ env.WEBAPP_PACKAGE_PATH }}/*'
+        # sftp_only: true
+        # delete_remote_files: true
+    # - name: Restart API
+      # uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      # with:
+        # host: ${{ secrets.SFTP_SERVER }}
+        # user: ${{ secrets.SFTP_USER }}
+        # pass: ${{ secrets.SFTP_PWD }}
+        # first_ssh: ${{ secrets.SSH_RESTART_APP }}
     
