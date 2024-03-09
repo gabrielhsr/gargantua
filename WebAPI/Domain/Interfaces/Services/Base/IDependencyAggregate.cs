@@ -1,6 +1,6 @@
-﻿using Financial.Domain.Data;
-using Financial.Domain.Models;
-using Financial.Domain.Interfaces.Repositories;
+﻿using Financial.Data;
+using Financial.Domain.Interfaces.Repositories.Base;
+using Financial.Domain.Models.Base;
 
 namespace Financial.Domain.Interfaces.Services.Base
 {

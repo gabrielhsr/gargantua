@@ -2,18 +2,18 @@
 @import "/src/assets/theme/colors.scss";
 
 .sidebar-container {
-	height: calc(100vh - var(--topbar-height));
+    height: calc(100vh - var(--topbar-height));
 }
 
 .list-item {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 0 30px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 30px 0 10px;
 
-	span {
-		margin-top: 2.5px;
-	}
+    span {
+        margin-top: 2.5px;
+    }
 }
 
 .active-item {
@@ -25,17 +25,19 @@
 }
 
 .background {
-	background-image: url('/assets/images/bg.svg');
-	background-repeat: repeat-x;
-	background-size: 100vw 250px;
+    background-color: $color-background;
+}
+
+mat-sidenav-content {
+    padding-top: 10px;
 }
 
 ::ng-deep .dark-theme .mat-drawer-backdrop.mat-drawer-shown {
-	background-color: rgba(0, 0, 0, 0.32) !important;
+    background-color: rgba(0, 0, 0, 0.32) !important;
 }
 
 @include media-breakpoint-up(lg) {
-	mat-sidenav-content {
-		padding: 22px !important;
-	}
+    mat-sidenav-content {
+        padding: 22px !important;
+    }
 }

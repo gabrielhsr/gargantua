@@ -1,19 +1,18 @@
-import { Period } from "src/app/entities/period/period.dto";
 
 export class DateHelper {
-	public static FromPeriod(period: Period) {
-		const today = new Date();
+    // public static FromPeriod(period: Period) {
+    //     const today = new Date();
 
-		today.setMonth(period.month - 1);
-		today.setFullYear(period.year);
+    //     today.setMonth(period.Month - 1);
+    //     today.setFullYear(period.year);
 
-		return today
-	}
+    //     return today
+    // }
 
-	public static PeriodNow(): Period {
-		const month = new Date().getMonth() + 1;
-		const year = new Date().getFullYear();
+    // public static PeriodNow(): Period {
+    //     const month = new Date().getMonth() + 1;
+    //     const year = new Date().getFullYear();
 
-		return { month, year };
-	}
+    //     return { Month: month, year };
+    // }
 }

@@ -1,44 +1,44 @@
 <mat-sidenav-container class="sidebar-container">
-	<mat-sidenav #sidenav mode="over" autoFocus="false">
-		<mat-nav-list>
-			<!-- <h2 matSubheader>{{ 'MY_WORK' | translate }}</h2> -->
+    <mat-sidenav #sidenav mode="over" autoFocus="false">
+        <mat-nav-list>
+            <!-- <h2 matSubheader>{{ 'MY_WORK' | translate }}</h2> -->
 
-			<mat-list-item routerLink="/home" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
-				<div class="list-item">
-					<mat-icon>home</mat-icon>
-					<span>{{ 'Sidebar.Home' | translate }}</span>
-				</div>
-			</mat-list-item>
-			<mat-list-item routerLink="/income" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
-				<div class="list-item">
-					<mat-icon>attach_money</mat-icon>
-					<span>{{ 'Sidebar.Income' | translate }}</span>
-				</div>
-			</mat-list-item>
-			<mat-list-item routerLink="/expenses" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
-				<div class="list-item">
-					<mat-icon>money_off</mat-icon>
-					<span>{{ 'Sidebar.Expenses' | translate }}</span>
-				</div>
-			</mat-list-item>
-			<mat-list-item routerLink="/config" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
-				<div class="list-item">
-					<mat-icon>settings</mat-icon>
-					<span>{{ 'Sidebar.Config' | translate }}</span>
-				</div>
-			</mat-list-item>
-			<mat-list-item (click)="logOut()">
-				<div class="list-item">
-					<mat-icon>logout</mat-icon>
-					<span>{{ 'Sidebar.LogOut' | translate }}</span>
-				</div>
-			</mat-list-item>
-		</mat-nav-list>
-	</mat-sidenav>
+            <!-- <mat-list-item routerLink="/home" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
+                <div class="list-item">
+                    <mat-icon>home</mat-icon>
+                    <span>{{ 'Sidebar.Home' | translate }}</span>
+                </div>
+            </mat-list-item> -->
+            <!-- <mat-list-item routerLink="/income" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
+                <div class="list-item">
+                    <mat-icon>attach_money</mat-icon>
+                    <span>{{ 'Sidebar.Income' | translate }}</span>
+                </div>
+            </mat-list-item> -->
+            <mat-list-item routerLink="/expenses" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
+                <div class="list-item">
+                    <mat-icon>money_off</mat-icon>
+                    <span>{{ 'Sidebar.Expenses' | translate }}</span>
+                </div>
+            </mat-list-item>
+            <!-- <mat-list-item routerLink="/config" [routerLinkActive]="activeStyle" (click)="sidenav.close()">
+                <div class="list-item">
+                    <mat-icon>settings</mat-icon>
+                    <span>{{ 'Sidebar.Config' | translate }}</span>
+                </div>
+            </mat-list-item> -->
+            <mat-list-item (click)="logOut()">
+                <div class="list-item">
+                    <mat-icon>logout</mat-icon>
+                    <span>{{ 'Sidebar.LogOut' | translate }}</span>
+                </div>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
 
-	<mat-sidenav-content class="background">
-		<div class="container">
-			<ng-content></ng-content>
-		</div>
-	</mat-sidenav-content>
+    <mat-sidenav-content class="background">
+        <div class="container">
+            <ng-content></ng-content>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,31 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Financial.Domain.Models.Base;
 
 namespace Financial.Domain.Models
 {
-    public class Expense : Movement
+    public class Expense : BaseEntity
     {
-        public Expense()
-        {
-            Category = new Category();
-            PaymentMethod = new PaymentMethod();
-        }
-        
-        public DateTimeOffset DueDate { get; set; }
+        public Guid IdCategory { get; set; }
 
-        [NotMapped]
-        public DateTimeOffset? DisplayDueDate { get; set; }
+        public Guid IdPaymentMethod { get; set; }
 
-        [Required]
+        public Guid IdUser { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public DateTimeOffset? DueDate { get; set; }
+
         public DateTimeOffset PurchaseDate { get; set; }
 
-        [NotMapped]
-        public DateTimeOffset? DisplayPurchaseDate { get; set; }
-
-        [Required]
         public virtual Category Category { get; set; }
 
-        [Required]
         public virtual PaymentMethod PaymentMethod { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

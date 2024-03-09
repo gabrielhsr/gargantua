@@ -1,22 +1,33 @@
 @import "node_modules/bootstrap/scss/bootstrap-utilities.scss";
 
 .login-container {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
 }
 
 .login-card {
-	display: flex;
-	flex-direction: column;
-	margin-top: 16px;
-	width: 85vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    width: 85vw;
     max-width: 500px;
 }
 
 .show-password {
-	margin: 15px;
+    margin: 15px;
 
-	:hover {
-		cursor: pointer;
-	}
+    :hover {
+        cursor: pointer;
+    }
+}
+
+.register-button {
+    margin-top: 15px;
+}
+
+@include media-breakpoint-up(lg) {
+    .login-container {
+        margin-top: auto;
+    }
 }

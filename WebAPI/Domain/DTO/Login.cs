@@ -10,4 +10,9 @@ namespace Financial.Domain.DTO
         [Required]
         public string Password { get; set; }
     }
+
+    public class AuthRes
+    {
+        public string Token { get; set; }
+    }
 }

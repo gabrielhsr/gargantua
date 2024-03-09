@@ -1,17 +1,17 @@
 @import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 .cards-container {
-	display: flex;
-	flex-direction: column;
-	gap: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 
-	mat-card {
-		min-width: 200px;
-	}
+    mat-card {
+        min-width: 200px;
+    }
 }
 
 @include media-breakpoint-up(lg) {
-	.cards-container {
-		flex-direction: row;
-	}
+    .cards-container {
+        flex-direction: row;
+    }
 }

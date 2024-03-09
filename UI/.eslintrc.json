@@ -1,0 +1,116 @@
+{
+    "root": true,
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "parserOptions": {
+                "project": ["tsconfig.json", "tsconfig.app.json", "tsconfig.spec.json"]
+            },
+            "plugins": ["@stylistic/js", "@stylistic/ts", "@stylistic/plus", "@angular-eslint"],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "rules": {
+                "@angular-eslint/component-class-suffix": ["error", { "suffixes": ["Page", "Component", "Base"] }], // Allowed Component Suffixes
+                "@angular-eslint/component-max-inline-declarations": "off",
+                "@angular-eslint/component-selector": ["error", { "type": "element", "prefix": "", "style": "kebab-case" }], // Component Selector must be kebab-case
+                "@angular-eslint/contextual-decorator": "error",
+                "@angular-eslint/directive-class-suffix": "off", // DISABLED: Directive must have Directive in name
+                "@angular-eslint/directive-selector": ["error", { "type": "attribute", "prefix": "", "style": "camelCase" }], // Directive Selector must be camelCase
+                "@angular-eslint/no-conflicting-lifecycle": "error", //Ensures that directives not implement conflicting lifecycle interfaces.
+                "@angular-eslint/no-empty-lifecycle-method": "error", // Self explanatory,
+                "@angular-eslint/no-lifecycle-call": "error", // Self explanatory.
+                "@angular-eslint/relative-url-prefix": "error", // Prefer ./ and ../ for relative url,
+                "@angular-eslint/sort-lifecycle-methods": "error", // Self explanatory.
+                "@angular-eslint/use-lifecycle-interface": "error", // Force lifecycle interfaces when method is used
+                "@angular-eslint/use-pipe-transform-interface": "error", // Force PipeTransform interface
+
+                "@typescript-eslint/adjacent-overload-signatures": "error", // Overloads must be adjacents
+                "@typescript-eslint/array-type": ["error", { "default": "array", "readonly": "array" }], // Require consistently using T[] for array definition
+                "@typescript-eslint/class-literal-property-style": "error", // Literal must be properties and not getters; public readonly myField1 = 1;
+                "@typescript-eslint/consistent-generic-constructors": "error", // Enforce specifying generic type arguments on generic class; const set = new Set<string>(); ✅ | const set: Set<string> = new Set(); ❌
+                "@typescript-eslint/consistent-indexed-object-style": "error", // Force Record<string, unknown> insted of { [key: string]: unknown; }
+                "@typescript-eslint/consistent-type-assertions": "error", // value as Type instead of <Type>value
+                "@typescript-eslint/default-param-last": "error", // Method default param as last; function f(a: number, b = 0) {}
+                "@typescript-eslint/dot-notation": "error", // foo.bar instead of foo["bar"] when possible
+                "@typescript-eslint/explicit-member-accessibility": ["error", { "overrides": { "constructors": "off" } }], // Force acessibility on everything besides contructor
+                "@typescript-eslint/no-inferrable-types": ["error", { "ignoreParameters": true, "ignoreProperties": true }], // Variable inferred. Ex: const maxValue = 5 ✅ | const maxValue: number = 5 ❌
+                
+                "@stylistic/js/array-bracket-newline": ["error", "consistent"], // Enforces line breaks after opening and before closing array brackets.
+                "@stylistic/js/array-bracket-spacing": ["error", "never"], // Enforces consistent spacing inside array brackets.
+                "@stylistic/js/array-element-newline": ["error", "consistent"], // Enforces line breaks between array elements.
+                "@stylistic/js/arrow-parens": ["error", "always"], // (a) => a.foo; ✅ | a => a.foo; ❌
+                "@stylistic/js/arrow-spacing": "error", // (a) => {}; ✅ | (a)=>{}; ❌
+                "@stylistic/js/comma-style": ["error", "last"], // consistent comma style in array literals, object literals, and variable declarations
+                "@stylistic/js/computed-property-spacing": ["error", "never"], // // obj[foo]; ✅ | obj[foo ] ❌
+                "@stylistic/js/dot-location": ["error", "property"], // enforce newline consistency in member expressions
+                "@stylistic/js/function-call-argument-newline": ["error", "consistent"], // enforces line breaks between arguments of a function call.
+
+                //https://eslint.style/rules/js/function-paren-newline
+
+                "@stylistic/ts/block-spacing": "error", // Consistent spacing inside an open block. Ex: function foo() { return true; } ✅ | function foo() {return true;} ❌
+                "@stylistic/ts/brace-style": [ "error", "1tbs", { "allowSingleLine": true }], // if else style. 
+                "@stylistic/ts/comma-spacing": "error", // Comma spacing; var foo = 1, bar = 2; ✅ | var foo = 1 ,bar = 2; ❌
+                "@stylistic/ts/function-call-spacing": "error", // new Date() ✅ | new Date () ❌
+                "@stylistic/ts/indent": ["error"], // Force 4 spaces for indentation
+                "@stylistic/ts/key-spacing": "error", // { "foo": 42 } ✅ | { "foo" : 42 } ❌
+                "@stylistic/ts/keyword-spacing": "error", // if (foo) ✅ | if(foo) ❌
+                "@stylistic/ts/lines-between-class-members": [ // Force lines between class members
+                    "error", 
+                    {
+                        "enforce": [
+                            { "blankLine": "always", "prev": "method", "next": "method" },
+                            { "blankLine": "always", "prev": "field", "next": "method" }
+                        ] 
+                    }
+                ],
+                "@stylistic/ts/member-delimiter-style": "error", // ; as member delimiter
+                "@stylistic/ts/no-extra-semi": "error", // Prevent ;;
+                "@stylistic/ts/object-curly-spacing": ["error", "always"], // export { foo }; ✅ | export {foo}; ❌, 
+                "@stylistic/ts/padding-line-between-statements" : [ // Force line between statements, prevent cluttered code
+                    "error",
+                    { "blankLine": "always", "prev": "*", "next": "return" },
+                    { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+                    { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
+                    { "blankLine": "always", "prev": "block-like", "next": "*" }
+                ],
+                "@stylistic/ts/quote-props": ["error", "as-needed"], // object style; { foo: "bar" }; ✅ | { "foo": "bar" }; ❌, 
+                "@stylistic/ts/quotes": ["error", "single"], // Force ' to string, instead ".
+                "@stylistic/ts/semi": ["error", "always"], // Force ; on statement end
+                "@stylistic/ts/space-before-blocks": ["error"], // if (foo) {} ✅ | if (foo){} ❌, 
+                "@stylistic/ts/space-before-function-paren": ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always"}], // Whitespace is between the function name or function
+                "@stylistic/ts/space-infix-ops": "error", // ensuring there are spaces around infix operator
+                "@stylistic/ts/type-annotation-spacing": "error", // enforce spacing around type annotations
+
+                "@stylistic/plus/indent-binary-ops": ["error", 2], // Indentation for binary operators
+                "@stylistic/plus/type-generic-spacing": ["error"], // Enforces consistent spacing inside type generics
+                "@stylistic/plus/type-named-tuple-spacing": ["error"], // Expect space before the type declaration in the named tuple.
+
+                "array-callback-return": "error", // Array methods must return values. Ex: map, filter, reduce
+                "camelcase": ["error", { "ignoreImports": true }], // Force camelCase variables
+                "consistent-return": "error", // Self explanatory
+                "default-param-last": "off", // To use @typescript-eslint version
+                "dot-notation": "off", // To use @typescript-eslint version
+                "no-await-in-loop": "error", // Self explanatory
+                "no-constant-binary-expression": "error", // Disallow expressions where the operation doesn't affect the value. Ex: const x = a + b ?? c;
+                "no-constructor-return": "error", // Self explanatory
+                "no-duplicate-imports": "error", // Self explanatory
+                "no-new-native-nonconstructor": "error", // Disallow new operators with global non-constructor functions. Ex: new Symbol()
+                "no-promise-executor-return": "error", // Disallow returning values from Promise executor functions. Must use resolve() reject()
+                "no-self-compare": "error", // Self explanatory; const x = 1; const equal = 1 === 1;
+                "no-template-curly-in-string": "error", // Force `` if have ${} in string
+                "no-unmodified-loop-condition": "error", // Disallow unmodified loop conditions; while (node) { node = node.parent }
+                "no-unused-private-class-members": "error", // Self explanatory
+                "require-atomic-updates": "error" // Prevent promisses bug
+            }
+        },
+        {
+            "files": ["*.html"],
+            "extends": ["plugin:@angular-eslint/template/recommended"],
+            "rules": {}
+        }
+    ]
+}

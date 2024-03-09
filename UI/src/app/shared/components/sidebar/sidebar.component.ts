@@ -1,34 +1,35 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ThemeService } from '../../services/theme.service';
-import { AuthenticationHelper } from '../../helpers/authentication.helper';
 import { Router } from '@angular/router';
+import { AuthenticationHelper } from '../../helpers/authentication.helper';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
-	selector: 'sidebar',
-	templateUrl: './sidebar.component.html',
-	styleUrls: ['./sidebar.component.scss'],
+    selector: 'sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-	@ViewChild('sidenav') private sidenav?: MatSidenav;
+    @ViewChild('sidenav') private sidenav?: MatSidenav;
 
-	constructor(public readonly theme: ThemeService, private readonly router: Router) {	}
+    constructor(public readonly theme: ThemeService, private readonly router: Router) {    }
 
-	public get activeStyle(): string {
-		return this.theme.isDark ? 'active-item-dark' : 'active-item';
-	}
+    public get activeStyle(): string {
+        return this.theme.isDark ? 'active-item-dark' : 'active-item';
+    }
 
-	public toggle(): void {
-		if (!this.sidenav) {
-			throw new Error("Property 'sidenav' undefined!");
-		}
+    public toggle(): void {
+        if (!this.sidenav) {
+            throw new Error('Property "sidenav" undefined!');
+        }
 
-		this.sidenav.toggle();
-	}
+        this.sidenav.toggle();
+    }
 
-	public logOut() {
-		this.sidenav?.close();
-		AuthenticationHelper.deleteToken();
-		this.router.navigate(['login']);
-	}
+    public logOut() {
+        AuthenticationHelper.deleteToken();
+
+        this.sidenav?.close();
+        this.router.navigate(['login']);
+    }
 }

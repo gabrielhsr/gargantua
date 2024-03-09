@@ -1,6 +1,6 @@
 ﻿using Financial.Domain.DTO;
-using Financial.Domain.Models;
 using Financial.Domain.Interfaces.Services.Base;
+using Financial.Domain.Models;
 
 namespace Financial.Domain.Interfaces.Services
 {
@@ -8,5 +8,6 @@ namespace Financial.Domain.Interfaces.Services
     {
         Task<AuthRes> LoginAsync(Login user);
         bool ValidateToken(string token);
+        Task RegisterAsync(Login user);
     }
 }

@@ -1,62 +1,62 @@
 <div class="config-container" [loading]="!categories && !paymentMethods">
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title>{{ 'Pages.Config.Categories' | translate }}</mat-card-title>
-		</mat-card-header>
-		<mat-card-content>
-			<mat-list role="list">
-				<ng-container *ngFor="let category of categories">
-					<mat-list-item role="listitem">
-						<config-input
-							#categoryInputs
-							type="category"
-							[item]="category"
-							[list]="categories"
-						>
-						</config-input>
-					</mat-list-item>
-				</ng-container>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ 'Pages.Config.Categories' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list role="list">
+                <ng-container *ngFor="let category of categories">
+                    <mat-list-item role="listitem">
+                        <config-input
+                            #categoryInputs
+                            type="category"
+                            [item]="category"
+                            [list]="categories"
+                        >
+                        </config-input>
+                    </mat-list-item>
+                </ng-container>
 
-				<mat-list-item role="listitem">
-					<mat-form-field matRipple class="new-item-input" (click)="addNewItem('category')">
-						<mat-label>{{ 'Pages.Config.AddNewItem' | translate }}</mat-label>
-						<input matInput disabled="true"/>
-						<mat-icon matSuffix>add</mat-icon>
-					</mat-form-field>
-					<div class="fake-hint"></div>
-				</mat-list-item>
-			</mat-list>
-		</mat-card-content>
-	</mat-card>
+                <mat-list-item role="listitem">
+                    <mat-form-field matRipple class="new-item-input" (click)="addNewItem('category')">
+                        <mat-label>{{ 'Pages.Config.AddNewItem' | translate }}</mat-label>
+                        <input matInput disabled="true"/>
+                        <mat-icon matSuffix>add</mat-icon>
+                    </mat-form-field>
+                    <div class="fake-hint"></div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
 
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title>{{ 'Pages.Config.PaymentMethods' | translate }}</mat-card-title>
-		</mat-card-header>
-		<mat-card-content>
-			<mat-list role="list">
-				<ng-container *ngFor="let paymentMethod of paymentMethods">
-					<mat-list-item role="listitem">
-						<config-input
-							#paymentMethodInputs
-							type="paymentMethod"
-							[item]="paymentMethod"
-							[list]="paymentMethods"
-							[enableEdit]="true"
-						>
-						</config-input>
-					</mat-list-item>
-				</ng-container>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ 'Pages.Config.PaymentMethods' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list role="list">
+                <ng-container *ngFor="let paymentMethod of paymentMethods">
+                    <mat-list-item role="listitem">
+                        <config-input
+                            #paymentMethodInputs
+                            type="paymentMethod"
+                            [item]="paymentMethod"
+                            [list]="paymentMethods"
+                            [enableEdit]="true"
+                        >
+                        </config-input>
+                    </mat-list-item>
+                </ng-container>
 
-				<mat-list-item role="listitem">
-					<mat-form-field matRipple class="new-item-input" (click)="addNewItem('paymentMethod')">
-						<mat-label>{{ 'Pages.Config.AddNewItem' | translate }}</mat-label>
-						<input matInput disabled="true"/>
-						<mat-icon matSuffix>add</mat-icon>
-					</mat-form-field>
-					<div class="fake-hint"></div>
-				</mat-list-item>
-			</mat-list>
-		</mat-card-content>
-	</mat-card>
+                <mat-list-item role="listitem">
+                    <mat-form-field matRipple class="new-item-input" (click)="addNewItem('paymentMethod')">
+                        <mat-label>{{ 'Pages.Config.AddNewItem' | translate }}</mat-label>
+                        <input matInput disabled="true"/>
+                        <mat-icon matSuffix>add</mat-icon>
+                    </mat-form-field>
+                    <div class="fake-hint"></div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
 </div>

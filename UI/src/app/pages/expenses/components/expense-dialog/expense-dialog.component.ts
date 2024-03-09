@@ -1,180 +1,80 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { forkJoin, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
-import { Category } from 'src/app/entities/category/category.model';
-import { Expense } from 'src/app/entities/expense/expense.model';
-import { PaymentMethod } from 'src/app/entities/paymentMethod/paymentMethod.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
+import { Category } from 'src/app/domain/category/category.model';
+import { Expense } from 'src/app/domain/expense/expense.model';
+import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
+import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { FormHelper } from 'src/app/shared/helpers/form.helper';
-import { GuidHelper } from 'src/app/shared/helpers/guid.helper';
-import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { ExpenseService } from '../../services/expense.service';
 
 @Component({
-	selector: 'expense-dialog',
-	templateUrl: './expense-dialog.component.html',
-	styleUrls: ['./expense-dialog.component.scss'],
+    selector: 'expense-dialog',
+    templateUrl: './expense-dialog.component.html',
+    styleUrls: ['./expense-dialog.component.scss']
 
 })
 export class ExpenseDialogComponent implements OnInit, OnDestroy {
-	public categories?: Category[];
-	public paymentMethods?: PaymentMethod[];
+    @Input() public expense?: Expense;
 
-	public expenseForm?: FormGroup;
-	public loading: boolean = true;
-	public editMonth: boolean = false;
-	public showRecurrentCheck: boolean = true;
+    public expenseForm: FormGroup = new FormGroup({});
+    
+    public categoryCommand = this.categoryEndpoint.getCommand();
+    public paymentMethodCommand = this.paymentMethodEndpoint.getCommand();
 
-	public filteredCategories?: Observable<Category[] | undefined>;
-	public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
+    public filteredCategories?: Observable<Category[] | undefined>;
+    public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
+    
+    public showRecurrentCheck = false;
 
-	private destroy = new Subject();
+    private readonly destroy$ = new Subject<void>();
 
-	constructor(
-		@Inject(MAT_DIALOG_DATA) public data: { expense?: Expense, editMonth?: boolean },
-		private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
-		private readonly expenseService: ExpenseService,
-		private readonly feedback: FeedbackService
-	) {
-		forkJoin({
-			categories: this.expenseService.getCategories(),
-			paymentMethods: this.expenseService.getPaymentMethods(),
-		})
-			.pipe(takeUntil(this.destroy))
-			.subscribe(({ categories, paymentMethods }) => {
-				if (categories.isSuccess && paymentMethods.isSuccess) {
-					this.categories = categories.value;
-					this.paymentMethods = paymentMethods.value;
+    constructor(
+        private readonly categoryEndpoint: CategoryEndpoint,
+        private readonly paymentMethodEndpoint: PaymentMethodEndpoint
+    ) {}
 
-					this.loading = false;
-				}
-			});
-	}
+    public get isLoading() {
+        return this.categoryCommand.isLoading || this.paymentMethodCommand.isLoading;
+    }
 
-	public ngOnInit(): void {
-		this.createForm(this.data.expense ?? new Expense());
-		this.editMonth = this.data.editMonth ?? false;
+    public ngOnInit(): void {
+        this.createForm();
 
-		if ((this.editMonth || this.expenseForm?.get('recurrentId')?.value)) {
-			this.showRecurrentCheck = false;
+        this.categoryCommand.execute();
+        this.paymentMethodCommand.execute();
+    }
 
-			this.expenseForm?.patchValue({ dueDate: this.expenseForm.get('displayDueDate')?.value });
-			this.expenseForm?.patchValue({ purchaseDate: this.expenseForm.get('displayPurchaseDate')?.value });
-		}
+    public ngOnDestroy(): void {
+        this.categoryCommand.destroy();
+        this.paymentMethodCommand.destroy();
+        
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
 
-		this.filteredCategories = this.expenseForm?.get('category')?.valueChanges.pipe(startWith(''), map(val => this.filterCategories(val)));
-		this.filteredPaymentMethods = this.expenseForm?.get('paymentMethod')?.valueChanges.pipe(startWith(''), map(val => this.filterPaymentMethods(val)));
-	}
+    public submitForm(): void {
+        console.log(this.expenseForm.value);
+    }
 
-	public ngOnDestroy(): void {
-		this.destroy.next(null);
-        this.destroy.complete();
-	}
+    public showErrorMessage(input: string) {
+        return FormHelper.showErrorMessage(input, this.expenseForm);
+    }
 
-	public submitForm(): void {
-		this.loading = true;
+    public displayFn(category: Category | PaymentMethod) {
+        return category?.name ?? '';
+    }
 
-		if (this.editMonth) {
-			const recurrentId = this.expenseForm?.get('recurrentId')!;
-			const periodicInput = this.expenseForm?.get('periodic')!;
-			const id = this.expenseForm?.get('id')!;
+    public clearInput(controlName: string[]) {
+        controlName.forEach(((name) => this.expenseForm.controls[name].patchValue(null)));
+    }
 
-			periodicInput.patchValue(false);
-			recurrentId.patchValue(id.value);
-			id.patchValue(GuidHelper.default);
-		}
-
-		const formValue = this.expenseForm?.value as Expense;
-
-		if (typeof formValue.category === "string") {
-			formValue.category = { name: formValue.category, id: GuidHelper.default }
-		}
-
-		if (typeof formValue.paymentMethod === "string") {
-			formValue.paymentMethod = { name: formValue.paymentMethod, id: GuidHelper.default }
-		}
-
-		if (formValue.periodic) {
-			formValue.installments = 1;
-		} else {
-			formValue.monthInterval = 1;
-		}
-
-		formValue.dueDate ??= formValue.purchaseDate;
-
-		this.expenseService.saveExpense(formValue)
-			.pipe(takeUntil(this.destroy))
-			.subscribe((response) => {
-				if (response.isSuccess) {
-					this.feedback.successToast("Feedback.SaveSuccess");
-					this.dialogRef.close();
-				}
-
-				this.loading = false;
-			});
-	}
-
-	public showErrorMessage(input: string) {
-		if (this.expenseForm) {
-			return FormHelper.showErrorMessage(input, this.expenseForm);
-		}
-
-		throw 'Form not initialized!';
-	}
-
-	public displayFn(category: Category | PaymentMethod) {
-		return category?.name ?? '';
-	}
-
-	public selectedPaymentMethod($event: MatAutocompleteSelectedEvent) {
-		const { dueDate } = $event.option.value as PaymentMethod;
-
-		const today = new Date();
-		const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-
-		if (dueDate) {
-			const day = dueDate >= lastDay ? lastDay : dueDate;
-			this.expenseForm?.patchValue({ dueDate: new Date(today.getFullYear(), today.getMonth(), day) });
-		} else {
-			this.expenseForm?.patchValue({ dueDate: null });
-		}
-	}
-
-	private filterCategories(val: string) {
-		if (typeof val !== "string") return this.categories;
-
-		if (this.categories?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
-			this.expenseForm?.get('category')?.setErrors({ 'alreadyExist': true });
-		}
-
-		return this.categories?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
-	}
-
-	private filterPaymentMethods(val: string) {
-		if (typeof val !== "string") return this.paymentMethods;
-
-		if (this.paymentMethods?.find(x => x.name?.toLowerCase() === val.toLowerCase().trim())) {
-			this.expenseForm?.get('paymentMethod')?.setErrors({ 'alreadyExist': true });
-		}
-
-		return this.paymentMethods?.filter(option => option.name?.toLowerCase().includes(val.toLowerCase()));
-	}
-
-	private createForm(expense: Expense): void {
-		const formsControl = FormHelper.build(expense, {
-			allValidators: {
-				validators: [Validators.required],
-				exclude: [
-					'dueDate',
-					'displayPurchaseDate',
-					'displayDueDate',
-					'displayDescription',
-					'recurrentId',
-				],
-			},
-		});
-
-		this.expenseForm = new FormGroup(formsControl);
-	}
+    private createForm(): void {
+        this.expenseForm.addControl('description', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('amount', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('category', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('paymentMethod', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('dueDate', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('purchaseDate', new FormControl(null, [Validators.required]));
+    }
 }

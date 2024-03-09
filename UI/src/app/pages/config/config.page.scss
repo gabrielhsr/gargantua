@@ -1,40 +1,40 @@
 @import 'node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 mat-card {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
 mat-list-item {
-	height: 75px !important;
+    height: 75px !important;
 }
 
 mat-card-content {
-	padding: 0 !important;
-	padding-bottom: 10px !important;
+    padding: 0 !important;
+    padding-bottom: 10px !important;
 }
 
 .config-container {
-	display: flex;
-	gap: 16px;
-	flex-wrap: wrap;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .new-item-input {
-	width: 100%;
+    width: 100%;
 }
 
 .new-item-input:hover {
-	cursor: pointer;
+    cursor: pointer;
 
-	input:hover, mat-label:hover {
-		cursor: pointer;
-	}
+    input:hover, mat-label:hover {
+        cursor: pointer;
+    }
 }
 
 .fake-hint {
-	height: 22px;
+    height: 22px;
 }
 
 ::ng-deep .new-item-input .mat-mdc-form-field-subscript-wrapper {
-	display: none !important;
+    display: none !important;
 }

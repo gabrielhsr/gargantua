@@ -5,31 +5,31 @@ const TOKEN_KEY = 'auth-token';
 const jwtService = new JwtHelperService();
 
 export class AuthenticationHelper {
-	public static saveToken(token: string) {
-		localStorage.setItem(TOKEN_KEY, token);
-	}
+    public static saveToken(token: string) {
+        localStorage.setItem(TOKEN_KEY, token);
+    }
 
-	public static deleteToken() {
-		localStorage.removeItem(TOKEN_KEY);
-	}
+    public static deleteToken() {
+        localStorage.removeItem(TOKEN_KEY);
+    }
 
-	public static getToken() {
-		const storedToken = localStorage.getItem(TOKEN_KEY);
+    public static getToken() {
+        const storedToken = localStorage.getItem(TOKEN_KEY);
 
-		if (storedToken && !jwtService.isTokenExpired(storedToken)) {
-			return storedToken;
-		}
+        if (storedToken && !jwtService.isTokenExpired(storedToken)) {
+            return storedToken;
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public static get JWT_CONFIG(): JwtModuleOptions {
-		return {
-			config: {
-				tokenGetter: this.getToken,
-				allowedDomains: [environment.allowedDomains],
-				skipWhenExpired: true
-			},
-		};
-	}
+    public static get JWT_CONFIG(): JwtModuleOptions {
+        return {
+            config: {
+                tokenGetter: this.getToken,
+                allowedDomains: [environment.allowedDomains],
+                skipWhenExpired: true
+            }
+        };
+    }
 }

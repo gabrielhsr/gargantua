@@ -1,9 +1,7 @@
-﻿using Financial.Core.Helpers;
-using Financial.Domain.Data;
-using Financial.Domain.Interfaces.Repositories;
+﻿using Financial.Core.Common.Extensions;
+using Financial.Domain.Interfaces.Repositories.Base;
 using Financial.Domain.Interfaces.Services.Base;
-using Financial.Domain.Models;
-using System.Security.Claims;
+using Financial.Domain.Models.Base;
 
 namespace Financial.Core.Services.Base
 {
@@ -28,9 +26,9 @@ namespace Financial.Core.Services.Base
             httpContextAccessor = dependencyAggregate.HttpContextAccessor;
         }
 
-        public virtual async Task RemoveAsync(Guid id)
+        public virtual async Task<T> RemoveAsync(Guid id)
         {
-            await repository.DeleteAsync(id);
+            return await repository.DeleteAsync(id);
         }
 
         public virtual IQueryable<T> GetAll()
@@ -45,7 +43,7 @@ namespace Financial.Core.Services.Base
 
         public virtual async Task<T> SaveAsync(Guid id, T entity)
         {
-            if (IdHelper.IsNullOrDefault(id))
+            if (id.IsNullOrDefault())
             {
                 await repository.AddAsync(entity);
             }
