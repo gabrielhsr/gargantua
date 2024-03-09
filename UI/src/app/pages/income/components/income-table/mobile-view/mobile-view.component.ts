@@ -20,6 +20,6 @@ export class IncomeMobileViewComponent {
     public openedPanels: string[] = [];
 
     public forgetPanel(id: string) {
-        return this.openedPanels = this.openedPanels.filter(x => x !== id);
+        return this.openedPanels = this.openedPanels.filter((x) => x !== id);
     }
 }

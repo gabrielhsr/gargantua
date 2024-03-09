@@ -1,4 +1,4 @@
-import { BaseEntity } from "../base.model";
+import { BaseEntity } from '../base.model';
 
 export class Movement extends BaseEntity {
     public description: string = '';

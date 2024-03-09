@@ -20,15 +20,16 @@ export class SidebarComponent {
 
     public toggle(): void {
         if (!this.sidenav) {
-            throw new Error("Property 'sidenav' undefined!");
+            throw new Error('Property "sidenav" undefined!');
         }
 
         this.sidenav.toggle();
     }
 
     public logOut() {
-        this.sidenav?.close();
         AuthenticationHelper.deleteToken();
+
+        this.sidenav?.close();
         this.router.navigate(['login']);
     }
 }

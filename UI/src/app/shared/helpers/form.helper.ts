@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup } from '@angular/forms';
 
 const messageErrors: string[] = [];
 
@@ -6,6 +6,7 @@ export class FormHelper {
     public static showErrorMessage(input: string, form: FormGroup): string {
         if (!input) {
             console.error('Field empty!');
+            
             return '';
         }
 
@@ -22,6 +23,7 @@ export class FormHelper {
         }
 
         console.error(`Field '${input} does not exist in the form.`);
+
         return '';
     }
 }

@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
-import { of } from "rxjs";
-import { environment } from "src/environments/environment";
-import { RequestCommand } from "../shared/utils/request-command";
-import { BaseEntity, Guid } from "./base.model";
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { RequestCommand } from '../shared/utils/request-command';
+import { BaseEntity, Guid } from './base.model';
 
 export abstract class BaseEndpoint<T extends BaseEntity> {
     private apiUrl = environment.baseApi;

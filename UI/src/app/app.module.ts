@@ -28,13 +28,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-    align: "right",
+    align: 'right',
     allowNegative: true,
-    decimal: ",",
+    decimal: ',',
     precision: 2,
-    prefix: "R$ ",
-    suffix: "",
-    thousands: "."
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.'
 };
 
 @NgModule({

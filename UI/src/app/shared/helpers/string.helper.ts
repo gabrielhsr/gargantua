@@ -1,5 +1,5 @@
 export function toTitleCase(str: string) {
-    return str.replace(/\b\w/g, s => s.toUpperCase());
+    return str.replace(/\b\w/g, (s) => s.toUpperCase());
 }
 
 export function capitalize(str: string) {

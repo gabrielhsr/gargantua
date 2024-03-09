@@ -10,7 +10,7 @@ import { Months, Period } from 'src/app/domain/period/period.model';
     styleUrls: ['./period-select.component.scss']
 })
 export class PeriodSelectComponent implements OnInit, OnDestroy {
-    @Input() public appearance: MatFormFieldAppearance = "outline";
+    @Input() public appearance: MatFormFieldAppearance = 'outline';
     @Input() public fillCurrentDate: boolean = false;
 
     @Output() public periodChange = new EventEmitter<Period>();
@@ -22,7 +22,7 @@ export class PeriodSelectComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
 
     protected get months() {
-        return Object.keys(Months).filter(month => isNaN(Number(month)));
+        return Object.keys(Months).filter((month) => isNaN(Number(month)));
     }
 
     public ngOnInit() {
@@ -49,7 +49,7 @@ export class PeriodSelectComponent implements OnInit, OnDestroy {
     }
 
     private createForm() {
-        this.periodForm.addControl("month", new FormControl(null, Validators.required));
-        this.periodForm.addControl("year", new FormControl(null, Validators.required));
+        this.periodForm.addControl('month', new FormControl(null, Validators.required));
+        this.periodForm.addControl('year', new FormControl(null, Validators.required));
     }
 }

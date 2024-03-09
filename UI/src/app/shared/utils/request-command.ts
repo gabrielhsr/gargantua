@@ -1,5 +1,5 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from "rxjs";
+import { HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
 
 export interface CommandResponse<T> {
     isSuccess: boolean;
@@ -18,7 +18,7 @@ export class RequestCommand<T> {
     constructor(private readonly request: () => Observable<T>) {
         this.response$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(value => this.response = value);
+            .subscribe((value) => this.response = value);
     }
 
     public get isLoading() {
@@ -51,7 +51,7 @@ export class RequestCommand<T> {
                     return of(response);
                 })
             )
-            .subscribe(response => this.handleResponse(response));
+            .subscribe((response) => this.handleResponse(response));
     }
 
     public destroy() {

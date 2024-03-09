@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.registerCommand.response$
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => this.feedback.toastResponse(res, "Login.SuccessRegister", "Login.Unauthorized"));
+            .subscribe((res) => this.feedback.toastResponse(res, 'Login.SuccessRegister', 'Login.Unauthorized'));
 
         this.validateTokenCommand.execute();
     }
@@ -76,7 +76,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     private createForm(): void {
-        this.loginForm.addControl("email", new FormControl('', [Validators.required, Validators.email]));
-        this.loginForm.addControl("password", new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
+        this.loginForm.addControl('email', new FormControl('', [Validators.required, Validators.email]));
+        this.loginForm.addControl('password', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
+    }
+
+    private teste() {
+        const x = 1;
+        
+        return x;
     }
 }

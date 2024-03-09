@@ -13,6 +13,6 @@ export class TypeSafeMatCellDef<T> extends MatCellDef {
     @Input() public matCellDefDataSouce?: T[] | Observable<T[]> | MatTableDataSource<T>;
 
     public static ngTemplateContextGuard<T>(dir: TypeSafeMatCellDef<T>, ctx: unknown): ctx is { $implicit: T; index: number } {
-        return true
+        return true;
     }
 }

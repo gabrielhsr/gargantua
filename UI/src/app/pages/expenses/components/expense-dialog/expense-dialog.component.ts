@@ -66,7 +66,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     }
 
     public clearInput(controlName: string[]) {
-        controlName.forEach((name => this.expenseForm.controls[name].patchValue(null)));
+        controlName.forEach(((name) => this.expenseForm.controls[name].patchValue(null)));
     }
 
     private createForm(): void {

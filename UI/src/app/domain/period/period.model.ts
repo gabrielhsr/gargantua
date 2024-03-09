@@ -4,15 +4,15 @@ export class Period {
 }
 
 export enum Months {
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro'
+    Janeiro,
+    Fevereiro,
+    Março,
+    Abril,
+    Junho,
+    Julho,
+    Agosto,
+    Setembro,
+    Outubro,
+    Novembro,
+    Dezembro
 }
