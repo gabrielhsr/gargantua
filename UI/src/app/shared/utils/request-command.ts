@@ -36,7 +36,7 @@ export class RequestCommand<T> {
                         isSuccess: true,
                         value: value
                     };
-    
+
                     return response;
                 }),
                 catchError((res: HttpErrorResponse) => {
@@ -47,7 +47,7 @@ export class RequestCommand<T> {
                         error: res.message,
                         value: {} as T
                     };
-    
+
                     return of(response);
                 })
             )

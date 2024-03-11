@@ -44,12 +44,35 @@
                 "@stylistic/js/array-element-newline": ["error", "consistent"], // Enforces line breaks between array elements.
                 "@stylistic/js/arrow-parens": ["error", "always"], // (a) => a.foo; ✅ | a => a.foo; ❌
                 "@stylistic/js/arrow-spacing": "error", // (a) => {}; ✅ | (a)=>{}; ❌
-                "@stylistic/js/comma-style": ["error", "last"], // consistent comma style in array literals, object literals, and variable declarations
+                "@stylistic/js/comma-style": ["error", "last"], // Consistent comma style in array literals, object literals, and variable declarations
                 "@stylistic/js/computed-property-spacing": ["error", "never"], // // obj[foo]; ✅ | obj[foo ] ❌
-                "@stylistic/js/dot-location": ["error", "property"], // enforce newline consistency in member expressions
+                "@stylistic/js/dot-location": ["error", "property"], // Enforce newline consistency in member expressions
                 "@stylistic/js/function-call-argument-newline": ["error", "consistent"], // enforces line breaks between arguments of a function call.
-
-                //https://eslint.style/rules/js/function-paren-newline
+                "@stylistic/js/implicit-arrow-linebreak": ["error", "beside"], // Arrow function implicit return position
+                "@stylistic/js/multiline-ternary": ["error", "always-multiline"], // Ternary style
+                "@stylistic/js/new-parens": "error", // Force () on class construction. new Date(); ✅ | new Date; ❌
+                "@stylistic/js/newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }], // Chained method on each line
+                "@stylistic/js/no-confusing-arrow": "error", // Prevent comparison and arrow function confusion
+                "@stylistic/js/no-floating-decimal": "error", // 0.5 ✅ | .5 ❌
+                "@stylistic/js/no-mixed-operators": "error", // (a && b) || c || d ✅ | a && b || c || d ❌
+                "@stylistic/js/no-mixed-spaces-and-tabs": "error", // Self explanatory.
+                "@stylistic/js/no-multi-spaces": "error", // Prevent multiple spaces instead of one
+                "@stylistic/js/no-multiple-empty-lines": "error", // Self explanatory.
+                "@stylistic/js/no-trailing-spaces": ["error", { "ignoreComments": true }], // Self explanatory.
+                "@stylistic/js/no-whitespace-before-property": "error", // foo.bar ✅ | foo. bar ❌
+                "@stylistic/js/nonblock-statement-body-position": ["error", "beside"], // Enforce a consistent location for single-line statements.
+                "@stylistic/js/object-curly-newline": ["error", { "consistent": true }], // Consistent format inside objects
+                "@stylistic/js/object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }], // Consistent format inside objects
+                "@stylistic/js/operator-linebreak": ["error", "after", { "overrides": { "?": "before", ":": "before" } }], // Enforces a consistent linebreak style for operators.
+                "@stylistic/js/padded-blocks": ["error", "never"], // Enforces consistent (not) empty line padding within blocks.
+                "@stylistic/js/rest-spread-spacing": "error", // fn(...args); ✅ | fn(... args); ❌
+                "@stylistic/js/semi-spacing": "error", // Consistent spacing betweens semicolons
+                "@stylistic/js/semi-style": ["error", "last"], // Semicolon always on the statement end
+                "@stylistic/js/space-in-parens": ["error", "never"], // fn(arg); ✅ | fn( arg ); ❌
+                "@stylistic/js/space-unary-ops": "error", // Ensuring there are spaces around unary operator
+                "@stylistic/js/switch-colon-spacing": "error", // Consistent spacing around case/default clauses
+                "@stylistic/js/template-curly-spacing": "error", // Consistency around the spacing inside of template literals
+                "@stylistic/js/wrap-regex": "error", // (/foo/).test("bar"); ✅ | /foo/.test("bar"); ❌
 
                 "@stylistic/ts/block-spacing": "error", // Consistent spacing inside an open block. Ex: function foo() { return true; } ✅ | function foo() {return true;} ❌
                 "@stylistic/ts/brace-style": [ "error", "1tbs", { "allowSingleLine": true }], // if else style. 

@@ -18,13 +18,13 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     @Input() public expense?: Expense;
 
     public expenseForm: FormGroup = new FormGroup({});
-    
+
     public categoryCommand = this.categoryEndpoint.getCommand();
     public paymentMethodCommand = this.paymentMethodEndpoint.getCommand();
 
     public filteredCategories?: Observable<Category[] | undefined>;
     public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
-    
+
     public showRecurrentCheck = false;
 
     private readonly destroy$ = new Subject<void>();
@@ -48,7 +48,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     public ngOnDestroy(): void {
         this.categoryCommand.destroy();
         this.paymentMethodCommand.destroy();
-        
+
         this.destroy$.next();
         this.destroy$.complete();
     }

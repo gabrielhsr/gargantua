@@ -62,8 +62,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
             provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
             useValue: { duration: 2500 }
         },
-        { 
-            provide: CURRENCY_MASK_CONFIG, 
+        {
+            provide: CURRENCY_MASK_CONFIG,
             useValue: CustomCurrencyMaskConfig
         }
     ],

@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.validateTokenCommand.execute();
     }
-    
+
     public ngOnDestroy(): void {
         this.validateTokenCommand.destroy();
         this.signInCommand.destroy();
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     private teste() {
         const x = 1;
-        
+
         return x;
     }
 }

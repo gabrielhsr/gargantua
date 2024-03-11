@@ -12,7 +12,7 @@ import { ThemeService } from '../../services/theme.service';
 export class SidebarComponent {
     @ViewChild('sidenav') private sidenav?: MatSidenav;
 
-    constructor(public readonly theme: ThemeService, private readonly router: Router) {    }
+    constructor(public readonly theme: ThemeService, private readonly router: Router) {}
 
     public get activeStyle(): string {
         return this.theme.isDark ? 'active-item-dark' : 'active-item';

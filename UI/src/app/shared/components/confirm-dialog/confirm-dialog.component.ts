@@ -7,5 +7,5 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
-    constructor(@Inject(MAT_DIALOG_DATA) public itemName: string) {    }
+    constructor(@Inject(MAT_DIALOG_DATA) public itemName: string) {}
 }

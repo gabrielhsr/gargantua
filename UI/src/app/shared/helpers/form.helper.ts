@@ -6,7 +6,7 @@ export class FormHelper {
     public static showErrorMessage(input: string, form: FormGroup): string {
         if (!input) {
             console.error('Field empty!');
-            
+
             return '';
         }
 

@@ -21,7 +21,7 @@ export class IncomeDesktopViewComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (this.sort && this.periodIncome) {
             this.periodIncome.sort = this.sort;
-            
+
             return;
         }
 
