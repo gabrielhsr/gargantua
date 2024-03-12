@@ -21,11 +21,11 @@ export class RequestCommand<T> {
             .subscribe((value) => this.response = value);
     }
 
-    public get isLoading() {
+    public get isLoading(): boolean {
         return this.isLoading$.value;
     }
 
-    public execute() {
+    public execute(): void {
         this.isLoading$.next(true);
 
         this.request()
@@ -54,12 +54,12 @@ export class RequestCommand<T> {
             .subscribe((response) => this.handleResponse(response));
     }
 
-    public destroy() {
+    public destroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
-    private handleResponse(response: CommandResponse<T>) {
+    private handleResponse(response: CommandResponse<T>): void {
         this.isLoading$.next(false);
         this.response$.next(response);
     }

@@ -15,7 +15,7 @@ export class LoadingDirective implements OnInit, OnChanges {
 
     constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         const spinner: Element = this.renderer.createElement('div');
 
         this.guid = 'loading-container-' + Guid.new();
@@ -30,13 +30,13 @@ export class LoadingDirective implements OnInit, OnChanges {
         this.toggleDisplay();
     }
 
-    public ngOnChanges(simpleChanges: SimpleChanges) {
+    public ngOnChanges(simpleChanges: SimpleChanges): void {
         const isLoading = simpleChanges['loading'];
 
         if (isLoading) this.toggleDisplay();
     }
 
-    public toggleDisplay() {
+    public toggleDisplay(): void {
         if (this.loading) {
             this.renderer.appendChild(this.element.nativeElement, this.loadingElement);
         } else {

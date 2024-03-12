@@ -31,7 +31,7 @@ export class ThemeService {
         return this.theme === 'light';
     }
 
-    public toggle() {
+    public toggle(): void {
         this.theme = this.theme === 'light' ? 'dark' : 'light';
     }
 }

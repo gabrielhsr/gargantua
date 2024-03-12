@@ -8,11 +8,11 @@ import { CommandResponse } from '../utils/request-command';
 export class RefreshService {
     private subject = new BehaviorSubject<void>(undefined);
 
-    public execute() {
+    public execute(): void {
         this.subject.next();
     }
 
-    public handle<T>(getMethod: Observable<CommandResponse<T>>) {
+    public handle<T>(getMethod: Observable<CommandResponse<T>>): Observable<CommandResponse<T>> {
         return this.subject.pipe(switchMap(() => getMethod));
     }
 }

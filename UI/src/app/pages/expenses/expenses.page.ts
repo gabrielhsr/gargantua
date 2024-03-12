@@ -10,7 +10,7 @@ import { ExpenseService } from './services/expense.service';
 export class ExpensesPage {
     constructor(private readonly expenseService: ExpenseService) {}
 
-    public openAddDialog() {
+    public openAddDialog(): void {
         const newExpense = new Expense();
 
         this.expenseService.openFormDialog(newExpense);

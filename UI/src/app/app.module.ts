@@ -23,7 +23,7 @@ import { AuthenticationHelper } from './shared/helpers/authentication.helper';
 registerLocaleData(localePT);
 registerLocaleData(localeEN);
 
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(http);
 }
 

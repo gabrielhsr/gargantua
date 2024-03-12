@@ -4,7 +4,7 @@ interface Options {
 }
 
 export class TableHelper {
-    public static GenerateColumns(item: object, options: Partial<Options>) {
+    public static GenerateColumns(item: object, options: Partial<Options>): string[] {
         const itemKeys = Object.keys(item);
         const include = options.include ?? [];
 

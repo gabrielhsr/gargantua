@@ -18,7 +18,7 @@ export class IncomeDesktopViewComponent implements AfterViewInit {
 
     @ViewChild(MatSort) public sort?: MatSort;
 
-    public ngAfterViewInit() {
+    public ngAfterViewInit(): void {
         if (this.sort && this.periodIncome) {
             this.periodIncome.sort = this.sort;
 

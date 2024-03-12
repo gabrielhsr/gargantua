@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         private readonly feedback: FeedbackService
     ) {}
 
-    public get isLoading() {
+    public get isLoading(): boolean {
         return this.validateTokenCommand.isLoading || this.signInCommand.isLoading || this.registerCommand.isLoading;
     }
 
@@ -71,18 +71,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    public showErrorMessage(input: string) {
+    public showErrorMessage(input: string): string {
         return FormHelper.showErrorMessage(input, this.loginForm);
     }
 
     private createForm(): void {
         this.loginForm.addControl('email', new FormControl('', [Validators.required, Validators.email]));
         this.loginForm.addControl('password', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
-    }
-
-    private teste() {
-        const x = 1;
-
-        return x;
     }
 }

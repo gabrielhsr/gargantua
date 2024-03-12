@@ -10,7 +10,7 @@ export class AppBase {
     public isDark: boolean;
 
     @HostBinding('class')
-    public get theme() {
+    public get theme(): string {
         return this.isDark ? 'dark-theme' : 'light-theme';
     }
 

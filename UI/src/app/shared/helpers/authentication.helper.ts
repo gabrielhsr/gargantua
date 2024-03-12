@@ -5,15 +5,15 @@ const TOKEN_KEY = 'auth-token';
 const jwtService = new JwtHelperService();
 
 export class AuthenticationHelper {
-    public static saveToken(token: string) {
+    public static saveToken(token: string): void {
         localStorage.setItem(TOKEN_KEY, token);
     }
 
-    public static deleteToken() {
+    public static deleteToken(): void {
         localStorage.removeItem(TOKEN_KEY);
     }
 
-    public static getToken() {
+    public static getToken(): string | null {
         const storedToken = localStorage.getItem(TOKEN_KEY);
 
         if (storedToken && !jwtService.isTokenExpired(storedToken)) {

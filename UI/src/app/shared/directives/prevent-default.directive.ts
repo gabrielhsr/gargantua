@@ -5,7 +5,7 @@ import { Directive, HostListener } from '@angular/core';
 })
 export class PreventDefaultDirective {
     @HostListener('click', ['$event'])
-    private onClick($event: PointerEvent) {
+    private onClick($event: PointerEvent): void {
         $event.stopPropagation();
         $event.preventDefault();
     }

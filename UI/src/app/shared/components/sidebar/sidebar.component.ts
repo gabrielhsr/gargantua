@@ -26,7 +26,7 @@ export class SidebarComponent {
         this.sidenav.toggle();
     }
 
-    public logOut() {
+    public logOut(): void {
         AuthenticationHelper.deleteToken();
 
         this.sidenav?.close();

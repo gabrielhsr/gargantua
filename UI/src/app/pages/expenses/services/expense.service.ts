@@ -13,7 +13,7 @@ export class ExpenseService {
 
     constructor(private readonly dialog: MatDialog) {}
 
-    public openFormDialog(expense?: Expense, editMonth?: boolean) {
+    public openFormDialog(expense?: Expense, editMonth?: boolean): void {
         this.dialog.open(ExpenseDialogComponent, { data: { expense, editMonth }, panelClass: ['responsive-dialog'] });
     }
 }

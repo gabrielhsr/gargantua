@@ -26,7 +26,6 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.0-alpha1",
     "ng2-currency-mask": "^13.0.3",
-    "object-resolve-path": "^1.1.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.13.0"

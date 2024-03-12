@@ -34,7 +34,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         private readonly paymentMethodEndpoint: PaymentMethodEndpoint
     ) {}
 
-    public get isLoading() {
+    public get isLoading(): boolean {
         return this.categoryCommand.isLoading || this.paymentMethodCommand.isLoading;
     }
 
@@ -57,15 +57,15 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         console.log(this.expenseForm.value);
     }
 
-    public showErrorMessage(input: string) {
+    public showErrorMessage(input: string): string {
         return FormHelper.showErrorMessage(input, this.expenseForm);
     }
 
-    public displayFn(category: Category | PaymentMethod) {
+    public displayFn(category: Category | PaymentMethod): string {
         return category?.name ?? '';
     }
 
-    public clearInput(controlName: string[]) {
+    public clearInput(controlName: string[]): void {
         controlName.forEach(((name) => this.expenseForm.controls[name].patchValue(null)));
     }
 

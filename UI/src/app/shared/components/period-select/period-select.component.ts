@@ -21,11 +21,11 @@ export class PeriodSelectComponent implements OnInit, OnDestroy {
 
     private readonly destroy$ = new Subject<void>();
 
-    protected get months() {
+    protected get months(): string[] {
         return Object.keys(Months).filter((month) => isNaN(Number(month)));
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.createForm();
 
         if (this.fillCurrentDate) {
@@ -42,13 +42,13 @@ export class PeriodSelectComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    protected emitEvent() {
+    protected emitEvent(): void {
         const formValue = this.periodForm.value as Period;
 
         this.periodChange.emit(formValue);
     }
 
-    private createForm() {
+    private createForm(): void {
         this.periodForm.addControl('month', new FormControl(null, Validators.required));
         this.periodForm.addControl('year', new FormControl(null, Validators.required));
     }
