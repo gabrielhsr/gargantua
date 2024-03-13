@@ -5,13 +5,13 @@ import { Guid } from 'src/app/domain/base.model';
     selector: '[loading]'
 })
 export class LoadingDirective implements OnInit, OnChanges {
+    @Input() public loading: boolean = false;
+
     @HostBinding('style.position')
     private hostPosition: string = 'relative';
     private guid?: string;
 
     private loadingElement: Element = this.renderer.createElement('div');
-
-    @Input() public loading: boolean = false;
 
     constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 

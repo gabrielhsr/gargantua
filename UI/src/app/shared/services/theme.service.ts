@@ -9,6 +9,14 @@ type Theme = 'light' | 'dark';
     providedIn: 'root'
 })
 export class ThemeService {
+    public get isDark(): boolean {
+        return this.theme === 'dark';
+    }
+
+    public get isLight(): boolean {
+        return this.theme === 'light';
+    }
+
     private get theme(): Theme {
         const stored = localStorage.getItem(LOCALSTORAGE_THEME_KEY);
 
@@ -21,14 +29,6 @@ export class ThemeService {
 
     private set theme(value: Theme) {
         localStorage.setItem(LOCALSTORAGE_THEME_KEY, value);
-    }
-
-    public get isDark(): boolean {
-        return this.theme === 'dark';
-    }
-
-    public get isLight(): boolean {
-        return this.theme === 'light';
     }
 
     public toggle(): void {

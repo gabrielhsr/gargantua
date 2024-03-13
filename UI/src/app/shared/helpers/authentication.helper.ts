@@ -5,6 +5,16 @@ const TOKEN_KEY = 'auth-token';
 const jwtService = new JwtHelperService();
 
 export class AuthenticationHelper {
+    public static get JWT_CONFIG(): JwtModuleOptions {
+        return {
+            config: {
+                tokenGetter: this.getToken,
+                allowedDomains: [environment.allowedDomains],
+                skipWhenExpired: true
+            }
+        };
+    }
+
     public static saveToken(token: string): void {
         localStorage.setItem(TOKEN_KEY, token);
     }
@@ -21,15 +31,5 @@ export class AuthenticationHelper {
         }
 
         return null;
-    }
-
-    public static get JWT_CONFIG(): JwtModuleOptions {
-        return {
-            config: {
-                tokenGetter: this.getToken,
-                allowedDomains: [environment.allowedDomains],
-                skipWhenExpired: true
-            }
-        };
     }
 }

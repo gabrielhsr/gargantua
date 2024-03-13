@@ -9,12 +9,12 @@ import { ThemeService } from './shared/services/theme.service';
 export class AppBase {
     public isDark: boolean;
 
+    constructor(private readonly themeService: ThemeService) {
+        this.isDark = themeService.isDark;
+    }
+
     @HostBinding('class')
     public get theme(): string {
         return this.isDark ? 'dark-theme' : 'light-theme';
-    }
-
-    constructor(private readonly themeService: ThemeService) {
-        this.isDark = themeService.isDark;
     }
 }

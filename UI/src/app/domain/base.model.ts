@@ -1,7 +1,3 @@
-export abstract class BaseEntity {
-    public id: string = Guid.default;
-}
-
 export class Guid {
     public static default = '00000000-0000-0000-0000-000000000000';
 
@@ -19,4 +15,8 @@ export class Guid {
     public static isNullOrDefault(id: string): boolean {
         return id === this.default || id === null;
     }
+}
+
+export abstract class BaseEntity {
+    public id: string = Guid.default;
 }
