@@ -7,7 +7,12 @@
                 "project": true,
                 "tsconfigRootDir": "__dirname"
             },
-            "plugins": ["@stylistic/js", "@stylistic/ts", "@stylistic/plus", "@angular-eslint"],
+            "plugins": [
+                "@stylistic/js",
+                "@stylistic/ts",
+                "@stylistic/plus",
+                "@angular-eslint"
+            ],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/recommended",
@@ -138,7 +143,6 @@
                 "@stylistic/plus/type-named-tuple-spacing": ["error"], // Expect space before the type declaration in the named tuple.
 
                 "array-callback-return": "error", // Array methods must return values. Ex: map, filter, reduce
-                "camelcase": ["error", { "ignoreImports": true }], // Force camelCase variables
                 "default-param-last": "off", // To use @typescript-eslint version
                 "dot-notation": "off", // To use @typescript-eslint version
                 "no-await-in-loop": "error", // Self explanatory
@@ -158,15 +162,29 @@
                 "no-unused-expressions": "off", // To use @typescript-eslint version
                 "no-useless-constructor": "off", // To use @typescript-eslint version,
                 "require-atomic-updates": "error", // Prevent promisses bug
-                "init-declarations": "off" // To use @typescript-eslint version
-
-                // https://eslint.org/docs/latest/rules/
+                "init-declarations": "off", // To use @typescript-eslint version
+                "camelcase": ["error", { "ignoreImports": true }], // Force camelCase variables
+                "accessor-pairs": "error" // Force getter if have a setter, not the oposite
             }
         },
         {
             "files": ["*.html"],
-            "extends": ["plugin:@angular-eslint/template/recommended"],
-            "rules": {} // https://github.com/angular-eslint/angular-eslint/blob/main/packages/eslint-plugin-template/docs/rules/alt-text.md
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {
+                "@angular-eslint/template/attributes-order": [ // Ensure attribute order
+                    "error", 
+                    { "order": ["STRUCTURAL_DIRECTIVE", "ATTRIBUTE_BINDING", "INPUT_BINDING", "TWO_WAY_BINDING", "OUTPUT_BINDING", "TEMPLATE_REFERENCE"] }
+                ],
+                "@angular-eslint/template/banana-in-box": "error", // Ensures that the two-way data binding syntax is correct
+                "@angular-eslint/template/conditional-complexity": "error", // Default 5 - The conditional complexity should not exceed a rational limit
+                "@angular-eslint/template/no-any": "error", // No "$any"
+                "@angular-eslint/template/no-duplicate-attributes": "error", // Self explanatory
+                "@angular-eslint/template/no-inline-styles": ["error", { "allowNgStyle": true, "allowBindToStyle": true }], // Self explanatory
+                "@angular-eslint/template/no-negated-async": "error", // Self explanatory
+                "@angular-eslint/template/prefer-ngsrc": "error" // ngSrc instead of src
+            } 
         }
     ]
 }

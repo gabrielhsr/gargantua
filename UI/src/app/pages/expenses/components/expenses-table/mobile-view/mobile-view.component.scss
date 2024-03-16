@@ -14,7 +14,7 @@
     }
 
     mat-action-row {
-        padding: 1px 16px 1px 16px;
+        padding: 1px 16px;
     }
 
     .panel-title {
@@ -30,6 +30,12 @@
         justify-content: flex-end;
         flex-grow: 1;
         width: 45%;
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
 
     .panel-content {
@@ -49,12 +55,6 @@
                 align-items: flex-end;
             }
         }
-    }
-
-    .item {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
     }
 
     .sub-title {

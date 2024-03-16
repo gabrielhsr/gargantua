@@ -1,5 +1,5 @@
 <mat-toolbar class="toolbar">
-    <button mat-icon-button (click)="sidebarButton.emit()" *ngIf="routeData?.showMenu">
+    <button *ngIf="routeData?.showMenu" mat-icon-button (click)="sidebarButton.emit()">
         <mat-icon>menu</mat-icon>
     </button>
 

@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{ "Feedback.YesOrNo.Title" | translate }}</h1>
 <div mat-dialog-content>{{ data.message | translate  }}</div>
 <div mat-dialog-actions align="end">
-    <button mat-stroked-button mat-dialog-close [mat-dialog-close]="{ confirm: false }">{{ data.noText ?? "Common.No" | translate }}</button>
-    <button mat-stroked-button mat-dialog-close color="primary" cdkFocusInitial [mat-dialog-close]="{ confirm: true }">{{ data.yesText ?? "Common.Yes" | translate }}</button>
+    <button mat-stroked-button [mat-dialog-close]="{ confirm: false }">{{ data.noText ?? "Common.No" | translate }}</button>
+    <button mat-stroked-button color="primary" cdkFocusInitial [mat-dialog-close]="{ confirm: true }">{{ data.yesText ?? "Common.Yes" | translate }}</button>
 </div>

@@ -14,7 +14,7 @@
 
                 <mat-form-field>
                     <mat-label>{{ 'Login.Password' | translate }}</mat-label>
-                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+                    <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" />
                     <div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
                         <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
                     </div>
