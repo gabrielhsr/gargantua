@@ -44,8 +44,6 @@
                 "@typescript-eslint/default-param-last": "error", // Method default param as last; function f(a: number, b = 0) {}
                 "@typescript-eslint/dot-notation": "error", // foo.bar instead of foo["bar"] when possible
                 "@typescript-eslint/explicit-member-accessibility": ["error", { "overrides": { "constructors": "off" } }], // Force acessibility on everything besides contructor
-                "@typescript-eslint/explicit-function-return-type": "error", // Self explanatory
-                "@typescript-eslint/explicit-module-boundary-types": "error", // Explicit return and argument types on exported functions' and classes'
                 "@typescript-eslint/init-declarations": "error", // Require initialization in variable declarations
                 "@typescript-eslint/member-ordering": "error", // Consistent member declaration order.
                 "@typescript-eslint/method-signature-style": "error", // Enforce using property signature for functions.

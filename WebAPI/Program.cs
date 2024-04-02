@@ -74,7 +74,7 @@ services
             .Count()
             .Expand()
             .SetMaxTop(100)
-            .AddRouteComponents("api", OdataHelper.GetEdmModel());
+            .AddRouteComponents("odata", OdataHelper.GetEdmModel());
     })
     .AddNewtonsoftJson(options =>
     {

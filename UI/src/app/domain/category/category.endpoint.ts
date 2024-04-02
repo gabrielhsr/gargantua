@@ -10,6 +10,6 @@ export class CategoryEndpoint extends BaseEndpoint<Category> {
     public override activator: Category = new Category();
 
     constructor(private readonly client: HttpClient) {
-        super(client, 'api/Category');
+        super(client);
     }
 }

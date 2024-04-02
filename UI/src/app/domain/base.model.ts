@@ -19,4 +19,19 @@ export class Guid {
 
 export abstract class BaseEntity {
     public id: string = Guid.default;
+
+    public get className(): string {
+        const activatorName = this?.constructor?.name;
+
+        if (!activatorName) {
+            throw new Error('Cannot get the BaseEntity type name.');
+        }
+
+        return activatorName;
+    }
+}
+
+export interface OdataResponse<T> {
+    count: boolean;
+    value: T[];
 }

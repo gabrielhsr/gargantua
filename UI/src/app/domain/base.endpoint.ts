@@ -2,53 +2,65 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RequestCommand } from '../shared/utils/request-command';
-import { BaseEntity, Guid } from './base.model';
+import { BaseEntity, Guid, OdataResponse } from './base.model';
 
-export abstract class BaseEndpoint<T extends BaseEntity> {
+export abstract class BaseEndpoint<TEntity extends BaseEntity> {
     private apiUrl = environment.baseApi;
 
-    public abstract activator: T;
+    public abstract activator: TEntity;
 
-    constructor(protected httpClient: HttpClient, public readonly url: string) {}
+    constructor(protected httpClient: HttpClient) {}
 
-    public get(): Observable<T[]> {
-        return this.httpClient.get<T[]>(`${this.apiUrl}\\${this.url}?$count=true&filter=name eq 'Teste'`);
+    public get entityName() {
+        return this.activator.className;
     }
 
-    public getById(id: string): Observable<T> {
-        return this.httpClient.get<T>(`${this.apiUrl}\\${this.url}\\${id}`);
+    public get() {
+        return this.httpClient.get<TEntity[]>(`${this.apiUrl}\\api\\${this.entityName}`);
     }
 
-    public post(object: T): Observable<T> {
-        return this.httpClient.post<T>(`${this.apiUrl}\\${this.url}`, object);
+    public getOdata() {
+        return this.httpClient.get<OdataResponse<TEntity>>(`${this.apiUrl}\\odata\\${this.entityName}`);
     }
 
-    public put(object: T): Observable<T> {
-        return this.httpClient.put<T>(`${this.apiUrl}\\${this.url}\\${object.id}`, object);
+    public getById(id: string): Observable<TEntity> {
+        return this.httpClient.get<TEntity>(`${this.apiUrl}\\${this.entityName}\\api\\${id}`);
     }
 
-    public delete(id: string): Observable<T> {
-        return this.httpClient.delete<T>(`${this.apiUrl}\\${this.url}\\${id}`);
+    public post(object: TEntity): Observable<TEntity> {
+        return this.httpClient.post<TEntity>(`${this.apiUrl}\\api\\${this.entityName}`, object);
     }
 
-    public getCommand(): RequestCommand<T[]> {
+    public put(object: TEntity): Observable<TEntity> {
+        return this.httpClient.put<TEntity>(`${this.apiUrl}\\api\\${this.entityName}\\${object.id}`, object);
+    }
+
+    public delete(id: string): Observable<TEntity> {
+        return this.httpClient.delete<TEntity>(`${this.apiUrl}\\api\\${this.entityName}\\${id}`);
+    }
+
+    public getCommand(): RequestCommand<TEntity[]> {
         return new RequestCommand(() => this.get());
     }
 
-    public getByIdCommand(id: () => string): RequestCommand<T> {
+    public getODataCommand(): RequestCommand<OdataResponse<TEntity>> {
+        return new RequestCommand(() => this.getOdata());
+    }
+
+    public getByIdCommand(id: () => string): RequestCommand<TEntity> {
         const entityId = id();
         const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.getById(entityId);
 
         return new RequestCommand(() => endpoint);
     }
 
-    public saveCommand(entity: () => T): Observable<T> {
+    public saveCommand(entity: () => TEntity): Observable<TEntity> {
         const obj = entity();
 
         return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
     }
 
-    public deleteCommand(id: () => string): RequestCommand<T> {
+    public deleteCommand(id: () => string): RequestCommand<TEntity> {
         const entityId = id();
         const endpoint = Guid.isNullOrDefault(entityId) ? of(this.activator) : this.delete(entityId);
 

@@ -10,6 +10,6 @@ export class PaymentMethodEndpoint extends BaseEndpoint<PaymentMethod> {
     public override activator: PaymentMethod = new PaymentMethod();
 
     constructor(private readonly client: HttpClient) {
-        super(client, 'api/PaymentMethod');
+        super(client);
     }
 }
