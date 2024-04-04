@@ -7,15 +7,28 @@ export interface CommandResponse<T> {
     error?: string;
 }
 
+export class QueryString {
+    private parameters = new Map<string, string>();
+
+    public buildUrl(baseUrl: string) {
+        return baseUrl;
+    }
+
+    public addParam(parameter: string, value: string) {
+        this.parameters.set(parameter, value);
+    }
+}
+
 export class RequestCommand<T> {
     public response$ = new Subject<CommandResponse<T>>();
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
     public response = {} as CommandResponse<T>;
+    public queryString = new QueryString();
 
     private readonly destroy$ = new Subject<void>();
 
-    constructor(private readonly request: () => Observable<T>) {
+    constructor(private readonly request: (command: RequestCommand<T>) => Observable<T>) {
         this.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((value) => this.response = value);
@@ -28,7 +41,7 @@ export class RequestCommand<T> {
     public execute(): void {
         this.isLoading$.next(true);
 
-        this.request()
+        this.request(this)
             .pipe(
                 takeUntil(this.destroy$),
                 map((value) => {
@@ -40,8 +53,6 @@ export class RequestCommand<T> {
                     return response;
                 }),
                 catchError((res: HttpErrorResponse) => {
-                    console.log(res);
-
                     const response: CommandResponse<T> = {
                         isSuccess: false,
                         error: res.message,

@@ -19,8 +19,8 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
     public expenseForm: FormGroup = new FormGroup({});
 
-    public categoryCommand = this.categoryEndpoint.getODataCommand();
-    public paymentMethodCommand = this.paymentMethodEndpoint.getODataCommand();
+    public categoryCommand = this.categoryEndpoint.getOdataCommand();
+    public paymentMethodCommand = this.paymentMethodEndpoint.getOdataCommand();
 
     public filteredCategories?: Observable<Category[] | undefined>;
     public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
@@ -43,8 +43,6 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
-
-        const x = this.categoryCommand.response.value;
     }
 
     public ngOnDestroy(): void {
