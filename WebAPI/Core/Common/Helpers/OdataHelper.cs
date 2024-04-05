@@ -11,6 +11,7 @@ namespace Financial.Core.Common.Helpers
             var builder = new ODataConventionModelBuilder();
 
             builder.EntitySet<Category>(nameof(Category)).EntityType.HasKey(x => x.Id);
+            builder.EntitySet<PaymentMethod>(nameof(PaymentMethod)).EntityType.HasKey(x => x.Id);
 
             return builder.GetEdmModel();
         }

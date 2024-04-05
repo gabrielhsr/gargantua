@@ -47,7 +47,11 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
     }
 
     public getOdataCommand(): RequestCommand<OdataResponse<TEntity>> {
-        return new RequestCommand((command) => this.getOdata(command.queryString));
+        return new RequestCommand((command) => {
+            command.queryString.setParams({ top: 15, count: true });
+
+            return this.getOdata(command.queryString);
+        });
     }
 
     public getByIdCommand(id: () => string): RequestCommand<TEntity> {

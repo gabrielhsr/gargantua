@@ -1,4 +1,5 @@
 using Financial.Core.Common.Helpers;
+using Financial.Core.Middlewares;
 using Financial.Core.Repositories.Base;
 using Financial.Core.Services;
 using Financial.Core.Services.Base;
@@ -28,7 +29,9 @@ services.AddCors(opts =>
 services.AddDbContext<FinancialDbContext>(opts =>
 {
     opts.UseLazyLoadingProxies()
-        .UseSqlServer(connectionString);
+        .UseSqlServer(connectionString)
+        .EnableDetailedErrors()
+        .EnableSensitiveDataLogging();
 });
 
 // HttpContext
@@ -74,6 +77,7 @@ services
             .Filter()
             .Count()
             .Expand()
+            .Select()
             .SetMaxTop(100)
             .AddRouteComponents("odata", OdataHelper.GetEdmModel());
     })
@@ -103,6 +107,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
+
+app.UseMiddleware<ODataResponseMiddleware>();
 
 app.MapControllers();
 

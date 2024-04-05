@@ -25,6 +25,7 @@ export abstract class BaseEntity {
 }
 
 export interface OdataResponse<T> {
-    count?: boolean;
+    count?: number;
+    context: string;
     value: T[];
 }

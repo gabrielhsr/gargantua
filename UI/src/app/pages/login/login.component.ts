@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.validateTokenCommand.response$
             .pipe(takeUntil(this.destroy$), filter(({ isSuccess }) => isSuccess))
             .subscribe((res) => {
-                if (res.value) {
+                if (res.response) {
                     this.router.navigate(['home']);
                 }
             });
@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 this.feedback.toastErrorResponse(res);
 
-                if (res.isSuccess && res.value) {
-                    AuthenticationHelper.saveToken(res.value.token);
+                if (res.isSuccess && res.response) {
+                    AuthenticationHelper.saveToken(res.response.token);
                     this.router.navigate(['home']);
                 }
             });

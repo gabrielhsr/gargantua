@@ -7,7 +7,6 @@ namespace Financial.Data
     {
         public FinancialDbContext(DbContextOptions options) : base(options) { }
 
-        ////public DbSet<Income> Income { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }

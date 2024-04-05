@@ -3,19 +3,65 @@ import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } 
 
 export interface CommandResponse<T> {
     isSuccess: boolean;
-    value: T;
+    response: T;
     error?: string;
+}
+
+export interface OdataOperators {
+    top?: number;
+    count?: boolean;
+    skip?: number;
 }
 
 export class QueryString {
     private parameters = new Map<string, string>();
 
     public buildUrl(baseUrl: string) {
-        return baseUrl;
+        const hasParameter = this.parameters.size >= 1;
+
+        return hasParameter ? `${baseUrl}?${this.buildQueryString()}` : baseUrl;
     }
 
-    public addParam(parameter: string, value: string) {
-        this.parameters.set(parameter, value);
+    public addParam(parameter: string, value: string | boolean | number) {
+        this.parameters.set(parameter, value.toString());
+    }
+
+    public setParams(params: OdataOperators) {
+        if (params.top) {
+            this.top(params.top);
+        }
+
+        if (params.count) {
+            this.count();
+        }
+
+        if (params.skip) {
+            this.top(params.skip);
+        }
+    }
+
+    public count() {
+        this.parameters.set('$count', 'true');
+    }
+
+    public top(value: number) {
+        this.parameters.set('$top', value.toString());
+    }
+
+    public skip(value: number) {
+        this.parameters.set('$skip', value.toString());
+    }
+
+    private buildQueryString() {
+        let baseQuery = '';
+
+        this.parameters.forEach((value, key) => {
+            const isFirst = baseQuery === '';
+
+            baseQuery += isFirst ? `${key}=${value}` : `&${key}=${value}`;
+        });
+
+        return baseQuery;
     }
 }
 
@@ -47,7 +93,7 @@ export class RequestCommand<T> {
                 map((value) => {
                     const response: CommandResponse<T> = {
                         isSuccess: true,
-                        value: value
+                        response: value
                     };
 
                     return response;
@@ -56,7 +102,7 @@ export class RequestCommand<T> {
                     const response: CommandResponse<T> = {
                         isSuccess: false,
                         error: res.message,
-                        value: {} as T
+                        response: {} as T
                     };
 
                     return of(response);
