@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QueryString, RequestCommand } from '../shared/utils/request-command';
+import { QueryCommand, QueryString } from '../shared/utils/request-command';
 import { BaseEntity, Guid, OdataResponse } from './base.model';
 
 const API_URL = 'api';
@@ -42,26 +42,26 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return this.httpClient.delete<TEntity>(`${this.apiUrl}\\${API_URL}\\${this.entityName}\\${id}`);
     }
 
-    public getCommand(): RequestCommand<TEntity[]> {
-        return new RequestCommand((command) => this.get(command.queryString));
+    public getCommand(): QueryCommand<TEntity[]> {
+        return new QueryCommand((command) => this.get(command.queryString));
     }
 
-    public getOdataCommand(): RequestCommand<OdataResponse<TEntity>> {
-        return new RequestCommand((command) => {
+    public getOdataCommand(): QueryCommand<OdataResponse<TEntity>> {
+        return new QueryCommand((command) => {
             command.queryString.setParams({ top: 15, count: true });
 
             return this.getOdata(command.queryString);
         });
     }
 
-    public getByIdCommand(id: () => string): RequestCommand<TEntity> {
+    public getByIdCommand(id: () => string): QueryCommand<TEntity> {
         const entityId = id();
 
         if (Guid.isNullOrDefault(entityId)) {
             throw new Error('Id cannot be null or default!');
         }
 
-        return new RequestCommand((command) => this.getById(command.queryString, entityId));
+        return new QueryCommand((command) => this.getById(command.queryString, entityId));
     }
 
     public saveCommand(entity: () => TEntity): Observable<TEntity> {
@@ -70,13 +70,13 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
     }
 
-    public deleteCommand(id: () => string): RequestCommand<TEntity> {
+    public deleteCommand(id: () => string): QueryCommand<TEntity> {
         const entityId = id();
 
         if (Guid.isNullOrDefault(entityId)) {
             throw new Error('Id cannot be null or default!');
         }
 
-        return new RequestCommand(() => this.delete(entityId));
+        return new QueryCommand(() => this.delete(entityId));
     }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { RequestCommand } from 'src/app/shared/utils/request-command';
+import { QueryCommand } from 'src/app/shared/utils/request-command';
 import { environment } from 'src/environments/environment';
 import { AuthRes, Login } from './authentication.model';
 
@@ -13,22 +13,22 @@ export class AuthenticationEndpoint {
 
     constructor(private readonly http: HttpClient) {}
 
-    public signInCommand(login: () => Login): RequestCommand<AuthRes> {
-        return new RequestCommand(() => this.signIn(login()));
+    public signInCommand(login: () => Login): QueryCommand<AuthRes> {
+        return new QueryCommand(() => this.signIn(login()));
     }
 
-    public registerCommand(login: () => Login): RequestCommand<unknown> {
-        return new RequestCommand(() => this.register(login()));
+    public registerCommand(login: () => Login): QueryCommand<unknown> {
+        return new QueryCommand(() => this.register(login()));
     }
 
-    public validateTokenCommand(token: () => string | null): RequestCommand<boolean> {
+    public validateTokenCommand(token: () => string | null): QueryCommand<boolean> {
         const tokenValue = token();
 
         if (!tokenValue) {
-            return new RequestCommand(() => of(false));
+            return new QueryCommand(() => of(false));
         }
 
-        return new RequestCommand(() => this.validateToken(tokenValue));
+        return new QueryCommand(() => this.validateToken(tokenValue));
     }
 
     private signIn(login: Login): Observable<AuthRes> {

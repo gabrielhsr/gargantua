@@ -65,7 +65,7 @@ export class QueryString {
     }
 }
 
-export class RequestCommand<T> {
+export class QueryCommand<T> {
     public response$ = new Subject<CommandResponse<T>>();
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -74,7 +74,7 @@ export class RequestCommand<T> {
 
     private readonly destroy$ = new Subject<void>();
 
-    constructor(private readonly request: (command: RequestCommand<T>) => Observable<T>) {
+    constructor(private readonly request: (command: QueryCommand<T>) => Observable<T>) {
         this.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((value) => this.response = value);
