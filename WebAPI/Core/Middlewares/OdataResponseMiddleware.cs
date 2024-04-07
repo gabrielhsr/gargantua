@@ -29,6 +29,10 @@
                 await newBody.CopyToAsync(originBody);
                 response.Body = originBody;
             }
+            else
+            {
+                await _next(context);
+            }
         }
 
         private async Task RemoveODataPropertiesAsync(HttpResponse response)

@@ -48,7 +48,7 @@ namespace Financial.Controllers
         {
             var isValid = authenticationService.ValidateToken(dto.Token);
 
-            return isValid ? Ok() : Unauthorized();
+            return isValid ? Ok(true) : Unauthorized();
         }
     }
 }

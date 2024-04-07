@@ -6,7 +6,7 @@ import { Category } from 'src/app/domain/category/category.model';
 import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
 import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
-import { FormHelper } from 'src/app/shared/helpers/form.helper';
+import { FeedbackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
     selector: 'expense-dialog',
@@ -31,7 +31,8 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
     constructor(
         private readonly categoryEndpoint: CategoryEndpoint,
-        private readonly paymentMethodEndpoint: PaymentMethodEndpoint
+        private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
+        public readonly feedbackService: FeedbackService
     ) {}
 
     public get isLoading(): boolean {
@@ -55,10 +56,6 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
     public submitForm(): void {
         console.log(this.expenseForm.value);
-    }
-
-    public showErrorMessage(input: string): string {
-        return FormHelper.showErrorMessage(input, this.expenseForm);
     }
 
     public displayFn(category: Category | PaymentMethod): string {

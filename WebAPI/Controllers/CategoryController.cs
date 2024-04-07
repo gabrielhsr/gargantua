@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Financial.Controllers
 {
-    [ApiController]
+    [Route("api/[controller]")]
     public class CategoryController : BaseController<Category>
     {
         public CategoryController(IBaseService<Category> service) : base(service)

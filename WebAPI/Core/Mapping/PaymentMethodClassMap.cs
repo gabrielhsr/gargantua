@@ -21,11 +21,11 @@ namespace Financial.Core.Mapping
                 .HasMaxLength(50)
                 .IsRequired(true);
 
-            builder.HasMany(x => x.Expense)
-                .WithOne(x => x.PaymentMethod)
-                .HasForeignKey(x => x.IdPaymentMethod)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired(true);
+            //builder.HasMany(x => x.Expense)
+            //    .WithOne(x => x.PaymentMethod)
+            //    .HasForeignKey(x => x.IdPaymentMethod)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .IsRequired(true);
         }
     }
 }

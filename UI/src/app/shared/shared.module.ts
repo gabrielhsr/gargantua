@@ -24,6 +24,7 @@ import { YesOrNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog
 // Modules
 import { TranslateModule } from '@ngx-translate/core';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { SearchableAutocompleteComponent } from './components/searchable-autocomplete/searchable-autocomplete.component';
 import { MaterialModule } from './material/material.module';
 
 
@@ -42,7 +43,8 @@ import { MaterialModule } from './material/material.module';
         SidebarComponent,
         ConfirmDialogComponent,
         PeriodSelectComponent,
-        YesOrNoDialogComponent
+        YesOrNoDialogComponent,
+        SearchableAutocompleteComponent
     ],
     imports: [
         // Modules
@@ -73,7 +75,8 @@ import { MaterialModule } from './material/material.module';
         // Components
         TopbarComponent,
         SidebarComponent,
-        PeriodSelectComponent
+        PeriodSelectComponent,
+        SearchableAutocompleteComponent
     ],
     providers: []
 })

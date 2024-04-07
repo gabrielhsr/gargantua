@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
 import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.helper';
-import { FormHelper } from 'src/app/shared/helpers/form.helper';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
@@ -24,9 +23,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
 
     constructor(
+        public readonly feedbackService: FeedbackService,
         private readonly authenticationEndpoint: AuthenticationEndpoint,
-        private readonly router: Router,
-        private readonly feedback: FeedbackService
+        private readonly router: Router
     ) {}
 
     public get isLoading(): boolean {
@@ -37,8 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.createForm();
 
         this.validateTokenCommand.response$
-            .pipe(takeUntil(this.destroy$), filter(({ isSuccess }) => isSuccess))
+            .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
+                this.feedbackService.toastErrorResponse(res);
+
                 if (res.response) {
                     this.router.navigate(['home']);
                 }
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.signInCommand.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
-                this.feedback.toastErrorResponse(res);
+                this.feedbackService.toastErrorResponse(res);
 
                 if (res.isSuccess && res.response) {
                     AuthenticationHelper.saveToken(res.response.token);
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.registerCommand.response$
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => this.feedback.toastResponse(res, 'Login.SuccessRegister', 'Login.Unauthorized'));
+            .subscribe((res) => this.feedbackService.toastResponse(res, 'Login.SuccessRegister', 'Login.Unauthorized'));
 
         this.validateTokenCommand.execute();
     }
@@ -69,10 +70,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.destroy$.next();
         this.destroy$.complete();
-    }
-
-    public showErrorMessage(input: string): string {
-        return FormHelper.showErrorMessage(input, this.loginForm);
     }
 
     private createForm(): void {

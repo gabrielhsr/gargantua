@@ -1,14 +1,13 @@
 ﻿using Financial.Domain.Interfaces.Services.Base;
 using Financial.Domain.Models.Base;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace Financial.Controllers.Base
 {
-    [Route("api/[controller]")]
-    [Authorize]
+    ////[Authorize]
+    [ApiController]
     public class BaseController<TEntity> : ODataController where TEntity : BaseEntity
     {
         private readonly IBaseService<TEntity> service;
@@ -28,7 +27,7 @@ namespace Financial.Controllers.Base
 
         // GET: api/Entity/5
         [HttpGet("{id}")]
-        public virtual async Task<ActionResult<TEntity>> Get(Guid id)
+        public virtual async Task<ActionResult<TEntity>> GetEntity(Guid id)
         {
             var entity = await service.GetByIdAsync(id);
 
@@ -41,7 +40,6 @@ namespace Financial.Controllers.Base
         }
 
         // PUT: api/Entity/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Put(Guid id, TEntity entity)
         {
@@ -56,7 +54,6 @@ namespace Financial.Controllers.Base
         }
 
         // POST: api/Entity
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public virtual async Task<ActionResult<TEntity>> Post(TEntity entitiy)
         {

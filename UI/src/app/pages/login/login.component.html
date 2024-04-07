@@ -9,7 +9,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>{{ 'Login.Email' | translate }}</mat-label>
                     <input matInput type="email" formControlName="email" />
-                    <mat-error>{{ showErrorMessage('email') }}</mat-error>
+                    <mat-error>{{ feedbackService.getFormError('email', loginForm) }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -18,7 +18,7 @@
                     <div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
                         <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
                     </div>
-                    <mat-error>{{ showErrorMessage('password') }}</mat-error>
+                    <mat-error>{{ feedbackService.getFormError('password', loginForm) }}</mat-error>
                 </mat-form-field>
 
                 <button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="signInCommand.execute()">

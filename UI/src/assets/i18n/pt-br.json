@@ -117,10 +117,10 @@
         }
     },
     "ErrorMessage": {
-        "required": "Campo obrigatório.",
-        "alreadyExist": "Não pode ter itens de mesmo nome!",
+        "required": "Campo Obrigatório",
+        "alreadyExist": "Não pode ter itens de mesmo nome",
         "email": "Campo deve conter um e-mail válido",
-        "minlength": "Campo deve ter no mínimo 5 caracteres.",
-        "maxlength": "Campo deve ter no máximo 12 caracteres."
+        "minlength": "Campo deve ter no mínimo 5 caracteres",
+        "maxlength": "Campo deve ter no máximo 12 caracteres"
     }
 }

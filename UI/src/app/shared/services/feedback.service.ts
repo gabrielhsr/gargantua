@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +21,13 @@ export class FeedbackService {
         private readonly dialog: MatDialog,
         private readonly translate: TranslateService
     ) {}
+
+    public getFormError(input: string, form: FormGroup) {
+        const field = form.get(input);
+        const key = field?.errors ? Object.keys(field.errors)[0] : null;
+
+        return key ? this.translate.instant(`ErrorMessage.${key}`) : '';
+    }
 
     public successToast(dictionaryKey?: string, args?: Record<string, string>): void {
         this.toast(dictionaryKey ? this.translate.instant(dictionaryKey, args) : this.translate.instant('Feedback.GenericSuccess'));

@@ -18,7 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("DbConnectionSt
 var services = builder.Services;
 
 // Cors
-var origins = builder.Configuration.GetSection("AllowedOrigins").Value!.Split(",");
+var origins = builder.Configuration.GetSection("AllowedOrigins").Value.Split(",");
 
 services.AddCors(opts =>
 {
@@ -87,8 +87,11 @@ services
     });
 
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
 services.AddRazorPages();
+services.AddSwaggerGen(options =>
+{
+    options.ResolveConflictingActions(x => x.First());
+});
 
 var app = builder.Build();
 
@@ -112,5 +115,9 @@ app.UseMiddleware<ODataResponseMiddleware>();
 
 app.MapControllers();
 
-app.Run();
+app.UseODataRouteDebug();
+app.UseODataQueryRequest();
 
+app.UseDeveloperExceptionPage();
+
+app.Run();
