@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QueryCommand, QueryString } from '../shared/utils/request-command';
-import { BaseEntity, Guid, OdataResponse } from './base.model';
+import { QueryCommand, QueryString } from '../shared/utils/query-command';
+import { BaseEntity, Guid, ODataResponse } from './base.model';
 
 const API_URL = 'api';
 const ODATA_URL = 'odata';
@@ -22,8 +22,8 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return this.httpClient.get<TEntity[]>(queryString.buildUrl(`${this.apiUrl}\\${API_URL}\\${this.entityName}`));
     }
 
-    public getOdata(queryString: QueryString) {
-        return this.httpClient.get<OdataResponse<TEntity>>(queryString.buildUrl(`${this.apiUrl}\\${ODATA_URL}\\${this.entityName}`));
+    public getOData(queryString: QueryString) {
+        return this.httpClient.get<ODataResponse<TEntity>>(queryString.buildUrl(`${this.apiUrl}\\${ODATA_URL}\\${this.entityName}`));
     }
 
     public getById(queryString: QueryString, id: string): Observable<TEntity> {
@@ -35,7 +35,7 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
     }
 
     public put(object: TEntity): Observable<TEntity> {
-        return this.httpClient.put<TEntity>(`${this.apiUrl}\\${API_URL}\\${this.entityName}\\${object.id}`, object);
+        return this.httpClient.put<TEntity>(`${this.apiUrl}\\${API_URL}\\${this.entityName}\\${object.Id}`, object);
     }
 
     public delete(id: string): Observable<TEntity> {
@@ -46,11 +46,11 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return new QueryCommand((command) => this.get(command.queryString));
     }
 
-    public getOdataCommand(): QueryCommand<OdataResponse<TEntity>> {
+    public getODataCommand(): QueryCommand<ODataResponse<TEntity>> {
         return new QueryCommand((command) => {
             command.queryString.setParams({ top: 15, count: true });
 
-            return this.getOdata(command.queryString);
+            return this.getOData(command.queryString);
         });
     }
 
@@ -67,7 +67,7 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
     public saveCommand(entity: () => TEntity): Observable<TEntity> {
         const obj = entity();
 
-        return Guid.isNullOrDefault(obj.id) ? this.post(obj) : this.put(obj);
+        return Guid.isNullOrDefault(obj.Id) ? this.post(obj) : this.put(obj);
     }
 
     public deleteCommand(id: () => string): QueryCommand<TEntity> {

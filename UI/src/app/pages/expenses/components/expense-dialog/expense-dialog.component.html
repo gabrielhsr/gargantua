@@ -1,11 +1,11 @@
 <div class="title-container">
     {{ "Expenses.NewExpense" | translate }}
-    <button *ngIf="!isLoading" mat-icon-button mat-dialog-close>
+    <button mat-icon-button mat-dialog-close>
         <mat-icon>close</mat-icon>
     </button>
 </div>
 
-<mat-dialog-content [loading]="isLoading">
+<mat-dialog-content>
     <form [formGroup]="expenseForm">
         <div class="form-container">
             <mat-form-field>
@@ -23,33 +23,18 @@
             </mat-form-field>
 
             <div class="two-input-container">
-                <mat-form-field>
-                    <mat-label>{{ "Expenses.Category" | translate }}</mat-label>
-                    <input formControlName="category" matInput [matAutocomplete]="categoryAutoComplete" #category>
-                    <mat-icon *ngIf="category.value" matSuffix (click)="clearInput(['category'])">clear</mat-icon>
+                <searchable-autocomplete
+                    formControlName="category"
+                    [label]="'expenses.category' | translate"
+                    [queryCommand]="categoryCommand"
+                ></searchable-autocomplete>
 
-                    <mat-autocomplete [displayWith]="displayFn" #categoryAutoComplete="matAutocomplete">
-                        <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
-                            {{ category.name }}
-                        </mat-option>
-                    </mat-autocomplete>
-
-                    <mat-error>{{ feedbackService.getFormError('category', expenseForm) }}</mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>{{ "Expenses.PaymentMethod" | translate }}</mat-label>
-                    <input formControlName="paymentMethod" matInput [matAutocomplete]="paymentMethodAutoComplete" #paymentMethod>
-                    <mat-icon *ngIf="paymentMethod.value" matSuffix (click)="clearInput(['paymentMethod'])">clear</mat-icon>
-
-                    <mat-autocomplete [displayWith]="displayFn" #paymentMethodAutoComplete="matAutocomplete">
-                        <mat-option *ngFor="let paymentMethod of filteredPaymentMethods | async" [value]="paymentMethod">
-                            {{ paymentMethod.name }}
-                        </mat-option>
-                    </mat-autocomplete>
-
-                    <mat-error>{{ feedbackService.getFormError('paymentMethod', expenseForm) }}</mat-error>
-                </mat-form-field>
+                <searchable-autocomplete
+                    formControlName="paymentMethod"
+                    displayWith="Name"
+                    [label]="'expenses.payment-method' | translate"
+                    [queryCommand]="paymentMethodCommand"
+                ></searchable-autocomplete>
             </div>
 
             <div class="two-input-container">

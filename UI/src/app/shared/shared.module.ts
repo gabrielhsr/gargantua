@@ -22,6 +22,10 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { YesOrNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 
 // Modules
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { SearchableAutocompleteComponent } from './components/searchable-autocomplete/searchable-autocomplete.component';
@@ -51,9 +55,13 @@ import { MaterialModule } from './material/material.module';
         CommonModule,
         MaterialModule,
         RouterModule,
+        MatAutocompleteModule,
         ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
         FormsModule,
-        TranslateModule
+        TranslateModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         // Modules

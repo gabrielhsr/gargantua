@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 this.feedbackService.toastErrorResponse(res);
 
-                if (res.response) {
+                if (res.data) {
                     this.router.navigate(['home']);
                 }
             });
@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 this.feedbackService.toastErrorResponse(res);
 
-                if (res.isSuccess && res.response) {
-                    AuthenticationHelper.saveToken(res.response.token);
+                if (res.isSuccess && res.data) {
+                    AuthenticationHelper.saveToken(res.data.token);
                     this.router.navigate(['home']);
                 }
             });

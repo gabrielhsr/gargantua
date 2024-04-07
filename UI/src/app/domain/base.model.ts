@@ -11,7 +11,7 @@ export class Guid {
 }
 
 export abstract class BaseEntity {
-    public id: string = Guid.default;
+    public Id: string = Guid.default;
 
     public get className(): string {
         const activatorName = this?.constructor?.name;
@@ -24,7 +24,7 @@ export abstract class BaseEntity {
     }
 }
 
-export interface OdataResponse<T> {
+export interface ODataResponse<T> {
     count?: number;
     context: string;
     value: T[];

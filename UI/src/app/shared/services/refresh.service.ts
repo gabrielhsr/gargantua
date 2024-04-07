@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { CommandResponse } from '../utils/request-command';
+import { CommandResponse } from '../utils/query-command';
 
 @Injectable({
     providedIn: 'root'

@@ -19,8 +19,8 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
     public expenseForm: FormGroup = new FormGroup({});
 
-    public categoryCommand = this.categoryEndpoint.getOdataCommand();
-    public paymentMethodCommand = this.paymentMethodEndpoint.getOdataCommand();
+    public categoryCommand = this.categoryEndpoint.getODataCommand();
+    public paymentMethodCommand = this.paymentMethodEndpoint.getODataCommand();
 
     public filteredCategories?: Observable<Category[] | undefined>;
     public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
@@ -35,15 +35,21 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         public readonly feedbackService: FeedbackService
     ) {}
 
-    public get isLoading(): boolean {
-        return this.categoryCommand.isLoading || this.paymentMethodCommand.isLoading;
-    }
-
     public ngOnInit(): void {
         this.createForm();
 
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
+
+        this.expenseForm.valueChanges.subscribe((x) => console.log('control change', x));
+
+        // const queryString = new FilterBuilder()
+        //     .eq('Name', this.showRecurrentCheck)
+        //     .eq('Description', 12345)
+        //     .eq((x) => x.toLower('Teste'), 12345)
+        //     .build('and');
+
+        // console.log(queryString);
     }
 
     public ngOnDestroy(): void {
@@ -59,7 +65,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     }
 
     public displayFn(category: Category | PaymentMethod): string {
-        return category?.name ?? '';
+        return category?.Name ?? '';
     }
 
     public clearInput(controlName: string[]): void {

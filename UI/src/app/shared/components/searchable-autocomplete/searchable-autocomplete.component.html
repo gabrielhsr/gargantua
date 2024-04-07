@@ -1,3 +1,29 @@
-<p>
-  searchable-autocomplete works!
-</p>
+<form class="form-container">
+    <mat-form-field>
+        <mat-label>{{ label }}</mat-label>
+        <input type="text" matInput [placeholder]="placeholder" [formControl]="control" [matAutocomplete]="auto">
+        <mat-autocomplete [displayWith]="renderItem.bind(this)" #auto="matAutocomplete">
+            @for (option of commandList; track option) {
+                <mat-option [value]="option">{{ renderItem(option) }}</mat-option>
+            }
+
+            @if (!hasValueInResponse && !hasFilter && !formValue && !commandIsLoading) {
+                <mat-option disabled>{{ 'common.empty-list'| translate }}</mat-option>
+            } 
+            
+            @if(hasFilter && !commandList.length && !commandIsLoading) {
+                <mat-option disabled>{{ 'common.no-result'| translate }}</mat-option>
+            }
+        </mat-autocomplete>
+
+        @if (formValue && !commandIsLoading) {
+            <button matSuffix mat-icon-button (click)="clearControl()">
+                <mat-icon>close</mat-icon>
+            </button>
+        }
+
+        @if (commandIsLoading) {
+            <mat-spinner matSuffix></mat-spinner>
+        }
+    </mat-form-field>
+</form>

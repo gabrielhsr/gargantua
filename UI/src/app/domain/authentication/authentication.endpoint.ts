@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { QueryCommand } from 'src/app/shared/utils/request-command';
+import { QueryCommand } from 'src/app/shared/utils/query-command';
 import { environment } from 'src/environments/environment';
 import { AuthRes, Login } from './authentication.model';
 

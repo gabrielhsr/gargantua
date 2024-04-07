@@ -1,19 +1,27 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
 
-export interface CommandResponse<T> {
-    isSuccess: boolean;
-    response: T;
-    error?: string;
-}
+const FILTER_KEY = '$filter';
+const TOP_KEY = '$top';
+const COUNT_KEY = '$count';
+const SKIP_KEY = '$skip';
 
-export interface OdataOperators {
+export interface ODataOperators {
     top?: number;
     count?: boolean;
     skip?: number;
+    filter?: string;
+}
+
+export class CommandResponse<T> {
+    public isSuccess: boolean = false;
+    public data?: T;
+    public error?: string;
 }
 
 export class QueryString {
+    public value = '';
+
     private parameters = new Map<string, string>();
 
     public buildUrl(baseUrl: string) {
@@ -26,7 +34,7 @@ export class QueryString {
         this.parameters.set(parameter, value.toString());
     }
 
-    public setParams(params: OdataOperators) {
+    public setParams(params: ODataOperators) {
         if (params.top) {
             this.top(params.top);
         }
@@ -38,30 +46,50 @@ export class QueryString {
         if (params.skip) {
             this.top(params.skip);
         }
+
+        if (params.filter) {
+            this.filter(params.filter);
+        }
     }
 
-    public count() {
-        this.parameters.set('$count', 'true');
+    public count(value: boolean = true) {
+        this.parameters.set(COUNT_KEY, value.toString());
     }
 
     public top(value: number) {
-        this.parameters.set('$top', value.toString());
+        if (value === undefined || value === null) {
+            this.parameters.delete(TOP_KEY);
+        } else {
+            this.parameters.set(TOP_KEY, value.toString());
+        }
     }
 
     public skip(value: number) {
-        this.parameters.set('$skip', value.toString());
+        if (value) {
+            this.parameters.set(SKIP_KEY, value.toString());
+        } else {
+            this.parameters.delete(SKIP_KEY);
+        }
+    }
+
+    public filter(expression: string) {
+        if (expression) {
+            this.parameters.set(FILTER_KEY, expression);
+        } else {
+            this.parameters.delete(FILTER_KEY);
+        }
     }
 
     private buildQueryString() {
-        let baseQuery = '';
+        this.value = '';
 
         this.parameters.forEach((value, key) => {
-            const isFirst = baseQuery === '';
+            const isFirst = this.value === '';
 
-            baseQuery += isFirst ? `${key}=${value}` : `&${key}=${value}`;
+            this.value += isFirst ? `${key}=${value}` : `&${key}=${value}`;
         });
 
-        return baseQuery;
+        return this.value;
     }
 }
 
@@ -69,7 +97,7 @@ export class QueryCommand<T> {
     public response$ = new Subject<CommandResponse<T>>();
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
-    public response = {} as CommandResponse<T>;
+    public response = new CommandResponse<T>();
     public queryString = new QueryString();
 
     private readonly destroy$ = new Subject<void>();
@@ -93,7 +121,7 @@ export class QueryCommand<T> {
                 map((value) => {
                     const response: CommandResponse<T> = {
                         isSuccess: true,
-                        response: value
+                        data: value
                     };
 
                     return response;
@@ -102,7 +130,7 @@ export class QueryCommand<T> {
                     const response: CommandResponse<T> = {
                         isSuccess: false,
                         error: res.message,
-                        response: {} as T
+                        data: {} as T
                     };
 
                     return of(response);

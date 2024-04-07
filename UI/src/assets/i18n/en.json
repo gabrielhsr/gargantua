@@ -1,109 +1,185 @@
 {
-  "Language": "English",
-  "Example": "Example",
-  "Title": "Finances",
-  "Feedback": {
-    "GenericSuccess": "Success!",
-    "GenericError": "Error!",
-    "SaveSuccess": "Saved successfully!",
-    "DeleteSuccess": "Successfully deleted!",
-    "DeleteItem": {
-      "Title": "Delete item",
-      "Message": "Would you like to delete the item '{{itemName}}'?"
-    },
-    "YesOrNo": {
-      "Title": "Confirmation"
-    },
-    "TokenExpired": "Your access has expired! \nLog in again."
-  },
   "Common": {
-    "Send": "Send",
-    "Month": "Month",
     "Cancel": "Cancel",
     "Delete": "Delete",
-    "Total": "Total",
     "Edit": "Edit",
-    "Name": "Name",
-    "Yes": "Yes",
-    "No": "No",
+    "Month": "Month",
     "MoreOptions": "More Options",
+    "Name": "Name",
+    "No": "No",
     "OnlyMonth": "Month Only",
     "Periodic": "Recurrent",
     "Save": "To save",
-    "Year": "Year"
+    "Send": "Send",
+    "Total": "Total",
+    "Year": "Year",
+    "Yes": "Yes"
   },
-  "Sidebar": {
-    "Home": "Home Page",
-    "Config": "Configurations",
-    "Expenses": "Expenses",
-    "Income": "Income",
-    "LogOut": "To go out"
+  "Config": {
+    "AddNewItem": "",
+    "Bank": "",
+    "Categories": "",
+    "DueDate": "",
+    "EditPaymentMethod": "",
+    "Errors": {
+      "EntityInUse": ""
+    },
+    "Name": "",
+    "PaymentMethods": "",
+    "SavedWithSuccess": ""
+  },
+  "ErrorMessage": {
+    "alreadyExist": "Cannot have items of the same name!",
+    "email": "Field must contain a valid email",
+    "maxlength": "Field must have a maximum of 12 characters.",
+    "minlength": "Field must have at least 5 characters.",
+    "required": "Required field."
+  },
+  "Example": "Example",
+  "Expenses": {
+    "Alerts": {
+      "NoExpense": ""
+    },
+    "Amount": "",
+    "Category": "",
+    "Description": "",
+    "Detail": "",
+    "DisplayDueDate": "",
+    "DisplayPurchaseDate": "",
+    "DueDate": "",
+    "EditExpense": "",
+    "EditOption": "",
+    "FilterBy": "",
+    "Installments": "",
+    "MarkAsPaid": "",
+    "MonthInterval": "",
+    "NewExpense": "",
+    "PaymentMethod": "",
+    "Periodic": "",
+    "PurchaseDate": "",
+    "SavePaidExpenses": "",
+    "ShowPaid": "",
+    "SortBy": ""
+  },
+  "Feedback": {
+    "DeleteItem": {
+      "Message": "Would you like to delete the item '{{itemName}}'?",
+      "Title": "Delete item"
+    },
+    "DeleteSuccess": "Successfully deleted!",
+    "GenericError": "Error!",
+    "GenericSuccess": "Success!",
+    "SaveError": "",
+    "SaveSuccess": "Saved successfully!",
+    "SuccessAction": "",
+    "TokenExpired": "Your access has expired! \nLog in again.",
+    "YesOrNo": {
+      "Title": "Confirmation"
+    }
+  },
+  "Home": {
+    "Balance": "",
+    "Expenses": "",
+    "Income": ""
+  },
+  "Income": {
+    "Alerts": {
+      "DeleteRecurrent": "",
+      "NoIncome": ""
+    },
+    "Amount": "",
+    "Description": "",
+    "DisplayPaymentDate": "",
+    "EditIncome": "",
+    "EditOption": "",
+    "FilterBy": "",
+    "Installments": "",
+    "JustMonth": "",
+    "MonthInterval": "",
+    "NewIncome": "",
+    "Payer": "",
+    "PaymentDate": "",
+    "PaymentMethod": "",
+    "Periodic": "",
+    "PeriodicTooltip": "",
+    "SortBy": ""
+  },
+  "Language": "English",
+  "Login": {
+    "Email": "",
+    "Enter": "",
+    "Password": "",
+    "Register": "",
+    "Success": "",
+    "SuccessRegister": "",
+    "Title": "",
+    "Unauthorized": ""
   },
   "Pages": {
-    "Home": {
-      "Income": "Monthly Income",
-      "Expenses": "Monthly Expenses",
-      "Balance": "Monthly Balance"
+    "Config": {
+      "AddNewItem": "Add new item...",
+      "Bank": "Bank",
+      "Categories": "Categories",
+      "DueDate": "Due date",
+      "EditPaymentMethod": "Edit Payment Method",
+      "Errors": {
+        "EntityInUse": "Item '{{itemName}}' cannot be deleted as it is in use by some expense record!"
+      },
+      "Name": "Name",
+      "PaymentMethods": "Payment Methods",
+      "SavedWithSuccess": "Saved successfully!"
     },
     "Expenses": {
       "Alerts": {
         "NoExpense": "No expense registered!"
       },
-      "DueDate": "Due Date",
-      "PurchaseDate": "Purchase Date",
-      "Category": "Category",
-      "PaymentMethod": "Payment Method",
-      "Description": "Description",
       "Amount": "Amount Paid",
-      "NewExpense": "New Expense",
-      "EditExpense": "Edit Expense",
-      "FilterBy": "Filter By",
-      "SortBy": "Sort By",
-      "Installments": "Installments",
-      "Periodic": "Periodic",
+      "Category": "Category",
+      "Description": "Description",
       "Detail": "Detail",
       "DisplayDueDate": "Due date",
       "DisplayPurchaseDate": "Purchase Date",
+      "DueDate": "Due Date",
+      "EditExpense": "Edit Expense",
       "EditOption": "Do you want to edit the recurrence or just this month?",
+      "FilterBy": "Filter By",
+      "Installments": "Installments",
       "MarkAsPaid": "Pay",
       "MonthInterval": "Interval Between Months",
+      "NewExpense": "New Expense",
+      "PaymentMethod": "Payment Method",
+      "Periodic": "Periodic",
+      "PurchaseDate": "Purchase Date",
       "SavePaidExpenses": "Save Payments",
-      "ShowPaid": "Show Paid"
+      "ShowPaid": "Show Paid",
+      "SortBy": "Sort By"
+    },
+    "Home": {
+      "Balance": "Monthly Balance",
+      "Expenses": "Monthly Expenses",
+      "Income": "Monthly Income"
     },
     "Income": {
       "Alerts": {
-        "NoIncome": "No income registered!",
-        "DeleteRecurrent": "Do you want to delete the entire recurrence or just this month's edition? \nImportant: When deleting only the month's edition, the original recurrence will appear in its place."
+        "DeleteRecurrent": "Do you want to delete the entire recurrence or just this month's edition? \nImportant: When deleting only the month's edition, the original recurrence will appear in its place.",
+        "NoIncome": "No income registered!"
       },
       "Amount": "Amount Paid",
-      "PaymentDate": "Purchase Date",
       "Description": "Description",
-      "PaymentMethod": "Payment Method",
-      "NewIncome": "New Income",
+      "DisplayPaymentDate": "Pay day",
       "EditIncome": "Edit Income",
+      "EditOption": "Want to edit the recurrence or just this month?",
       "FilterBy": "Filter By",
-      "SortBy": "Sort By",
+      "Installments": "Installments",
+      "JustMonth": "Just Month",
+      "MonthInterval": "Interval Between Months",
+      "NewIncome": "New Income",
+      "Payer": "Payer",
+      "PaymentDate": "Purchase Date",
+      "PaymentMethod": "Payment Method",
       "Periodic": "Periodic",
       "PeriodicTooltip": "Income of every month. For example: Salary.",
-      "EditOption": "Want to edit the recurrence or just this month?",
-      "JustMonth": "Just Month",
-      "DisplayPaymentDate": "Pay day",
-      "Installments": "Installments",
-      "MonthInterval": "Interval Between Months",
-      "Payer": "Payer"
-    },
-    "Config": {
-      "Categories": "Categories",
-      "PaymentMethods": "Payment Methods",
-      "SavedWithSuccess": "Saved successfully!",
-      "AddNewItem": "Add new item...",
-      "Errors": {
-        "EntityInUse": "Item '{{itemName}}' cannot be deleted as it is in use by some expense record!"
-      },
-      "Bank": "Bank",
-      "DueDate": "Due date",
-      "EditPaymentMethod": "Edit Payment Method",
-      "Name": "Name"
+      "SortBy": "Sort By"
     },
     "Login": {
       "Email": "Email",
@@ -115,11 +191,20 @@
       "Unauthorized": "Incorrect Username or Password!"
     }
   },
-  "ErrorMessage": {
-    "required": "Required field.",
-    "alreadyExist": "Cannot have items of the same name!",
-    "email": "Field must contain a valid email",
-    "maxlength": "Field must have a maximum of 12 characters.",
-    "minlength": "Field must have at least 5 characters."
+  "Sidebar": {
+    "Config": "Configurations",
+    "Expenses": "Expenses",
+    "Home": "Home Page",
+    "Income": "Income",
+    "LogOut": "To go out"
+  },
+  "Title": "Finances",
+  "common": {
+    "empty-list": "",
+    "no-result": ""
+  },
+  "expenses": {
+    "category": "",
+    "payment-method": ""
   }
 }

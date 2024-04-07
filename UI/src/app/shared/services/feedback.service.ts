@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { YesOrNoData, YesOrNoDialogComponent } from '../components/yes-no-dialog/yes-no-dialog.component';
-import { CommandResponse } from '../utils/request-command';
+import { CommandResponse } from '../utils/query-command';
 
 export type ActionDialogRes = undefined | {
     confirm: boolean;
