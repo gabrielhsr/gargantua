@@ -69,7 +69,7 @@ mat-dialog-content {
         flex-direction: row;
         gap: 22px;
 
-        input {
+        input, searchable-autocomplete {
             width: 100%;
         }
     }

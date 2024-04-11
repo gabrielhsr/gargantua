@@ -27,6 +27,7 @@
                     formControlName="category"
                     [label]="'expenses.category' | translate"
                     [queryCommand]="categoryCommand"
+                    [queryString]="paymentMethodFilter"
                 ></searchable-autocomplete>
 
                 <searchable-autocomplete
@@ -34,6 +35,7 @@
                     displayWith="Name"
                     [label]="'expenses.payment-method' | translate"
                     [queryCommand]="paymentMethodCommand"
+                    [queryString]="paymentMethodFilter"
                 ></searchable-autocomplete>
             </div>
 

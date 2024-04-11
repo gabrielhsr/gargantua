@@ -56,7 +56,7 @@ export class QueryString {
         this.parameters.set(COUNT_KEY, value.toString());
     }
 
-    public top(value: number) {
+    public top(value?: number) {
         if (value === undefined || value === null) {
             this.parameters.delete(TOP_KEY);
         } else {
@@ -64,7 +64,7 @@ export class QueryString {
         }
     }
 
-    public skip(value: number) {
+    public skip(value?: number) {
         if (value) {
             this.parameters.set(SKIP_KEY, value.toString());
         } else {
@@ -72,7 +72,7 @@ export class QueryString {
         }
     }
 
-    public filter(expression: string) {
+    public filter(expression?: string) {
         if (expression) {
             this.parameters.set(FILTER_KEY, expression);
         } else {

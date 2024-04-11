@@ -1,34 +1,58 @@
-// export type AllowedValues = string | number | boolean;
+export type OperatorExpression = (obj: ODataOperators) => string;
+export type AllowedValues = string | number | boolean | OperatorExpression;
 
-// export type PropertyExpression = (obj: ODataFunctions) => string;
+export const REPLACEABLE_KEY = '{replace}';
 
-// export class ODataFunctions {
-//     public toLower(property: string | PropertyExpression) {
-//         return '';
-//     }
+export class ODataOperators {
+    constructor(private readonly normalize: boolean = false) {}
 
-//     public toUpper(property: string | PropertyExpression) {
-//         return '';
-//     }
-// }
+    public toLower(target: string) {
+        return this.normalize ? `toLower('${target}')` : `toLower(${target})`;
+    }
 
-// export class FilterBuilder {
-//     private rules: string[] = [];
+    public toUpper(target: string) {
+        return this.normalize ? `toUpper('${target}')` : `toUpper(${target})`;
+    }
+}
 
-//     public eq(property: PropertyExpression | string, value: AllowedValues) {
-//         if (typeof property === 'function') {
-//             console.log(property(value));
-//         }
+export class FilterBuilder {
+    private rules: string[] = [];
 
-//         const isString = typeof value === 'string';
-//         const normalizedValue = isString ? `'${value.toString()}'` : value;
+    public eq(property: OperatorExpression | string, value: AllowedValues) {
+        const propertyIsExpression = typeof property === 'function';
+        const valueIsExpression = typeof value === 'function';
 
-//         this.rules.push(`(${property} eq ${normalizedValue})`);
+        const parsedProperty = propertyIsExpression ? property(new ODataOperators()) : property;
+        const parsedValue = valueIsExpression ? value(new ODataOperators(true)) : value;
 
-//         return this;
-//     }
+        const originalValueIsString = typeof value === 'string';
+        const normalizedValue = originalValueIsString ? `'${parsedValue.toString()}'` : parsedValue;
 
-//     public build(condition: 'or' | 'and') {
-//         return `(${this.rules.join(` ${condition} `)})`;
-//     }
-// }
+        this.rules.push(`(${parsedProperty} eq ${normalizedValue})`);
+
+        return this;
+    }
+
+    public contains(property: OperatorExpression | string, value?: AllowedValues) {
+        const propertyIsExpression = typeof property === 'function';
+        const valueIsExpression = typeof value === 'function';
+
+        const parsedProperty = propertyIsExpression ? property(new ODataOperators()) : property;
+        const parsedValue = valueIsExpression ? value(new ODataOperators(true)) : value ? value : `'${REPLACEABLE_KEY}'`;
+
+        const originalValueIsString = typeof value === 'string';
+        const normalizedValue = originalValueIsString ? `'${parsedValue.toString()}'` : parsedValue;
+
+        this.rules.push(`(contains(${parsedProperty}, ${normalizedValue}))`);
+
+        return this;
+    }
+
+    public build(condition?: 'or' | 'and') {
+        if (this.rules.length > 1 && !condition) {
+            throw new Error('FilterBuilder with more than one rule. The build condition is required.');
+        }
+
+        return `(${this.rules.join(` ${condition} `)})`;
+    }
+}

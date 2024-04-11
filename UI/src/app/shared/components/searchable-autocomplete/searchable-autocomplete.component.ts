@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { BaseEntity, ODataResponse } from 'src/app/domain/base.model';
+import { REPLACEABLE_KEY } from '../../utils/filter-builder';
 import { QueryCommand } from '../../utils/query-command';
 
 @Component({
@@ -26,6 +27,7 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
     @Input() public label: string = 'no-label';
     @Input() public placeholder: string = '';
 
+    @Input() public queryString?: string;
     @Input() public formControl?: FormControl;
     @Input() public formControlName?: string;
     @Input() public displayWith?: ((value: unknown) => string) | string = 'Id';
@@ -137,7 +139,14 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
             return;
         }
 
-        this.queryCommand?.queryString.filter(`contains(tolower(Name), '${this.formValue}')`);
+        if (this.queryString) {
+            if (this.formValue) {
+                this.queryCommand?.queryString.filter(this.queryString.replace(REPLACEABLE_KEY, this.formValue));
+            } else {
+                this.queryCommand?.queryString.filter();
+            }
+        }
+
         this.queryCommand?.execute();
     }
 }

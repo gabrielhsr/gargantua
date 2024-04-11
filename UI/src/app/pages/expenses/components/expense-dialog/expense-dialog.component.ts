@@ -7,6 +7,7 @@ import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
 import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
+import { FilterBuilder, REPLACEABLE_KEY } from 'src/app/shared/utils/filter-builder';
 
 @Component({
     selector: 'expense-dialog',
@@ -35,6 +36,12 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         public readonly feedbackService: FeedbackService
     ) {}
 
+    public get paymentMethodFilter() {
+        return new FilterBuilder()
+            .contains((op) => op.toLower('Name'), (op) => op.toLower(REPLACEABLE_KEY))
+            .build();
+    }
+
     public ngOnInit(): void {
         this.createForm();
 
@@ -42,14 +49,6 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         this.paymentMethodCommand.execute();
 
         this.expenseForm.valueChanges.subscribe((x) => console.log('control change', x));
-
-        // const queryString = new FilterBuilder()
-        //     .eq('Name', this.showRecurrentCheck)
-        //     .eq('Description', 12345)
-        //     .eq((x) => x.toLower('Teste'), 12345)
-        //     .build('and');
-
-        // console.log(queryString);
     }
 
     public ngOnDestroy(): void {
