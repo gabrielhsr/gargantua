@@ -64,10 +64,11 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return new QueryCommand((command) => this.getById(command.queryString, entityId));
     }
 
-    public saveCommand(entity: () => TEntity): Observable<TEntity> {
-        const obj = entity();
+    public saveCommand(entity: () => TEntity): QueryCommand<TEntity> {
+        const postCommand = new QueryCommand(() => this.post(entity()));
+        const putCommand = new QueryCommand(() => this.put(entity()));
 
-        return Guid.isNullOrDefault(obj.Id) ? this.post(obj) : this.put(obj);
+        return Guid.isNullOrDefault(entity().Id) ? postCommand : putCommand;
     }
 
     public deleteCommand(id: () => string): QueryCommand<TEntity> {

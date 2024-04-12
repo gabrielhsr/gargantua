@@ -6,7 +6,7 @@ export class Guid {
     }
 
     public static isNullOrDefault(id: string): boolean {
-        return id === this.default || id === null;
+        return id === this.default || id === null || id === undefined;
     }
 }
 

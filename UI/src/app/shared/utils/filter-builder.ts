@@ -1,5 +1,6 @@
 export type OperatorExpression = (obj: ODataOperators) => string;
 export type AllowedValues = string | number | boolean | OperatorExpression;
+export type AllowedProperties = string | OperatorExpression;
 
 export const REPLACEABLE_KEY = '{replace}';
 
@@ -18,7 +19,7 @@ export class ODataOperators {
 export class FilterBuilder {
     private rules: string[] = [];
 
-    public eq(property: OperatorExpression | string, value: AllowedValues) {
+    public eq(property: AllowedProperties, value: AllowedValues) {
         const propertyIsExpression = typeof property === 'function';
         const valueIsExpression = typeof value === 'function';
 
@@ -33,7 +34,7 @@ export class FilterBuilder {
         return this;
     }
 
-    public contains(property: OperatorExpression | string, value?: AllowedValues) {
+    public contains(property: AllowedProperties, value?: AllowedValues) {
         const propertyIsExpression = typeof property === 'function';
         const valueIsExpression = typeof value === 'function';
 
@@ -50,7 +51,7 @@ export class FilterBuilder {
 
     public build(condition?: 'or' | 'and') {
         if (this.rules.length > 1 && !condition) {
-            throw new Error('FilterBuilder with more than one rule. The build condition is required.');
+            throw new Error('FilterBuilder with more than one rule. The condition is required.');
         }
 
         return `(${this.rules.join(` ${condition} `)})`;

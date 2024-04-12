@@ -25,6 +25,7 @@
             <div class="two-input-container">
                 <searchable-autocomplete
                     formControlName="category"
+                    displayWith="Name"
                     [label]="'expenses.category' | translate"
                     [queryCommand]="categoryCommand"
                     [queryString]="paymentMethodFilter"

@@ -32,7 +32,7 @@ namespace Financial.Core.Common.Helpers
                     new("Id", user.Id.ToString()),
                     new(ClaimTypes.Name, user.Email),
                     new(ClaimTypes.NameIdentifier, user.Email),
-                    new(ClaimTypes.Email, user.Email),
+                    new(ClaimTypes.Email, user.Email)
                 },
                 expires: DateTime.Now.AddMonths(1),
                 signingCredentials: credentials

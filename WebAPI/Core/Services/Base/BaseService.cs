@@ -1,4 +1,5 @@
 ﻿using Financial.Core.Common.Extensions;
+using Financial.Domain.Interfaces.Providers;
 using Financial.Domain.Interfaces.Repositories.Base;
 using Financial.Domain.Interfaces.Services.Base;
 using Financial.Domain.Models.Base;
@@ -7,15 +8,15 @@ namespace Financial.Core.Services.Base
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IUserProvider userProvider;
 
         public readonly IBaseRepository<T> repository;
 
-        public Guid UserId
+        public Guid IdUser
         {
             get
             {
-                return Guid.Parse(httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+                return userProvider.GetIdUser();
             }
             private set { }
         }
@@ -23,7 +24,7 @@ namespace Financial.Core.Services.Base
         public BaseService(IDependencyAggregate<T> dependencyAggregate)
         {
             repository = dependencyAggregate.BaseRepository;
-            httpContextAccessor = dependencyAggregate.HttpContextAccessor;
+            userProvider = dependencyAggregate.UserProvider;
         }
 
         public virtual async Task<T> RemoveAsync(Guid id)

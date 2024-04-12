@@ -1,8 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
 import { Category } from 'src/app/domain/category/category.model';
+import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
 import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
 import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
@@ -19,6 +21,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     @Input() public expense?: Expense;
 
     public expenseForm: FormGroup = new FormGroup({});
+    public submitCommand = this.expenseEndpoint.saveCommand(this.bodyBuilder.bind(this));
 
     public categoryCommand = this.categoryEndpoint.getODataCommand();
     public paymentMethodCommand = this.paymentMethodEndpoint.getODataCommand();
@@ -31,8 +34,10 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
 
     constructor(
+        private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
         private readonly categoryEndpoint: CategoryEndpoint,
         private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
+        private readonly expenseEndpoint: ExpenseEndpoint,
         public readonly feedbackService: FeedbackService
     ) {}
 
@@ -48,7 +53,15 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
 
-        this.expenseForm.valueChanges.subscribe((x) => console.log('control change', x));
+        this.submitCommand.response$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.feedbackService.toastResponse(res);
+
+                if (res.isSuccess) {
+                    this.dialogRef.close();
+                }
+            });
     }
 
     public ngOnDestroy(): void {
@@ -60,7 +73,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     }
 
     public submitForm(): void {
-        console.log(this.expenseForm.value);
+        this.submitCommand.execute();
     }
 
     public displayFn(category: Category | PaymentMethod): string {
@@ -72,11 +85,25 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
     }
 
     private createForm(): void {
-        this.expenseForm.addControl('description', new FormControl(null, [Validators.required]));
-        this.expenseForm.addControl('amount', new FormControl(null, [Validators.required]));
-        this.expenseForm.addControl('category', new FormControl(null, [Validators.required]));
-        this.expenseForm.addControl('paymentMethod', new FormControl(null, [Validators.required]));
-        this.expenseForm.addControl('dueDate', new FormControl(null, [Validators.required]));
-        this.expenseForm.addControl('purchaseDate', new FormControl(null, [Validators.required]));
+        this.expenseForm.addControl('description', new FormControl('teste', [Validators.required]));
+        this.expenseForm.addControl('amount', new FormControl(1234, [Validators.required]));
+        this.expenseForm.addControl('category', new FormControl('teste', [Validators.required]));
+        this.expenseForm.addControl('paymentMethod', new FormControl('teste', [Validators.required]));
+        this.expenseForm.addControl('dueDate', new FormControl(null));
+        this.expenseForm.addControl('purchaseDate', new FormControl(new Date(), [Validators.required]));
+    }
+
+    private bodyBuilder() {
+        const formValue = this.expenseForm.getRawValue();
+
+        if (typeof formValue.category === 'string') {
+            formValue.category = new Category(formValue.category);
+        }
+
+        if (typeof formValue.paymentMethod === 'string') {
+            formValue.paymentMethod = new PaymentMethod(formValue.paymentMethod);
+        }
+
+        return formValue;
     }
 }
