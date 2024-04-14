@@ -37,7 +37,7 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
 
     protected expenseForm = new FormGroup({
         Description: new FormControl<string | null>(null, [Validators.required]),
-        Amount: new FormControl(0, [Validators.required]),
+        Amount: new FormControl<number | null>(null, [Validators.required]),
         Category: new FormControl<Category | string>('', [Validators.required]),
         PaymentMethod: new FormControl<PaymentMethod | string>('', [Validators.required]),
         PurchaseDate: new FormControl(new Date(), [Validators.required]),

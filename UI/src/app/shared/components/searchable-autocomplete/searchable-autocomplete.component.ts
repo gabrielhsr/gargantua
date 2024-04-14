@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { BaseEntity, ODataResponse } from 'src/app/domain/base.model';
+import { FeedbackService } from '../../services/feedback.service';
 import { REPLACEABLE_KEY } from '../../utils/command/filter-builder';
 import { QueryCommand } from '../../utils/command/query-command';
 
@@ -22,12 +23,14 @@ import { QueryCommand } from '../../utils/command/query-command';
         }
     ],
 })
-export class SearchableAutocompleteComponent<TEntity extends BaseEntity> implements ControlValueAccessor, Validator, OnInit, OnDestroy {
+export class SearchableAutocompleteComponent<TEntity extends BaseEntity> implements ControlValueAccessor, OnInit, OnDestroy {
     @ViewChild(FormControlDirective, { static: true }) private formControlDirective?: FormControlDirective;
 
     private readonly destroy$ = new Subject<void>();
 
-    private controlContainer = inject(ControlContainer);
+    private readonly controlContainer = inject(ControlContainer);
+    
+    protected readonly feedbackService = inject(FeedbackService);
 
     @Input() public queryCommand?: QueryCommand<ODataResponse<TEntity>>;
     @Input() public label: string = 'no-label';
@@ -103,14 +106,10 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
         this.formControlDirective?.valueAccessor?.setDisabledState?.(isDisabled);
     }
 
-    public validate(control: AbstractControl<unknown, unknown>): ValidationErrors | null {
-        console.log('validate', control);
+    public validate(control: AbstractControl): ValidationErrors | null {
+        this.formControlDirective?.validator?.(control);
 
-        return null;
-    }
-
-    public registerOnValidatorChange?(fn: () => void): void {
-        console.log('registerOnValidatorChange', fn);
+        return this.formControlDirective?.errors ?? null;
     }
 
     protected renderItem(item: TEntity) {

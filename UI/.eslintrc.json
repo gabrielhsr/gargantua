@@ -136,7 +136,10 @@
                         "enforce": [
                             { "blankLine": "always", "prev": "method", "next": "method" },
                             { "blankLine": "always", "prev": "field", "next": "method" }
-                        ] 
+                        ]
+                    },
+                    {
+                        "exceptAfterOverload": true
                     }
                 ],
                 "@stylistic/ts/member-delimiter-style": "error", // ; as member delimiter

@@ -16,6 +16,8 @@
             }
         </mat-autocomplete>
 
+        <mat-error>{{ feedbackService.getFormError(control) }}</mat-error>
+
         @if (formValue && !commandIsLoading) {
             <button matSuffix mat-icon-button (click)="clearControl()">
                 <mat-icon>close</mat-icon>

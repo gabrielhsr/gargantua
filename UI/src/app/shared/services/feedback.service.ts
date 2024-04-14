@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,14 +19,26 @@ export class FeedbackService {
     private readonly dialog = inject(MatDialog);
     private readonly translate = inject(TranslateService);
 
-    public getFormError(input: string, form: FormGroup) {
-        const field = form.get(input);
+    public getFormError(input?: AbstractControl): string;
+
+    public getFormError(input?: string, form?: FormGroup | FormArray | null): string;
+
+    public getFormError(input?: string | AbstractControl, form?: FormGroup | FormArray | null): string {
+        if (!input) return '';
+
+        const field = typeof input === 'string' ? form?.get(input) : input;
         const key = field?.errors ? Object.keys(field.errors)[0] : null;
 
         const hasRequiredLength = field?.errors?.[key as keyof typeof field.errors]?.requiredLength;
         const params = hasRequiredLength ? { 'required-length': hasRequiredLength } : {};
 
-        return key ? this.translate.instant(`feedback.form.${key}`, params) : '';
+        if (field) {
+            return this.translate.instant(`feedback.form.${key}`, params);
+        }
+
+        console.error(`Cannot find the input '${input}' in the informed form.`);
+
+        return '';
     }
 
     public successToast(dictionaryKey?: string, args?: Record<string, string>) {
