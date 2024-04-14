@@ -45,7 +45,28 @@
                 "@typescript-eslint/dot-notation": "error", // foo.bar instead of foo["bar"] when possible
                 "@typescript-eslint/explicit-member-accessibility": ["error", { "overrides": { "constructors": "off" } }], // Force acessibility on everything besides contructor
                 "@typescript-eslint/init-declarations": "error", // Require initialization in variable declarations
-                "@typescript-eslint/member-ordering": "error", // Consistent member declaration order.
+                "@typescript-eslint/member-ordering": ["error", { 
+                    "default": [
+                        "private-field",
+                        "protected-field",
+                        "public-field",
+
+                        "constructor",
+
+                        "private-get",
+                        "private-set",
+                        
+                        "protected-get",
+                        "protected-set",
+                        
+                        "public-get",
+                        "public-set",
+
+                        "public-method",
+                        "protected-method",
+                        "private-method"
+                    ]
+                }], // Consistent member declaration order.
                 "@typescript-eslint/method-signature-style": "error", // Enforce using property signature for functions.
                 "@typescript-eslint/no-confusing-non-null-assertion": "error", // Disallow non-null assertion in locations that may be confusing.
                 "@typescript-eslint/no-dynamic-delete": "error", // Disallow using the delete operator on computed key expressions.
@@ -86,7 +107,7 @@
                 "@stylistic/js/no-mixed-spaces-and-tabs": "error", // Self explanatory
                 "@stylistic/js/no-multi-spaces": "error", // Prevent multiple spaces instead of one
                 "@stylistic/js/no-multiple-empty-lines": "error", // Self explanatory
-                "@stylistic/js/no-trailing-spaces": ["error", { "ignoreComments": true }], // Self explanatory
+                "@stylistic/js/no-trailing-spaces": ["off"], // Self explanatory
                 "@stylistic/js/no-whitespace-before-property": "error", // foo.bar ✅ | foo. bar ❌
                 "@stylistic/js/nonblock-statement-body-position": ["error", "beside"], // Enforce a consistent location for single-line statements.
                 "@stylistic/js/object-curly-newline": ["error", { "consistent": true }], // Consistent format inside objects

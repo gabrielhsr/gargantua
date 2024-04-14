@@ -24,7 +24,7 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
         data: {
-            title: 'Sidebar.Home',
+            title: 'home.title',
             showMenu: true
         },
         canActivate: [AuthGuard]
@@ -33,7 +33,7 @@ const routes: Routes = [
         path: 'expenses',
         loadChildren: () => import('./pages/expenses/expenses.module').then((m) => m.ExpensesModule),
         data: {
-            title: 'Sidebar.Expenses',
+            title: 'expenses.title',
             showMenu: true
         },
         canActivate: [AuthGuard]

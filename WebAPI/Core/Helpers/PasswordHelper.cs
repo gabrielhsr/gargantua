@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Financial.Core.Common.Helpers
+namespace Financial.Core.Helpers
 {
     public static class PasswordHelper
     {

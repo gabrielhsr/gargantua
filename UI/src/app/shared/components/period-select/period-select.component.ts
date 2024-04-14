@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { Months, Period } from 'src/app/domain/period/period.model';
 
@@ -10,30 +11,33 @@ import { Months, Period } from 'src/app/domain/period/period.model';
     styleUrls: ['./period-select.component.scss']
 })
 export class PeriodSelectComponent implements OnInit, OnDestroy {
+    private readonly destroy$ = new Subject<void>();
+
+    private readonly translate = inject(TranslateService);
+
+    protected periodForm = new FormGroup({
+        Month: new FormControl<string | null>(null, Validators.required),
+        Year: new FormControl<string | null>(null, Validators.required)
+    });
+
+    protected years = ['2024', '2025'];
+
     @Input() public appearance: MatFormFieldAppearance = 'outline';
     @Input() public fillCurrentDate: boolean = false;
 
     @Output() public periodChange = new EventEmitter<Period>();
-
-    protected periodForm = new FormGroup({});
-
-    protected years = [2024, 2025];
-
-    private readonly destroy$ = new Subject<void>();
 
     protected get months(): string[] {
         return Object.keys(Months).filter((month) => isNaN(Number(month)));
     }
 
     public ngOnInit(): void {
-        this.createForm();
-
         if (this.fillCurrentDate) {
             const current = new Date();
             const month = Months[current.getMonth()];
             const year = current.getFullYear();
 
-            this.periodForm.patchValue({ month, year });
+            this.periodForm.patchValue({ Month: month, Year: year.toString() });
         }
     }
 
@@ -46,10 +50,5 @@ export class PeriodSelectComponent implements OnInit, OnDestroy {
         const formValue = this.periodForm.value as Period;
 
         this.periodChange.emit(formValue);
-    }
-
-    private createForm(): void {
-        this.periodForm.addControl('month', new FormControl(null, Validators.required));
-        this.periodForm.addControl('year', new FormControl(null, Validators.required));
     }
 }

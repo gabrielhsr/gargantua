@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QueryCommand, QueryString } from '../shared/utils/query-command';
+import { QueryCommand } from '../shared/utils/command/query-command';
+import { ODataOptions, QueryString } from '../shared/utils/command/query-string';
 import { BaseEntity, Guid, ODataResponse } from './base.model';
 
 const API_URL = 'api';
 const ODATA_URL = 'odata';
 
 export abstract class BaseEndpoint<TEntity extends BaseEntity> {
+    private readonly httpClient = inject(HttpClient);
     private apiUrl = environment.baseApi;
 
     public abstract activator: TEntity;
-
-    constructor(protected httpClient: HttpClient) {}
 
     public get entityName() {
         return this.activator.className;
@@ -46,38 +47,45 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return new QueryCommand((command) => this.get(command.queryString));
     }
 
-    public getODataCommand(): QueryCommand<ODataResponse<TEntity>> {
+    public getODataCommand(options?: ODataOptions): QueryCommand<ODataResponse<TEntity>> {
         return new QueryCommand((command) => {
-            command.queryString.setParams({ top: 15, count: true });
+            const defaultOperators = { top: 15, count: true };
+
+            command.queryString.setParams(options ?? defaultOperators);
 
             return this.getOData(command.queryString);
         });
     }
 
     public getByIdCommand(id: () => string): QueryCommand<TEntity> {
-        const entityId = id();
+        return new QueryCommand((command) => {
+            const entityId = id();
 
-        if (Guid.isNullOrDefault(entityId)) {
-            throw new Error('Id cannot be null or default!');
-        }
+            if (Guid.isNullOrDefault(entityId)) {
+                throw new Error('Id cannot be null or default!');
+            }
 
-        return new QueryCommand((command) => this.getById(command.queryString, entityId));
+            return this.getById(command.queryString, entityId);
+        });
     }
 
     public saveCommand(entity: () => TEntity): QueryCommand<TEntity> {
-        const postCommand = new QueryCommand(() => this.post(entity()));
-        const putCommand = new QueryCommand(() => this.put(entity()));
+        return new QueryCommand(() => {
+            const entityObj = entity();
 
-        return Guid.isNullOrDefault(entity().Id) ? postCommand : putCommand;
+            return Guid.isNullOrDefault(entityObj.Id) ? this.post(entityObj) : this.put(entityObj);
+        });
     }
 
     public deleteCommand(id: () => string): QueryCommand<TEntity> {
-        const entityId = id();
+        return new QueryCommand(() => {
+            const entityId = id();
 
-        if (Guid.isNullOrDefault(entityId)) {
-            throw new Error('Id cannot be null or default!');
-        }
+            if (Guid.isNullOrDefault(entityId)) {
+                throw new Error('Id cannot be null or default!');
+            }
 
-        return new QueryCommand(() => this.delete(entityId));
+            return this.delete(entityId);
+        });
     }
 }

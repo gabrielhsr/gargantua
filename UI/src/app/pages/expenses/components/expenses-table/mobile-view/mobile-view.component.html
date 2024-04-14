@@ -1,57 +1,50 @@
-<!-- <div class="mobile-view">
+<div class="mobile-view">
     <mat-accordion multi="true">
         <mat-expansion-panel
-            class="mat-elevation-z1"
             *ngFor="let expense of periodExpenses?.data"
-            [expanded]="openedPanels.includes(expense.id)"
-            (opened)="openedPanels.push(expense.id)"
-            (closed)="forgotPanel(expense.id)"
+            class="mat-elevation-z1"
+            [expanded]="openedPanels.includes(expense.Id)"
+            (opened)="openedPanels.push(expense.Id)"
+            (closed)="forgotPanel(expense.Id)"
             #panel
         >
-            <mat-expansion-panel-header [ngStyle]="{ 'padding-left' : !expensePaidService.showActions ? '24px' : '12px' }">
+            <mat-expansion-panel-header>
                 <mat-panel-title class="panel-title">
-                    <mat-checkbox
-                        *ngIf="expensePaidService.showActions"
-                        [checked]="expense.paid"
-                        (click)="$event.stopPropagation();"
-                        (change)="expensePaidService.markAsPaid($event.checked, expense)"
-                    ></mat-checkbox>
-
                     <div class="item-container">
                         <div class="item">
-                            <div class="sub-title">{{ "Pages.Expenses.Description" | translate }}</div>
-                            <div [ngClass]="panel.expanded ? '' : 'sub-value'">{{ expense.description }}</div>
+                            <div class="sub-title">{{ "common.description" | translate }}</div>
+                            <div [ngClass]="panel.expanded ? '' : 'sub-value'">{{ expense.Description }}</div>
                         </div>
 
                         <div class="item">
-                            <div class="sub-title">{{ "Pages.Expenses.PurchaseDate" | translate }}</div>
-                            <div class="sub-value">{{ expense.displayPurchaseDate | date }}</div>
+                            <div class="sub-title">{{ "common.purchase-date" | translate }}</div>
+                            <div class="sub-value">{{ expense.PurchaseDate | date }}</div>
                         </div>
                     </div>
                 </mat-panel-title>
 
                 <mat-panel-description class="panel-description">
-                    <div class="sub-value">{{ expense.amount | currency }}</div>
+                    <div class="sub-value">{{ expense.Amount | currency }}</div>
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
             <div class="panel-content">
                 <div class="sub-content">
                     <div class="item">
-                        <div class="sub-title">{{ "Pages.Expenses.DueDate" | translate }}</div>
-                        <div class="sub-value">{{ expense.displayDueDate | date }}</div>
+                        <div class="sub-title">{{ "common.due-date" | translate }}</div>
+                        <div class="sub-value">{{ expense.DueDate | date }}</div>
                     </div>
 
                     <div class="item">
-                        <div class="sub-title">{{ "Pages.Expenses.Category" | translate }}</div>
-                        <div class="sub-value">{{ expense.category?.name }}</div>
+                        <div class="sub-title">{{ "common.category" | translate }}</div>
+                        <div class="sub-value">{{ expense.Category?.Name }}</div>
                     </div>
                 </div>
 
                 <div class="sub-content">
                     <div class="item">
-                        <div class="sub-title">{{ "Pages.Expenses.PaymentMethod" | translate }}</div>
-                        <div class="sub-value">{{ expense.paymentMethod?.name }}</div>
+                        <div class="sub-title">{{ "common.payment-method" | translate }}</div>
+                        <div class="sub-value">{{ expense.PaymentMethod?.Name }}</div>
                     </div>
                 </div>
             </div>
@@ -69,8 +62,8 @@
 
     <mat-card>
         <mat-card-content class="total-container">
-            {{ "Common.Total" | translate }}
+            {{ "common.total" | translate }}
             <div class="total-value">{{ totalAmount | currency }}</div>
         </mat-card-content>
     </mat-card>
-</div> -->
+</div>

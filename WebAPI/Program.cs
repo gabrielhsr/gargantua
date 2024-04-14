@@ -1,4 +1,4 @@
-using Financial.Core.Common.Helpers;
+using Financial.Core.Helpers;
 using Financial.Core.Middlewares;
 using Financial.Core.Providers;
 using Financial.Core.Repositories.Base;
@@ -88,6 +88,7 @@ services
     })
     .AddNewtonsoftJson(options =>
     {
+        options.UseMemberCasing();
         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
     });

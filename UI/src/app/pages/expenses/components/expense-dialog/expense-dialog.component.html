@@ -1,40 +1,40 @@
 <div class="title-container">
-    {{ "Expenses.NewExpense" | translate }}
+    {{ isNew ? ("expenses.new-expense" | translate) : ("expenses.edit-expense" | translate) }}
     <button mat-icon-button mat-dialog-close>
         <mat-icon>close</mat-icon>
     </button>
 </div>
 
 <mat-dialog-content>
-    <form [formGroup]="expenseForm">
+    <form class="d-flex-column h-100" [formGroup]="expenseForm">
         <div class="form-container">
             <mat-form-field>
-                <mat-label>{{ "Expenses.Description" | translate }}</mat-label>
-                <input matInput type="text" formControlName="description" #description/>
-                <mat-icon *ngIf="description.value" matSuffix (click)="clearInput(['description'])">clear</mat-icon>
+                <mat-label>{{ "common.description" | translate }}</mat-label>
+                <input matInput type="text" formControlName="Description" #description/>
+                <mat-icon *ngIf="description.value" matSuffix (click)="clearInput(['Description'])">clear</mat-icon>
                 <mat-error>{{ feedbackService.getFormError('description', expenseForm) }}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>{{ "Expenses.Amount" | translate }}</mat-label>
-                <input matInput currencyMask formControlName="amount" #amount/>
-                <mat-icon *ngIf="amount.value" matSuffix (click)="clearInput(['amount'])">clear</mat-icon>
+                <mat-label>{{ "common.amount" | translate }}</mat-label>
+                <input matInput currencyMask formControlName="Amount" #amount/>
+                <mat-icon *ngIf="amount.value" matSuffix (click)="clearInput(['Amount'])">clear</mat-icon>
                 <mat-error>{{ feedbackService.getFormError('amount', expenseForm) }}</mat-error>
             </mat-form-field>
 
             <div class="two-input-container">
                 <searchable-autocomplete
-                    formControlName="category"
+                    formControlName="Category"
                     displayWith="Name"
-                    [label]="'expenses.category' | translate"
+                    [label]="'common.category' | translate"
                     [queryCommand]="categoryCommand"
                     [queryString]="paymentMethodFilter"
                 ></searchable-autocomplete>
 
                 <searchable-autocomplete
-                    formControlName="paymentMethod"
+                    formControlName="PaymentMethod"
                     displayWith="Name"
-                    [label]="'expenses.payment-method' | translate"
+                    [label]="'common.payment-method' | translate"
                     [queryCommand]="paymentMethodCommand"
                     [queryString]="paymentMethodFilter"
                 ></searchable-autocomplete>
@@ -42,41 +42,21 @@
 
             <div class="two-input-container">
                 <mat-form-field>
-                    <mat-label>{{ "Expenses.DueDate" | translate }}</mat-label>
-                    <input matInput formControlName="dueDate" [matDatepicker]="dueDatePicker"/>
-                    <mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dueDatePicker></mat-datepicker>
-                    <mat-error>{{ feedbackService.getFormError('dueDate', expenseForm) }}</mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>{{ "Expenses.PurchaseDate" | translate }}</mat-label>
-                    <input matInput formControlName="purchaseDate" [matDatepicker]="purchaseDatePicker"/>
+                    <mat-label>{{ "common.purchase-date" | translate }}</mat-label>
+                    <input matInput formControlName="PurchaseDate" [matDatepicker]="purchaseDatePicker"/>
                     <mat-datepicker-toggle matIconSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #purchaseDatePicker></mat-datepicker>
                     <mat-error>{{ feedbackService.getFormError('purchaseDate', expenseForm) }}</mat-error>
                 </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>{{ "common.due-date" | translate }}</mat-label>
+                    <input matInput formControlName="DueDate" [matDatepicker]="dueDatePicker"/>
+                    <mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dueDatePicker></mat-datepicker>
+                    <mat-error>{{ feedbackService.getFormError('dueDate', expenseForm) }}</mat-error>
+                </mat-form-field>
             </div>
-
-            <mat-expansion-panel *ngIf="showRecurrentCheck" class="mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{ 'Common.MoreOptions' | translate }}</mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-checkbox formControlName="periodic" #periodic>{{ "Common.Periodic" | translate }}</mat-checkbox>
-
-                <mat-form-field *ngIf="!periodic.checked">
-                    <mat-label>{{ "Expenses.Installments" | translate }}</mat-label>
-                    <input matInput type="number" min="1" formControlName="installments"/>
-                    <mat-error>{{ feedbackService.getFormError('installments', expenseForm) }}</mat-error>
-                </mat-form-field>
-
-                <mat-form-field *ngIf="periodic.checked">
-                    <mat-label>{{ "Expenses.MonthInterval" | translate }}</mat-label>
-                    <input matInput type="number" min="1" formControlName="monthInterval"/>
-                    <mat-error>{{ feedbackService.getFormError('monthInterval', expenseForm) }}</mat-error>
-                </mat-form-field>
-            </mat-expansion-panel>
         </div>
 
         <div class="button-container">
@@ -86,7 +66,7 @@
                 [disabled]="expenseForm.invalid || expenseForm.pristine"
                 (click)="submitForm()"
             >
-                {{ "Common.Send" | translate }}
+                {{ "common.save" | translate }}
             </button>
         </div>
     </form>

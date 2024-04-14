@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Financial.Core.Common.Helpers
+namespace Financial.Core.Helpers
 {
     public class TokenHelper
     {

@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
-
 @Component({
     selector: 'page-home',
     templateUrl: './home.page.html',
@@ -10,7 +9,7 @@ import { Subject } from 'rxjs';
 export class HomePage implements OnDestroy {
     private destroy$ = new Subject<void>();
 
-    public async ngOnDestroy(): Promise<void> {
+    public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }

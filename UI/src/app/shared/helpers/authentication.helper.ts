@@ -25,8 +25,9 @@ export class AuthenticationHelper {
 
     public static getToken(): string | null {
         const storedToken = localStorage.getItem(TOKEN_KEY);
+        const invalid = storedToken === 'undefined' || storedToken === 'null';
 
-        if (storedToken && !jwtService.isTokenExpired(storedToken)) {
+        if (storedToken && !invalid && !jwtService.isTokenExpired(storedToken)) {
             return storedToken;
         }
 

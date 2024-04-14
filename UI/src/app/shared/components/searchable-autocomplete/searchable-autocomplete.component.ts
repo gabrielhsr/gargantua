@@ -1,9 +1,9 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { BaseEntity, ODataResponse } from 'src/app/domain/base.model';
-import { REPLACEABLE_KEY } from '../../utils/filter-builder';
-import { QueryCommand } from '../../utils/query-command';
+import { REPLACEABLE_KEY } from '../../utils/command/filter-builder';
+import { QueryCommand } from '../../utils/command/query-command';
 
 @Component({
     selector: 'searchable-autocomplete',
@@ -23,6 +23,12 @@ import { QueryCommand } from '../../utils/query-command';
     ],
 })
 export class SearchableAutocompleteComponent<TEntity extends BaseEntity> implements ControlValueAccessor, Validator, OnInit, OnDestroy {
+    @ViewChild(FormControlDirective, { static: true }) private formControlDirective?: FormControlDirective;
+
+    private readonly destroy$ = new Subject<void>();
+
+    private controlContainer = inject(ControlContainer);
+
     @Input() public queryCommand?: QueryCommand<ODataResponse<TEntity>>;
     @Input() public label: string = 'no-label';
     @Input() public placeholder: string = '';
@@ -31,12 +37,6 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
     @Input() public formControl?: FormControl;
     @Input() public formControlName?: string;
     @Input() public displayWith?: ((value: unknown) => string) | string = 'Id';
-
-    @ViewChild(FormControlDirective, { static: true }) private formControlDirective?: FormControlDirective;
-
-    private destroy$ = new Subject<void>();
-
-    constructor(private readonly controlContainer: ControlContainer) {}
 
     protected get control(): FormControl {
         if ((!this.formControl && !this.formControlName) || !this.formControlName) {
@@ -88,37 +88,29 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
     }
 
     public writeValue(obj: TEntity): void {
-        // console.log('writeValue', obj);
-
         this.formControlDirective?.valueAccessor?.writeValue(obj);
     }
 
-    public registerOnChange(fn: any): void {
-        // console.log('registerOnChange', fn);
-
+    public registerOnChange(fn: unknown): void {
         this.formControlDirective?.valueAccessor?.registerOnChange(fn);
     }
 
-    public registerOnTouched(fn: any): void {
-        // console.log('registerOnTouched', fn);
-
+    public registerOnTouched(fn: unknown): void {
         this.formControlDirective?.valueAccessor?.registerOnTouched(fn);
     }
 
     public setDisabledState?(isDisabled: boolean): void {
-        // console.log('setDisabledState', isDisabled);
-
         this.formControlDirective?.valueAccessor?.setDisabledState?.(isDisabled);
     }
 
-    public validate(control: AbstractControl<any, any>): ValidationErrors | null {
-        // console.log('validate', control);
+    public validate(control: AbstractControl<unknown, unknown>): ValidationErrors | null {
+        console.log('validate', control);
 
         return null;
     }
 
     public registerOnValidatorChange?(fn: () => void): void {
-        // console.log('registerOnValidatorChange', fn);
+        console.log('registerOnValidatorChange', fn);
     }
 
     protected renderItem(item: TEntity) {

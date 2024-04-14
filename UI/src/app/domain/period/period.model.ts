@@ -1,19 +1,19 @@
 export class Period {
-    public month: number = 0;
-    public year: number = 0;
+    public Month: string = '';
+    public Year: string = '';
 }
 
 export enum Months {
-    Janeiro = 1,
-    Fevereiro = 2,
-    Março = 3,
-    Abril = 4,
-    Maio = 5,
-    Junho = 6,
-    Julho = 7,
-    Agosto = 8,
-    Setembro = 9,
-    Outubro = 10,
-    Novembro = 11,
-    Dezembro = 12
+    jan = 1,
+    fev = 2,
+    mar = 3,
+    apr = 4,
+    may = 5,
+    jun = 6,
+    jul = 7,
+    aug = 8,
+    sep = 9,
+    oct = 10,
+    nov = 11,
+    dev = 12
 }

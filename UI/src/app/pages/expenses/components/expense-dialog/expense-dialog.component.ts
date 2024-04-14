@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { Guid } from 'src/app/domain/base.model';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
 import { Category } from 'src/app/domain/category/category.model';
 import { ExpenseEndpoint } from 'src/app/domain/expense/expense.endpoint';
@@ -9,47 +10,53 @@ import { Expense } from 'src/app/domain/expense/expense.model';
 import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-method.endpoint';
 import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { FilterBuilder, REPLACEABLE_KEY } from 'src/app/shared/utils/filter-builder';
+import { FilterBuilder, REPLACEABLE_KEY } from 'src/app/shared/utils/command/filter-builder';
 
 @Component({
     selector: 'expense-dialog',
     templateUrl: './expense-dialog.component.html',
     styleUrls: ['./expense-dialog.component.scss']
-
 })
 export class ExpenseDialogComponent implements OnInit, OnDestroy {
-    @Input() public expense?: Expense;
-
-    public expenseForm: FormGroup = new FormGroup({});
-    public submitCommand = this.expenseEndpoint.saveCommand(this.bodyBuilder.bind(this));
-
-    public categoryCommand = this.categoryEndpoint.getODataCommand();
-    public paymentMethodCommand = this.paymentMethodEndpoint.getODataCommand();
-
-    public filteredCategories?: Observable<Category[] | undefined>;
-    public filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
-
-    public showRecurrentCheck = false;
-
     private readonly destroy$ = new Subject<void>();
 
-    constructor(
-        private readonly dialogRef: MatDialogRef<ExpenseDialogComponent>,
-        private readonly categoryEndpoint: CategoryEndpoint,
-        private readonly paymentMethodEndpoint: PaymentMethodEndpoint,
-        private readonly expenseEndpoint: ExpenseEndpoint,
-        public readonly feedbackService: FeedbackService
-    ) {}
+    private readonly dialogRef = inject(MatDialogRef<ExpenseDialogComponent>);
+    private readonly categoryEndpoint = inject(CategoryEndpoint);
+    private readonly paymentMethodEndpoint = inject(PaymentMethodEndpoint);
+    private readonly expenseEndpoint = inject(ExpenseEndpoint);
 
-    public get paymentMethodFilter() {
+    protected readonly feedbackService = inject(FeedbackService);
+    
+    protected submitCommand = this.expenseEndpoint.saveCommand(this.bodyBuilder.bind(this));
+
+    protected categoryCommand = this.categoryEndpoint.getODataCommand();
+    protected paymentMethodCommand = this.paymentMethodEndpoint.getODataCommand();
+
+    protected filteredCategories?: Observable<Category[] | undefined>;
+    protected filteredPaymentMethods?: Observable<PaymentMethod[] | undefined>;
+
+    protected expenseForm = new FormGroup({
+        Description: new FormControl<string | null>(null, [Validators.required]),
+        Amount: new FormControl(0, [Validators.required]),
+        Category: new FormControl<Category | string>('', [Validators.required]),
+        PaymentMethod: new FormControl<PaymentMethod | string>('', [Validators.required]),
+        PurchaseDate: new FormControl(new Date(), [Validators.required]),
+        DueDate: new FormControl<Date | null>(null)
+    });
+
+    @Input({ required: true }) public expenseId: string = Guid.default;
+
+    protected get paymentMethodFilter() {
         return new FilterBuilder()
             .contains((op) => op.toLower('Name'), (op) => op.toLower(REPLACEABLE_KEY))
             .build();
     }
 
-    public ngOnInit(): void {
-        this.createForm();
+    protected get isNew() {
+        return this.expenseId === Guid.default;
+    }
 
+    public ngOnInit(): void {
         this.categoryCommand.execute();
         this.paymentMethodCommand.execute();
 
@@ -72,38 +79,29 @@ export class ExpenseDialogComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    public submitForm(): void {
+    protected submitForm(): void {
         this.submitCommand.execute();
     }
 
-    public displayFn(category: Category | PaymentMethod): string {
+    protected displayFn(category: Category | PaymentMethod): string {
         return category?.Name ?? '';
     }
 
-    public clearInput(controlName: string[]): void {
+    protected clearInput(controlName: (keyof typeof this.expenseForm.controls)[]): void {
         controlName.forEach(((name) => this.expenseForm.controls[name].patchValue(null)));
-    }
-
-    private createForm(): void {
-        this.expenseForm.addControl('description', new FormControl('teste', [Validators.required]));
-        this.expenseForm.addControl('amount', new FormControl(1234, [Validators.required]));
-        this.expenseForm.addControl('category', new FormControl('teste', [Validators.required]));
-        this.expenseForm.addControl('paymentMethod', new FormControl('teste', [Validators.required]));
-        this.expenseForm.addControl('dueDate', new FormControl(null));
-        this.expenseForm.addControl('purchaseDate', new FormControl(new Date(), [Validators.required]));
     }
 
     private bodyBuilder() {
         const formValue = this.expenseForm.getRawValue();
 
-        if (typeof formValue.category === 'string') {
-            formValue.category = new Category(formValue.category);
+        if (typeof formValue.Category === 'string') {
+            formValue.Category = new Category(formValue.Category);
         }
 
-        if (typeof formValue.paymentMethod === 'string') {
-            formValue.paymentMethod = new PaymentMethod(formValue.paymentMethod);
+        if (typeof formValue.PaymentMethod === 'string') {
+            formValue.PaymentMethod = new PaymentMethod(formValue.PaymentMethod);
         }
 
-        return formValue;
+        return formValue as Expense;
     }
 }

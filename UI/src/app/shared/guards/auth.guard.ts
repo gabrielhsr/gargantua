@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationHelper } from '../helpers/authentication.helper';
 
@@ -6,7 +6,7 @@ import { AuthenticationHelper } from '../helpers/authentication.helper';
     providedIn: 'root'
 })
 export class AuthGuard {
-    constructor(private readonly router: Router) {}
+    private readonly router = inject(Router);
 
     public canActivate(): boolean {
         const token = AuthenticationHelper.getToken();

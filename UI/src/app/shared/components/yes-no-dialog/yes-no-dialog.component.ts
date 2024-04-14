@@ -1,10 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
 
 export interface YesOrNoData {
-    message: string;
-    yesText?: string;
-    noText?: string;
+    messageKey: string;
+    yesKey: string;
+    noKey: string;
 }
 
 @Component({
@@ -12,6 +11,16 @@ export interface YesOrNoData {
     templateUrl: './yes-no-dialog.component.html',
     styleUrls: ['./yes-no-dialog.component.scss']
 })
-export class YesOrNoDialogComponent {
-    constructor(@Inject(MAT_DIALOG_DATA) public data: YesOrNoData) {}
+export class YesOrNoDialogComponent implements OnInit {
+    protected options: YesOrNoData = {
+        messageKey: 'feedback.yer-or-no.default-message',
+        noKey: 'common.no',
+        yesKey: 'common.yes'
+    };
+
+    @Input({ required: true }) public data?: Partial<YesOrNoData>;
+
+    public ngOnInit(): void {
+        this.options = { ...this.options, ...this.data };
+    }
 }

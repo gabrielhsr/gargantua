@@ -1,4 +1,4 @@
-﻿using Financial.Core.Common.Extensions;
+﻿using Financial.Core.Extensions;
 using Financial.Domain.Interfaces.Providers;
 using Financial.Domain.Interfaces.Repositories.Base;
 using Financial.Domain.Interfaces.Services.Base;

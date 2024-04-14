@@ -1,210 +1,61 @@
 {
-  "Common": {
-    "Cancel": "Cancel",
-    "Delete": "Delete",
-    "Edit": "Edit",
-    "Month": "Month",
-    "MoreOptions": "More Options",
-    "Name": "Name",
-    "No": "No",
-    "OnlyMonth": "Month Only",
-    "Periodic": "Recurrent",
-    "Save": "To save",
-    "Send": "Send",
-    "Total": "Total",
-    "Year": "Year",
-    "Yes": "Yes"
-  },
-  "Config": {
-    "AddNewItem": "",
-    "Bank": "",
-    "Categories": "",
-    "DueDate": "",
-    "EditPaymentMethod": "",
-    "Errors": {
-      "EntityInUse": ""
-    },
-    "Name": "",
-    "PaymentMethods": "",
-    "SavedWithSuccess": ""
-  },
-  "ErrorMessage": {
-    "alreadyExist": "Cannot have items of the same name!",
-    "email": "Field must contain a valid email",
-    "maxlength": "Field must have a maximum of 12 characters.",
-    "minlength": "Field must have at least 5 characters.",
-    "required": "Required field."
-  },
-  "Example": "Example",
-  "Expenses": {
-    "Alerts": {
-      "NoExpense": ""
-    },
-    "Amount": "",
-    "Category": "",
-    "Description": "",
-    "Detail": "",
-    "DisplayDueDate": "",
-    "DisplayPurchaseDate": "",
-    "DueDate": "",
-    "EditExpense": "",
-    "EditOption": "",
-    "FilterBy": "",
-    "Installments": "",
-    "MarkAsPaid": "",
-    "MonthInterval": "",
-    "NewExpense": "",
-    "PaymentMethod": "",
-    "Periodic": "",
-    "PurchaseDate": "",
-    "SavePaidExpenses": "",
-    "ShowPaid": "",
-    "SortBy": ""
-  },
-  "Feedback": {
-    "DeleteItem": {
-      "Message": "Would you like to delete the item '{{itemName}}'?",
-      "Title": "Delete item"
-    },
-    "DeleteSuccess": "Successfully deleted!",
-    "GenericError": "Error!",
-    "GenericSuccess": "Success!",
-    "SaveError": "",
-    "SaveSuccess": "Saved successfully!",
-    "SuccessAction": "",
-    "TokenExpired": "Your access has expired! \nLog in again.",
-    "YesOrNo": {
-      "Title": "Confirmation"
-    }
-  },
-  "Home": {
-    "Balance": "",
-    "Expenses": "",
-    "Income": ""
-  },
-  "Income": {
-    "Alerts": {
-      "DeleteRecurrent": "",
-      "NoIncome": ""
-    },
-    "Amount": "",
-    "Description": "",
-    "DisplayPaymentDate": "",
-    "EditIncome": "",
-    "EditOption": "",
-    "FilterBy": "",
-    "Installments": "",
-    "JustMonth": "",
-    "MonthInterval": "",
-    "NewIncome": "",
-    "Payer": "",
-    "PaymentDate": "",
-    "PaymentMethod": "",
-    "Periodic": "",
-    "PeriodicTooltip": "",
-    "SortBy": ""
-  },
-  "Language": "English",
-  "Login": {
-    "Email": "",
-    "Enter": "",
-    "Password": "",
-    "Register": "",
-    "Success": "",
-    "SuccessRegister": "",
-    "Title": "",
-    "Unauthorized": ""
-  },
-  "Pages": {
-    "Config": {
-      "AddNewItem": "Add new item...",
-      "Bank": "Bank",
-      "Categories": "Categories",
-      "DueDate": "Due date",
-      "EditPaymentMethod": "Edit Payment Method",
-      "Errors": {
-        "EntityInUse": "Item '{{itemName}}' cannot be deleted as it is in use by some expense record!"
-      },
-      "Name": "Name",
-      "PaymentMethods": "Payment Methods",
-      "SavedWithSuccess": "Saved successfully!"
-    },
-    "Expenses": {
-      "Alerts": {
-        "NoExpense": "No expense registered!"
-      },
-      "Amount": "Amount Paid",
-      "Category": "Category",
-      "Description": "Description",
-      "Detail": "Detail",
-      "DisplayDueDate": "Due date",
-      "DisplayPurchaseDate": "Purchase Date",
-      "DueDate": "Due Date",
-      "EditExpense": "Edit Expense",
-      "EditOption": "Do you want to edit the recurrence or just this month?",
-      "FilterBy": "Filter By",
-      "Installments": "Installments",
-      "MarkAsPaid": "Pay",
-      "MonthInterval": "Interval Between Months",
-      "NewExpense": "New Expense",
-      "PaymentMethod": "Payment Method",
-      "Periodic": "Periodic",
-      "PurchaseDate": "Purchase Date",
-      "SavePaidExpenses": "Save Payments",
-      "ShowPaid": "Show Paid",
-      "SortBy": "Sort By"
-    },
-    "Home": {
-      "Balance": "Monthly Balance",
-      "Expenses": "Monthly Expenses",
-      "Income": "Monthly Income"
-    },
-    "Income": {
-      "Alerts": {
-        "DeleteRecurrent": "Do you want to delete the entire recurrence or just this month's edition? \nImportant: When deleting only the month's edition, the original recurrence will appear in its place.",
-        "NoIncome": "No income registered!"
-      },
-      "Amount": "Amount Paid",
-      "Description": "Description",
-      "DisplayPaymentDate": "Pay day",
-      "EditIncome": "Edit Income",
-      "EditOption": "Want to edit the recurrence or just this month?",
-      "FilterBy": "Filter By",
-      "Installments": "Installments",
-      "JustMonth": "Just Month",
-      "MonthInterval": "Interval Between Months",
-      "NewIncome": "New Income",
-      "Payer": "Payer",
-      "PaymentDate": "Purchase Date",
-      "PaymentMethod": "Payment Method",
-      "Periodic": "Periodic",
-      "PeriodicTooltip": "Income of every month. For example: Salary.",
-      "SortBy": "Sort By"
-    },
-    "Login": {
-      "Email": "Email",
-      "Enter": "To enter",
-      "Password": "Password",
-      "Register": "Register Account",
-      "SuccessRegister": "Successfully registered!",
-      "Title": "Login",
-      "Unauthorized": "Incorrect Username or Password!"
-    }
-  },
-  "Sidebar": {
-    "Config": "Configurations",
-    "Expenses": "Expenses",
-    "Home": "Home Page",
-    "Income": "Income",
-    "LogOut": "To go out"
-  },
-  "Title": "Finances",
   "common": {
-    "empty-list": "",
-    "no-result": ""
+    "amount": "Amount",
+    "category": "Category",
+    "description": "Description",
+    "due-date": "Due Date",
+    "email": "Email",
+    "empty-list": "No items registered!",
+    "exit": "Exit",
+    "month": "Month",
+    "months": {
+      "apr": "April",
+      "aug": "August",
+      "dev": "December",
+      "fev": "February",
+      "jan": "January",
+      "jul": "July",
+      "jun": "June",
+      "mar": "March",
+      "may": "May",
+      "nov": "November",
+      "oct": "October",
+      "sep": "September"
+    },
+    "no-result": "No results for your search!",
+    "password": "Password",
+    "payment-method": "Payment Method",
+    "purchase-date": "Purchase Date",
+    "save": "Save",
+    "total": "Total",
+    "year": "Year"
   },
   "expenses": {
-    "category": "",
-    "payment-method": ""
+    "category": "Category",
+    "edit-expense": "Edit Expense",
+    "new-expense": "New Expense",
+    "payment-method": "Payment Method",
+    "title": "Expenses"
+  },
+  "feedback": {
+    "form": {
+      "email": "Invalid email format. Example: nome@dominio.com.br",
+      "maxlength": "Field must contain a maximum of {{required-length}} characters.",
+      "minlength": "Field must contain at least {{required-length}} characters.",
+      "required": "Required field"
+    },
+    "generic-error": "An error occurred while performing the action!",
+    "generic-success": "Action carried out successfully.",
+    "yes-or-no": {
+      "title": "Take action?"
+    }
+  },
+  "home": {
+    "title": "Home"
+  },
+  "login": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "title": "Login"
   }
 }

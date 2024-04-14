@@ -1,32 +1,32 @@
 <div class="login-container">
     <mat-card>
         <mat-card-header class="justify-content-center">
-            <mat-card-title>{{ 'Login.Title' | translate }}</mat-card-title>
+            <mat-card-title>{{ 'login.title' | translate }}</mat-card-title>
         </mat-card-header>
 
         <form *ngIf="loginForm" [formGroup]="loginForm">
             <mat-card-content class="login-card" [loading]="isLoading">
                 <mat-form-field appearance="fill">
-                    <mat-label>{{ 'Login.Email' | translate }}</mat-label>
-                    <input matInput type="email" formControlName="email" />
-                    <mat-error>{{ feedbackService.getFormError('email', loginForm) }}</mat-error>
+                    <mat-label>{{ 'common.email' | translate }}</mat-label>
+                    <input matInput type="email" formControlName="Email" />
+                    <mat-error>{{ feedbackService.getFormError('Email', loginForm) }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>{{ 'Login.Password' | translate }}</mat-label>
-                    <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" />
+                    <mat-label>{{ 'common.password' | translate }}</mat-label>
+                    <input matInput formControlName="Password" [type]="hidePassword ? 'password' : 'text'" />
                     <div mat-icon-button class="show-password" matSuffix (click)="hidePassword = !hidePassword">
                         <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
                     </div>
-                    <mat-error>{{ feedbackService.getFormError('password', loginForm) }}</mat-error>
+                    <mat-error>{{ feedbackService.getFormError('Password', loginForm) }}</mat-error>
                 </mat-form-field>
 
                 <button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="signInCommand.execute()">
-                    {{ 'Login.Enter' | translate }}
+                    {{ 'login.signin' | translate }}
                 </button>
 
                 <button type="submit" class="register-button" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="registerCommand.execute()">
-                    {{ 'Login.Register' | translate }}
+                    {{ 'login.signup' | translate }}
                 </button>
             </mat-card-content>
         </form>

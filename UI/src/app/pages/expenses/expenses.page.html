@@ -1,9 +1,9 @@
 <period-select appearance="fill" [fillCurrentDate]="true"></period-select>
 
 <div class="expenses-container">
-    <!-- <expenses-table></expenses-table> -->
+    <expenses-table></expenses-table>
 </div>
 
-<button mat-fab class="add-button" color="primary" (click)="openAddDialog()">
+<button mat-fab class="add-button" color="primary" (click)="expenseService.openFormDialog">
     <mat-icon>add</mat-icon>
 </button>

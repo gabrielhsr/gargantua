@@ -1,19 +1,20 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges, inject } from '@angular/core';
 import { Guid } from 'src/app/domain/base.model';
 
 @Directive({
     selector: '[loading]'
 })
 export class LoadingDirective implements OnInit, OnChanges {
-    @Input() public loading: boolean = false;
+    private readonly element = inject(ElementRef<HTMLElement>);
+    private readonly renderer = inject(Renderer2);
 
     @HostBinding('style.position')
     private hostPosition: string = 'relative';
     private guid?: string;
-
+    
     private loadingElement: Element = this.renderer.createElement('div');
 
-    constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+    @Input() public loading: boolean = false;
 
     public ngOnInit(): void {
         const spinner: Element = this.renderer.createElement('div');

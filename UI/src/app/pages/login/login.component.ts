@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -13,28 +13,29 @@ import { FeedbackService } from 'src/app/shared/services/feedback.service';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    public hidePassword = true;
-    public loginForm: FormGroup = new FormGroup({});
-
-    public validateTokenCommand = this.authenticationEndpoint.validateTokenCommand(() => AuthenticationHelper.getToken());
-    public signInCommand = this.authenticationEndpoint.signInCommand(() => this.loginForm?.value);
-    public registerCommand = this.authenticationEndpoint.registerCommand(() => this.loginForm?.value);
-
     private readonly destroy$ = new Subject<void>();
 
-    constructor(
-        public readonly feedbackService: FeedbackService,
-        private readonly authenticationEndpoint: AuthenticationEndpoint,
-        private readonly router: Router
-    ) {}
+    private readonly authenticationEndpoint = inject(AuthenticationEndpoint);
+    private readonly router = inject(Router);
+
+    public readonly feedbackService = inject(FeedbackService);
+
+    public validateTokenCommand = this.authenticationEndpoint.validateTokenCommand(() => AuthenticationHelper.getToken());
+    public signInCommand = this.authenticationEndpoint.signInCommand(() => this.loginForm.value);
+    public registerCommand = this.authenticationEndpoint.registerCommand(() => this.loginForm.value);
+    
+    public hidePassword = true;
+
+    public loginForm: FormGroup = new FormGroup({
+        Email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
+        Password: new FormControl<string | null>(null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)])
+    });
 
     public get isLoading(): boolean {
         return this.validateTokenCommand.isLoading || this.signInCommand.isLoading || this.registerCommand.isLoading;
     }
 
     public ngOnInit(): void {
-        this.createForm();
-
         this.validateTokenCommand.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.feedbackService.toastErrorResponse(res);
 
                 if (res.isSuccess && res.data) {
-                    AuthenticationHelper.saveToken(res.data.token);
+                    AuthenticationHelper.saveToken(res.data.Token);
                     this.router.navigate(['home']);
                 }
             });
@@ -70,10 +71,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.destroy$.next();
         this.destroy$.complete();
-    }
-
-    private createForm(): void {
-        this.loginForm.addControl('email', new FormControl('', [Validators.required, Validators.email]));
-        this.loginForm.addControl('password', new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]));
     }
 }

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Expense } from 'src/app/domain/expense/expense.model';
+import { Component, inject } from '@angular/core';
 import { ExpenseService } from './services/expense.service';
 
 @Component({
@@ -8,11 +7,5 @@ import { ExpenseService } from './services/expense.service';
     styleUrls: ['./expenses.page.scss']
 })
 export class ExpensesPage {
-    constructor(private readonly expenseService: ExpenseService) {}
-
-    public openAddDialog(): void {
-        const newExpense = new Expense();
-
-        this.expenseService.openFormDialog(newExpense);
-    }
+    protected readonly expenseService = inject(ExpenseService);
 }

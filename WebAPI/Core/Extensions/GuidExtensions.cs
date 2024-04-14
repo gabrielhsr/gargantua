@@ -1,4 +1,4 @@
-﻿namespace Financial.Core.Common.Extensions
+﻿namespace Financial.Core.Extensions
 {
     public static class GuidExtensions
     {
