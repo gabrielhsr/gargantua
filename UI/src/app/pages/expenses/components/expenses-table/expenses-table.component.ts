@@ -12,7 +12,7 @@ export class ExpensesTableComponent implements OnInit, OnDestroy {
 
     private readonly expenseEndpoint = inject(ExpenseEndpoint);
 
-    protected queryCommand = this.expenseEndpoint.getODataCommand();
+    protected queryCommand = this.expenseEndpoint.getODataCommand({ expand: 'PaymentMethod, Category' });
 
     public get expenseList() {
         return this.queryCommand.response.data?.value;

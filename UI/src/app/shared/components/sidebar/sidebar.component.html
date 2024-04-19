@@ -15,6 +15,13 @@
                 </div>
             </mat-list-item>
 
+            <mat-list-item routerLink="/settings" routerLinkActive="active-item" (click)="sidenav.close()">
+                <div class="list-item">
+                    <mat-icon>settings</mat-icon>
+                    <span>{{ 'settings.title' | translate }}</span>
+                </div>
+            </mat-list-item>
+
             <mat-list-item (click)="logOut()">
                 <div class="list-item">
                     <mat-icon>logout</mat-icon>

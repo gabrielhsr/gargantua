@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { SearchableAutocompleteComponent } from './components/searchable-autocomplete/searchable-autocomplete.component';
 import { MaterialModule } from './material/material.module';
+import { EmptyPipe } from './pipes/empty.pipe';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { MaterialModule } from './material/material.module';
         PreventDefaultDirective,
 
         // Pipes
+        EmptyPipe,
 
         // Components
         TopbarComponent,
@@ -79,6 +81,7 @@ import { MaterialModule } from './material/material.module';
         PreventDefaultDirective,
 
         // Pipes
+        EmptyPipe,
 
         // Components
         TopbarComponent,

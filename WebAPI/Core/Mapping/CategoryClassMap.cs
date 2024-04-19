@@ -21,6 +21,16 @@ namespace Financial.Core.Mapping
                 .HasMaxLength(50)
                 .IsRequired(true);
 
+            builder.Property(x => x.Icon)
+                .HasColumnName("Icon")
+                .HasMaxLength(50)
+                .IsRequired(true);
+
+            builder.Property(x => x.Color)
+                .HasColumnName("Color")
+                .HasMaxLength(50)
+                .IsRequired(true);
+
             builder.HasMany(x => x.Expense)
                 .WithOne(x => x.Category)
                 .HasForeignKey(x => x.IdCategory)

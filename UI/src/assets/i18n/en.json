@@ -1,4 +1,7 @@
 {
+  "category": {
+    "title": ""
+  },
   "common": {
     "amount": "Amount",
     "category": "Category",
@@ -23,6 +26,7 @@
       "sep": "September"
     },
     "no-result": "No results for your search!",
+    "no-result-found": "",
     "password": "Password",
     "payment-method": "Payment Method",
     "purchase-date": "Purchase Date",
@@ -57,5 +61,11 @@
     "signin": "Sign In",
     "signup": "Sign Up",
     "title": "Login"
+  },
+  "payment-method": {
+    "title": ""
+  },
+  "settings": {
+    "title": ""
   }
 }

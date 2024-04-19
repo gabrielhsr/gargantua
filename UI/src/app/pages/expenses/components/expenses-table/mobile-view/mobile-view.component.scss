@@ -1,87 +1,35 @@
+@import '../../../../../../assets/theme/colors.scss';
+
 .mobile-view {
     display: flex;
-    gap: 12px;
     flex-direction: column;
+    gap: 20px;
+}
 
-    mat-expansion-panel-header {
-        align-items: flex-start;
-        padding: 12px 24px;
-        height: auto;
+.no-result-container {
+    display: flex;
+    margin: 15px;
+    justify-content: center;
+}
 
-         ::ng-deep .mat-expansion-indicator {
-            align-self: center;
-        }
+.item-container {
+    display: flex;
+    gap: 12px;
+    padding: 24px;
+}
+
+.description-container {
+    display: flex;
+    flex-direction: column;
+    
+    .category {
+        font-size: 0.9rem;
+        color: $color-text-3;
     }
+}
 
-    mat-action-row {
-        padding: 1px 16px;
-    }
-
-    .panel-title {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        align-items: center;
-        width: 45%;
-    }
-
-    .panel-description {
-        font-size: 1.1rem;
-        justify-content: flex-end;
-        flex-grow: 1;
-        width: 45%;
-    }
-
-    .item {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .panel-content {
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-
-        .sub-content {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-grow: 1;
-        }
-
-        .sub-content:last-of-type {
-            .item {
-                align-items: flex-end;
-            }
-        }
-    }
-
-    .sub-title {
-        font-size: 0.7rem;
-        line-height: 0.7rem;
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    .dark-theme .sub-title {
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    .sub-value {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .total-container {
-        display: flex;
-        font-size: 1.1rem;
-        justify-content: space-between;
-
-        .total-value {
-            color: rgba(0,0,0,.54);
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-    }
+.amount-container {
+    align-self: center;
+    font-size: 1.2rem;
+    font-weight: 500;
 }

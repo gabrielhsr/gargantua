@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { Months, Period } from 'src/app/domain/period/period.model';
 
@@ -12,8 +11,6 @@ import { Months, Period } from 'src/app/domain/period/period.model';
 })
 export class PeriodSelectComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
-
-    private readonly translate = inject(TranslateService);
 
     protected periodForm = new FormGroup({
         Month: new FormControl<string | null>(null, Validators.required),

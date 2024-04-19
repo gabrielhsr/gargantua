@@ -1,16 +1,18 @@
-const FILTER_KEY = '$filter';
-const TOP_KEY = '$top';
-const COUNT_KEY = '$count';
-const SKIP_KEY = '$skip';
+const ODATA_FILTER_KEY = '$filter';
+const ODATA_TOP_KEY = '$top';
+const ODATA_COUNT_KEY = '$count';
+const ODATA_SKIP_KEY = '$skip';
+const ODATA_EXPAND_KEY = '$expand';
 
 export interface ODataOptions {
     top?: number;
     count?: boolean;
     skip?: number;
     filter?: string;
+    expand?: string;
 }
 
-export class QueryString {
+export class ODataQueryString {
     private readonly parameters = new Map<string, string>();
 
     public value = '';
@@ -41,33 +43,45 @@ export class QueryString {
         if (params.filter) {
             this.filter(params.filter);
         }
+
+        if (params.expand) {
+            this.expand(params.expand);
+        }
     }
 
     public count(value: boolean = true) {
-        this.parameters.set(COUNT_KEY, value.toString());
+        this.parameters.set(ODATA_COUNT_KEY, value.toString());
     }
 
     public top(value?: number) {
         if (value === undefined || value === null) {
-            this.parameters.delete(TOP_KEY);
+            this.parameters.delete(ODATA_TOP_KEY);
         } else {
-            this.parameters.set(TOP_KEY, value.toString());
+            this.parameters.set(ODATA_TOP_KEY, value.toString());
         }
     }
 
     public skip(value?: number) {
         if (value) {
-            this.parameters.set(SKIP_KEY, value.toString());
+            this.parameters.set(ODATA_SKIP_KEY, value.toString());
         } else {
-            this.parameters.delete(SKIP_KEY);
+            this.parameters.delete(ODATA_SKIP_KEY);
         }
     }
 
     public filter(expression?: string) {
         if (expression) {
-            this.parameters.set(FILTER_KEY, expression);
+            this.parameters.set(ODATA_FILTER_KEY, expression);
         } else {
-            this.parameters.delete(FILTER_KEY);
+            this.parameters.delete(ODATA_FILTER_KEY);
+        }
+    }
+
+    public expand(expression?: string) {
+        if (expression) {
+            this.parameters.set(ODATA_EXPAND_KEY, expression);
+        } else {
+            this.parameters.delete(ODATA_EXPAND_KEY);
         }
     }
 

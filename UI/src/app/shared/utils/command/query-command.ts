@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
-import { QueryString } from './query-string';
+import { ODataQueryString } from './query-string';
 
 export class CommandResponse<T> {
     public isSuccess: boolean = false;
@@ -15,7 +15,7 @@ export class QueryCommand<T> {
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
     public response = new CommandResponse<T>();
-    public queryString = new QueryString();
+    public queryString = new ODataQueryString();
 
     constructor(private readonly request: (command: QueryCommand<T>) => Observable<T>) {
         this.response$

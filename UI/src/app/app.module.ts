@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -61,6 +61,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         {
             provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
             useValue: { duration: 2500 }
+        },
+        {
+            provide: DEFAULT_CURRENCY_CODE,
+            useValue: 'BRL'
         },
         {
             provide: CURRENCY_MASK_CONFIG,

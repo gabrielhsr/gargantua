@@ -1,4 +1,7 @@
 {
+  "category": {
+    "title": "Categoria"
+  },
   "common": {
     "amount": "Quantidade",
     "category": "Categoria",
@@ -8,27 +11,28 @@
     "empty-list": "Nenhum item cadastrado!",
     "exit": "Sair",
     "month": "Mês",
+    "months": {
+      "apr": "Abril",
+      "aug": "Agosto",
+      "dev": "Dezembro",
+      "fev": "Fevereiro",
+      "jan": "Janeiro",
+      "jul": "Julho",
+      "jun": "Junho",
+      "mar": "Março",
+      "may": "Maio",
+      "nov": "Novembro",
+      "oct": "Outubro",
+      "sep": "Setembro"
+    },
     "no-result": "Nenhum resultado para a busca!",
+    "no-result-found": "Nenhum resultado encontrado!",
     "password": "Senha",
     "payment-method": "Método de Pagamento",
     "purchase-date": "Data da Compra",
     "save": "Salvar",
     "total": "Total",
-    "year": "Ano",
-    "months": {
-      "jan": "Janeiro",
-      "fev": "Fevereiro",
-      "mar": "Março",
-      "apr": "Abril",
-      "may": "Maio",
-      "jun": "Junho",
-      "jul": "Julho",
-      "aug": "Agosto",
-      "sep": "Setembro",
-      "oct": "Outubro",
-      "nov": "Novembro",
-      "dev": "Dezembro"
-    }
+    "year": "Ano"
   },
   "expenses": {
     "category": "Categoria",
@@ -38,16 +42,16 @@
     "title": "Despesas"
   },
   "feedback": {
+    "form": {
+      "email": "Formato do e-mail inválido. Exemplo: nome@dominio.com.br",
+      "maxlength": "Campo deve conter no máximo {{required-length}} caracteres.",
+      "minlength": "Campo deve conter no mínimo {{required-length}} caracteres.",
+      "required": "Campo Obrigatório"
+    },
     "generic-error": "Ocorreu um erro ao realizar a ação!",
     "generic-success": "Ação realizada com sucesso.",
     "yes-or-no": {
       "title": "Realizar ação?"
-    },
-    "form": {
-      "required": "Campo Obrigatório",
-      "minlength": "Campo deve conter no mínimo {{required-length}} caracteres.",
-      "maxlength": "Campo deve conter no máximo {{required-length}} caracteres.",
-      "email": "Formato do e-mail inválido. Exemplo: nome@dominio.com.br"
     }
   },
   "home": {
@@ -57,5 +61,11 @@
     "signin": "Entrar",
     "signup": "Cadastrar",
     "title": "Login"
+  },
+  "payment-method": {
+    "title": "Forma de Pagamento"
+  },
+  "settings": {
+    "title": "Configurações"
   }
 }
