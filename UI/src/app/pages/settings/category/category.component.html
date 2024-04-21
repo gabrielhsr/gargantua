@@ -1,0 +1,22 @@
+<table mat-table [dataSource]="categoryDataSource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th *matHeaderCellDef> mat-header-cell Name </th>
+      <td *matCellDef="let element" mat-cell> {{ element.Name }} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Icon">
+      <th *matHeaderCellDef> mat-header-cell Weight </th>
+      <td *matCellDef="let element" mat-cell> {{ element.Icon }} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Color">
+      <th *matHeaderCellDef> mat-header-cell Symbol </th>
+      <td *matCellDef="let element" mat-cell> {{ element.Color }} </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>

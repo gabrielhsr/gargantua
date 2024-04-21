@@ -1,3 +1,4 @@
+import { ArrayDataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
 import { ODataQueryString } from './query-string';
@@ -16,6 +17,7 @@ export class QueryCommand<T> {
 
     public response = new CommandResponse<T>();
     public queryString = new ODataQueryString();
+    public dataSource: ArrayDataSource<T> = new ArrayDataSource<T>([]);
 
     constructor(private readonly request: (command: QueryCommand<T>) => Observable<T>) {
         this.response$
@@ -44,8 +46,7 @@ export class QueryCommand<T> {
                 catchError((res: HttpErrorResponse) => {
                     const response: CommandResponse<T> = {
                         isSuccess: false,
-                        error: res.message,
-                        data: {} as T
+                        error: res.message
                     };
 
                     return of(response);
@@ -59,8 +60,26 @@ export class QueryCommand<T> {
         this.destroy$.complete();
     }
 
+    public getDataSouce() {
+        const data = this.response.data as readonly T[];
+
+        return new ArrayDataSource(data);
+    }
+
     private handleResponse(response: CommandResponse<T>): void {
         this.isLoading$.next(false);
         this.response$.next(response);
+
+        if (!response.data) return;
+
+        const data = response.data as object;
+
+        if ('value' in data) {
+            this.dataSource = new ArrayDataSource(data.value as T[]);
+        } else if (response.data instanceof Array) {
+            this.dataSource = new ArrayDataSource(response.data as T[]);
+        } else {
+            this.dataSource = new ArrayDataSource([response.data]);
+        }
     }
 }

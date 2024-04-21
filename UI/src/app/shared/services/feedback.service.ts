@@ -83,13 +83,13 @@ export class FeedbackService {
         }
     }
 
-    public toastSuccessResponse<T>(res: CommandResponse<T>, successKey = 'Feedback.SuccessAction') {
+    public toastSuccessResponse<T>(res: CommandResponse<T>, successKey = 'feedback.generic-success') {
         if (res.isSuccess) {
             this.snackBar.open(this.translate.instant(successKey));
         }
     }
 
-    public toastErrorResponse<T>(res: CommandResponse<T>, errorKey = 'Feedback.GenericError') {
+    public toastErrorResponse<T>(res: CommandResponse<T>, errorKey = 'feedback.generic-error') {
         if (!res.isSuccess) {
             this.snackBar.open(this.translate.instant(errorKey));
         }
