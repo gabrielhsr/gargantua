@@ -1,6 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { TranslateModule } from '@ngx-translate/core';
 import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
+import { TypeSafeMatCellDef } from 'src/app/shared/directives/typed-cell-def.directive';
+import { TypeSafeMatRowDef } from 'src/app/shared/directives/typed-row-def.directive';
+import { EmptyPipe } from 'src/app/shared/pipes/empty.pipe';
 
 @Component({
     selector: 'g-category',
@@ -8,7 +13,12 @@ import { CategoryEndpoint } from 'src/app/domain/category/category.endpoint';
     styleUrls: ['./category.component.scss'],
     standalone: true,
     imports: [
-        MatTableModule
+        CommonModule,
+        MatTableModule,
+        EmptyPipe,
+        TranslateModule,
+        TypeSafeMatCellDef,
+        TypeSafeMatRowDef
     ]
 })
 export class CategoryComponent implements OnInit {

@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-tab-group>
+    <mat-tab-group mat-align-tabs="start" [mat-stretch-tabs]="isMobile$ | async">
         <mat-tab label="{{ 'category.title' | translate }}">
             <g-category></g-category>
         </mat-tab>

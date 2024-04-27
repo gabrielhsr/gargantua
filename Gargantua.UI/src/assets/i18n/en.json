@@ -5,11 +5,13 @@
   "common": {
     "amount": "Amount",
     "category": "Category",
+    "color": "",
     "description": "Description",
     "due-date": "Due Date",
     "email": "Email",
     "empty-list": "No items registered!",
     "exit": "Exit",
+    "icon": "",
     "month": "Month",
     "months": {
       "apr": "April",
@@ -25,6 +27,7 @@
       "oct": "October",
       "sep": "September"
     },
+    "name": "",
     "no-result": "No results for your search!",
     "no-result-found": "",
     "password": "Password",

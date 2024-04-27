@@ -5,11 +5,13 @@
   "common": {
     "amount": "Quantidade",
     "category": "Categoria",
+    "color": "Cor",
     "description": "Descrição",
     "due-date": "Data de Vencimento",
     "email": "E-mail",
     "empty-list": "Nenhum item cadastrado!",
     "exit": "Sair",
+    "icon": "Ícone",
     "month": "Mês",
     "months": {
       "apr": "Abril",
@@ -25,6 +27,7 @@
       "oct": "Outubro",
       "sep": "Setembro"
     },
+    "name": "Nome",
     "no-result": "Nenhum resultado para a busca!",
     "no-result-found": "Nenhum resultado encontrado!",
     "password": "Senha",

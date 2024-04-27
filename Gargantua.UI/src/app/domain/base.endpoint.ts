@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { OdataQueryCommand } from '../shared/utils/command/odata-query-command';
 import { QueryCommand } from '../shared/utils/command/query-command';
 import { ODataOptions, ODataQueryString } from '../shared/utils/command/query-string';
 import { BaseEntity, Guid, ODataResponse } from './base.model';
@@ -47,8 +48,8 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return new QueryCommand((command) => this.get(command.queryString));
     }
 
-    public getODataCommand(options?: ODataOptions): QueryCommand<ODataResponse<TEntity>> {
-        return new QueryCommand((command) => {
+    public getODataCommand(options?: ODataOptions) {
+        return new OdataQueryCommand<TEntity>((command) => {
             const defaultOperators = { top: 15, count: true };
 
             command.queryString.setParams(options ?? defaultOperators);

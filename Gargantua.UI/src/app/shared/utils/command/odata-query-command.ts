@@ -1,6 +1,7 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
+import { ODataResponse } from 'src/app/domain/base.model';
 import { ODataQueryString } from './query-string';
 
 export class CommandResponse<T> {
@@ -9,17 +10,17 @@ export class CommandResponse<T> {
     public error?: string;
 }
 
-export class QueryCommand<T> {
+export class OdataQueryCommand<T> {
     private readonly destroy$ = new Subject<void>();
 
-    public response$ = new Subject<CommandResponse<T>>();
+    public response$ = new Subject<CommandResponse<ODataResponse<T>>>();
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
-    public response = new CommandResponse<T>();
+    public response = new CommandResponse<ODataResponse<T>>();
     public queryString = new ODataQueryString();
     public dataSource: ArrayDataSource<T> = new ArrayDataSource<T>([]);
 
-    constructor(private readonly request: (command: QueryCommand<T>) => Observable<T>) {
+    constructor(private readonly request: (command: OdataQueryCommand<T>) => Observable<ODataResponse<T>>) {
         this.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((value) => this.response = value);
@@ -36,7 +37,7 @@ export class QueryCommand<T> {
             .pipe(
                 takeUntil(this.destroy$),
                 map((value) => {
-                    const response: CommandResponse<T> = {
+                    const response: CommandResponse<ODataResponse<T>> = {
                         isSuccess: true,
                         data: value
                     };
@@ -44,7 +45,7 @@ export class QueryCommand<T> {
                     return response;
                 }),
                 catchError((res: HttpErrorResponse) => {
-                    const response: CommandResponse<T> = {
+                    const response: CommandResponse<ODataResponse<T>> = {
                         isSuccess: false,
                         error: res.message
                     };
@@ -61,21 +62,21 @@ export class QueryCommand<T> {
     }
 
     public getDataSouce() {
-        const data = this.response.data as readonly T[];
+        const data = this.response.data?.value as readonly T[];
 
         return new ArrayDataSource(data);
     }
 
-    private handleResponse(response: CommandResponse<T>): void {
+    private handleResponse(response: CommandResponse<ODataResponse<T>>): void {
         this.isLoading$.next(false);
         this.response$.next(response);
 
         if (!response.data) return;
 
-        if (response.data instanceof Array) {
-            this.dataSource = new ArrayDataSource(response.data as T[]);
+        if (response.data.value instanceof Array) {
+            this.dataSource = new ArrayDataSource(response.data.value as T[]);
         } else {
-            this.dataSource = new ArrayDataSource([response.data]);
+            this.dataSource = new ArrayDataSource([response.data.value]);
         }
     }
 }
