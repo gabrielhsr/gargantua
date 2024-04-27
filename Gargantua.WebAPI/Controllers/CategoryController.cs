@@ -1,0 +1,15 @@
+﻿using Financial.Controllers.Base;
+using Gargantua.Domain.Entities;
+using Gargantua.Domain.Interfaces.Services.Base;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Financial.Controllers
+{
+    [Route("api/[controller]")]
+    public class CategoryController : BaseController<Category>
+    {
+        public CategoryController(IBaseService<Category> service) : base(service)
+        {
+        }
+    }
+}
