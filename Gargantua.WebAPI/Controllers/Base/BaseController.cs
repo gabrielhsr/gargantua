@@ -1,12 +1,13 @@
 ﻿using Gargantua.Domain.Entities;
 using Gargantua.Domain.Interfaces.Services.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
-namespace Financial.Controllers.Base
+namespace Gargantua.Controllers
 {
-    ////[Authorize]
+    [Authorize]
     [ApiController]
     public class BaseController<TEntity> : ODataController where TEntity : BaseEntity
     {

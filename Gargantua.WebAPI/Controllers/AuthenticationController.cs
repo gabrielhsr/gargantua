@@ -3,7 +3,7 @@ using Gargantua.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
 
-namespace Financial.Controllers
+namespace Gargantua.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
