@@ -8,5 +8,5 @@ The application's name is based on the black hole from the movie Interstellar. I
 
 ## Tech Stack
 
-**Front-End:** Angular 17 and Angular Material 17.
-**Back-End:** .NET 7.0, EF Core 7.0 and SQL Server.
+- **Front-End:** Angular 17 and Angular Material 17.
+- **Back-End:** .NET 7.0, EF Core 7.0 and SQL Server.
