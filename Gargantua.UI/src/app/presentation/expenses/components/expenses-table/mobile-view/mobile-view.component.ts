@@ -3,10 +3,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule } from '@ngx-translate/core';
-import { ODataResponse } from 'src/app/domain/base.model';
 import { Expense } from 'src/app/domain/expense/expense.model';
 import { EmptyPipe } from 'src/app/shared/pipes/empty.pipe';
-import { QueryCommand } from 'src/app/shared/utils/command/query-command';
+import { OdataQueryCommand } from 'src/app/shared/utils/command/odata/odata-query-command';
 
 @Component({
     selector: 'expenses-mobile-view',
@@ -22,7 +21,7 @@ import { QueryCommand } from 'src/app/shared/utils/command/query-command';
     ]
 })
 export class ExpensesMobileViewComponent {
-    @Input({ required: true }) public expensesCommand?: QueryCommand<ODataResponse<Expense>>;
+    @Input({ required: true }) public expensesCommand?: OdataQueryCommand<Expense>;
 
     @Output() public editExpense = new EventEmitter<Expense>();
     @Output() public deleteExpense = new EventEmitter<Expense>();

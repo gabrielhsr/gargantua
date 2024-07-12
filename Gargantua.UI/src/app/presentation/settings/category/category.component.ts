@@ -28,7 +28,7 @@ export class CategoryComponent implements OnInit {
     constructor(private readonly categoryEndpoint: CategoryEndpoint) {}
 
     public get categoryDataSource() {
-        return this.categoryCommand.dataSource;
+        return this.categoryCommand.getOdataDataSource();
     }
 
     public ngOnInit() {

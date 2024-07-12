@@ -8,10 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
-import { BaseEntity, ODataResponse } from 'src/app/domain/base.model';
+import { BaseEntity } from 'src/app/domain/base.model';
 import { FeedbackService } from '../../services/feedback.service';
-import { REPLACEABLE_KEY } from '../../utils/command/filter-builder';
-import { QueryCommand } from '../../utils/command/query-command';
+import { OdataQueryCommand } from '../../utils/command/odata/odata-query-command';
+import { REPLACEABLE_KEY } from '../../utils/filter-builder/filter-builder';
 
 @Component({
     selector: 'searchable-autocomplete',
@@ -50,7 +50,7 @@ export class SearchableAutocompleteComponent<TEntity extends BaseEntity> impleme
     
     protected readonly feedbackService = inject(FeedbackService);
 
-    @Input() public queryCommand?: QueryCommand<ODataResponse<TEntity>>;
+    @Input() public queryCommand?: OdataQueryCommand<TEntity>;
     @Input() public label: string = 'no-label';
     @Input() public placeholder: string = '';
 

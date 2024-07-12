@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { YesOrNoData, YesOrNoDialogComponent } from '../components/yes-no-dialog/yes-no-dialog.component';
-import { CommandResponse } from '../utils/command/query-command';
+import { CommandResponse } from '../utils/command/common';
 
 export type ActionDialogRes = undefined | {
     confirm: boolean;

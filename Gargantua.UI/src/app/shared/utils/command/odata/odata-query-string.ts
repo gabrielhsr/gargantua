@@ -1,3 +1,5 @@
+import { IQueryString, QueryString } from '../base/query-string';
+
 const ODATA_FILTER_KEY = '$filter';
 const ODATA_TOP_KEY = '$top';
 const ODATA_COUNT_KEY = '$count';
@@ -12,21 +14,16 @@ export interface ODataOptions {
     expand?: string;
 }
 
-export class ODataQueryString {
-    private readonly parameters = new Map<string, string>();
+export interface IODataQueryString extends IQueryString {
+    setParams: (params: ODataOptions) => void;
+    count: (value: boolean) => void;
+    top: (value?: number) => void;
+    skip: (value?: number) => void;
+    filter: (expression?: string) => void;
+    expand: (expression?: string) => void;
+}
 
-    public value = '';
-
-    public buildUrl(baseUrl: string) {
-        const hasParameter = this.parameters.size >= 1;
-
-        return hasParameter ? `${baseUrl}?${this.buildQueryString()}` : baseUrl;
-    }
-
-    public addParam(parameter: string, value: string | boolean | number) {
-        this.parameters.set(parameter, value.toString());
-    }
-
+export class ODataQueryString extends QueryString implements IODataQueryString {
     public setParams(params: ODataOptions) {
         if (params.top) {
             this.top(params.top);
@@ -83,17 +80,5 @@ export class ODataQueryString {
         } else {
             this.parameters.delete(ODATA_EXPAND_KEY);
         }
-    }
-
-    private buildQueryString() {
-        this.value = '';
-
-        this.parameters.forEach((value, key) => {
-            const isFirst = this.value === '';
-
-            this.value += isFirst ? `${key}=${value}` : `&${key}=${value}`;
-        });
-
-        return this.value;
     }
 }

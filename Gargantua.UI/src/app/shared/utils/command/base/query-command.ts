@@ -1,29 +1,35 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, catchError, map, of, takeUntil } from 'rxjs';
-import { ODataQueryString } from './query-string';
+import { CommandResponse } from '../common';
+import { IQueryString, QueryString } from './query-string';
 
-export class CommandResponse<T> {
-    public isSuccess: boolean = false;
-    public data?: T;
-    public error?: string;
+export interface IQueryCommand<T> {
+    response$: Subject<CommandResponse<T>>;
+    isLoading$: BehaviorSubject<boolean>;
+
+    response: CommandResponse<T>;
+    queryString: IQueryString;
+
+    isLoading: boolean;
+
+    execute: () => void;
+    destroy: () => void;
+
+    getDataSource: () => ArrayDataSource<T>;
 }
 
-export class QueryCommand<T> {
+export class QueryCommand<T> implements IQueryCommand<T> {
     private readonly destroy$ = new Subject<void>();
+    private dataSource: ArrayDataSource<T> = new ArrayDataSource<T>([]);
 
     public response$ = new Subject<CommandResponse<T>>();
     public isLoading$ = new BehaviorSubject<boolean>(false);
 
     public response = new CommandResponse<T>();
-    public queryString = new ODataQueryString();
-    public dataSource: ArrayDataSource<T> = new ArrayDataSource<T>([]);
+    public queryString: IQueryString = new QueryString();
 
-    constructor(private readonly request: (command: QueryCommand<T>) => Observable<T>) {
-        this.response$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((value) => this.response = value);
-    }
+    constructor(private readonly request: (command: IQueryCommand<T>) => Observable<T>) {}
 
     public get isLoading(): boolean {
         return this.isLoading$.value;
@@ -60,15 +66,14 @@ export class QueryCommand<T> {
         this.destroy$.complete();
     }
 
-    public getDataSouce() {
-        const data = this.response.data as readonly T[];
-
-        return new ArrayDataSource(data);
+    public getDataSource() {
+        return this.dataSource;
     }
 
-    private handleResponse(response: CommandResponse<T>): void {
+    protected handleResponse(response: CommandResponse<T>): void {
         this.isLoading$.next(false);
         this.response$.next(response);
+        this.response = response;
 
         if (!response.data) return;
 

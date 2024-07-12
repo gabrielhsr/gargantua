@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { OdataQueryCommand } from '../shared/utils/command/odata-query-command';
-import { QueryCommand } from '../shared/utils/command/query-command';
-import { ODataOptions, ODataQueryString } from '../shared/utils/command/query-string';
+import { QueryCommand } from '../shared/utils/command/base/query-command';
+import { IQueryString } from '../shared/utils/command/base/query-string';
+import { OdataQueryCommand } from '../shared/utils/command/odata/odata-query-command';
+import { ODataOptions } from '../shared/utils/command/odata/odata-query-string';
 import { BaseEntity, Guid, ODataResponse } from './base.model';
 
 const API_URL = 'api';
@@ -20,15 +21,15 @@ export abstract class BaseEndpoint<TEntity extends BaseEntity> {
         return this.activator.className;
     }
 
-    public get(queryString: ODataQueryString) {
+    public get(queryString: IQueryString) {
         return this.httpClient.get<TEntity[]>(queryString.buildUrl(`${this.apiUrl}\\${API_URL}\\${this.entityName}`));
     }
 
-    public getOData(queryString: ODataQueryString) {
+    public getOData(queryString: IQueryString) {
         return this.httpClient.get<ODataResponse<TEntity>>(queryString.buildUrl(`${this.apiUrl}\\${ODATA_URL}\\${this.entityName}`));
     }
 
-    public getById(queryString: ODataQueryString, id: string): Observable<TEntity> {
+    public getById(queryString: IQueryString, id: string): Observable<TEntity> {
         return this.httpClient.get<TEntity>(`${this.apiUrl}\\${this.entityName}\\${API_URL}\\${id}`);
     }
 

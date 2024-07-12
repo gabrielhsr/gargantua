@@ -15,14 +15,14 @@ const routes: Routes = [
     },
     {
         path: 'login',
-        loadChildren: () => import('./pages/login/login.routes').then((x) => x.loginRoutes),
+        loadChildren: () => import('./presentation/login/login.routes').then((x) => x.loginRoutes),
         data: {
             showMenu: false
         }
     },
     {
         path: 'home',
-        loadChildren: () => import('./pages/home/home.routes').then((x) => x.homeRoutes),
+        loadChildren: () => import('./presentation/home/home.routes').then((x) => x.homeRoutes),
         data: {
             title: 'home.title',
             showMenu: true
@@ -31,7 +31,7 @@ const routes: Routes = [
     },
     {
         path: 'expenses',
-        loadChildren: () => import('./pages/expenses/expenses.routes').then((x) => x.expensesRoutes),
+        loadChildren: () => import('./presentation/expenses/expenses.routes').then((x) => x.expensesRoutes),
         data: {
             title: 'expenses.title',
             showMenu: true
@@ -40,7 +40,7 @@ const routes: Routes = [
     },
     {
         path: 'settings',
-        loadChildren: () => import('./pages/settings/settings.routes').then((x) => x.settingsRoutes),
+        loadChildren: () => import('./presentation/settings/settings.routes').then((x) => x.settingsRoutes),
         data: {
             title: 'settings.title',
             showMenu: true
@@ -49,7 +49,7 @@ const routes: Routes = [
     },
     // {
     //     path: 'income',
-    //     loadChildren: () => import('./pages/income/income.module').then((m) => m.IncomeModule),
+    //     loadChildren: () => import('./presentation/income/income.module').then((m) => m.IncomeModule),
     //     data: {
     //         title: 'Sidebar.Income',
     //         showMenu: true

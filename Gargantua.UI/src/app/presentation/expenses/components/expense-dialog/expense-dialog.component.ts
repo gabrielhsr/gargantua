@@ -20,7 +20,7 @@ import { PaymentMethodEndpoint } from 'src/app/domain/payment-method/payment-met
 import { PaymentMethod } from 'src/app/domain/payment-method/payment-method.model';
 import { SearchableAutocompleteComponent } from 'src/app/shared/components/searchable-autocomplete/searchable-autocomplete.component';
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
-import { FilterBuilder, REPLACEABLE_KEY } from 'src/app/shared/utils/command/filter-builder';
+import { FilterBuilder, REPLACEABLE_KEY } from 'src/app/shared/utils/filter-builder/filter-builder';
 
 @Component({
     selector: 'expense-dialog',
