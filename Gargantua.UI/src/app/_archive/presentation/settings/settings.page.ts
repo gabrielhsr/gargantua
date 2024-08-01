@@ -7,7 +7,7 @@ import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 import { CategoryComponent } from './category/category.component';
 
 @Component({
-    selector: 'g-settings',
+    selector: 'app-settings',
     templateUrl: './settings.page.html',
     styleUrls: ['./settings.page.scss'],
     standalone: true,

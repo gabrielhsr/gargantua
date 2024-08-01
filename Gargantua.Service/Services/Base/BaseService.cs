@@ -1,6 +1,5 @@
 ﻿using Gargantua.Domain.Entities;
 using Gargantua.Domain.Extensions;
-using Gargantua.Domain.Interfaces.Providers;
 using Gargantua.Domain.Interfaces.Repositories;
 using Gargantua.Domain.Interfaces.Services;
 using Gargantua.Domain.Interfaces.Services.Base;
@@ -9,23 +8,11 @@ namespace Gargantua.Service.Services
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
-        private readonly IUserProvider userProvider;
-
         public readonly IBaseRepository<T> repository;
-
-        public Guid IdUser
-        {
-            get
-            {
-                return userProvider.GetIdUser();
-            }
-            private set { }
-        }
 
         public BaseService(IDependencyAggregate<T> dependencyAggregate)
         {
             repository = dependencyAggregate.BaseRepository;
-            userProvider = dependencyAggregate.UserProvider;
         }
 
         public virtual async Task<T> RemoveAsync(Guid id)

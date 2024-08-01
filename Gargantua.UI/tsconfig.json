@@ -22,7 +22,11 @@
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "lib": ["es2020", "dom"],
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "paths": {
+            "@gargantua/*": ["./src/app/*"],
+            "@env/*": ["./src/environments/*"]
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

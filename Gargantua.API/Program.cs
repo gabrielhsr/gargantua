@@ -1,7 +1,5 @@
-using Gargantua.API.Providers;
 using Gargantua.Core.Repositories;
 using Gargantua.Data;
-using Gargantua.Domain.Interfaces.Providers;
 using Gargantua.Domain.Interfaces.Repositories;
 using Gargantua.Domain.Interfaces.Services;
 using Gargantua.Domain.Interfaces.Services.Base;
@@ -36,10 +34,6 @@ services.AddDbContext<GargantuaDbContext>(opts =>
         .EnableDetailedErrors()
         .EnableSensitiveDataLogging();
 });
-
-// HttpContext
-services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-services.AddSingleton<IUserProvider, UserProvider>();
 
 // Repositories
 services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

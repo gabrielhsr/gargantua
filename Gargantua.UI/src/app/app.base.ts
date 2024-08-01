@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'g-root',
+    selector: 'app-root',
     templateUrl: './app.base.html',
     styleUrls: ['./app.base.scss']
 })

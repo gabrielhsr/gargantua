@@ -21,7 +21,7 @@
                     <mat-error>{{ feedbackService.getFormError('Password', loginForm) }}</mat-error>
                 </mat-form-field>
 
-                <button type="submit" mat-flat-button color="accent" [disabled]="loginForm.invalid" (click)="signInCommand.execute()">
+                <button type="submit" mat-flat-button color="accent" (click)="login()">
                     {{ 'login.signin' | translate }}
                 </button>
 

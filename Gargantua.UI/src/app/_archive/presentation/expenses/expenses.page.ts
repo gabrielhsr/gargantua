@@ -6,7 +6,7 @@ import { ExpensesTableComponent } from './components/expenses-table/expenses-tab
 import { ExpenseService } from './services/expense.service';
 
 @Component({
-    selector: 'g-page-expenses',
+    selector: 'app-page-expenses',
     templateUrl: './expenses.page.html',
     styleUrls: ['./expenses.page.scss'],
     standalone: true,

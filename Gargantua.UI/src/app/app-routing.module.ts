@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './shared/guards/auth.guard';
 
 export interface RouteData {
     title: string;
@@ -10,55 +9,24 @@ export interface RouteData {
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'auth',
         pathMatch: 'full'
     },
     {
-        path: 'login',
-        loadChildren: () => import('./presentation/login/login.routes').then((x) => x.loginRoutes),
-        data: {
-            showMenu: false
-        }
+        path: 'auth',
+        loadChildren: () => import('./pages/auth/routes/auth.routes').then((x) => x.authRoutes)
     },
     {
         path: 'home',
-        loadChildren: () => import('./presentation/home/home.routes').then((x) => x.homeRoutes),
-        data: {
-            title: 'home.title',
-            showMenu: true
-        },
-        canActivate: [AuthGuard]
+        loadChildren: () => import('./pages/home/routes/home.routes').then((x) => x.homeRoutes)
     },
     {
-        path: 'expenses',
-        loadChildren: () => import('./presentation/expenses/expenses.routes').then((x) => x.expensesRoutes),
-        data: {
-            title: 'expenses.title',
-            showMenu: true
-        },
-        canActivate: [AuthGuard]
+        path: 'fallback',
+        loadChildren: () => import('./pages/fallback/routes/fallback.routes').then((x) => x.fallbackRoutes)
     },
-    {
-        path: 'settings',
-        loadChildren: () => import('./presentation/settings/settings.routes').then((x) => x.settingsRoutes),
-        data: {
-            title: 'settings.title',
-            showMenu: true
-        },
-        canActivate: [AuthGuard]
-    },
-    // {
-    //     path: 'income',
-    //     loadChildren: () => import('./presentation/income/income.module').then((m) => m.IncomeModule),
-    //     data: {
-    //         title: 'Sidebar.Income',
-    //         showMenu: true
-    //     },
-    //     canActivate: [AuthGuard]
-    // },
     {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'fallback/not-found',
         pathMatch: 'full'
     }
 ];

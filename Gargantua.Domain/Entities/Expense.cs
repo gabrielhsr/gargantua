@@ -21,5 +21,12 @@
         public virtual PaymentMethod PaymentMethod { get; set; }
 
         public virtual User User { get; set; }
+
+        public Expense SetUser(Guid idUser)
+        {
+            IdUser = idUser;
+
+            return this;
+        }
     }
 }

@@ -26,8 +26,6 @@ namespace Gargantua.Service.Services
                 dbContext.Entry(entity.PaymentMethod).State = EntityState.Unchanged;
             }
 
-            entity.IdUser = IdUser;
-
             return base.SaveAsync(id, entity);
         }
     }

@@ -99,7 +99,7 @@
                         }
                     },
                     "options": {
-                        "ssl": true
+                        "ssl": false
                     },
                     "defaultConfiguration": "development"
                 },

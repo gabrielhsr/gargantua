@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationEndpoint } from 'src/app/domain/authentication/authentication.endpoint';
 import { LoadingDirective } from 'src/app/shared/directives/loading.directive';
@@ -15,7 +16,7 @@ import { AuthenticationHelper } from 'src/app/shared/helpers/authentication.help
 import { FeedbackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
-    selector: 'g-login',
+    selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
     standalone: true,
@@ -37,6 +38,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private readonly authenticationEndpoint = inject(AuthenticationEndpoint);
     private readonly router = inject(Router);
 
+    private readonly oidcSecurityService = inject(OidcSecurityService);
+
     public readonly feedbackService = inject(FeedbackService);
 
     public validateTokenCommand = this.authenticationEndpoint.validateTokenCommand(() => AuthenticationHelper.getToken());
@@ -55,6 +58,14 @@ export class LoginPage implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
+        this.oidcSecurityService
+            .checkAuth()
+            .subscribe((loginRes) => {
+                console.info(loginRes);
+            });
+
+        this.oidcSecurityService.getAccessToken().subscribe((token) => console.log(token));
+
         this.validateTokenCommand.response$
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
@@ -90,5 +101,9 @@ export class LoginPage implements OnInit, OnDestroy {
 
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    public login() {
+        this.oidcSecurityService.authorize();
     }
 }

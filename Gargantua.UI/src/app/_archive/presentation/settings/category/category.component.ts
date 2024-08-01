@@ -8,7 +8,7 @@ import { TypeSafeMatRowDef } from 'src/app/shared/directives/typed-row-def.direc
 import { EmptyPipe } from 'src/app/shared/pipes/empty.pipe';
 
 @Component({
-    selector: 'g-category',
+    selector: 'app-category',
     templateUrl: './category.component.html',
     styleUrls: ['./category.component.scss'],
     standalone: true,
