@@ -10,10 +10,10 @@ import localePT from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { CurrencyMaskConfig } from 'ng2-currency-mask';
 import { AppBase } from './app.base';
 import { AuthConfigModule } from './shared/auth/auth-config.module';
 
@@ -24,16 +24,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(http);
 }
 
-export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-    align: 'right',
-    allowNegative: true,
-    decimal: ',',
-    precision: 2,
-    prefix: 'R$ ',
-    suffix: '',
-    thousands: '.'
-};
-
 @NgModule({
     declarations: [AppBase],
     imports: [
@@ -41,7 +31,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule,
-        HttpClientModule,
         TranslateModule.forRoot(
             {
                 defaultLanguage: 'pt-br',
@@ -62,7 +51,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         {
             provide: LOCALE_ID,
             useValue: 'pt-BR'
-        }
+        },
+        provideAnimationsAsync(),
+        provideHttpClient(withInterceptorsFromDi())
     ],
     bootstrap: [AppBase]
 })
