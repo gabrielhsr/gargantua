@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ensureLogged, ensureNotLogged } from './shared/auth/auth.guard';
 
 export interface RouteData {
     title: string;
@@ -14,19 +15,21 @@ const routes: Routes = [
     },
     {
         path: 'auth',
+        canActivate: [ensureNotLogged],
         loadChildren: () => import('./pages/auth/routes/auth.routes').then((x) => x.authRoutes)
     },
     {
         path: 'home',
+        canActivate: [ensureLogged],
         loadChildren: () => import('./pages/home/routes/home.routes').then((x) => x.homeRoutes)
     },
     {
-        path: 'fallback',
+        path: '',
         loadChildren: () => import('./pages/fallback/routes/fallback.routes').then((x) => x.fallbackRoutes)
     },
     {
         path: '**',
-        redirectTo: 'fallback/not-found',
+        redirectTo: 'not-found',
         pathMatch: 'full'
     }
 ];

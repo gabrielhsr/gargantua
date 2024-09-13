@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --o",
-    "start-host": "ng serve --o --host 0.0.0.0 --disable-host-check",
+    "start": "ng serve -c local --o",
+    "start-host": "ng serve -c local --o --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint"

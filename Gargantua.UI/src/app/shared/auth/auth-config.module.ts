@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { AuthModule } from 'angular-auth-oidc-client';
+import { environment } from '@env/environment';
+import { AuthModule, provideAuth } from 'angular-auth-oidc-client';
 
 @NgModule({
-    imports: [
-        AuthModule.forRoot({
+    providers: [
+        provideAuth({
             config: {
-                authority: 'https://login.microsoftonline.com/99ac8aab-50ef-4acc-8057-54f612bb6dc8/v2.0',
-                authWellknownEndpointUrl: 'https://login.microsoftonline.com/99ac8aab-50ef-4acc-8057-54f612bb6dc8/v2.0',
-                redirectUrl: 'http://localhost:4200',
-                clientId: '38e14400-af20-4076-928c-8bdcccd3afdb',
-                scope: 'openid profile offline_access',
+                authority: environment.authority,
+                redirectUrl: environment.baseUi,
+                clientId: environment.clientId,
+                scope: environment.scopes,
                 responseType: 'code',
                 silentRenew: true,
                 useRefreshToken: true,
@@ -17,9 +17,9 @@ import { AuthModule } from 'angular-auth-oidc-client';
                 issValidationOff: false,
                 autoUserInfo: false,
                 ignoreNonceAfterRefresh: true,
-                secureRoutes: ['http://localhost:4200']
+                secureRoutes: [environment.baseUi]
             },
-        }),
+        })
     ],
     exports: [AuthModule],
 })

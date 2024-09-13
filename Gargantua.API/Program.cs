@@ -10,16 +10,16 @@ using Gargantua.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.Identity.Web;
 using Newtonsoft.Json;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
+var configuration = builder.Configuration;
+var connectionString = configuration.GetConnectionString("DbConnectionString");
 var services = builder.Services;
 
 // Cors
-var origins = builder.Configuration.GetSection("AllowedOrigins").Value.Split(",");
+var origins = configuration.GetSection("AllowedOrigins").Value.Split(",");
 
 services.AddCors(opts =>
 {
@@ -44,29 +44,22 @@ services.AddScoped(typeof(IDependencyAggregate<>), typeof(DependencyAggregate<>)
 // Services
 services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
-services.AddScoped<IAuthenticationService, AuthenticationService>();
-services.AddScoped<IExpenseService, ExpenseService>();
+// Authentication
+var daConfig = builder.Configuration.GetSection("DownstreamApi");
 
 services
     .AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration.GetSection("ValidIssuer").Value,
-            ValidAudience = builder.Configuration.GetSection("ValidAudience").Value,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("IssuerSigningKey").Value!))
-        };
-    });
+    .AddMicrosoftIdentityWebApi(configuration, "AzureAd")
+    .EnableTokenAcquisitionToCallDownstreamApi()
+    .AddDownstreamApi("DownstreamApi", daConfig)
+    .AddInMemoryTokenCaches();
 
+// Routes
 services
     .AddControllers()
     .AddOData(options =>
@@ -110,6 +103,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapRazorPages();
 
 app.UseMiddleware<ODataResponseMiddleware>();

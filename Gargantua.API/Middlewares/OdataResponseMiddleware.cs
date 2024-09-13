@@ -26,7 +26,9 @@
                 await RemoveODataPropertiesAsync(response);
 
                 newBody.Seek(0, SeekOrigin.Begin);
+
                 await newBody.CopyToAsync(originBody);
+
                 response.Body = originBody;
             }
             else
