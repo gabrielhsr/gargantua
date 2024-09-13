@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Gargantua.API/appsettings.EntraId.json
+/Gargantua.API/appsettings.Local.json
+/Gargantua.UI/src/environments/environment.local.ts
