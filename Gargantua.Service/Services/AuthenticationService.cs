@@ -7,13 +7,13 @@ using System.Security.Authentication;
 
 namespace Gargantua.Service.Services
 {
-    public class AuthenticationService : BaseService<User>, IAuthenticationService
+    public class AuthenticationService : BaseService<User, Guid>, IAuthenticationService
     {
         private readonly TokenHelper tokenHelper;
         private readonly string pepper;
         private readonly int iteration = 5;
 
-        public AuthenticationService(IDependencyAggregate<User> aggregate, IConfiguration configuration) : base(aggregate)
+        public AuthenticationService(IDependencyAggregate<User, Guid> aggregate, IConfiguration configuration) : base(aggregate)
         {
             var validIssuer = configuration.GetSection("ValidIssuer").Value;
             var validAudience = configuration.GetSection("ValidAudience").Value;

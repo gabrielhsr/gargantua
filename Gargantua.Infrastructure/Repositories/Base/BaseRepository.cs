@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gargantua.Core.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<TEntity, TID> : IBaseRepository<TEntity, TID> where TEntity : BaseEntity<TID>
     {
         public DbContext Context { get; }
 
@@ -14,7 +14,7 @@ namespace Gargantua.Core.Repositories
             Context = context;
         }
 
-        public virtual async Task<T> AddAsync(T entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await Context.AddAsync(entity);
             await Context.SaveChangesAsync();
@@ -22,7 +22,7 @@ namespace Gargantua.Core.Repositories
             return entity;
         }
 
-        public virtual async Task<T> DeleteAsync(Guid id)
+        public virtual async Task<TEntity> DeleteAsync(TID id)
         {
             var entity = await GetByIdAsync(id);
 
@@ -31,37 +31,37 @@ namespace Gargantua.Core.Repositories
                 throw new Exception("Id not found!");
             }
 
-            Context.Set<T>().Remove(entity);
+            Context.Set<TEntity>().Remove(entity);
             await Context.SaveChangesAsync();
 
             return entity;
         }
 
-        public virtual async Task<bool> Exists(Guid id)
+        public virtual async Task<bool> Exists(TID id)
         {
             var entity = await Context
-                .Set<T>()
+                .Set<TEntity>()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(entity => entity.Id.Equals(id));
 
             return entity != null;
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<TEntity> GetAll()
         {
             return Context
-                .Set<T>()
+                .Set<TEntity>()
                 .AsQueryable();
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id)
+        public virtual async Task<TEntity> GetByIdAsync(TID id)
         {
             return await Context
-                .Set<T>()
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .Set<TEntity>()
+                .FirstOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
-        public virtual async Task<T> UpdateAsync(T entity)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             Context.Update(entity);
             await Context.SaveChangesAsync();

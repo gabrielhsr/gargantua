@@ -23,6 +23,11 @@ export class AuthService {
         this.oidcSecurityService.authorize(undefined);
     }
 
+    public logout() {
+        this.oidcSecurityService.logoffLocal();
+        window.location.reload();
+    }
+
     public startAuthPipe() {
         const auth$ = this.oidcSecurityService.checkAuth()
             .pipe(

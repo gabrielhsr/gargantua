@@ -1,10 +1,10 @@
 ﻿namespace Gargantua.Domain.Interfaces.Services.Base
 {
-    public interface IBaseService<T>
+    public interface IBaseService<TEntity, TID>
     {
-        Task<T> GetByIdAsync(Guid id);
-        IQueryable<T> GetAll();
-        Task<T> RemoveAsync(Guid id);
-        Task<T> SaveAsync(Guid id, T entity);
+        Task<TEntity> GetByIdAsync(TID id);
+        IQueryable<TEntity> GetAll();
+        Task<TEntity> RemoveAsync(TID id);
+        Task<TEntity> SaveAsync(TID id, TEntity entity);
     }
 }

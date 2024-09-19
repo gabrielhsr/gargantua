@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gargantua.Domain.Interfaces.Services
 {
-    public interface IDependencyAggregate<T> where T : BaseEntity
+    public interface IDependencyAggregate<TEntity, TID> where TEntity : BaseEntity<TID>
     {
-        IBaseRepository<T> BaseRepository { get; }
+        IBaseRepository<TEntity, TID> BaseRepository { get; }
         DbContext DbContext { get; }
     }
 }

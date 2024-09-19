@@ -1,6 +1,6 @@
 ﻿namespace Gargantua.Domain.Entities
 {
-    public class User : BaseEntity
+    public class User : BaseEntity<Guid>
     {
         public string Email { get; set; }
 

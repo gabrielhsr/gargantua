@@ -36,13 +36,13 @@ services.AddDbContext<GargantuaDbContext>(opts =>
 });
 
 // Repositories
-services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
 
 // DI Aggregator
-services.AddScoped(typeof(IDependencyAggregate<>), typeof(DependencyAggregate<>));
+services.AddScoped(typeof(IDependencyAggregate<,>), typeof(DependencyAggregate<,>));
 
 // Services
-services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
 // Authentication
 var daConfig = builder.Configuration.GetSection("DownstreamApi");

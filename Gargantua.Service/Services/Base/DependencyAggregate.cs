@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gargantua.Service.Services
 {
-    public class DependencyAggregate<T> : IDependencyAggregate<T> where T : BaseEntity
+    public class DependencyAggregate<TEntity, TID> : IDependencyAggregate<TEntity, TID> where TEntity : BaseEntity<TID>
     {
-        public DependencyAggregate(IBaseRepository<T> baseRepository, GargantuaDbContext dbContext)
+        public DependencyAggregate(IBaseRepository<TEntity, TID> baseRepository, GargantuaDbContext dbContext)
         {
             BaseRepository = baseRepository;
             DbContext = dbContext;
         }
 
-        public IBaseRepository<T> BaseRepository { get; }
+        public IBaseRepository<TEntity, TID> BaseRepository { get; }
         public DbContext DbContext { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Gargantua.Domain.Entities
 {
-    public class Expense : BaseEntity
+    public class Expense : BaseEntity<Guid>
     {
         public Guid IdCategory { get; set; }
 

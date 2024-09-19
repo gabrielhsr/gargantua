@@ -5,13 +5,11 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.API", "Gargantua.API\Gargantua.API.csproj", "{2FCF90D0-282B-4282-8C03-264CAEB67FF2}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Gargantua.UI", "Gargantua.UI\Gargantua.UI.esproj", "{A2311B58-D826-4164-8ADE-4446A9D33AC8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Domain", "Gargantua.Domain\Gargantua.Domain.csproj", "{30C78CBC-D825-42A8-8778-7D70E6873B39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Infrastructure", "Gargantua.Infrastructure\Gargantua.Infrastructure.csproj", "{420C252D-77B7-448D-92EA-23112395440A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gargantua.Service", "Gargantua.Service\Gargantua.Service.csproj", "{85522644-B556-4721-BECF-24606A876D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Service", "Gargantua.Service\Gargantua.Service.csproj", "{85522644-B556-4721-BECF-24606A876D99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +21,6 @@ Global
 		{2FCF90D0-282B-4282-8C03-264CAEB67FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FCF90D0-282B-4282-8C03-264CAEB67FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FCF90D0-282B-4282-8C03-264CAEB67FF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2311B58-D826-4164-8ADE-4446A9D33AC8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{30C78CBC-D825-42A8-8778-7D70E6873B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30C78CBC-D825-42A8-8778-7D70E6873B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30C78CBC-D825-42A8-8778-7D70E6873B39}.Release|Any CPU.ActiveCfg = Release|Any CPU

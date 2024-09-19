@@ -3,7 +3,7 @@ using Gargantua.Domain.Interfaces.Services.Base;
 
 namespace Gargantua.Domain.Interfaces.Services
 {
-    public interface IAuthenticationService : IBaseService<User>
+    public interface IAuthenticationService : IBaseService<User, Guid>
     {
         Task<Authorization> LoginAsync(Login user);
         bool ValidateToken(string token);

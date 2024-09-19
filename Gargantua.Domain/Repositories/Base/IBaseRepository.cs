@@ -2,14 +2,14 @@
 
 namespace Gargantua.Domain.Interfaces.Repositories
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<TEntity, TID> where TEntity : class
     {
         DbContext Context { get; }
-        Task<T> GetByIdAsync(Guid id);
-        IQueryable<T> GetAll();
-        Task<T> AddAsync(T entity);
-        Task<T> DeleteAsync(Guid id);
-        Task<T> UpdateAsync(T entity);
-        Task<bool> Exists(Guid id);
+        Task<TEntity> GetByIdAsync(TID id);
+        IQueryable<TEntity> GetAll();
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> DeleteAsync(TID id);
+        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<bool> Exists(TID id);
     }
 }

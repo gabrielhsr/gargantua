@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gargantua.Service.Services
 {
-    public class ExpenseService : BaseService<Expense>, IExpenseService
+    public class ExpenseService : BaseService<Expense, Guid>, IExpenseService
     {
         private readonly DbContext dbContext;
 
-        public ExpenseService(IDependencyAggregate<Expense> dependencyAggregate) : base(dependencyAggregate)
+        public ExpenseService(IDependencyAggregate<Expense, Guid> dependencyAggregate) : base(dependencyAggregate)
         {
             dbContext = dependencyAggregate.DbContext;
         }

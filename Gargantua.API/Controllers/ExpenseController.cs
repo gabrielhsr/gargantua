@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gargantua.Controllers
 {
     [Route("api/[controller]")]
-    public class ExpenseController : BaseController<Expense>
+    public class ExpenseController : BaseController<Expense, Guid>
     {
         public ExpenseController(IExpenseService service) : base(service)
         {

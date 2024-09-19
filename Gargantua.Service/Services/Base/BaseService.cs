@@ -1,38 +1,37 @@
 ﻿using Gargantua.Domain.Entities;
-using Gargantua.Domain.Extensions;
 using Gargantua.Domain.Interfaces.Repositories;
 using Gargantua.Domain.Interfaces.Services;
 using Gargantua.Domain.Interfaces.Services.Base;
 
 namespace Gargantua.Service.Services
 {
-    public class BaseService<T> : IBaseService<T> where T : BaseEntity
+    public class BaseService<TEntity, TID> : IBaseService<TEntity, TID> where TEntity : BaseEntity<TID>
     {
-        public readonly IBaseRepository<T> repository;
+        public readonly IBaseRepository<TEntity, TID> repository;
 
-        public BaseService(IDependencyAggregate<T> dependencyAggregate)
+        public BaseService(IDependencyAggregate<TEntity, TID> dependencyAggregate)
         {
             repository = dependencyAggregate.BaseRepository;
         }
 
-        public virtual async Task<T> RemoveAsync(Guid id)
+        public virtual async Task<TEntity> RemoveAsync(TID id)
         {
             return await repository.DeleteAsync(id);
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<TEntity> GetAll()
         {
             return repository.GetAll();
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id)
+        public virtual async Task<TEntity> GetByIdAsync(TID id)
         {
             return await repository.GetByIdAsync(id);
         }
 
-        public virtual async Task<T> SaveAsync(Guid id, T entity)
+        public virtual async Task<TEntity> SaveAsync(TID id, TEntity entity)
         {
-            if (id.IsNullOrDefault())
+            if (id == null)
             {
                 await repository.AddAsync(entity);
             }

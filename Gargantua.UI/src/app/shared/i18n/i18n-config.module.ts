@@ -14,7 +14,7 @@ function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 registerLocaleData(localePT);
 registerLocaleData(localeEN);
 
-const defaultLanguage = 'pt-BR';
+const defaultLanguage = 'pt-br';
 
 @NgModule({
     imports: [

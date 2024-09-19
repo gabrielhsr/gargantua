@@ -19,9 +19,9 @@ namespace Gargantua.Helpers
         private static void MapBaseEntities(ODataConventionModelBuilder builder)
         {
             var baseEntities = Assembly
-                .GetAssembly(typeof(BaseEntity))
+                .GetAssembly(typeof(BaseEntity<>))
                 .GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(BaseEntity)))
+                .Where(type => type.IsSubclassOf(typeof(BaseEntity<>)))
                 .Where(type => !type.IsAbstract);
 
             foreach (var baseEntity in baseEntities)

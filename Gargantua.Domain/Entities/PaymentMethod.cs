@@ -1,6 +1,6 @@
 ﻿namespace Gargantua.Domain.Entities
 {
-    public class PaymentMethod : BaseEntity
+    public class PaymentMethod : BaseEntity<Guid>
     {
         public string Name { get; set; }
 

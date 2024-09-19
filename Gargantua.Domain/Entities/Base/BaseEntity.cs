@@ -1,7 +1,7 @@
 ﻿namespace Gargantua.Domain.Entities
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity<TID>
     {
-        public Guid Id { get; set; }
+        public TID Id { get; set; }
     }
 }

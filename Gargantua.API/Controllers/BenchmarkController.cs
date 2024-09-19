@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gargantua.Controllers
 {
     [Route("api/[controller]")]
-    public class PaymentMethodController : BaseController<PaymentMethod, Guid>
+    public class BenchmarkController : BaseController<Benchmark, int>
     {
-        public PaymentMethodController(IBaseService<PaymentMethod, Guid> service) : base(service)
+        public BenchmarkController(IBaseService<Benchmark, int> service) : base(service)
         {
         }
     }
