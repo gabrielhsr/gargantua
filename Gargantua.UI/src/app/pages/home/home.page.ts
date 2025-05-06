@@ -1,49 +1,35 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { Benchmark } from '@gargantua/domain/benchmark/benchmark.model';
+import { environment } from '@env/environment';
 import { AuthService } from '@gargantua/shared/auth/auth.service';
 import { Base } from '@gargantua/shared/components/base/base.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-home',
-    standalone: true,
     imports: [
         CommonModule,
         TranslateModule,
-        MatButtonModule
+        HlmButtonDirective
     ],
     templateUrl: './home.page.html',
     styleUrl: './home.page.scss'
 })
-export class HomePage extends Base {    
-    private readonly httpClient = inject(HttpClient);
+export class HomePage extends Base {
     private readonly authService = inject(AuthService);
+    private readonly httpClient = inject(HttpClient);
 
-    protected test() {
-        this.httpClient
-            .get<Benchmark[]>('https://localhost:7242/api/Benchmark')
+    protected exampleFetch() {
+        const url = environment.baseApi + '/api/Example';
+
+        this.httpClient.get(url)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((benchmarks) => {
-                benchmarks.forEach((benchmark) => {
-                    const documentParsed = JSON.parse(benchmark.Document);
-    
-                    const date = benchmark.DateTimeUtc;
-                    const id = benchmark.Id;
-                    const scenario = benchmark.Scenario;
-                    const badResponses = documentParsed?.jobs?.load?.results['bombardier/badresponses'];
-                    const maxLatency = documentParsed?.jobs?.load?.results['bombardier/latency/max'];
-                    const avgLatency = documentParsed?.jobs?.load?.results['bombardier/latency/mean'];
-                    const requests = documentParsed?.jobs?.load?.results['bombardier/requests'];
-
-                    console.error({ id, date, scenario, badResponses, maxLatency, avgLatency, requests });
-                });
-            });
+            .subscribe((res) => console.log(res));
     }
-
+    
     protected logout() {
         this.authService.logout();
     }

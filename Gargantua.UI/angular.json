@@ -37,20 +37,23 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist",
+                        "outputPath": {
+                          "base": "dist"
+                        },
                         "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
+                        "polyfills": [
+                          "src/polyfills.ts"
+                        ],
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [
-                            "@angular/material/prebuilt-themes/azure-blue.css",
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "browser": "src/main.ts"
                     },
                     "configurations": {
                         "production": {
@@ -75,17 +78,13 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                            "buildOptimizer": false,
-                            "optimization": false,
-                            "vendorChunk": true,
+                          "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
                         },
                         "local": {
-                            "buildOptimizer": false,
-                            "optimization": false,
-                            "vendorChunk": true,
+                          "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true,
@@ -133,7 +132,6 @@
                         "inlineStyleLanguage": "scss",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [
-                            "@angular/material/prebuilt-themes/azure-blue.css",
                             "src/styles.scss"
                         ],
                         "scripts": []

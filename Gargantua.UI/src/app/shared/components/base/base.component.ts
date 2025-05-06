@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-base',
-    standalone: true,
     imports: [CommonModule],
     template: ''
 })

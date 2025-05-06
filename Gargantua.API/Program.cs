@@ -1,12 +1,7 @@
-using Gargantua.Core.Repositories;
 using Gargantua.Data;
-using Gargantua.Domain.Interfaces.Repositories;
-using Gargantua.Domain.Interfaces.Services;
-using Gargantua.Domain.Interfaces.Services.Base;
 using Gargantua.Helpers;
 using Gargantua.Infrastructure.Data;
 using Gargantua.Middlewares;
-using Gargantua.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
@@ -35,15 +30,6 @@ services.AddDbContext<GargantuaDbContext>(opts =>
         .EnableSensitiveDataLogging();
 });
 
-// Repositories
-services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
-
-// DI Aggregator
-services.AddScoped(typeof(IDependencyAggregate<,>), typeof(DependencyAggregate<,>));
-
-// Services
-services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
-
 // Authentication
 var daConfig = builder.Configuration.GetSection("DownstreamApi");
 
@@ -54,7 +40,7 @@ services
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddMicrosoftIdentityWebApi(configuration, "AzureAd")
+    .AddMicrosoftIdentityWebApi(configuration, "EntraId")
     .EnableTokenAcquisitionToCallDownstreamApi()
     .AddDownstreamApi("DownstreamApi", daConfig)
     .AddInMemoryTokenCaches();

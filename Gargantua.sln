@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Domain", "Gargant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Infrastructure", "Gargantua.Infrastructure\Gargantua.Infrastructure.csproj", "{420C252D-77B7-448D-92EA-23112395440A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Service", "Gargantua.Service\Gargantua.Service.csproj", "{85522644-B556-4721-BECF-24606A876D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gargantua.Application", "Gargantua.Application\Gargantua.Application.csproj", "{85522644-B556-4721-BECF-24606A876D99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

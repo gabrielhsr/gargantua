@@ -1,37 +1,45 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "noImplicitAny": true,
-        "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "sourceMap": true,
-        "declaration": false,
-        "downlevelIteration": true,
-        "experimentalDecorators": true,
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "target": "ES2022",
-        "module": "es2020",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "lib": ["es2020", "dom"],
-        "useDefineForClassFields": false,
-        "paths": {
-            "@gargantua/*": ["./src/app/*"],
-            "@env/*": ["./src/environments/*"]
-        }
-    },
-    "angularCompilerOptions": {
-        "enableI18nLegacyMessageIdFormat": false,
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "useDefineForClassFields": false,
+    "paths": {
+      "@gargantua/*": [
+        "./src/app/*"
+      ],
+      "@env/*": [
+        "./src/environments/*"
+      ],
+      "@spartan-ng/ui-button-helm": [
+        ".\\libs/ui/ui-button-helm/src/index.ts"
+      ]
     }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

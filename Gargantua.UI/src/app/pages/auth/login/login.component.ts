@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '@gargantua/shared/auth/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+
 
 @Component({
     selector: 'app-login',
-    standalone: true,
     imports: [
         CommonModule,
-        MatButtonModule,
-        TranslateModule
+        TranslateModule,
+        HlmButtonDirective
     ],
     templateUrl: './login.component.html',
-    styleUrl: './login.component.scss',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
     private readonly authService = inject(AuthService);
